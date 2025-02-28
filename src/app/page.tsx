@@ -4,17 +4,17 @@ import CalculatorCard from '@/components/CalculatorCard';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'FatCalc - Free Body Fat, BMI, TDEE & Weight Management Calculators',
+  title: 'HealthCheck - Free Body Fat, BMI, TDEE & Weight Management Calculators',
   description: 'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health and fitness goals.',
   keywords: 'body fat calculator, BMI calculator, TDEE calculator, calorie deficit calculator, weight loss calculator, fitness calculators, health calculators, waist-to-hip ratio, ABSI calculator',
   alternates: {
-    canonical: 'https://www.fatcalc.com/',
+    canonical: 'https://www.healthcheck.com/',
   },
   openGraph: {
-    title: 'FatCalc - Free Body Fat, BMI, TDEE & Weight Management Calculators',
+    title: 'HealthCheck - Free Body Fat, BMI, TDEE & Weight Management Calculators',
     description: 'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health and fitness goals.',
-    url: 'https://www.fatcalc.com/',
-    siteName: 'FatCalc',
+    url: 'https://www.healthcheck.com/',
+    siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',
   },

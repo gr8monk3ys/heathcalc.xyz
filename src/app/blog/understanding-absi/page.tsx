@@ -3,19 +3,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'Understanding ABSI: Beyond BMI for Health Risk Assessment | FatCalc',
+  title: 'Understanding ABSI: Beyond BMI for Health Risk Assessment | HealthCheck',
   description: 'Learn about A Body Shape Index (ABSI), how it differs from BMI, and why it might be a better predictor of health risks associated with body shape and fat distribution.',
   keywords: 'ABSI, A Body Shape Index, body shape, waist circumference, BMI limitations, health risk assessment, central obesity, mortality risk',
   openGraph: {
     title: 'Understanding ABSI: Beyond BMI for Health Risk Assessment',
     description: 'Learn about A Body Shape Index (ABSI), how it differs from BMI, and why it might be a better predictor of health risks associated with body shape and fat distribution.',
-    url: 'https://www.fatcalc.com/blog/understanding-absi',
-    siteName: 'FatCalc',
+    url: 'https://www.healthcheck.com/blog/understanding-absi',
+    siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://www.fatcalc.com/blog/understanding-absi',
+    canonical: 'https://www.healthcheck.com/blog/understanding-absi',
   },
 };
 

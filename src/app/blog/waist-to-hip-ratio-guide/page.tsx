@@ -3,19 +3,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'Waist-to-Hip Ratio: A Complete Guide to Understanding Your Body Shape | FatCalc',
+  title: 'Waist-to-Hip Ratio: A Complete Guide to Understanding Your Body Shape | HealthCheck',
   description: 'Learn about Waist-to-Hip Ratio (WHR), how to measure it correctly, what your results mean, and why body shape matters for your health.',
   keywords: 'waist-to-hip ratio, WHR, apple shape, pear shape, body shape, central obesity, fat distribution, health risk assessment, waist circumference, hip circumference',
   openGraph: {
     title: 'Waist-to-Hip Ratio: A Complete Guide to Understanding Your Body Shape',
     description: 'Learn about Waist-to-Hip Ratio (WHR), how to measure it correctly, what your results mean, and why body shape matters for your health.',
-    url: 'https://www.fatcalc.com/blog/waist-to-hip-ratio-guide',
-    siteName: 'FatCalc',
+    url: 'https://www.healthcheck.com/blog/waist-to-hip-ratio-guide',
+    siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://www.fatcalc.com/blog/waist-to-hip-ratio-guide',
+    canonical: 'https://www.healthcheck.com/blog/waist-to-hip-ratio-guide',
   },
 };
 
