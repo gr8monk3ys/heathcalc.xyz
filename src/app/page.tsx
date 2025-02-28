@@ -1,8 +1,24 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import CalculatorCard from '@/components/CalculatorCard';
+import Image from 'next/image';
+
+export const metadata = {
+  title: 'FatCalc - Free Body Fat, BMI, TDEE & Weight Management Calculators',
+  description: 'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health and fitness goals.',
+  keywords: 'body fat calculator, BMI calculator, TDEE calculator, calorie deficit calculator, weight loss calculator, fitness calculators, health calculators, waist-to-hip ratio, ABSI calculator',
+  alternates: {
+    canonical: 'https://www.fatcalc.com/',
+  },
+  openGraph: {
+    title: 'FatCalc - Free Body Fat, BMI, TDEE & Weight Management Calculators',
+    description: 'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health and fitness goals.',
+    url: 'https://www.fatcalc.com/',
+    siteName: 'FatCalc',
+    locale: 'en_US',
+    type: 'website',
+  },
+};
 
 // Icons for calculator cards
 const icons = {
@@ -62,9 +78,58 @@ const icons = {
 export default function Home() {
   return (
     <div>
-      <section className="mb-12">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Health & Fitness Calculators</h1>
+      {/* Hero Section */}
+      <section className="py-12 mb-12 bg-gradient-to-br from-accent/5 to-accent/10 rounded-3xl">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                Accurate Health & Fitness Calculators
+              </h1>
+              <p className="text-xl text-gray-700 mb-6">
+                Evidence-based tools to help you understand your body composition, set realistic goals, and track your progress.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/bmi" className="px-6 py-3 neumorph rounded-lg text-accent font-medium hover:shadow-neumorph-inset transition-all">
+                  Calculate BMI
+                </Link>
+                <Link href="/body-fat" className="px-6 py-3 neumorph rounded-lg text-accent font-medium hover:shadow-neumorph-inset transition-all">
+                  Body Fat Calculator
+                </Link>
+                <Link href="/tdee" className="px-6 py-3 neumorph rounded-lg text-accent font-medium hover:shadow-neumorph-inset transition-all">
+                  TDEE Calculator
+                </Link>
+              </div>
+            </div>
+            <div className="md:w-1/2 relative">
+              <div className="neumorph p-4 rounded-2xl">
+                <div className="aspect-w-4 aspect-h-3 relative rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
+                    <div className="text-center p-6">
+                      <div className="text-5xl font-bold mb-2">9+</div>
+                      <div className="text-xl">Free Calculators</div>
+                      <div className="mt-4 text-sm">No sign-up required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -right-4 neumorph p-3 rounded-lg transform rotate-3 bg-white">
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-medium">Scientifically Validated</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Featured Calculators Section */}
+      <section className="mb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold mb-4">Health & Fitness Calculators</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Your go-to resource for body fat, calorie needs, and weight management calculations.
           </p>
