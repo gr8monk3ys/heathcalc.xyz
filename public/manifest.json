@@ -1,7 +1,7 @@
 {
-  "name": "HealthCheck - Health & Fitness Calculators",
+  "name": "HealthCheck - Health and Fitness Calculators",
   "short_name": "HealthCheck",
-  "description": "Calculate body fat, BMI, TDEE, and more with our health and fitness calculators.",
+  "description": "Free health and fitness calculators for body fat, BMI, TDEE, and more",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0f2f5",
@@ -57,47 +57,58 @@
       "purpose": "any maskable"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/home-screen.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "narrow",
+      "label": "Home Screen"
+    },
+    {
+      "src": "/images/screenshots/bmi-calculator.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "narrow",
+      "label": "BMI Calculator"
+    },
+    {
+      "src": "/images/screenshots/body-fat-calculator.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "narrow",
+      "label": "Body Fat Calculator"
+    }
+  ],
   "shortcuts": [
     {
       "name": "BMI Calculator",
       "short_name": "BMI",
       "description": "Calculate your Body Mass Index",
       "url": "/bmi",
-      "icons": [{ "src": "/icons/bmi-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icons/bmi-icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "Body Fat Calculator",
       "short_name": "Body Fat",
       "description": "Calculate your body fat percentage",
       "url": "/body-fat",
-      "icons": [{ "src": "/icons/body-fat-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icons/body-fat-icon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "TDEE Calculator",
       "short_name": "TDEE",
       "description": "Calculate your Total Daily Energy Expenditure",
       "url": "/tdee",
-      "icons": [{ "src": "/icons/tdee-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icons/tdee-icon-192x192.png", "sizes": "192x192" }]
     }
   ],
   "categories": ["health", "fitness", "lifestyle", "utilities"],
-  "screenshots": [
-    {
-      "src": "/screenshots/home-screen.png",
-      "sizes": "1280x720",
-      "type": "image/png"
-    },
-    {
-      "src": "/screenshots/bmi-calculator.png",
-      "sizes": "1280x720",
-      "type": "image/png"
-    },
-    {
-      "src": "/screenshots/body-fat-calculator.png",
-      "sizes": "1280x720",
-      "type": "image/png"
-    }
-  ],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
   "related_applications": [],
-  "prefer_related_applications": false
+  "iarc_rating_id": "",
+  "scope": "/",
+  "id": "healthcheck-pwa"
 }
