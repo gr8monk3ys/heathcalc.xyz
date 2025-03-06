@@ -106,7 +106,7 @@ export default function ContactPage() {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm font-medium">Email</p>
-                  <p className="text-sm text-gray-600">info@healthcheck.com</p>
+                  <p className="text-sm text-gray-600">info@healthcheck.info</p>
                 </div>
               </div>
               

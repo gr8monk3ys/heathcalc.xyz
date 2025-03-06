@@ -59,7 +59,7 @@ export default function Image({
   const imageRef = useRef<HTMLDivElement>(null);
   
   // Determine if the image is external (not from our domain)
-  const isExternal = src.startsWith('http') && !src.includes('healthcheck.com');
+  const isExternal = src.startsWith('http') && !src.includes('healthcheck.info');
   
   // Generate image metadata for structured data
   const imageMetadata = useMemo(() => {

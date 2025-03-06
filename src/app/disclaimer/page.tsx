@@ -130,7 +130,7 @@ export default function DisclaimerPage() {
       <div className="neumorph p-6 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
         <p>
-          If you have any questions about this Disclaimer, please contact us at info@healthcheck.com.
+          If you have any questions about this Disclaimer, please contact us at info@healthcheck.info.
         </p>
       </div>
     </div>

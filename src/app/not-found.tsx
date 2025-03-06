@@ -136,13 +136,13 @@ export default function NotFound() {
               '@type': 'ListItem',
               'position': 1,
               'name': 'Home',
-              'item': 'https://www.healthcheck.com/'
+              'item': 'https://www.healthcheck.info/'
             },
             {
               '@type': 'ListItem',
               'position': 2,
               'name': 'Page Not Found',
-              'item': 'https://www.healthcheck.com/404'
+              'item': 'https://www.healthcheck.info/404'
             }
           ]
         }}

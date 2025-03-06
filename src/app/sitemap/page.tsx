@@ -140,13 +140,13 @@ export default function Sitemap() {
               '@type': 'ListItem',
               'position': 1,
               'name': 'Home',
-              'item': 'https://www.healthcheck.com/'
+              'item': 'https://www.healthcheck.info/'
             },
             {
               '@type': 'ListItem',
               'position': 2,
               'name': 'Sitemap',
-              'item': 'https://www.healthcheck.com/sitemap'
+              'item': 'https://www.healthcheck.info/sitemap'
             }
           ]
         }}
@@ -159,14 +159,14 @@ export default function Sitemap() {
           '@type': 'WebPage',
           'name': 'Sitemap',
           'description': 'A complete list of all pages on HealthCheck, including calculators, articles, and information pages.',
-          'url': 'https://www.healthcheck.com/sitemap',
+          'url': 'https://www.healthcheck.info/sitemap',
           'mainEntity': {
             '@type': 'ItemList',
             'itemListElement': sections.flatMap((section, sectionIndex) => 
               section.pages.map((page, pageIndex) => ({
                 '@type': 'ListItem',
                 'position': sectionIndex * 100 + pageIndex + 1,
-                'url': `https://www.healthcheck.com${page.url}`,
+                'url': `https://www.healthcheck.info${page.url}`,
                 'name': page.title,
                 'description': page.description
               }))

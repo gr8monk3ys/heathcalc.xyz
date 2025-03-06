@@ -35,13 +35,13 @@ export default function Search() {
               '@type': 'ListItem',
               'position': 1,
               'name': 'Home',
-              'item': 'https://www.healthcheck.com/'
+              'item': 'https://www.healthcheck.info/'
             },
             {
               '@type': 'ListItem',
               'position': 2,
               'name': 'Search',
-              'item': 'https://www.healthcheck.com/search'
+              'item': 'https://www.healthcheck.info/search'
             }
           ]
         }}
@@ -52,12 +52,12 @@ export default function Search() {
         data={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
-          'url': 'https://www.healthcheck.com/',
+          'url': 'https://www.healthcheck.info/',
           'potentialAction': {
             '@type': 'SearchAction',
             'target': {
               '@type': 'EntryPoint',
-              'urlTemplate': 'https://www.healthcheck.com/search?q={search_term_string}'
+              'urlTemplate': 'https://www.healthcheck.info/search?q={search_term_string}'
             },
             'query-input': 'required name=search_term_string'
           }

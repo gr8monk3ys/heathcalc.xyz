@@ -9,13 +9,13 @@ export const metadata = {
   openGraph: {
     title: 'Understanding ABSI: Beyond BMI for Health Risk Assessment',
     description: 'Learn about A Body Shape Index (ABSI), how it differs from BMI, and why it might be a better predictor of health risks associated with body shape and fat distribution.',
-    url: 'https://www.healthcheck.com/blog/understanding-absi',
+    url: 'https://www.healthcheck.info/blog/understanding-absi',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://www.healthcheck.com/blog/understanding-absi',
+    canonical: 'https://www.healthcheck.info/blog/understanding-absi',
   },
 };
 

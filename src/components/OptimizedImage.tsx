@@ -44,7 +44,7 @@ export default function OptimizedImage({
   }, [src]);
 
   // Determine if the image is external (not from our domain)
-  const isExternal = src.startsWith('http') && !src.includes('healthcheck.com');
+  const isExternal = src.startsWith('http') && !src.includes('healthcheck.info');
 
   // Placeholder image for errors
   const fallbackSrc = '/images/placeholder.jpg';
@@ -119,7 +119,7 @@ export function generateImageMetadata(
   // Ensure src is an absolute URL
   const absoluteSrc = src.startsWith('http')
     ? src
-    : `https://www.healthcheck.com${src.startsWith('/') ? '' : '/'}${src}`;
+    : `https://www.healthcheck.info${src.startsWith('/') ? '' : '/'}${src}`;
 
   return {
     url: absoluteSrc,

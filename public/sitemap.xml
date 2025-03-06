@@ -4,7 +4,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Home Page -->
   <url>
-    <loc>https://www.healthcheck.com/</loc>
+    <loc>https://www.healthcheck.info/</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -12,97 +12,97 @@
   
   <!-- Calculator Pages -->
   <url>
-    <loc>https://www.healthcheck.com/bmi</loc>
+    <loc>https://www.healthcheck.info/bmi</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/bmi-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/bmi-calculator.jpg</image:loc>
       <image:title>BMI Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/body-fat</loc>
+    <loc>https://www.healthcheck.info/body-fat</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/body-fat-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/body-fat-calculator.jpg</image:loc>
       <image:title>Body Fat Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/body-fat-burn</loc>
+    <loc>https://www.healthcheck.info/body-fat-burn</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/body-fat-burn-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/body-fat-burn-calculator.jpg</image:loc>
       <image:title>Body Fat Burn Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/tdee</loc>
+    <loc>https://www.healthcheck.info/tdee</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/tdee-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/tdee-calculator.jpg</image:loc>
       <image:title>TDEE Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/calorie-deficit</loc>
+    <loc>https://www.healthcheck.info/calorie-deficit</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/calorie-deficit-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/calorie-deficit-calculator.jpg</image:loc>
       <image:title>Calorie Deficit Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/weight-management</loc>
+    <loc>https://www.healthcheck.info/weight-management</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/weight-management-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/weight-management-calculator.jpg</image:loc>
       <image:title>Weight Management Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/maximum-fat-loss</loc>
+    <loc>https://www.healthcheck.info/maximum-fat-loss</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/maximum-fat-loss-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/maximum-fat-loss-calculator.jpg</image:loc>
       <image:title>Maximum Fat Loss Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/absi</loc>
+    <loc>https://www.healthcheck.info/absi</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/absi-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/absi-calculator.jpg</image:loc>
       <image:title>ABSI Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/whr</loc>
+    <loc>https://www.healthcheck.info/whr</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/calculators/whr-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/calculators/whr-calculator.jpg</image:loc>
       <image:title>Waist-to-Hip Ratio Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/conversions</loc>
+    <loc>https://www.healthcheck.info/conversions</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -110,99 +110,99 @@
   
   <!-- Blog Pages -->
   <url>
-    <loc>https://www.healthcheck.com/blog</loc>
+    <loc>https://www.healthcheck.info/blog</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/blog/calorie-deficit-myths</loc>
+    <loc>https://www.healthcheck.info/blog/calorie-deficit-myths</loc>
     <lastmod>2025-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/blog/calorie-deficit-myths.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/blog/calorie-deficit-myths.jpg</image:loc>
       <image:title>5 Myths About Calorie Deficits Debunked</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/blog/tdee-explained</loc>
+    <loc>https://www.healthcheck.info/blog/tdee-explained</loc>
     <lastmod>2025-02-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/blog/tdee-explained.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/blog/tdee-explained.jpg</image:loc>
       <image:title>TDEE Explained: How Many Calories Do You Really Need?</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/blog/measuring-body-fat</loc>
+    <loc>https://www.healthcheck.info/blog/measuring-body-fat</loc>
     <lastmod>2025-02-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/blog/measuring-body-fat.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/blog/measuring-body-fat.jpg</image:loc>
       <image:title>The Pros and Cons of Different Body Fat Measurement Methods</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/blog/understanding-absi</loc>
+    <loc>https://www.healthcheck.info/blog/understanding-absi</loc>
     <lastmod>2025-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/blog/understanding-absi.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/blog/understanding-absi.jpg</image:loc>
       <image:title>Understanding ABSI: A Better Measure of Body Shape</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/blog/understanding-body-fat-percentage</loc>
+    <loc>https://www.healthcheck.info/blog/understanding-body-fat-percentage</loc>
     <lastmod>2025-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/blog/understanding-body-fat-percentage.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/blog/understanding-body-fat-percentage.jpg</image:loc>
       <image:title>Understanding Body Fat Percentage: What the Numbers Really Mean</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/blog/waist-to-hip-ratio-guide</loc>
+    <loc>https://www.healthcheck.info/blog/waist-to-hip-ratio-guide</loc>
     <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.healthcheck.com/images/blog/waist-to-hip-ratio-guide.jpg</image:loc>
+      <image:loc>https://www.healthcheck.info/images/blog/waist-to-hip-ratio-guide.jpg</image:loc>
       <image:title>Waist-to-Hip Ratio Guide: What It Means for Your Health</image:title>
     </image:image>
   </url>
   
   <!-- Informational Pages -->
   <url>
-    <loc>https://www.healthcheck.com/about</loc>
+    <loc>https://www.healthcheck.info/about</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/contact</loc>
+    <loc>https://www.healthcheck.info/contact</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/privacy</loc>
+    <loc>https://www.healthcheck.info/privacy</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/terms</loc>
+    <loc>https://www.healthcheck.info/terms</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.healthcheck.com/disclaimer</loc>
+    <loc>https://www.healthcheck.info/disclaimer</loc>
     <lastmod>2025-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

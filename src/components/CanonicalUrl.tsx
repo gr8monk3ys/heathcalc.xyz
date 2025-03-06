@@ -15,7 +15,7 @@ interface CanonicalUrlProps {
  */
 export default function CanonicalUrl({
   path,
-  baseUrl = 'https://www.healthcheck.com',
+  baseUrl = 'https://www.healthcheck.info',
 }: CanonicalUrlProps) {
   const pathname = usePathname();
   

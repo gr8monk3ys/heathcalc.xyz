@@ -438,7 +438,7 @@ export default function BodyFatBurnCalculator() {
             "priceCurrency": "USD"
           },
           "description": "Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise.",
-          "url": "https://www.healthcheck.com/body-fat-burn"
+          "url": "https://www.healthcheck.info/body-fat-burn"
         }} 
       />
     </div>

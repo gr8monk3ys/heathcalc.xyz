@@ -8,12 +8,12 @@ export const metadata = {
   description: 'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health and fitness goals.',
   keywords: 'body fat calculator, BMI calculator, TDEE calculator, calorie deficit calculator, weight loss calculator, fitness calculators, health calculators, waist-to-hip ratio, ABSI calculator',
   alternates: {
-    canonical: 'https://www.healthcheck.com/',
+    canonical: 'https://www.healthcheck.info/',
   },
   openGraph: {
     title: 'HealthCheck - Free Body Fat, BMI, TDEE & Weight Management Calculators',
     description: 'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health and fitness goals.',
-    url: 'https://www.healthcheck.com/',
+    url: 'https://www.healthcheck.info/',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',

@@ -39,7 +39,7 @@ export default function SocialMeta({
   tags = [],
 }: SocialMetaProps) {
   // Base URL for absolute URLs
-  const baseUrl = 'https://www.healthcheck.com';
+  const baseUrl = 'https://www.healthcheck.info';
   
   // Ensure image URL is absolute
   const imageUrl = image.startsWith('http') ? image : `${baseUrl}${image.startsWith('/') ? '' : '/'}${image}`;

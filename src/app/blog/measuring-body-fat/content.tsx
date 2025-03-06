@@ -49,8 +49,8 @@ export default function MeasuringBodyFatPage() {
   const articleData = {
     title: "The Pros and Cons of Different Body Fat Measurement Methods",
     description: "Compare the accuracy, accessibility, and practicality of various body fat assessment techniques, from DEXA scans to skinfold calipers to Navy method measurements.",
-    url: "https://www.healthcheck.com/blog/measuring-body-fat",
-    imageUrl: "https://www.healthcheck.com/images/blog/measuring-body-fat.jpg",
+    url: "https://www.healthcheck.info/blog/measuring-body-fat",
+    imageUrl: "https://www.healthcheck.info/images/blog/measuring-body-fat.jpg",
     datePublished: "2025-02-15T08:00:00Z",
     dateModified: "2025-02-15T08:00:00Z",
     authorName: "HealthCheck Team"

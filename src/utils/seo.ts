@@ -8,7 +8,7 @@
  * @returns The canonical URL
  */
 export function getCanonicalUrl(path: string): string {
-  const baseUrl = 'https://www.healthcheck.com';
+  const baseUrl = 'https://www.healthcheck.info';
   const normalizedPath = path === '/' ? '' : path.startsWith('/') ? path : `/${path}`;
   return `${baseUrl}${normalizedPath}`;
 }
@@ -139,7 +139,7 @@ export function generateImageMetadata(
   // Ensure src is an absolute URL
   const absoluteSrc = src.startsWith('http')
     ? src
-    : `https://www.healthcheck.com${src.startsWith('/') ? '' : '/'}${src}`;
+    : `https://www.healthcheck.info${src.startsWith('/') ? '' : '/'}${src}`;
 
   return {
     url: absoluteSrc,
@@ -186,7 +186,7 @@ export function generateArticleData(article: {
     '@type': 'Article',
     'headline': article.title,
     'description': article.description,
-    'image': article.imageUrl || 'https://www.healthcheck.com/images/og-image.jpg',
+    'image': article.imageUrl || 'https://www.healthcheck.info/images/og-image.jpg',
     'datePublished': article.datePublished,
     'dateModified': article.dateModified || article.datePublished,
     'author': {
@@ -198,7 +198,7 @@ export function generateArticleData(article: {
       'name': 'HealthCheck',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://www.healthcheck.com/icons/icon-512x512.png',
+        'url': 'https://www.healthcheck.info/icons/icon-512x512.png',
       },
     },
     'mainEntityOfPage': {
