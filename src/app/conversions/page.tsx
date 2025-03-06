@@ -175,15 +175,15 @@ export default function MeasurementConversions() {
             
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <span className="font-medium">Calories to Kilojoules:</span> 1 kcal = 4.184 kJ
+                <span className="font-medium">Calories to Kilojoules:</span> 1 kcal = 4.184 kj
               </li>
               <li>
-                <span className="font-medium">Kilojoules to Calories:</span> 1 kJ = 0.239006 kcal
+                <span className="font-medium">Kilojoules to Calories:</span> 1 kj = 0.239006 kcal
               </li>
             </ul>
             
             <p>
-              Note: In nutrition, what we commonly call a "calorie" is actually a kilocalorie (kcal). Food labels in some countries use kcal, while others use kJ.
+              Note: In nutrition, what we commonly call a "calorie" is actually a kilocalorie (kcal). Food labels in some countries use kcal, while others use kj.
             </p>
             
             <p>

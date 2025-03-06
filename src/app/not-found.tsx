@@ -2,18 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import StructuredData from '@/components/StructuredData';
-
-// Metadata for the 404 page
-export const metadata: Metadata = {
-  title: 'Page Not Found | HealthCheck',
-  description: 'The page you are looking for could not be found. HealthCheck provides health and fitness calculators for body fat, BMI, TDEE, and more.',
-  robots: {
-    index: false,
-    follow: true,
-  },
-};
 
 // Popular calculator links to show on the 404 page
 const popularCalculators = [

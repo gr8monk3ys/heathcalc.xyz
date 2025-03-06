@@ -5,26 +5,25 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
+  // Rule: Add dark mode support
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: "#f0f2f5", // Light gray background for neumorphic design
-        secondary: "#e0e5ec", // Slightly darker for shadows
-        accent: {
-          DEFAULT: "#4f46e5", // Indigo accent color
-          light: "#6366f1",
-          dark: "#4338ca",
+        // Light mode colors
+        primary: {
+          DEFAULT: "var(--primary)",
+          dark: "var(--primary-dark)",
         },
-        success: "#10b981", // Green
-        warning: "#f59e0b", // Amber
-        danger: "#ef4444",  // Red
-        info: "#3b82f6",    // Blue
-      },
-      boxShadow: {
-        'neumorph': '8px 8px 16px rgba(174, 174, 192, 0.4), -8px -8px 16px rgba(255, 255, 255, 0.8)',
-        'neumorph-inset': 'inset 4px 4px 8px rgba(174, 174, 192, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.8)',
-        'neumorph-flat': '3px 3px 6px rgba(174, 174, 192, 0.4), -3px -3px 6px rgba(255, 255, 255, 0.8)',
-        'neumorph-pressed': 'inset 2px 2px 5px rgba(174, 174, 192, 0.4), inset -2px -2px 5px rgba(255, 255, 255, 0.8)',
+        accent: {
+          DEFAULT: "var(--accent)",
+          light: "var(--accent-light)",
+          dark: "var(--accent-dark)",
+        },
+        success: "var(--success)",
+        warning: "var(--warning)",
+        danger: "var(--danger)",
+        info: "var(--info)",
       },
       borderRadius: {
         'neumorph': '1rem',

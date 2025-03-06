@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Gender, HeightUnit, WeightUnit } from '@/types/common';
 import { BodyFatMethod, BodyFatResult as BodyFatResultType } from '@/types/bodyFat';
 import { calculateBodyFat, getBodyFatCategory, getHealthyBodyFatRange, calculateFatAndLeanMass } from '@/app/api/bodyFat';
@@ -11,7 +11,7 @@ import BodyFatResultDisplay from '@/components/calculators/body-fat/BodyFatResul
 import BodyFatInfo from '@/components/calculators/body-fat/BodyFatInfo';
 import BodyFatUnderstanding from '@/components/calculators/body-fat/BodyFatUnderstanding';
 
-export default function Bodyhealthcheckulator() {
+export default function BodyFatCalculator() {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
@@ -40,8 +40,8 @@ export default function Bodyhealthcheckulator() {
   const [result, setResult] = useState<BodyFatResultType | null>(null);
   const [showResult, setShowResult] = useState<boolean>(false);
   
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  // Handle form submission with useCallback to memoize the function
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate form
@@ -180,10 +180,22 @@ export default function Bodyhealthcheckulator() {
         // Handle error (could set an error state here)
       }
     }
-  };
+  }, [
+    age, 
+    gender, 
+    height, 
+    heightUnit, 
+    weight, 
+    weightUnit, 
+    method, 
+    waist, 
+    neck, 
+    hips, 
+    bodyFatPercentage
+  ]);
   
-  // Handle unit toggle
-  const toggleHeightUnit = () => {
+  // Handle unit toggle with useCallback
+  const toggleHeightUnit = useCallback(() => {
     if (heightUnit === 'cm' && typeof height === 'number') {
       setHeight(parseFloat((height / 30.48).toFixed(1)));
       setHeightUnit('ft');
@@ -193,9 +205,9 @@ export default function Bodyhealthcheckulator() {
     } else {
       setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
     }
-  };
+  }, [height, heightUnit]);
   
-  const toggleWeightUnit = () => {
+  const toggleWeightUnit = useCallback(() => {
     if (weightUnit === 'kg' && typeof weight === 'number') {
       setWeight(parseFloat((weight * 2.20462).toFixed(1)));
       setWeightUnit('lb');
@@ -205,10 +217,10 @@ export default function Bodyhealthcheckulator() {
     } else {
       setWeightUnit(weightUnit === 'kg' ? 'lb' : 'kg');
     }
-  };
+  }, [weight, weightUnit]);
   
-  // Reset form
-  const handleReset = () => {
+  // Reset form with useCallback
+  const handleReset = useCallback(() => {
     setGender('male');
     setAge('');
     setHeight('');
@@ -223,10 +235,10 @@ export default function Bodyhealthcheckulator() {
     setErrors({});
     setResult(null);
     setShowResult(false);
-  };
+  }, []);
   
-  // Handle method change
-  const handleMethodChange = (newMethod: BodyFatMethod) => {
+  // Handle method change with useCallback
+  const handleMethodChange = useCallback((newMethod: BodyFatMethod) => {
     setMethod(newMethod);
     // Clear method-specific errors when changing methods
     setErrors(prev => {
@@ -237,10 +249,10 @@ export default function Bodyhealthcheckulator() {
       delete updated.bodyFatPercentage;
       return updated;
     });
-  };
+  }, []);
   
-  // Get method-specific fields
-  const getMethodFields = () => {
+  // Get method-specific fields with useMemo
+  const methodFields = useMemo(() => {
     const fields = [];
     
     if (method === 'navy') {
@@ -293,10 +305,10 @@ export default function Bodyhealthcheckulator() {
     }
     
     return fields;
-  };
+  }, [method, gender, waist, neck, hips, bodyFatPercentage, errors]);
   
-  // Form fields for the CalculatorForm component
-  const formFields = [
+  // Form fields for the CalculatorForm component with useMemo
+  const formFields = useMemo(() => [
     {
       name: 'gender',
       label: 'Gender',
@@ -353,8 +365,27 @@ export default function Bodyhealthcheckulator() {
         description: m.description
       }))
     },
-    ...getMethodFields()
-  ];
+    ...methodFields
+  ], [
+    gender, 
+    age, 
+    height, 
+    heightUnit, 
+    weight, 
+    weightUnit, 
+    method, 
+    errors, 
+    toggleHeightUnit, 
+    toggleWeightUnit, 
+    handleMethodChange, 
+    methodFields
+  ]);
+  
+  // Memoize the method label for the result display
+  const methodLabel = useMemo(() => 
+    BODY_FAT_METHODS.find(m => m.value === method)?.label || method,
+    [method]
+  );
   
   return (
     <div className="max-w-4xl mx-auto">
@@ -379,7 +410,7 @@ export default function Bodyhealthcheckulator() {
               result={result}
               gender={gender}
               weightUnit={weightUnit}
-              method={BODY_FAT_METHODS.find(m => m.value === method)?.label || method}
+              method={methodLabel}
             />
           ) : (
             <BodyFatInfo />

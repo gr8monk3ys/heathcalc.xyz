@@ -10,7 +10,15 @@ interface CalculatorCardProps {
   icon: React.ReactNode;
 }
 
-export default function CalculatorCard({ title, description, path, icon }: CalculatorCardProps) {
+/**
+ * Calculator card component that displays a calculator with a title, description, and icon
+ * @param title - The calculator title
+ * @param description - The calculator description
+ * @param path - The path to the calculator page
+ * @param icon - The calculator icon
+ * @returns A card component with a link to the calculator
+ */
+function CalculatorCard({ title, description, path, icon }: CalculatorCardProps) {
   return (
     <Link href={path} className="block">
       <div className="neumorph h-full p-6 transition-all duration-300 hover:shadow-neumorph-inset">
@@ -24,3 +32,23 @@ export default function CalculatorCard({ title, description, path, icon }: Calcu
     </Link>
   );
 }
+
+/**
+ * Memoized version of the CalculatorCard component
+ * This prevents unnecessary re-renders when parent components re-render
+ */
+export const MemoizedCalculatorCard = React.memo(CalculatorCard, (prevProps, nextProps) => {
+  // Custom comparison function to determine if the component should re-render
+  // Return true if the props are equal (no re-render needed)
+  return (
+    prevProps.title === nextProps.title &&
+    prevProps.description === nextProps.description &&
+    prevProps.path === nextProps.path &&
+    // For the icon, we do a simple check if both exist or both don't exist
+    // A more complex comparison would be needed for deeply comparing React nodes
+    Boolean(prevProps.icon) === Boolean(nextProps.icon)
+  );
+});
+
+// For backward compatibility and to maintain existing import structure
+export default CalculatorCard;
