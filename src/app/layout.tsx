@@ -6,6 +6,8 @@ import Analytics from '@/components/Analytics';
 import GlobalStructuredData from '@/components/GlobalStructuredData';
 import Preconnect from '@/components/Preconnect';
 import { ReactNode } from 'react';
+import { PreferencesProvider } from '@/context/PreferencesContext';
+import { SavedResultsProvider } from '@/context/SavedResultsContext';
 
 export const metadata: Metadata = {
   title: 'HealthCheck - Health and Fitness Calculators',
@@ -106,19 +108,24 @@ export default function RootLayout({
         )}
       </head>
       <body>
-        <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-grow container mx-auto px-4 py-8">
-            {children}
-          </main>
-          <Footer />
-        </div>
-        
-        {/* Analytics component for tracking */}
-        <Analytics />
-        
-        {/* Global structured data for organization and website */}
-        <GlobalStructuredData />
+        {/* Rule: Use React Context for global state management */}
+        <PreferencesProvider>
+          <SavedResultsProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main className="flex-grow container mx-auto px-4 py-8">
+                {children}
+              </main>
+              <Footer />
+            </div>
+            
+            {/* Analytics component for tracking */}
+            <Analytics />
+            
+            {/* Global structured data for organization and website */}
+            <GlobalStructuredData />
+          </SavedResultsProvider>
+        </PreferencesProvider>
       </body>
     </html>
   );
