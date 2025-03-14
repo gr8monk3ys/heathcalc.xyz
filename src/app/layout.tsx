@@ -2,12 +2,12 @@ import './globals.css';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Analytics from '@/components/Analytics';
 import GlobalStructuredData from '@/components/GlobalStructuredData';
 import Preconnect from '@/components/Preconnect';
 import { ReactNode } from 'react';
 import { PreferencesProvider } from '@/context/PreferencesContext';
 import { SavedResultsProvider } from '@/context/SavedResultsContext';
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: 'HealthCheck - Health and Fitness Calculators',
@@ -105,6 +105,15 @@ export default function RootLayout({
               }}
             />
           </>
+        )}
+        
+        {/* Google AdSense Script */}
+        {process.env.NODE_ENV === 'production' && (
+          <script 
+            async 
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4505962980988232"
+            crossOrigin="anonymous"
+          />
         )}
       </head>
       <body>
