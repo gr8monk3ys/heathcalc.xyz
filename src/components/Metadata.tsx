@@ -56,7 +56,6 @@ export default function Metadata({
       <meta property="twitter:image" content={ogImage} />
       
       {/* Additional metadata */}
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#f0f2f5" />
       <meta name="robots" content="index, follow" />
     </Head>
