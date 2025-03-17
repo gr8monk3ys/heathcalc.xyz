@@ -28,7 +28,7 @@ export default function SocialShare({
   // Ensure URL is absolute
   const absoluteUrl = url.startsWith('http')
     ? url
-    : `https://www.healthcheck.info${url.startsWith('/') ? '' : '/'}${url}`;
+    : `https://www.heathcheck.info${url.startsWith('/') ? '' : '/'}${url}`;
   
   // Encode parameters for sharing
   const encodedUrl = encodeURIComponent(absoluteUrl);

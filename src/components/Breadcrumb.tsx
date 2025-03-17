@@ -63,7 +63,7 @@ export default function Breadcrumb({
   // Create schema items for structured data
   const schemaItems = breadcrumbItems.map((item) => ({
     name: item.name,
-    url: `https://www.healthcheck.info${item.path}`,
+    url: `https://www.heathcheck.info${item.path}`,
   }));
   
   return (

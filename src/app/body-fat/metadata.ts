@@ -18,7 +18,7 @@ const metadata: Metadata = {
   openGraph: {
     title: 'Body Fat Calculator | Calculate Your Body Fat Percentage',
     description: 'Calculate your body fat percentage using the Navy Method, BMI estimation, or manual entry. Get insights on your body composition, fat mass, and lean mass.',
-    url: 'https://www.healthcheck.info/body-fat',
+    url: 'https://www.heathcheck.info/body-fat',
     siteName: 'healthcheck',
     locale: 'en_US',
     type: 'website',
@@ -29,7 +29,7 @@ const metadata: Metadata = {
     description: 'Calculate your body fat percentage using the Navy Method, BMI estimation, or manual entry. Get insights on your body composition, fat mass, and lean mass.',
   },
   alternates: {
-    canonical: 'https://www.healthcheck.info/body-fat',
+    canonical: 'https://www.heathcheck.info/body-fat',
   },
 };
 

@@ -21,14 +21,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.healthcheck.info'),
+  metadataBase: new URL('https://www.heathcheck.info'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'HealthCheck - Health and Fitness Calculators',
     description: 'Your go-to resource for health and fitness calculators. Calculate body fat, BMI, calorie needs, and more.',
-    url: 'https://www.healthcheck.info',
+    url: 'https://www.heathcheck.info',
     siteName: 'HealthCheck',
     images: [
       {

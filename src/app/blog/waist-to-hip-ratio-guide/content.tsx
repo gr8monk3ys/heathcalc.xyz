@@ -9,13 +9,13 @@ export const metadata = {
   openGraph: {
     title: 'Waist-to-Hip Ratio: A Complete Guide to Understanding Your Body Shape',
     description: 'Learn about Waist-to-Hip Ratio (WHR), how to measure it correctly, what your results mean, and why body shape matters for your health.',
-    url: 'https://www.healthcheck.info/blog/waist-to-hip-ratio-guide',
+    url: 'https://www.heathcheck.info/blog/waist-to-hip-ratio-guide',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'article',
   },
   alternates: {
-    canonical: 'https://www.healthcheck.info/blog/waist-to-hip-ratio-guide',
+    canonical: 'https://www.heathcheck.info/blog/waist-to-hip-ratio-guide',
   },
 };
 

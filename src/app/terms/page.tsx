@@ -81,7 +81,7 @@ export default function TermsPage() {
         </ul>
         <p>
           If you wish to use any material from the Service for commercial purposes, you must obtain 
-          permission from HealthCheck by contacting us at info@healthcheck.info.
+          permission from HealthCheck by contacting us at info@heathcheck.info.
         </p>
       </div>
       
@@ -154,7 +154,7 @@ export default function TermsPage() {
       <div className="neumorph p-6 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
         <p>
-          If you have any questions about these Terms, please contact us at legal@healthcheck.info.
+          If you have any questions about these Terms, please contact us at legal@heathcheck.info.
         </p>
       </div>
     </div>

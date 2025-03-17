@@ -18,7 +18,7 @@ const metadata: Metadata = {
   openGraph: {
     title: 'ABSI Calculator | A Body Shape Index Calculator',
     description: 'Calculate your A Body Shape Index (ABSI) to assess health risks related to body shape and fat distribution. ABSI is a better predictor of mortality risk than BMI alone.',
-    url: 'https://www.healthcheck.info/absi',
+    url: 'https://www.heathcheck.info/absi',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',
@@ -29,7 +29,7 @@ const metadata: Metadata = {
     description: 'Calculate your A Body Shape Index (ABSI) to assess health risks related to body shape and fat distribution. ABSI is a better predictor of mortality risk than BMI alone.',
   },
   alternates: {
-    canonical: 'https://www.healthcheck.info/absi',
+    canonical: 'https://www.heathcheck.info/absi',
   },
 };
 
