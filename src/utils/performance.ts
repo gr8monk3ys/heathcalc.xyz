@@ -103,9 +103,11 @@ export function measureCoreWebVitals(): void {
     const lcpObserver = new PerformanceObserver(entryList => {
       const entries = entryList.getEntries();
       const lastEntry = entries[entries.length - 1];
-      // eslint-disable-next-line no-console
-      console.log('LCP:', lastEntry.startTime);
-      // In production, you'd send this to your analytics
+      // Send to analytics if configured
+      if (typeof window !== 'undefined' && 'gtag' in window) {
+        // @ts-expect-error - gtag is not typed
+        window.gtag('event', 'web_vitals', { metric: 'LCP', value: lastEntry.startTime });
+      }
     });
     lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
 
@@ -116,9 +118,11 @@ export function measureCoreWebVitals(): void {
         // Use type assertion for PerformanceEventTiming
         const fidEntry = entry as PerformanceEventTiming;
         const delay = fidEntry.processingStart - fidEntry.startTime;
-        // eslint-disable-next-line no-console
-        console.log('FID:', delay);
-        // In production, you'd send this to your analytics
+        // Send to analytics if configured
+        if (typeof window !== 'undefined' && 'gtag' in window) {
+          // @ts-expect-error - gtag is not typed
+          window.gtag('event', 'web_vitals', { metric: 'FID', value: delay });
+        }
       });
     });
     fidObserver.observe({ type: 'first-input', buffered: true });
@@ -133,9 +137,11 @@ export function measureCoreWebVitals(): void {
           cumulativeLayoutShift += layoutShiftEntry.value;
         }
       }
-      // eslint-disable-next-line no-console
-      console.log('CLS:', cumulativeLayoutShift);
-      // In production, you'd send this to your analytics
+      // Send to analytics if configured
+      if (typeof window !== 'undefined' && 'gtag' in window) {
+        // @ts-expect-error - gtag is not typed
+        window.gtag('event', 'web_vitals', { metric: 'CLS', value: cumulativeLayoutShift });
+      }
     });
     clsObserver.observe({ type: 'layout-shift', buffered: true });
   } catch (e) {

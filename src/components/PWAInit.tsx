@@ -13,24 +13,13 @@ export default function PWAInit() {
     // Only run in production and if service workers are supported
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       // Register the service worker
-      registerServiceWorker()
-        .then(registration => {
-          if (registration) {
-            // eslint-disable-next-line no-console
-            console.log('✅ Service Worker registered successfully');
-          }
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.error('❌ Service Worker registration failed:', error);
-        });
+      registerServiceWorker().catch(error => {
+        console.error('Service Worker registration failed:', error);
+      });
 
       // Check for updates
       checkForUpdates(() => {
-        // eslint-disable-next-line no-console
-        console.log('🔄 New version available! Refresh to update.');
-
-        // Optionally show a toast or notification to the user
+        // Show notification to the user about the update
         if (window.confirm('A new version is available. Refresh to update?')) {
           window.location.reload();
         }

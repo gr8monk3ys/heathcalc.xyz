@@ -29,12 +29,9 @@ export function registerServiceWorker(): Promise<ServiceWorkerRegistration | und
   return navigator.serviceWorker
     .register('/sw.js')
     .then(registration => {
-      // eslint-disable-next-line no-console
-      console.log('Service Worker registered with scope:', registration.scope);
       return registration;
     })
     .catch(error => {
-      // eslint-disable-next-line no-console
       console.error('Service Worker registration failed:', error);
       return undefined;
     });
@@ -64,14 +61,7 @@ export function checkInstallable(callback: () => void): void {
     // Show the prompt
     deferredPrompt.prompt();
     // Wait for the user to respond to the prompt
-    deferredPrompt.userChoice.then((choiceResult: { outcome: string }) => {
-      if (choiceResult.outcome === 'accepted') {
-        // eslint-disable-next-line no-console
-        console.log('User accepted the install prompt');
-      } else {
-        // eslint-disable-next-line no-console
-        console.log('User dismissed the install prompt');
-      }
+    deferredPrompt.userChoice.then(() => {
       deferredPrompt = null;
     });
   };
