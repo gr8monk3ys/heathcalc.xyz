@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'BMI Calculator | HealthCheck',
@@ -13,9 +14,10 @@ export const metadata: Metadata = {
     description:
       'Calculate your Body Mass Index (BMI) and find your healthy weight range based on your height.',
     type: 'website',
+    url: 'https://www.heathcheck.info/bmi',
     images: [
       {
-        url: '/images/bmi-calculator-og.jpg',
+        url: '/images/calculators/bmi-calculator.jpg',
         width: 1200,
         height: 630,
         alt: 'BMI Calculator',
@@ -27,6 +29,10 @@ export const metadata: Metadata = {
     title: 'BMI Calculator | HealthCheck',
     description:
       'Calculate your Body Mass Index (BMI) and find your healthy weight range based on your height.',
-    images: ['/images/bmi-calculator-og.jpg'],
+    images: ['/images/calculators/bmi-calculator.jpg'],
   },
 };
+
+export default function BMILayout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}

@@ -1,39 +1,41 @@
 import type { Metadata } from 'next';
+import { ReactNode } from 'react';
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: 'Body Fat Calculator | Calculate Your Body Fat Percentage',
   description:
     'Calculate your body fat percentage using the Navy Method, BMI estimation, or manual entry. Get insights on your body composition, fat mass, and lean mass.',
-  keywords: [
-    'body fat calculator',
-    'body fat percentage',
-    'navy method',
-    'body composition',
-    'fat mass',
-    'lean mass',
-    'body fat measurement',
-    'healthy body fat',
-    'body fat categories',
-    'fitness calculator',
-  ].join(', '),
+  keywords:
+    'body fat calculator, body fat percentage, navy method, body composition, fat mass, lean mass, body fat measurement, healthy body fat, body fat categories, fitness calculator',
+  alternates: {
+    canonical: 'https://www.heathcheck.info/body-fat',
+  },
   openGraph: {
     title: 'Body Fat Calculator | Calculate Your Body Fat Percentage',
     description:
       'Calculate your body fat percentage using the Navy Method, BMI estimation, or manual entry. Get insights on your body composition, fat mass, and lean mass.',
     url: 'https://www.heathcheck.info/body-fat',
-    siteName: 'healthcheck',
+    siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/images/calculators/body-fat-calculator.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Body Fat Calculator',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Body Fat Calculator | Calculate Your Body Fat Percentage',
     description:
       'Calculate your body fat percentage using the Navy Method, BMI estimation, or manual entry. Get insights on your body composition, fat mass, and lean mass.',
-  },
-  alternates: {
-    canonical: 'https://www.heathcheck.info/body-fat',
+    images: ['/images/calculators/body-fat-calculator.jpg'],
   },
 };
 
-export default metadata;
+export default function BodyFatLayout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}

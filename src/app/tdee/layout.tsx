@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'TDEE Calculator | HealthCheck',
@@ -14,9 +15,10 @@ export const metadata: Metadata = {
     description:
       'Calculate your Total Daily Energy Expenditure (TDEE) to determine your daily calorie needs.',
     type: 'website',
+    url: 'https://www.heathcheck.info/tdee',
     images: [
       {
-        url: '/images/tdee-calculator-og.jpg',
+        url: '/images/calculators/tdee-calculator.jpg',
         width: 1200,
         height: 630,
         alt: 'TDEE Calculator',
@@ -28,6 +30,10 @@ export const metadata: Metadata = {
     title: 'TDEE Calculator | HealthCheck',
     description:
       'Calculate your Total Daily Energy Expenditure (TDEE) to determine your daily calorie needs.',
-    images: ['/images/tdee-calculator-og.jpg'],
+    images: ['/images/calculators/tdee-calculator.jpg'],
   },
 };
+
+export default function TDEELayout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}
