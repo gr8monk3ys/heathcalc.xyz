@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ABSIResult } from '@/types/absi';
-import { getWaistHeightRatioCategory } from '@/app/api/absi';
+import { getWaistHeightRatioCategory } from '@/utils/calculators/absi';
 
 interface ABSIResultDisplayProps {
   result: ABSIResult;

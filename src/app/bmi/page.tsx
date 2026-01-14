@@ -7,10 +7,11 @@ import {
   calculateHealthyWeightRange,
   estimateBMIPercentile,
   getBMIPercentileCategory,
-} from '@/app/api/bmi';
+} from '@/utils/calculators/bmi';
 import { BMIResult } from '@/types/bmi';
-import { Gender, HeightUnit, WeightUnit } from '@/types/common';
+import { Gender } from '@/types/common';
 import { validateAge, validateHeight, validateWeight, isEmpty } from '@/utils/validation';
+import { convertWeight } from '@/utils/conversions';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import CalculatorForm from '@/components/calculators/CalculatorForm';
 import BMIResultDisplay from '@/components/calculators/bmi/BMIResult';
@@ -23,6 +24,7 @@ import SaveResult from '@/components/SaveResult';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import FAQSection from '@/components/FAQSection';
 import RelatedArticles from '@/components/RelatedArticles';
+import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
 
 // FAQ data for BMI calculator
 const faqs = [
@@ -93,10 +95,8 @@ export default function BMICalculator() {
   // State for form inputs
   const [age, setAge] = useState<number | ''>('');
   const [gender, setGender] = useState<Gender>('male');
-  const [height, setHeight] = useState<number | ''>('');
-  const [heightUnit, setHeightUnit] = useState<HeightUnit>('cm');
-  const [weight, setWeight] = useState<number | ''>('');
-  const [weightUnit, setWeightUnit] = useState<WeightUnit>('kg');
+  const height = useHeight();
+  const weight = useWeight();
   const [isChild, setIsChild] = useState<boolean>(false);
 
   // State for form validation
@@ -131,25 +131,23 @@ export default function BMICalculator() {
       }
     }
 
-    // Validate height
-    if (isEmpty(height)) {
+    // Validate height (feet for imperial, cm for metric)
+    if (isEmpty(height.value)) {
       newErrors.height = 'Height is required';
     } else {
-      // Convert height to appropriate unit for validation
-      const heightForValidation = heightUnit === 'cm' ? height : (typeof height === 'number' ? height * 12 : height); // ft to inches
-      const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
-      const heightValidation = validateHeight(heightForValidation, unitSystem);
+      const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+      const heightValidation = validateHeight(height.value, unitSystem);
       if (!heightValidation.isValid) {
         newErrors.height = heightValidation.error;
       }
     }
 
     // Validate weight
-    if (isEmpty(weight)) {
+    if (isEmpty(weight.value)) {
       newErrors.weight = 'Weight is required';
     } else {
-      const unitSystem = weightUnit === 'kg' ? 'metric' : 'imperial';
-      const weightValidation = validateWeight(weight, unitSystem);
+      const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+      const weightValidation = validateWeight(weight.value, unitSystem);
       if (!weightValidation.isValid) {
         newErrors.weight = weightValidation.error;
       }
@@ -157,22 +155,20 @@ export default function BMICalculator() {
 
     setErrors(newErrors);
 
+    // Get converted values
+    const heightCm = height.toCm();
+    const weightKg = weight.toKg();
+
     // If no errors, calculate BMI
     if (
       Object.keys(newErrors).length === 0 &&
       typeof age === 'number' &&
-      typeof height === 'number' &&
-      typeof weight === 'number'
+      heightCm !== null &&
+      weightKg !== null
     ) {
       // Set isChild based on age
       const childStatus = age < 20;
       setIsChild(childStatus);
-
-      // Convert height to cm if needed
-      const heightCm = heightUnit === 'cm' ? height : height * 30.48;
-
-      // Convert weight to kg if needed
-      const weightKg = weightUnit === 'kg' ? weight : weight / 2.20462;
 
       // Calculate BMI
       const bmi = calculateBMI(heightCm, weightKg);
@@ -182,8 +178,8 @@ export default function BMICalculator() {
 
       // Convert healthy weight range to the current unit
       const displayHealthyWeightRange = {
-        min: weightUnit === 'kg' ? healthyWeightRange.min : healthyWeightRange.min * 2.20462,
-        max: weightUnit === 'kg' ? healthyWeightRange.max : healthyWeightRange.max * 2.20462,
+        min: weight.unit === 'kg' ? healthyWeightRange.min : convertWeight(healthyWeightRange.min, 'kg', 'lb'),
+        max: weight.unit === 'kg' ? healthyWeightRange.max : convertWeight(healthyWeightRange.max, 'kg', 'lb'),
       };
 
       // Create result object
@@ -226,39 +222,12 @@ export default function BMICalculator() {
     }
   };
 
-  // Handle unit toggle
-  const toggleHeightUnit = () => {
-    if (heightUnit === 'cm' && typeof height === 'number') {
-      setHeight(parseFloat((height / 30.48).toFixed(1)));
-      setHeightUnit('ft');
-    } else if (heightUnit === 'ft' && typeof height === 'number') {
-      setHeight(parseFloat((height * 30.48).toFixed(1)));
-      setHeightUnit('cm');
-    } else {
-      setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
-    }
-  };
-
-  const toggleWeightUnit = () => {
-    if (weightUnit === 'kg' && typeof weight === 'number') {
-      setWeight(parseFloat((weight * 2.20462).toFixed(1)));
-      setWeightUnit('lb');
-    } else if (weightUnit === 'lb' && typeof weight === 'number') {
-      setWeight(parseFloat((weight / 2.20462).toFixed(1)));
-      setWeightUnit('kg');
-    } else {
-      setWeightUnit(weightUnit === 'kg' ? 'lb' : 'kg');
-    }
-  };
-
   // Reset form
   const handleReset = () => {
     setAge('');
     setGender('male');
-    setHeight('');
-    setHeightUnit('cm');
-    setWeight('');
-    setWeightUnit('kg');
+    height.setValue('');
+    weight.setValue('');
     setErrors({});
     setResult(null);
     setShowResult(false);
@@ -286,30 +255,8 @@ export default function BMICalculator() {
         { value: 'female', label: 'Female' },
       ],
     },
-    {
-      name: 'height',
-      label: 'Height',
-      type: 'number' as const,
-      value: height,
-      onChange: setHeight,
-      error: errors.height,
-      placeholder: heightUnit === 'cm' ? 'Centimeters' : 'Feet',
-      unit: heightUnit === 'cm' ? 'cm' : 'ft',
-      unitToggle: toggleHeightUnit,
-      step: '0.1',
-    },
-    {
-      name: 'weight',
-      label: 'Weight',
-      type: 'number' as const,
-      value: weight,
-      onChange: setWeight,
-      error: errors.weight,
-      placeholder: weightUnit === 'kg' ? 'Kilograms' : 'Pounds',
-      unit: weightUnit === 'kg' ? 'kg' : 'lb',
-      unitToggle: toggleWeightUnit,
-      step: '0.1',
-    },
+    createHeightField(height, errors.height),
+    createWeightField(weight, errors.weight),
   ];
 
   return (
@@ -347,7 +294,7 @@ export default function BMICalculator() {
           <div className="md:col-span-2" id="bmi-result">
             {showResult && result ? (
               <>
-                <BMIResultDisplay result={result} isChild={isChild} weightUnit={weightUnit} />
+                <BMIResultDisplay result={result} isChild={isChild} weightUnit={weight.unit} />
 
                 {/* Save result functionality */}
                 <div className="mt-6 flex justify-between items-center">

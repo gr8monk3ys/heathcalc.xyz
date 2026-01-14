@@ -122,6 +122,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({
                   type="button"
                   onClick={field.unitToggle}
                   className="px-4 neumorph rounded-r-lg hover:shadow-neumorph-inset transition-all"
+                  aria-label={`Toggle ${field.label.toLowerCase()} unit, currently ${field.unit}`}
                 >
                   {field.unit}
                 </button>

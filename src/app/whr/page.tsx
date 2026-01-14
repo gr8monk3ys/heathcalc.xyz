@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Gender } from '@/types/common';
 import { WHRResult as WHRResultType } from '@/types/whr';
-import { calculateWHRWithCategory } from '@/app/api/whr';
+import { calculateWHRWithCategory } from '@/utils/calculators/whr';
 import { validateWaist, validateHip, validateWaistHipRatio, isEmpty } from '@/utils/validation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import CalculatorForm from '@/components/calculators/CalculatorForm';

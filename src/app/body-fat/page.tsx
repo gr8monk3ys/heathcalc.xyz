@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useState, useMemo, useCallback } from 'react';
-import { Gender, HeightUnit, WeightUnit } from '@/types/common';
+import { Gender } from '@/types/common';
 import { BodyFatMethod, BodyFatResult as BodyFatResultType } from '@/types/bodyFat';
 import {
   calculateBodyFat,
   getBodyFatCategory,
   getHealthyBodyFatRange,
   calculateFatAndLeanMass,
-} from '@/app/api/bodyFat';
+} from '@/utils/calculators/bodyFat';
 import { BODY_FAT_METHODS } from '@/constants/bodyFat';
-import { calculateBMI } from '@/app/api/bmi';
+import { calculateBMI } from '@/utils/calculators/bmi';
 import {
   validateAge,
   validateHeight,
@@ -26,20 +26,19 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import BodyFatResultDisplay from '@/components/calculators/body-fat/BodyFatResult';
 import BodyFatInfo from '@/components/calculators/body-fat/BodyFatInfo';
 import BodyFatUnderstanding from '@/components/calculators/body-fat/BodyFatUnderstanding';
+import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
 
 export default function BodyFatCalculator() {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
-  const [height, setHeight] = useState<number | ''>('');
-  const [heightUnit, setHeightUnit] = useState<HeightUnit>('cm');
-  const [weight, setWeight] = useState<number | ''>('');
-  const [weightUnit, setWeightUnit] = useState<WeightUnit>('kg');
+  const height = useHeight();
+  const weight = useWeight();
   const [method, setMethod] = useState<BodyFatMethod>('navy');
   const [waist, setWaist] = useState<number | ''>('');
   const [neck, setNeck] = useState<number | ''>('');
   const [hips, setHips] = useState<number | ''>('');
-  const [bodyFatPercentage, setBodyFatPercentage] = useState<number | ''>('');
+    const [bodyFatPercentage, setBodyFatPercentage] = useState<number | ''>('');
 
   // State for form validation
   const [errors, setErrors] = useState<{
@@ -83,24 +82,23 @@ export default function BodyFatCalculator() {
       }
 
       // Validate height
-      if (isEmpty(height)) {
+      // Validate height (feet for imperial, cm for metric)
+      if (isEmpty(height.value)) {
         newErrors.height = 'Height is required';
       } else {
-        // Convert height to inches if in feet for validation
-        const heightForValidation = heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
-        const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
-        const heightValidation = validateHeight(heightForValidation, unitSystem);
+        const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+        const heightValidation = validateHeight(height.value, unitSystem);
         if (!heightValidation.isValid) {
           newErrors.height = heightValidation.error;
         }
       }
 
       // Validate weight
-      if (isEmpty(weight)) {
+      if (isEmpty(weight.value)) {
         newErrors.weight = 'Weight is required';
       } else {
-        const unitSystem = weightUnit === 'kg' ? 'metric' : 'imperial';
-        const weightValidation = validateWeight(weight, unitSystem);
+        const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+        const weightValidation = validateWeight(weight.value, unitSystem);
         if (!weightValidation.isValid) {
           newErrors.weight = weightValidation.error;
         }
@@ -153,18 +151,17 @@ export default function BodyFatCalculator() {
 
       setErrors(newErrors);
 
+      // Get converted values
+      const heightCm = height.toCm();
+      const weightKg = weight.toKg();
+
       // If no errors, calculate body fat
       if (
         Object.keys(newErrors).length === 0 &&
         typeof age === 'number' &&
-        typeof height === 'number' &&
-        typeof weight === 'number'
+        heightCm !== null &&
+        weightKg !== null
       ) {
-        // Convert height to cm if needed
-        const heightCm = heightUnit === 'cm' ? height : height * 30.48;
-
-        // Convert weight to kg if needed
-        const weightKg = weightUnit === 'kg' ? weight : weight / 2.20462;
 
         // Calculate BMI
         const bmi = calculateBMI(heightCm, weightKg);
@@ -224,51 +221,26 @@ export default function BodyFatCalculator() {
     [
       age,
       gender,
-      height,
-      heightUnit,
-      weight,
-      weightUnit,
+      height.value,
+      height.unit,
+      weight.value,
+      weight.unit,
       method,
       waist,
       neck,
       hips,
       bodyFatPercentage,
+      height,
+      weight,
     ]
   );
-
-  // Handle unit toggle with useCallback
-  const toggleHeightUnit = useCallback(() => {
-    if (heightUnit === 'cm' && typeof height === 'number') {
-      setHeight(parseFloat((height / 30.48).toFixed(1)));
-      setHeightUnit('ft');
-    } else if (heightUnit === 'ft' && typeof height === 'number') {
-      setHeight(parseFloat((height * 30.48).toFixed(1)));
-      setHeightUnit('cm');
-    } else {
-      setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
-    }
-  }, [height, heightUnit]);
-
-  const toggleWeightUnit = useCallback(() => {
-    if (weightUnit === 'kg' && typeof weight === 'number') {
-      setWeight(parseFloat((weight * 2.20462).toFixed(1)));
-      setWeightUnit('lb');
-    } else if (weightUnit === 'lb' && typeof weight === 'number') {
-      setWeight(parseFloat((weight / 2.20462).toFixed(1)));
-      setWeightUnit('kg');
-    } else {
-      setWeightUnit(weightUnit === 'kg' ? 'lb' : 'kg');
-    }
-  }, [weight, weightUnit]);
 
   // Reset form with useCallback
   const handleReset = useCallback(() => {
     setGender('male');
     setAge('');
-    setHeight('');
-    setHeightUnit('cm');
-    setWeight('');
-    setWeightUnit('kg');
+    height.setValue('');
+    weight.setValue('');
     setMethod('navy');
     setWaist('');
     setNeck('');
@@ -277,7 +249,7 @@ export default function BodyFatCalculator() {
     setErrors({});
     setResult(null);
     setShowResult(false);
-  }, []);
+  }, [height, weight]);
 
   // Handle method change with useCallback
   const handleMethodChange = useCallback((newMethod: BodyFatMethod) => {
@@ -372,30 +344,8 @@ export default function BodyFatCalculator() {
         error: errors.age,
         placeholder: 'Years',
       },
-      {
-        name: 'height',
-        label: 'Height',
-        type: 'number' as const,
-        value: height,
-        onChange: setHeight,
-        error: errors.height,
-        placeholder: heightUnit === 'cm' ? 'Centimeters' : 'Feet',
-        unit: heightUnit === 'cm' ? 'cm' : 'ft',
-        unitToggle: toggleHeightUnit,
-        step: '0.1',
-      },
-      {
-        name: 'weight',
-        label: 'Weight',
-        type: 'number' as const,
-        value: weight,
-        onChange: setWeight,
-        error: errors.weight,
-        placeholder: weightUnit === 'kg' ? 'Kilograms' : 'Pounds',
-        unit: weightUnit === 'kg' ? 'kg' : 'lb',
-        unitToggle: toggleWeightUnit,
-        step: '0.1',
-      },
+      createHeightField(height, errors.height),
+      createWeightField(weight, errors.weight),
       {
         name: 'method',
         label: 'Calculation Method',
@@ -414,13 +364,9 @@ export default function BodyFatCalculator() {
       gender,
       age,
       height,
-      heightUnit,
       weight,
-      weightUnit,
       method,
       errors,
-      toggleHeightUnit,
-      toggleWeightUnit,
       handleMethodChange,
       methodFields,
     ]
@@ -455,7 +401,7 @@ export default function BodyFatCalculator() {
               <BodyFatResultDisplay
                 result={result}
                 gender={gender}
-                weightUnit={weightUnit}
+                weightUnit={weight.unit}
                 method={methodLabel}
               />
             ) : (

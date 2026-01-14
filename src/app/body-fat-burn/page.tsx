@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Gender, HeightUnit, WeightUnit, UnitSystem } from '@/types/common';
+import { Gender, UnitSystem } from '@/types/common';
 import { BodyFatBurnResult as BodyFatBurnResultType } from '@/types/bodyFatBurn';
-import { calculateBodyFatBurn } from '@/app/api/bodyFatBurn';
+import { calculateBodyFatBurn } from '@/utils/calculators/bodyFatBurn';
 import {
   ACTIVITIES,
   DURATION_RANGE,
@@ -23,6 +23,7 @@ import SaveResult from '@/components/SaveResult';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import FAQSection from '@/components/FAQSection';
 import RelatedArticles from '@/components/RelatedArticles';
+import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
 
 // FAQ data for the calculator
 const faqs = [
@@ -88,10 +89,8 @@ export default function BodyFatBurnCalculator() {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
-  const [height, setHeight] = useState<number | ''>('');
-  const [heightUnit, setHeightUnit] = useState<HeightUnit>('cm');
-  const [weight, setWeight] = useState<number | ''>('');
-  const [weightUnit, setWeightUnit] = useState<WeightUnit>('kg');
+  const height = useHeight();
+  const weight = useWeight();
   const [activity, setActivity] = useState<string>('walking');
   const [speed, setSpeed] = useState<number>(3.0);
   const [duration, setDuration] = useState<number>(30);
@@ -131,24 +130,23 @@ export default function BodyFatBurnCalculator() {
     }
 
     // Validate height
-    if (isEmpty(height)) {
+    // Validate height (feet for imperial, cm for metric)
+    if (isEmpty(height.value)) {
       newErrors.height = 'Height is required';
     } else {
-      // Convert height to inches if in feet for validation
-      const heightForValidation = heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
-      const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
-      const heightValidation = validateHeight(heightForValidation, unitSystem);
+      const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+      const heightValidation = validateHeight(height.value, unitSystem);
       if (!heightValidation.isValid) {
         newErrors.height = heightValidation.error;
       }
     }
 
     // Validate weight
-    if (isEmpty(weight)) {
+    if (isEmpty(weight.value)) {
       newErrors.weight = 'Weight is required';
     } else {
-      const unitSystem = weightUnit === 'kg' ? 'metric' : 'imperial';
-      const weightValidation = validateWeight(weight, unitSystem);
+      const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+      const weightValidation = validateWeight(weight.value, unitSystem);
       if (!weightValidation.isValid) {
         newErrors.weight = weightValidation.error;
       }
@@ -156,18 +154,17 @@ export default function BodyFatBurnCalculator() {
 
     setErrors(newErrors);
 
+    // Get converted values
+    const heightCm = height.toCm();
+    const weightKg = weight.toKg();
+
     // If no errors, calculate body fat burn
     if (
       Object.keys(newErrors).length === 0 &&
       typeof age === 'number' &&
-      typeof height === 'number' &&
-      typeof weight === 'number'
+      heightCm !== null &&
+      weightKg !== null
     ) {
-      // Convert height to cm if needed
-      const heightCm = heightUnit === 'cm' ? height : height * 30.48;
-
-      // Convert weight to kg if needed
-      const weightKg = weightUnit === 'kg' ? weight : weight / 2.20462;
 
       try {
         // Prepare form data
@@ -176,7 +173,7 @@ export default function BodyFatBurnCalculator() {
           age,
           height: heightCm,
           weight: weightKg,
-          unitSystem: weightUnit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
+          unitSystem: weight.unit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
           activity,
           speed,
           duration,
@@ -204,39 +201,12 @@ export default function BodyFatBurnCalculator() {
     }
   };
 
-  // Handle unit toggle
-  const toggleHeightUnit = () => {
-    if (heightUnit === 'cm' && typeof height === 'number') {
-      setHeight(parseFloat((height / 30.48).toFixed(1)));
-      setHeightUnit('ft');
-    } else if (heightUnit === 'ft' && typeof height === 'number') {
-      setHeight(parseFloat((height * 30.48).toFixed(1)));
-      setHeightUnit('cm');
-    } else {
-      setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
-    }
-  };
-
-  const toggleWeightUnit = () => {
-    if (weightUnit === 'kg' && typeof weight === 'number') {
-      setWeight(parseFloat((weight * 2.20462).toFixed(1)));
-      setWeightUnit('lb');
-    } else if (weightUnit === 'lb' && typeof weight === 'number') {
-      setWeight(parseFloat((weight / 2.20462).toFixed(1)));
-      setWeightUnit('kg');
-    } else {
-      setWeightUnit(weightUnit === 'kg' ? 'lb' : 'kg');
-    }
-  };
-
   // Reset form
   const handleReset = () => {
     setGender('male');
     setAge('');
-    setHeight('');
-    setHeightUnit('cm');
-    setWeight('');
-    setWeightUnit('kg');
+    height.setValue('');
+    weight.setValue('');
     setActivity('walking');
     setSpeed(3.0);
     setDuration(30);
@@ -272,30 +242,8 @@ export default function BodyFatBurnCalculator() {
       error: errors.age,
       placeholder: 'Years',
     },
-    {
-      name: 'height',
-      label: 'Height',
-      type: 'number' as const,
-      value: height,
-      onChange: setHeight,
-      error: errors.height,
-      placeholder: heightUnit === 'cm' ? 'Centimeters' : 'Feet',
-      unit: heightUnit === 'cm' ? 'cm' : 'ft',
-      unitToggle: toggleHeightUnit,
-      step: '0.1',
-    },
-    {
-      name: 'weight',
-      label: 'Weight',
-      type: 'number' as const,
-      value: weight,
-      onChange: setWeight,
-      error: errors.weight,
-      placeholder: weightUnit === 'kg' ? 'Kilograms' : 'Pounds',
-      unit: weightUnit === 'kg' ? 'kg' : 'lb',
-      unitToggle: toggleWeightUnit,
-      step: '0.1',
-    },
+    createHeightField(height, errors.height),
+    createWeightField(weight, errors.weight),
     {
       name: 'activity',
       label: 'Activity',
@@ -339,7 +287,7 @@ export default function BodyFatBurnCalculator() {
     },
     {
       name: 'burnGoal',
-      label: `Weight Loss Goal (${weightUnit === 'kg' ? 'kg' : 'lb'})`,
+      label: `Weight Loss Goal (${weight.unit === 'kg' ? 'kg' : 'lb'})`,
       type: 'number' as const,
       value: burnGoal,
       onChange: setBurnGoal,
@@ -392,7 +340,7 @@ export default function BodyFatBurnCalculator() {
                   frequency,
                   burnGoal,
                   unitSystem:
-                    weightUnit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
+                    weight.unit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
                 }}
               />
 
@@ -408,7 +356,7 @@ export default function BodyFatBurnCalculator() {
                     activity: selectedActivity?.name || activity,
                     duration,
                     frequency,
-                    burnGoal: `${burnGoal} ${weightUnit}`,
+                    burnGoal: `${burnGoal} ${weight.unit}`,
                   }}
                 />
 

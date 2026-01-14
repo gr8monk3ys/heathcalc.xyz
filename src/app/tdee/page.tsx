@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ActivityLevel, Gender, HeightUnit, WeightUnit } from '@/types/common';
-import { calculateBMR, calculateTDEE, getActivityMultiplier } from '@/app/api/tdee';
+import { ActivityLevel, Gender } from '@/types/common';
+import { calculateBMR, calculateTDEE, getActivityMultiplier } from '@/utils/calculators/tdee';
 import { ACTIVITY_MULTIPLIERS } from '@/constants/tdee';
 import { validateAge, validateHeight, validateWeight, isEmpty } from '@/utils/validation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
@@ -17,6 +17,7 @@ import SaveResult from '@/components/SaveResult';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import FAQSection from '@/components/FAQSection';
 import RelatedArticles from '@/components/RelatedArticles';
+import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
 
 // FAQ data for TDEE calculator
 const faqs = [
@@ -87,10 +88,8 @@ export default function TDEECalculator() {
   // State for form inputs
   const [age, setAge] = useState<number | ''>('');
   const [gender, setGender] = useState<Gender>('male');
-  const [height, setHeight] = useState<number | ''>('');
-  const [heightUnit, setHeightUnit] = useState<HeightUnit>('cm');
-  const [weight, setWeight] = useState<number | ''>('');
-  const [weightUnit, setWeightUnit] = useState<WeightUnit>('kg');
+  const height = useHeight();
+  const weight = useWeight();
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>('sedentary');
 
   // State for form validation
@@ -138,25 +137,23 @@ export default function TDEECalculator() {
       }
     }
 
-    // Validate height
-    if (isEmpty(height)) {
+    // Validate height (feet for imperial, cm for metric)
+    if (isEmpty(height.value)) {
       newErrors.height = 'Height is required';
     } else {
-      // Convert height to inches if in feet for validation
-      const heightForValidation = heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
-      const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
-      const heightValidation = validateHeight(heightForValidation, unitSystem);
+      const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+      const heightValidation = validateHeight(height.value, unitSystem);
       if (!heightValidation.isValid) {
         newErrors.height = heightValidation.error;
       }
     }
 
     // Validate weight
-    if (isEmpty(weight)) {
+    if (isEmpty(weight.value)) {
       newErrors.weight = 'Weight is required';
     } else {
-      const unitSystem = weightUnit === 'kg' ? 'metric' : 'imperial';
-      const weightValidation = validateWeight(weight, unitSystem);
+      const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+      const weightValidation = validateWeight(weight.value, unitSystem);
       if (!weightValidation.isValid) {
         newErrors.weight = weightValidation.error;
       }
@@ -164,18 +161,17 @@ export default function TDEECalculator() {
 
     setErrors(newErrors);
 
+    // Get converted values
+    const heightCm = height.toCm();
+    const weightKg = weight.toKg();
+
     // If no errors, calculate TDEE
     if (
       Object.keys(newErrors).length === 0 &&
       typeof age === 'number' &&
-      typeof height === 'number' &&
-      typeof weight === 'number'
+      heightCm !== null &&
+      weightKg !== null
     ) {
-      // Convert height to cm if needed
-      const heightCm = heightUnit === 'cm' ? height : height * 30.48;
-
-      // Convert weight to kg if needed
-      const weightKg = weightUnit === 'kg' ? weight : weight / 2.20462;
 
       // Get activity multiplier
       const activityMultiplier = getActivityMultiplier(activityLevel);
@@ -216,39 +212,12 @@ export default function TDEECalculator() {
     }
   };
 
-  // Handle unit toggle
-  const toggleHeightUnit = () => {
-    if (heightUnit === 'cm' && typeof height === 'number') {
-      setHeight(parseFloat((height / 30.48).toFixed(1)));
-      setHeightUnit('ft');
-    } else if (heightUnit === 'ft' && typeof height === 'number') {
-      setHeight(parseFloat((height * 30.48).toFixed(1)));
-      setHeightUnit('cm');
-    } else {
-      setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
-    }
-  };
-
-  const toggleWeightUnit = () => {
-    if (weightUnit === 'kg' && typeof weight === 'number') {
-      setWeight(parseFloat((weight * 2.20462).toFixed(1)));
-      setWeightUnit('lb');
-    } else if (weightUnit === 'lb' && typeof weight === 'number') {
-      setWeight(parseFloat((weight / 2.20462).toFixed(1)));
-      setWeightUnit('kg');
-    } else {
-      setWeightUnit(weightUnit === 'kg' ? 'lb' : 'kg');
-    }
-  };
-
   // Reset form
   const handleReset = () => {
     setAge('');
     setGender('male');
-    setHeight('');
-    setHeightUnit('cm');
-    setWeight('');
-    setWeightUnit('kg');
+    height.setValue('');
+    weight.setValue('');
     setActivityLevel('sedentary');
     setErrors({});
     setResult(null);
@@ -277,30 +246,8 @@ export default function TDEECalculator() {
         { value: 'female', label: 'Female' },
       ],
     },
-    {
-      name: 'height',
-      label: 'Height',
-      type: 'number' as const,
-      value: height,
-      onChange: setHeight,
-      error: errors.height,
-      placeholder: heightUnit === 'cm' ? 'Centimeters' : 'Feet',
-      unit: heightUnit === 'cm' ? 'cm' : 'ft',
-      unitToggle: toggleHeightUnit,
-      step: '0.1',
-    },
-    {
-      name: 'weight',
-      label: 'Weight',
-      type: 'number' as const,
-      value: weight,
-      onChange: setWeight,
-      error: errors.weight,
-      placeholder: weightUnit === 'kg' ? 'Kilograms' : 'Pounds',
-      unit: weightUnit === 'kg' ? 'kg' : 'lb',
-      unitToggle: toggleWeightUnit,
-      step: '0.1',
-    },
+    createHeightField(height, errors.height),
+    createWeightField(weight, errors.weight),
     {
       name: 'activity',
       label: 'Activity Level',
