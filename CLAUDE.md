@@ -18,7 +18,7 @@ npm run build                  # Build for production
 npm run start                  # Start production server
 
 # Testing
-npm test                       # Run all tests (537 tests across 12 files)
+npm test                       # Run all tests (565 tests across 13 files)
 npm test -- --run              # Run tests once (CI mode)
 npm run test:watch             # Watch mode
 npm run test:coverage          # Run with coverage report
@@ -41,38 +41,49 @@ Note: Use `npm install --legacy-peer-deps` if you encounter peer dependency conf
 ## Architecture
 
 ### File-Based Routing (Next.js App Router)
+
 - **Calculator routes:** `src/app/[calculator-name]/page.tsx` (client components with `'use client'`)
-- **Metadata:** Working calculators use `metadata.ts`, placeholder pages use `layout.tsx`
+- **Metadata:** All calculators use `layout.tsx` with exported `metadata` object
 - **API routes:** `src/app/api/` re-export from `src/utils/calculators/` (no business logic here)
 
 ### Calculation Logic (Primary Location)
+
 All calculation logic lives in `src/utils/calculators/`:
+
 - `bmi.ts` - BMI with adult/child support
-- `tdee.ts` - Multiple formulas (Mifflin-St Jeor, Harris-Benedict, Katch-McArdle)
+- `tdee.ts` - Multiple formulas (Mifflin-St Jeor, Harris-Benedict, Katch-McArdle), also exports shared `calculateBMR()` and `calculateTDEE()` used by other calculators
 - `bodyFat.ts` - Navy method & BMI method
 - `bodyFatBurn.ts` - Activity-based calorie burn
 - `absi.ts` - ABSI and waist-to-height ratio
 - `whr.ts` - Waist-to-hip ratio
+- `calorieDeficit.ts`, `weightManagement.ts`, `maximumFatLoss.ts` - Import BMR/TDEE from `tdee.ts`
 - Each has a corresponding `.test.ts` file
 
 ### Input Validation
+
 Use `src/utils/validation.ts` for all input validation:
+
 - `validateAge()`, `validateHeight()`, `validateWeight()`, `validateWaist()`, etc.
 - All validators return `{ isValid: boolean, error?: string, sanitized?: number }`
 - `VALIDATION_RANGES` contains min/max values
 
 ### Unit Conversions
+
 Single source of truth: `src/utils/conversions.ts`
+
 - `heightFtInToCm()`, `heightCmToFtIn()`, `weightLbToKg()`, `weightKgToLb()`
 - `convertHeight()`, `convertWeight()`, `convertTemperature()`, `convertLength()`
 - Do NOT add conversion logic elsewhere
 
 ### State Management
+
 Two React Contexts in `src/app/layout.tsx`:
+
 - `PreferencesContext` - User preferences (units, dark mode) persisted to localStorage
 - `SavedResultsContext` - Calculator result history
 
 ### Component Organization
+
 ```
 src/components/
 ├── ui/                         # Reusable primitives (buttons, cards, inputs)
@@ -85,12 +96,14 @@ src/components/
 ```
 
 ### Types
+
 - Calculator form data and results: `src/types/[calculator-name].ts`
 - Common types (Gender, ActivityLevel): `src/types/common.ts`
 
 ## Key Patterns
 
 ### Adding a New Calculator
+
 1. Create route folder: `src/app/[calculator-name]/`
 2. Add `page.tsx` (client component) and `metadata.ts`
 3. Create types in `src/types/[calculator-name].ts`
@@ -102,7 +115,9 @@ src/components/
 9. Update `public/sitemap.xml`
 
 ### Testing Pattern
+
 Tests use Vitest with jsdom environment:
+
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { calculateBMI } from './bmi';
@@ -118,21 +133,27 @@ describe('BMI Calculation', () => {
 ## Infrastructure
 
 ### SEO
+
 - Metadata in `metadata.ts` or `layout.tsx` for each page
 - Structured data via `GlobalStructuredData` component (Schema.org JSON-LD)
 - Sitemap at `public/sitemap.xml`
 
 ### Middleware
+
 `src/middleware.ts` handles URL canonicalization, trailing slash removal, www redirects (301)
 
 ### PWA
+
 Service worker in `public/sw.js`, manifest at `public/manifest.json`, auto-registered via `PWAInit` component
 
 ### Styling
+
 TailwindCSS with neumorphic design tokens in `tailwind.config.js`. Import alias `@/*` maps to `src/*`.
 
 ### CI/CD
+
 GitHub Actions workflow at `.github/workflows/ci.yml`:
+
 - Runs on Node 18.x and 20.x
 - format:check → lint → type-check → tests → build
 - Lighthouse performance checks on PRs
@@ -141,13 +162,17 @@ GitHub Actions workflow at `.github/workflows/ci.yml`:
 ## Known Issues
 
 ### Placeholder Pages
+
 4 calculator pages (Calorie Deficit, Weight Management, Maximum Fat Loss, Conversions) have full SEO metadata but show "Coming Soon" content. This creates poor UX when users land from search.
 
 ### Bundle Size
+
 Body Fat Burn calculator (`/body-fat-burn`) is ~50% larger than other calculators. Consider auditing dependencies.
 
 ### Type Safety
+
 4 remaining `any` types in `src/components/calculators/CalculatorForm.tsx`. These should be properly typed.
 
 ### Code Duplication
+
 Each calculator page reimplements form handling (150-260 lines). Consider extracting common form logic.
