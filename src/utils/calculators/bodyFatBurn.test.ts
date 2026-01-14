@@ -1,12 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateBodyFatBurn } from './bodyFatBurn';
 import { BodyFatBurnFormData } from '@/types/bodyFatBurn';
-import {
-  
-  
-  
-  
-} from '@/constants/bodyFatBurn';
+import {} from '@/constants/bodyFatBurn';
 
 describe('Body Fat Burn Calculator', () => {
   describe('calculateBodyFatBurn - Basic Calculations', () => {

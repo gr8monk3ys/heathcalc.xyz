@@ -24,31 +24,31 @@ export default function CalorieDeficitUnderstanding() {
         <Accordion title="The Science Behind Weight Loss">
           <div className="space-y-4">
             <p>
-              While the old rule of "3,500 calories equals one pound of fat" is commonly cited, modern
-              research shows that weight loss is more complex. Your body adapts to calorie restriction
-              in several ways:
+              While the old rule of "3,500 calories equals one pound of fat" is commonly cited,
+              modern research shows that weight loss is more complex. Your body adapts to calorie
+              restriction in several ways:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <span className="font-medium">Metabolic Adaptation:</span> Your metabolism slows by 5-15%
-                as you lose weight, making further weight loss more difficult
+                <span className="font-medium">Metabolic Adaptation:</span> Your metabolism slows by
+                5-15% as you lose weight, making further weight loss more difficult
               </li>
               <li>
                 <span className="font-medium">Body Composition Changes:</span> You lose both fat and
                 some lean mass, affecting your calorie needs
               </li>
               <li>
-                <span className="font-medium">Hormonal Adjustments:</span> Hunger hormones (ghrelin and
-                leptin) change, affecting appetite and energy levels
+                <span className="font-medium">Hormonal Adjustments:</span> Hunger hormones (ghrelin
+                and leptin) change, affecting appetite and energy levels
               </li>
               <li>
-                <span className="font-medium">Non-Linear Progress:</span> Weight loss isn't constant;
-                you'll experience plateaus and fluctuations
+                <span className="font-medium">Non-Linear Progress:</span> Weight loss isn't
+                constant; you'll experience plateaus and fluctuations
               </li>
             </ul>
             <p>
-              This calculator accounts for metabolic adaptation to provide more realistic estimates than
-              simple calorie math.
+              This calculator accounts for metabolic adaptation to provide more realistic estimates
+              than simple calorie math.
             </p>
           </div>
         </Accordion>
@@ -99,27 +99,28 @@ export default function CalorieDeficitUnderstanding() {
         <Accordion title="Minimum Calorie Guidelines">
           <div className="space-y-4">
             <p>
-              Healthcare professionals generally recommend minimum calorie intakes to ensure adequate
-              nutrition:
+              Healthcare professionals generally recommend minimum calorie intakes to ensure
+              adequate nutrition:
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <span className="font-medium">Women:</span> Generally should not go below 1,200 calories
-                per day
+                <span className="font-medium">Women:</span> Generally should not go below 1,200
+                calories per day
               </li>
               <li>
-                <span className="font-medium">Men:</span> Generally should not go below 1,500 calories per
-                day
+                <span className="font-medium">Men:</span> Generally should not go below 1,500
+                calories per day
               </li>
             </ul>
             <p>
-              Going below these thresholds makes it difficult to get adequate vitamins, minerals, and
-              protein. Very low-calorie diets should only be undertaken under medical supervision.
+              Going below these thresholds makes it difficult to get adequate vitamins, minerals,
+              and protein. Very low-calorie diets should only be undertaken under medical
+              supervision.
             </p>
             <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg mt-4">
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                <span className="font-medium">Important:</span> If your calculator results show a daily
-                calorie target below these minimums, consider:
+                <span className="font-medium">Important:</span> If your calculator results show a
+                daily calorie target below these minimums, consider:
               </p>
               <ul className="list-disc pl-5 mt-2 text-sm text-yellow-700 dark:text-yellow-300">
                 <li>Choosing a smaller deficit</li>
@@ -132,7 +133,10 @@ export default function CalorieDeficitUnderstanding() {
 
         <Accordion title="Why Weight Loss Slows Over Time">
           <div className="space-y-4">
-            <p>You may notice that your weight loss projections show a slowdown over time. This is normal and expected due to:</p>
+            <p>
+              You may notice that your weight loss projections show a slowdown over time. This is
+              normal and expected due to:
+            </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
                 <span className="font-medium">Lower body weight:</span> Smaller bodies burn fewer
@@ -169,8 +173,8 @@ export default function CalorieDeficitUnderstanding() {
               <div>
                 <div className="font-medium">2. Prioritize Protein</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Aim for 1.6-2.2g per kg of body weight. Protein preserves muscle mass and increases
-                  satiety.
+                  Aim for 1.6-2.2g per kg of body weight. Protein preserves muscle mass and
+                  increases satiety.
                 </p>
               </div>
               <div>
@@ -188,7 +192,8 @@ export default function CalorieDeficitUnderstanding() {
               <div>
                 <div className="font-medium">5. Focus on Habits, Not Just Numbers</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Build sustainable eating patterns you can maintain after reaching your goal weight.
+                  Build sustainable eating patterns you can maintain after reaching your goal
+                  weight.
                 </p>
               </div>
             </div>

@@ -26,7 +26,12 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import BodyFatResultDisplay from '@/components/calculators/body-fat/BodyFatResult';
 import BodyFatInfo from '@/components/calculators/body-fat/BodyFatInfo';
 import BodyFatUnderstanding from '@/components/calculators/body-fat/BodyFatUnderstanding';
-import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
+import {
+  useHeight,
+  useWeight,
+  createHeightField,
+  createWeightField,
+} from '@/hooks/useCalculatorUnits';
 
 export default function BodyFatCalculator() {
   // State for form inputs
@@ -38,7 +43,7 @@ export default function BodyFatCalculator() {
   const [waist, setWaist] = useState<number | ''>('');
   const [neck, setNeck] = useState<number | ''>('');
   const [hips, setHips] = useState<number | ''>('');
-    const [bodyFatPercentage, setBodyFatPercentage] = useState<number | ''>('');
+  const [bodyFatPercentage, setBodyFatPercentage] = useState<number | ''>('');
 
   // State for form validation
   const [errors, setErrors] = useState<{
@@ -162,7 +167,6 @@ export default function BodyFatCalculator() {
         heightCm !== null &&
         weightKg !== null
       ) {
-
         // Calculate BMI
         const bmi = calculateBMI(heightCm, weightKg);
 
@@ -360,16 +364,7 @@ export default function BodyFatCalculator() {
       },
       ...methodFields,
     ],
-    [
-      gender,
-      age,
-      height,
-      weight,
-      method,
-      errors,
-      handleMethodChange,
-      methodFields,
-    ]
+    [gender, age, height, weight, method, errors, handleMethodChange, methodFields]
   );
 
   // Memoize the method label for the result display

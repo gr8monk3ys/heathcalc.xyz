@@ -30,7 +30,11 @@ export default function WeightManagementResultDisplay({
   const unitLabel = weightUnit === 'kg' ? 'kg' : 'lbs';
 
   const goalTypeLabel =
-    result.goalType === 'lose' ? 'Weight Loss' : result.goalType === 'gain' ? 'Weight Gain' : 'Weight Maintenance';
+    result.goalType === 'lose'
+      ? 'Weight Loss'
+      : result.goalType === 'gain'
+        ? 'Weight Gain'
+        : 'Weight Maintenance';
 
   return (
     <div className="space-y-6">
@@ -50,7 +54,8 @@ export default function WeightManagementResultDisplay({
             Target Date: <span className="font-semibold">{formatDate(result.targetDate)}</span>
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            {result.weeksToGoal} weeks ({result.daysToGoal} days) • {Math.abs(displayWeeklyChange).toFixed(2)} {unitLabel}/week
+            {result.weeksToGoal} weeks ({result.daysToGoal} days) •{' '}
+            {Math.abs(displayWeeklyChange).toFixed(2)} {unitLabel}/week
           </p>
           {result.adjustedTargetDate && (
             <p className="text-sm text-orange-600 dark:text-orange-400 mt-2">
@@ -234,10 +239,19 @@ export default function WeightManagementResultDisplay({
               />
 
               {/* Axis labels */}
-              <text x="25" y="130" className="text-xs fill-current text-gray-600 dark:text-gray-400">
+              <text
+                x="25"
+                y="130"
+                className="text-xs fill-current text-gray-600 dark:text-gray-400"
+              >
                 Weight ({unitLabel})
               </text>
-              <text x="300" y="240" className="text-xs fill-current text-gray-600 dark:text-gray-400" textAnchor="middle">
+              <text
+                x="300"
+                y="240"
+                className="text-xs fill-current text-gray-600 dark:text-gray-400"
+                textAnchor="middle"
+              >
                 Weeks
               </text>
             </svg>

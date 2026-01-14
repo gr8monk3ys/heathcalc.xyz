@@ -32,10 +32,17 @@ export default function WeightManagementInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Daily Calorie Target</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Daily Calorie Target
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Precise calories needed to reach your goal by your target date
               </div>
@@ -48,10 +55,17 @@ export default function WeightManagementInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Macronutrient Breakdown</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Macronutrient Breakdown
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Exact protein, carbs, and fat grams for your chosen diet type
               </div>
@@ -64,10 +78,17 @@ export default function WeightManagementInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Weekly Projection Chart</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Weekly Projection Chart
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Visual timeline of expected weight changes
               </div>
@@ -80,10 +101,17 @@ export default function WeightManagementInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Lifestyle Recommendations</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Lifestyle Recommendations
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Water intake, sleep, and exercise guidance
               </div>
@@ -110,7 +138,9 @@ export default function WeightManagementInfo() {
             </div>
           </div>
           <div>
-            <div className="font-medium text-blue-800 dark:text-blue-200">High-Protein (30/40/30)</div>
+            <div className="font-medium text-blue-800 dark:text-blue-200">
+              High-Protein (30/40/30)
+            </div>
             <div className="text-blue-700 dark:text-blue-300">
               Best for muscle building and preservation
             </div>

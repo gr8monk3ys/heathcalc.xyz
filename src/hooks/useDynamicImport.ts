@@ -30,7 +30,6 @@ export function useDynamicImport<T = Record<string, unknown>>(
       const loadedModule = await importFn();
       setComponent(() => loadedModule.default);
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('Failed to dynamically load component', err);
       setError(err instanceof Error ? err : new Error(String(err)));
     } finally {

@@ -134,10 +134,12 @@ export function useWeight(options: UseWeightOptions = {}): WeightState {
 /**
  * Combined hook for calculators that need both height and weight
  */
-export function useCalculatorUnits(options: {
-  height?: UseHeightOptions;
-  weight?: UseWeightOptions;
-} = {}) {
+export function useCalculatorUnits(
+  options: {
+    height?: UseHeightOptions;
+    weight?: UseWeightOptions;
+  } = {}
+) {
   const height = useHeight(options.height);
   const weight = useWeight(options.weight);
 
@@ -156,10 +158,7 @@ export function useCalculatorUnits(options: {
 /**
  * Creates form field config for height input compatible with CalculatorForm
  */
-export function createHeightField(
-  heightState: HeightState,
-  error?: string
-) {
+export function createHeightField(heightState: HeightState, error?: string) {
   return {
     name: 'height',
     label: 'Height',
@@ -177,10 +176,7 @@ export function createHeightField(
 /**
  * Creates form field config for weight input compatible with CalculatorForm
  */
-export function createWeightField(
-  weightState: WeightState,
-  error?: string
-) {
+export function createWeightField(weightState: WeightState, error?: string) {
   return {
     name: 'weight',
     label: 'Weight',

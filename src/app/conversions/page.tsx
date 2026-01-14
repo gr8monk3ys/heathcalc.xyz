@@ -76,7 +76,7 @@ const faqs = [
   {
     question: 'Which weight unit system should I use for fitness tracking?',
     answer:
-      'Use whichever system you\'re most familiar with, but be consistent. Metric (kg) is used internationally and in scientific contexts, with finer precision for small changes (0.1 kg = 0.22 lb). Imperial (lb) is common in the US and UK. Stones are primarily British. For detailed tracking, kilograms are often preferred because 0.1 kg increments are easier to track than 0.2 lb increments. What matters most is consistency - don\'t switch systems mid-tracking, as this introduces conversion errors and makes trends harder to spot.',
+      "Use whichever system you're most familiar with, but be consistent. Metric (kg) is used internationally and in scientific contexts, with finer precision for small changes (0.1 kg = 0.22 lb). Imperial (lb) is common in the US and UK. Stones are primarily British. For detailed tracking, kilograms are often preferred because 0.1 kg increments are easier to track than 0.2 lb increments. What matters most is consistency - don't switch systems mid-tracking, as this introduces conversion errors and makes trends harder to spot.",
   },
   {
     question: 'Are the conversion factors in this tool accurate enough for medical use?',
@@ -239,8 +239,8 @@ export default function MeasurementConversions() {
                   <input
                     type="number"
                     value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleConvert()}
+                    onChange={e => setInputValue(e.target.value)}
+                    onKeyPress={e => e.key === 'Enter' && handleConvert()}
                     placeholder="Enter value"
                     className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                     step="any"
@@ -252,7 +252,7 @@ export default function MeasurementConversions() {
                   <label className="block text-sm font-medium mb-2">From</label>
                   <select
                     value={fromUnit}
-                    onChange={(e) => setFromUnit(e.target.value)}
+                    onChange={e => setFromUnit(e.target.value)}
                     className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                   >
                     {categoryConfig.units.map(unit => (
@@ -271,7 +271,12 @@ export default function MeasurementConversions() {
                     title="Swap units"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -281,7 +286,7 @@ export default function MeasurementConversions() {
                   <label className="block text-sm font-medium mb-2">To</label>
                   <select
                     value={toUnit}
-                    onChange={(e) => setToUnit(e.target.value)}
+                    onChange={e => setToUnit(e.target.value)}
                     className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                   >
                     {categoryConfig.units.map(unit => (
@@ -318,7 +323,10 @@ export default function MeasurementConversions() {
                       {categoryConfig.labels[toUnit as keyof typeof categoryConfig.labels]}
                     </div>
                     <div className="mt-4 text-sm text-gray-500 dark:text-gray-500">
-                      {inputValue} {categoryConfig.labels[fromUnit as keyof typeof categoryConfig.labels]} = {result.toFixed(4)} {categoryConfig.labels[toUnit as keyof typeof categoryConfig.labels]}
+                      {inputValue}{' '}
+                      {categoryConfig.labels[fromUnit as keyof typeof categoryConfig.labels]} ={' '}
+                      {result.toFixed(4)}{' '}
+                      {categoryConfig.labels[toUnit as keyof typeof categoryConfig.labels]}
                     </div>
                   </div>
                 )}
@@ -364,47 +372,79 @@ export default function MeasurementConversions() {
           <Accordion title="Weight Conversions">
             <p className="mb-3">Common weight conversions for health and fitness:</p>
             <ul className="list-disc pl-5 space-y-2 text-sm">
-              <li><span className="font-medium">Kilograms to Pounds:</span> 1 kg = 2.20462 lb</li>
-              <li><span className="font-medium">Pounds to Kilograms:</span> 1 lb = 0.453592 kg</li>
-              <li><span className="font-medium">Stones to Kilograms:</span> 1 stone = 6.35029 kg</li>
-              <li><span className="font-medium">Grams to Ounces:</span> 1 g = 0.035274 oz</li>
+              <li>
+                <span className="font-medium">Kilograms to Pounds:</span> 1 kg = 2.20462 lb
+              </li>
+              <li>
+                <span className="font-medium">Pounds to Kilograms:</span> 1 lb = 0.453592 kg
+              </li>
+              <li>
+                <span className="font-medium">Stones to Kilograms:</span> 1 stone = 6.35029 kg
+              </li>
+              <li>
+                <span className="font-medium">Grams to Ounces:</span> 1 g = 0.035274 oz
+              </li>
             </ul>
           </Accordion>
 
           <Accordion title="Height and Length Conversions">
             <p className="mb-3">Common height and length conversions:</p>
             <ul className="list-disc pl-5 space-y-2 text-sm">
-              <li><span className="font-medium">Centimeters to Inches:</span> 1 cm = 0.393701 in</li>
-              <li><span className="font-medium">Feet to Centimeters:</span> 1 ft = 30.48 cm</li>
-              <li><span className="font-medium">Meters to Feet:</span> 1 m = 3.28084 ft</li>
+              <li>
+                <span className="font-medium">Centimeters to Inches:</span> 1 cm = 0.393701 in
+              </li>
+              <li>
+                <span className="font-medium">Feet to Centimeters:</span> 1 ft = 30.48 cm
+              </li>
+              <li>
+                <span className="font-medium">Meters to Feet:</span> 1 m = 3.28084 ft
+              </li>
             </ul>
           </Accordion>
 
           <Accordion title="Volume Conversions">
             <p className="mb-3">Common volume conversions for cooking and nutrition:</p>
             <ul className="list-disc pl-5 space-y-2 text-sm">
-              <li><span className="font-medium">Liters to Cups:</span> 1 L = 4.227 cups</li>
-              <li><span className="font-medium">Cups to Milliliters:</span> 1 cup = 236.588 ml</li>
-              <li><span className="font-medium">Tablespoons to Milliliters:</span> 1 tbsp = 14.787 ml</li>
-              <li><span className="font-medium">Teaspoons to Milliliters:</span> 1 tsp = 4.929 ml</li>
+              <li>
+                <span className="font-medium">Liters to Cups:</span> 1 L = 4.227 cups
+              </li>
+              <li>
+                <span className="font-medium">Cups to Milliliters:</span> 1 cup = 236.588 ml
+              </li>
+              <li>
+                <span className="font-medium">Tablespoons to Milliliters:</span> 1 tbsp = 14.787 ml
+              </li>
+              <li>
+                <span className="font-medium">Teaspoons to Milliliters:</span> 1 tsp = 4.929 ml
+              </li>
             </ul>
           </Accordion>
 
           <Accordion title="Temperature Conversions">
             <p className="mb-3">Temperature conversion formulas:</p>
             <ul className="list-disc pl-5 space-y-2 text-sm">
-              <li><span className="font-medium">Celsius to Fahrenheit:</span> °F = (°C × 9/5) + 32</li>
-              <li><span className="font-medium">Fahrenheit to Celsius:</span> °C = (°F - 32) × 5/9</li>
+              <li>
+                <span className="font-medium">Celsius to Fahrenheit:</span> °F = (°C × 9/5) + 32
+              </li>
+              <li>
+                <span className="font-medium">Fahrenheit to Celsius:</span> °C = (°F - 32) × 5/9
+              </li>
             </ul>
           </Accordion>
 
           <Accordion title="Energy Conversions">
             <p className="mb-3">Energy conversion for nutrition:</p>
             <ul className="list-disc pl-5 space-y-2 text-sm">
-              <li><span className="font-medium">Calories to Kilojoules:</span> 1 kcal = 4.184 kJ</li>
-              <li><span className="font-medium">Kilojoules to Calories:</span> 1 kJ = 0.239 kcal</li>
+              <li>
+                <span className="font-medium">Calories to Kilojoules:</span> 1 kcal = 4.184 kJ
+              </li>
+              <li>
+                <span className="font-medium">Kilojoules to Calories:</span> 1 kJ = 0.239 kcal
+              </li>
             </ul>
-            <p className="mt-2 text-sm">Note: In nutrition, "calorie" typically refers to kilocalorie (kcal).</p>
+            <p className="mt-2 text-sm">
+              Note: In nutrition, "calorie" typically refers to kilocalorie (kcal).
+            </p>
           </Accordion>
         </div>
 

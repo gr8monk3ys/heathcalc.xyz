@@ -65,7 +65,7 @@ export function calculateNavyMethodBodyFat(
     const hipsIn = hipsCm / 2.54;
     bodyFatPercentage =
       495 /
-        (1.29579 - 0.35004 * Math.log10(waistIn + hipsIn - neckIn) + 0.22100 * Math.log10(heightIn)) -
+        (1.29579 - 0.35004 * Math.log10(waistIn + hipsIn - neckIn) + 0.221 * Math.log10(heightIn)) -
       450;
   }
 

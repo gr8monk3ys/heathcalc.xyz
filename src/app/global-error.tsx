@@ -136,8 +136,8 @@ export default function GlobalError({
                     cursor: 'pointer',
                     transition: 'background-color 0.2s',
                   }}
-                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#4338ca')}
-                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#4f46e5')}
+                  onMouseOver={e => (e.currentTarget.style.backgroundColor = '#4338ca')}
+                  onMouseOut={e => (e.currentTarget.style.backgroundColor = '#4f46e5')}
                 >
                   Try Again
                 </button>
@@ -154,8 +154,8 @@ export default function GlobalError({
                     textDecoration: 'none',
                     transition: 'background-color 0.2s',
                   }}
-                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#d1d5db')}
-                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#e5e7eb')}
+                  onMouseOver={e => (e.currentTarget.style.backgroundColor = '#d1d5db')}
+                  onMouseOut={e => (e.currentTarget.style.backgroundColor = '#e5e7eb')}
                 >
                   Go Home
                 </a>
@@ -174,8 +174,8 @@ export default function GlobalError({
                 <a
                   href="/contact"
                   style={{ color: '#4f46e5', textDecoration: 'underline' }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = '#4338ca')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = '#4f46e5')}
+                  onMouseOver={e => (e.currentTarget.style.color = '#4338ca')}
+                  onMouseOut={e => (e.currentTarget.style.color = '#4f46e5')}
                 >
                   contact support
                 </a>

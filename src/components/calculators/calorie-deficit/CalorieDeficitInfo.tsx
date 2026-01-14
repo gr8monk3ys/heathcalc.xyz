@@ -31,10 +31,17 @@ export default function CalorieDeficitInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Weight Loss Timeline</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Weight Loss Timeline
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 See exactly when you'll reach your goal weight
               </div>
@@ -47,10 +54,17 @@ export default function CalorieDeficitInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Daily Calorie Target</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Daily Calorie Target
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Your personalized calorie goal for weight loss
               </div>
@@ -63,10 +77,17 @@ export default function CalorieDeficitInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Weekly Progress Chart</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Weekly Progress Chart
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Visual projection of your weight loss over time
               </div>
@@ -79,10 +100,17 @@ export default function CalorieDeficitInfo() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Nutritional Guidance</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Nutritional Guidance
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Protein, water, and minimum calorie recommendations
               </div>
@@ -97,19 +125,25 @@ export default function CalorieDeficitInfo() {
         </h3>
         <div className="space-y-3 text-sm">
           <div>
-            <div className="font-medium text-blue-800 dark:text-blue-200">Mild (250-500 cal/day)</div>
+            <div className="font-medium text-blue-800 dark:text-blue-200">
+              Mild (250-500 cal/day)
+            </div>
             <div className="text-blue-700 dark:text-blue-300">
               Best for sustainable weight loss and muscle preservation
             </div>
           </div>
           <div>
-            <div className="font-medium text-blue-800 dark:text-blue-200">Moderate (500-750 cal/day)</div>
+            <div className="font-medium text-blue-800 dark:text-blue-200">
+              Moderate (500-750 cal/day)
+            </div>
             <div className="text-blue-700 dark:text-blue-300">
               Balanced approach for steady progress
             </div>
           </div>
           <div>
-            <div className="font-medium text-blue-800 dark:text-blue-200">Aggressive (750-1000 cal/day)</div>
+            <div className="font-medium text-blue-800 dark:text-blue-200">
+              Aggressive (750-1000 cal/day)
+            </div>
             <div className="text-blue-700 dark:text-blue-300">
               Faster results, but requires careful monitoring
             </div>

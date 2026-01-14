@@ -32,9 +32,7 @@ export function getDeficitOption(level: 'mild' | 'moderate' | 'aggressive'): Def
 /**
  * Calculate calorie deficit and weight loss timeline
  */
-export function calculateCalorieDeficit(
-  formData: CalorieDeficitFormData
-): CalorieDeficitResult {
+export function calculateCalorieDeficit(formData: CalorieDeficitFormData): CalorieDeficitResult {
   const { gender, age, heightCm, weightKg, activityLevel, goalWeightKg, deficitLevel } = formData;
 
   // Validation
@@ -108,10 +106,7 @@ export function calculateCalorieDeficit(
     // Account for metabolic adaptation over time
     const adaptationFactor = 1 - (week / (estimatedWeeks * 2)) * 0.1; // Max 10% slowdown
     const adjustedWeeklyLoss = weeklyWeightLoss * adaptationFactor;
-    const cumulativeWeightLoss = Math.min(
-      adjustedWeeklyLoss * week,
-      weightToLose
-    );
+    const cumulativeWeightLoss = Math.min(adjustedWeeklyLoss * week, weightToLose);
     const projectedWeight = weightKg - cumulativeWeightLoss;
 
     weeklyProjections.push({
@@ -171,13 +166,13 @@ export function formatTargetDate(date: Date): string {
 /**
  * Get deficit safety message
  */
-export function getDeficitSafetyMessage(
-  deficitLevel: 'mild' | 'moderate' | 'aggressive'
-): string {
+export function getDeficitSafetyMessage(deficitLevel: 'mild' | 'moderate' | 'aggressive'): string {
   const messages = {
-    mild: 'This deficit is safe and sustainable for most people. You\'ll lose weight gradually while maintaining muscle mass and energy levels.',
-    moderate: 'This deficit balances speed with sustainability. Most people can maintain this deficit while staying healthy and energized.',
-    aggressive: 'This deficit leads to faster results but requires careful monitoring. Ensure adequate protein intake and consider consulting a healthcare provider.',
+    mild: "This deficit is safe and sustainable for most people. You'll lose weight gradually while maintaining muscle mass and energy levels.",
+    moderate:
+      'This deficit balances speed with sustainability. Most people can maintain this deficit while staying healthy and energized.',
+    aggressive:
+      'This deficit leads to faster results but requires careful monitoring. Ensure adequate protein intake and consider consulting a healthcare provider.',
   };
 
   return messages[deficitLevel];

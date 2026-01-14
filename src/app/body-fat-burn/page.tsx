@@ -23,7 +23,12 @@ import SaveResult from '@/components/SaveResult';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import FAQSection from '@/components/FAQSection';
 import RelatedArticles from '@/components/RelatedArticles';
-import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
+import {
+  useHeight,
+  useWeight,
+  createHeightField,
+  createWeightField,
+} from '@/hooks/useCalculatorUnits';
 
 // FAQ data for the calculator
 const faqs = [
@@ -165,7 +170,6 @@ export default function BodyFatBurnCalculator() {
       heightCm !== null &&
       weightKg !== null
     ) {
-
       try {
         // Prepare form data
         const formData = {
@@ -303,119 +307,119 @@ export default function BodyFatBurnCalculator() {
         {/* Breadcrumb navigation */}
         <Breadcrumb />
 
-      <h1 className="text-3xl font-bold mb-2">Body Fat Burn Calculator</h1>
-      <p className="text-gray-600 mb-6">
-        Calculate calories burned during physical activities and estimate how long it will take to
-        reach your weight loss goals.
-      </p>
+        <h1 className="text-3xl font-bold mb-2">Body Fat Burn Calculator</h1>
+        <p className="text-gray-600 mb-6">
+          Calculate calories burned during physical activities and estimate how long it will take to
+          reach your weight loss goals.
+        </p>
 
-      {/* Social sharing buttons */}
-      <div className="mb-6">
-        <SocialShare
-          url="/body-fat-burn"
-          title="Body Fat Burn Calculator | Activity & Weight Loss Planner"
-          description="Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise."
-          hashtags={['fitness', 'weightloss', 'calorieburn', 'exercise']}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-        <div className="md:col-span-1">
-          <CalculatorForm
-            title="Enter Your Details"
-            fields={formFields}
-            onSubmit={handleSubmit}
-            onReset={handleReset}
+        {/* Social sharing buttons */}
+        <div className="mb-6">
+          <SocialShare
+            url="/body-fat-burn"
+            title="Body Fat Burn Calculator | Activity & Weight Loss Planner"
+            description="Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise."
+            hashtags={['fitness', 'weightloss', 'calorieburn', 'exercise']}
           />
         </div>
 
-        <div className="md:col-span-2" id="body-fat-burn-result">
-          {showResult && result ? (
-            <>
-              <BodyFatBurnResultDisplay
-                result={result}
-                formData={{
-                  activity,
-                  duration,
-                  frequency,
-                  burnGoal,
-                  unitSystem:
-                    weight.unit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
-                }}
-              />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="md:col-span-1">
+            <CalculatorForm
+              title="Enter Your Details"
+              fields={formFields}
+              onSubmit={handleSubmit}
+              onReset={handleReset}
+            />
+          </div>
 
-              {/* Save result functionality */}
-              <div className="mt-6 flex justify-between items-center">
-                <SaveResult
-                  calculatorType="body-fat-burn"
-                  calculatorName="Body Fat Burn Calculator"
-                  data={{
-                    caloriesPerSession: result.activityEnergyExpenditure,
-                    caloriesPerWeek: result.totalEnergyExpenditure,
-                    timeToReachGoal: `${result.timeToReachGoal.weeks} weeks, ${result.timeToReachGoal.days} days`,
-                    activity: selectedActivity?.name || activity,
+          <div className="md:col-span-2" id="body-fat-burn-result">
+            {showResult && result ? (
+              <>
+                <BodyFatBurnResultDisplay
+                  result={result}
+                  formData={{
+                    activity,
                     duration,
                     frequency,
-                    burnGoal: `${burnGoal} ${weight.unit}`,
+                    burnGoal,
+                    unitSystem:
+                      weight.unit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
                   }}
                 />
 
-                <button
-                  onClick={handleReset}
-                  className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
-                >
-                  New Calculation
-                </button>
-              </div>
-            </>
-          ) : (
-            <BodyFatBurnInfo />
-          )}
+                {/* Save result functionality */}
+                <div className="mt-6 flex justify-between items-center">
+                  <SaveResult
+                    calculatorType="body-fat-burn"
+                    calculatorName="Body Fat Burn Calculator"
+                    data={{
+                      caloriesPerSession: result.activityEnergyExpenditure,
+                      caloriesPerWeek: result.totalEnergyExpenditure,
+                      timeToReachGoal: `${result.timeToReachGoal.weeks} weeks, ${result.timeToReachGoal.days} days`,
+                      activity: selectedActivity?.name || activity,
+                      duration,
+                      frequency,
+                      burnGoal: `${burnGoal} ${weight.unit}`,
+                    }}
+                  />
+
+                  <button
+                    onClick={handleReset}
+                    className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
+                  >
+                    New Calculation
+                  </button>
+                </div>
+              </>
+            ) : (
+              <BodyFatBurnInfo />
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* FAQ Section with structured data */}
-      <FAQSection
-        faqs={faqs}
-        title="Frequently Asked Questions About Body Fat Burn"
-        className="mb-8"
-      />
+        {/* FAQ Section with structured data */}
+        <FAQSection
+          faqs={faqs}
+          title="Frequently Asked Questions About Body Fat Burn"
+          className="mb-8"
+        />
 
-      <BodyFatBurnUnderstanding />
+        <BodyFatBurnUnderstanding />
 
-      {/* Related Articles Section */}
-      <RelatedArticles
-        currentSlug=""
-        articles={blogArticles}
-        title="Related Articles"
-        className="my-8"
-      />
+        {/* Related Articles Section */}
+        <RelatedArticles
+          currentSlug=""
+          articles={blogArticles}
+          title="Related Articles"
+          className="my-8"
+        />
 
-      {/* Newsletter Signup */}
-      <NewsletterSignup
-        title="Get Fitness Tips & Updates"
-        description="Subscribe to receive the latest health and fitness tips, calculator updates, and exclusive content to help you achieve your goals."
-        className="my-8"
-      />
+        {/* Newsletter Signup */}
+        <NewsletterSignup
+          title="Get Fitness Tips & Updates"
+          description="Subscribe to receive the latest health and fitness tips, calculator updates, and exclusive content to help you achieve your goals."
+          className="my-8"
+        />
 
-      {/* Structured data for the calculator */}
-      <StructuredData
-        data={{
-          '@context': 'https://schema.org',
-          '@type': 'SoftwareApplication',
-          name: 'Body Fat Burn Calculator',
-          applicationCategory: 'HealthApplication',
-          operatingSystem: 'Web',
-          offers: {
-            '@type': 'Offer',
-            price: '0',
-            priceCurrency: 'USD',
-          },
-          description:
-            'Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise.',
-          url: 'https://www.heathcheck.info/body-fat-burn',
-        }}
-      />
+        {/* Structured data for the calculator */}
+        <StructuredData
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: 'Body Fat Burn Calculator',
+            applicationCategory: 'HealthApplication',
+            operatingSystem: 'Web',
+            offers: {
+              '@type': 'Offer',
+              price: '0',
+              priceCurrency: 'USD',
+            },
+            description:
+              'Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise.',
+            url: 'https://www.heathcheck.info/body-fat-burn',
+          }}
+        />
       </div>
     </ErrorBoundary>
   );

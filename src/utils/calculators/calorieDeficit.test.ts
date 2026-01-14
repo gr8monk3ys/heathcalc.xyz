@@ -213,7 +213,8 @@ describe('calculateCalorieDeficit', () => {
       expected.setDate(expected.getDate() + result.estimatedDays);
 
       // Allow 1 day difference due to timing
-      const daysDiff = Math.abs(result.targetDate.getTime() - expected.getTime()) / (1000 * 60 * 60 * 24);
+      const daysDiff =
+        Math.abs(result.targetDate.getTime() - expected.getTime()) / (1000 * 60 * 60 * 24);
       expect(daysDiff).toBeLessThan(2);
     });
 
@@ -356,7 +357,9 @@ describe('calculateCalorieDeficit', () => {
         goalWeightKg: 90, // Same as current
       };
 
-      expect(() => calculateCalorieDeficit(invalidData)).toThrow('Goal weight must be less than current weight');
+      expect(() => calculateCalorieDeficit(invalidData)).toThrow(
+        'Goal weight must be less than current weight'
+      );
     });
 
     it('should throw error when goal weight > current weight', () => {
@@ -365,7 +368,9 @@ describe('calculateCalorieDeficit', () => {
         goalWeightKg: 95, // More than current
       };
 
-      expect(() => calculateCalorieDeficit(invalidData)).toThrow('Goal weight must be less than current weight');
+      expect(() => calculateCalorieDeficit(invalidData)).toThrow(
+        'Goal weight must be less than current weight'
+      );
     });
   });
 
@@ -481,8 +486,8 @@ describe('formatTargetDate', () => {
 
   it('should handle different months', () => {
     const dates = [
-      new Date(2024, 0, 15),  // January 15, 2024
-      new Date(2024, 5, 1),   // June 1, 2024
+      new Date(2024, 0, 15), // January 15, 2024
+      new Date(2024, 5, 1), // June 1, 2024
       new Date(2024, 11, 31), // December 31, 2024
     ];
 

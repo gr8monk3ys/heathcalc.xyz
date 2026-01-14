@@ -236,12 +236,8 @@ describe('BMI Calculation', () => {
     });
 
     it('should throw error for invalid percentile', () => {
-      expect(() => getBMIPercentileCategory(-1)).toThrow(
-        'Percentile must be between 0 and 100'
-      );
-      expect(() => getBMIPercentileCategory(101)).toThrow(
-        'Percentile must be between 0 and 100'
-      );
+      expect(() => getBMIPercentileCategory(-1)).toThrow('Percentile must be between 0 and 100');
+      expect(() => getBMIPercentileCategory(101)).toThrow('Percentile must be between 0 and 100');
     });
   });
 });

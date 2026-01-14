@@ -74,7 +74,10 @@ export function validateAge(age: number | string): ValidationResult {
  *
  * Note: Imperial expects height in decimal feet (e.g., 5.75 for 5 feet 9 inches)
  */
-export function validateHeight(height: number | string, unit: 'metric' | 'imperial' = 'metric'): ValidationResult {
+export function validateHeight(
+  height: number | string,
+  unit: 'metric' | 'imperial' = 'metric'
+): ValidationResult {
   const numHeight = Number(height);
 
   if (isNaN(numHeight)) {
@@ -104,7 +107,10 @@ export function validateHeight(height: number | string, unit: 'metric' | 'imperi
 /**
  * Validates weight input
  */
-export function validateWeight(weight: number | string, unit: 'metric' | 'imperial' = 'metric'): ValidationResult {
+export function validateWeight(
+  weight: number | string,
+  unit: 'metric' | 'imperial' = 'metric'
+): ValidationResult {
   const numWeight = Number(weight);
 
   if (isNaN(numWeight)) {
@@ -118,11 +124,17 @@ export function validateWeight(weight: number | string, unit: 'metric' | 'imperi
   const range = unit === 'metric' ? VALIDATION_RANGES.weight.kg : VALIDATION_RANGES.weight.lb;
 
   if (numWeight < range.min) {
-    return { isValid: false, error: `Weight must be at least ${range.min}${unit === 'metric' ? 'kg' : 'lb'}` };
+    return {
+      isValid: false,
+      error: `Weight must be at least ${range.min}${unit === 'metric' ? 'kg' : 'lb'}`,
+    };
   }
 
   if (numWeight > range.max) {
-    return { isValid: false, error: `Weight must be less than ${range.max}${unit === 'metric' ? 'kg' : 'lb'}` };
+    return {
+      isValid: false,
+      error: `Weight must be less than ${range.max}${unit === 'metric' ? 'kg' : 'lb'}`,
+    };
   }
 
   return { isValid: true };
@@ -131,7 +143,10 @@ export function validateWeight(weight: number | string, unit: 'metric' | 'imperi
 /**
  * Validates waist circumference
  */
-export function validateWaist(waist: number | string, unit: 'metric' | 'imperial' = 'metric'): ValidationResult {
+export function validateWaist(
+  waist: number | string,
+  unit: 'metric' | 'imperial' = 'metric'
+): ValidationResult {
   const numWaist = Number(waist);
 
   if (isNaN(numWaist)) {
@@ -145,11 +160,17 @@ export function validateWaist(waist: number | string, unit: 'metric' | 'imperial
   const range = unit === 'metric' ? VALIDATION_RANGES.waist.cm : VALIDATION_RANGES.waist.in;
 
   if (numWaist < range.min) {
-    return { isValid: false, error: `Waist must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}` };
+    return {
+      isValid: false,
+      error: `Waist must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}`,
+    };
   }
 
   if (numWaist > range.max) {
-    return { isValid: false, error: `Waist must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}` };
+    return {
+      isValid: false,
+      error: `Waist must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}`,
+    };
   }
 
   return { isValid: true };
@@ -158,7 +179,10 @@ export function validateWaist(waist: number | string, unit: 'metric' | 'imperial
 /**
  * Validates hip circumference
  */
-export function validateHip(hip: number | string, unit: 'metric' | 'imperial' = 'metric'): ValidationResult {
+export function validateHip(
+  hip: number | string,
+  unit: 'metric' | 'imperial' = 'metric'
+): ValidationResult {
   const numHip = Number(hip);
 
   if (isNaN(numHip)) {
@@ -172,11 +196,17 @@ export function validateHip(hip: number | string, unit: 'metric' | 'imperial' = 
   const range = unit === 'metric' ? VALIDATION_RANGES.hip.cm : VALIDATION_RANGES.hip.in;
 
   if (numHip < range.min) {
-    return { isValid: false, error: `Hip must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}` };
+    return {
+      isValid: false,
+      error: `Hip must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}`,
+    };
   }
 
   if (numHip > range.max) {
-    return { isValid: false, error: `Hip must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}` };
+    return {
+      isValid: false,
+      error: `Hip must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}`,
+    };
   }
 
   return { isValid: true };
@@ -185,7 +215,10 @@ export function validateHip(hip: number | string, unit: 'metric' | 'imperial' = 
 /**
  * Validates neck circumference
  */
-export function validateNeck(neck: number | string, unit: 'metric' | 'imperial' = 'metric'): ValidationResult {
+export function validateNeck(
+  neck: number | string,
+  unit: 'metric' | 'imperial' = 'metric'
+): ValidationResult {
   const numNeck = Number(neck);
 
   if (isNaN(numNeck)) {
@@ -199,11 +232,17 @@ export function validateNeck(neck: number | string, unit: 'metric' | 'imperial' 
   const range = unit === 'metric' ? VALIDATION_RANGES.neck.cm : VALIDATION_RANGES.neck.in;
 
   if (numNeck < range.min) {
-    return { isValid: false, error: `Neck must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}` };
+    return {
+      isValid: false,
+      error: `Neck must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}`,
+    };
   }
 
   if (numNeck > range.max) {
-    return { isValid: false, error: `Neck must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}` };
+    return {
+      isValid: false,
+      error: `Neck must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}`,
+    };
   }
 
   return { isValid: true };

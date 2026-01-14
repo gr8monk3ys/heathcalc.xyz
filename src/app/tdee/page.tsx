@@ -17,19 +17,24 @@ import SaveResult from '@/components/SaveResult';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import FAQSection from '@/components/FAQSection';
 import RelatedArticles from '@/components/RelatedArticles';
-import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
+import {
+  useHeight,
+  useWeight,
+  createHeightField,
+  createWeightField,
+} from '@/hooks/useCalculatorUnits';
 
 // FAQ data for TDEE calculator
 const faqs = [
   {
     question: 'What is TDEE and how is it calculated?',
     answer:
-      'TDEE (Total Daily Energy Expenditure) is the total number of calories your body burns in a day, including resting metabolism (BMR) and activity. It\'s calculated by: 1) Computing BMR (Basal Metabolic Rate) - calories burned at rest using formulas like Mifflin-St Jeor, 2) Multiplying BMR by your activity level multiplier (1.2 for sedentary to 1.9 for very active). Your TDEE represents energy burned through three mechanisms: Basal Metabolic Rate (60-75% of TDEE), Thermic Effect of Food/digestion (8-15%), and physical activity/movement (10-30%). For example, a 70kg male, 30 years old, 175cm tall with moderate activity has BMR ~1700 calories and TDEE ~2600 calories. This is your maintenance calorie level - eating at this amount maintains current weight.',
+      "TDEE (Total Daily Energy Expenditure) is the total number of calories your body burns in a day, including resting metabolism (BMR) and activity. It's calculated by: 1) Computing BMR (Basal Metabolic Rate) - calories burned at rest using formulas like Mifflin-St Jeor, 2) Multiplying BMR by your activity level multiplier (1.2 for sedentary to 1.9 for very active). Your TDEE represents energy burned through three mechanisms: Basal Metabolic Rate (60-75% of TDEE), Thermic Effect of Food/digestion (8-15%), and physical activity/movement (10-30%). For example, a 70kg male, 30 years old, 175cm tall with moderate activity has BMR ~1700 calories and TDEE ~2600 calories. This is your maintenance calorie level - eating at this amount maintains current weight.",
   },
   {
     question: 'Which TDEE formula is most accurate?',
     answer:
-      'The Mifflin-St Jeor equation (created in 1990) is considered most accurate for modern populations and is recommended by the American Dietetic Association. It\'s more precise than older formulas like Harris-Benedict (1919) which tend to overestimate by 5%. The Katch-McArdle formula, based on lean body mass rather than total weight, is more accurate for very lean or very obese individuals if body fat percentage is known. However, all formulas have ±10-20% error margins because TDEE varies by: metabolism (influenced by genetics, hormones, medications), body composition (muscle burns more calories than fat), lifestyle (commute, occupation affect daily activity), and adherence to stated activity level. Individual metabolic adaptation also matters - some people have naturally faster/slower metabolisms. For best results, use the calculator as a starting point, track weight changes for 2-3 weeks, and adjust calories based on actual results rather than relying solely on predicted values.',
+      "The Mifflin-St Jeor equation (created in 1990) is considered most accurate for modern populations and is recommended by the American Dietetic Association. It's more precise than older formulas like Harris-Benedict (1919) which tend to overestimate by 5%. The Katch-McArdle formula, based on lean body mass rather than total weight, is more accurate for very lean or very obese individuals if body fat percentage is known. However, all formulas have ±10-20% error margins because TDEE varies by: metabolism (influenced by genetics, hormones, medications), body composition (muscle burns more calories than fat), lifestyle (commute, occupation affect daily activity), and adherence to stated activity level. Individual metabolic adaptation also matters - some people have naturally faster/slower metabolisms. For best results, use the calculator as a starting point, track weight changes for 2-3 weeks, and adjust calories based on actual results rather than relying solely on predicted values.",
   },
   {
     question: 'How do I use TDEE for weight loss or gain?',
@@ -39,12 +44,12 @@ const faqs = [
   {
     question: 'Should I eat my exact TDEE to maintain weight?',
     answer:
-      'Eating exactly at TDEE is the theoretical maintenance point, but in practice, it\'s unrealistic and unnecessary. Several factors make exact adherence impractical: 1) Calorie counting accuracy - food labels have ±20% margin, restaurant food is highly variable, 2) TDEE variation - fluctuates day-to-day based on sleep, stress, menstrual cycle, temperature, 3) Thermic effect variance - protein processing burns 20-30% of calories consumed, while carbs/fats burn 5-10%, 4) Activity inconsistency - activity levels vary weekly. A practical approach: eat within ±200 calories of estimated TDEE, monitor weight trends over 2-4 weeks, and adjust by 200-300 calories if trending up/down. Most people maintain weight successfully within 200-300 calorie range of TDEE. Use portion control, eat protein at every meal, include vegetables for satiety, limit ultra-processed foods, and focus on consistency over precision. Track trends, not individual days.',
+      "Eating exactly at TDEE is the theoretical maintenance point, but in practice, it's unrealistic and unnecessary. Several factors make exact adherence impractical: 1) Calorie counting accuracy - food labels have ±20% margin, restaurant food is highly variable, 2) TDEE variation - fluctuates day-to-day based on sleep, stress, menstrual cycle, temperature, 3) Thermic effect variance - protein processing burns 20-30% of calories consumed, while carbs/fats burn 5-10%, 4) Activity inconsistency - activity levels vary weekly. A practical approach: eat within ±200 calories of estimated TDEE, monitor weight trends over 2-4 weeks, and adjust by 200-300 calories if trending up/down. Most people maintain weight successfully within 200-300 calorie range of TDEE. Use portion control, eat protein at every meal, include vegetables for satiety, limit ultra-processed foods, and focus on consistency over precision. Track trends, not individual days.",
   },
   {
     question: 'How often should I recalculate my TDEE?',
     answer:
-      'Recalculate TDEE every 10-15 pounds of weight loss or gain, or every 3-6 months if weight is stable. This matters because: 1) As body weight decreases, BMR decreases proportionally (less mass to maintain), 2) As you lose weight, your TDEE could drop 50-100+ calories every 10 lbs lost, 3) Metabolic adaptation - body naturally reduces expenditure during calorie restriction, 4) Muscle vs fat changes affect calorie burn (muscle tissue more metabolically active). Example: woman with TDEE 2200 at 180 lbs might have TDEE ~2050 at 160 lbs. Failing to adjust often leads to weight loss plateaus around months 2-4 of dieting. If you\'re not progressing on your original calorie targets, recalculate rather than assuming you need extreme deficits. Similarly, if gaining muscle, your TDEE increases as lean mass increases. Professional athletes/competitors recalculate weekly. For most people, quarterly recalculation paired with monthly progress tracking provides optimal adjustment timing.',
+      "Recalculate TDEE every 10-15 pounds of weight loss or gain, or every 3-6 months if weight is stable. This matters because: 1) As body weight decreases, BMR decreases proportionally (less mass to maintain), 2) As you lose weight, your TDEE could drop 50-100+ calories every 10 lbs lost, 3) Metabolic adaptation - body naturally reduces expenditure during calorie restriction, 4) Muscle vs fat changes affect calorie burn (muscle tissue more metabolically active). Example: woman with TDEE 2200 at 180 lbs might have TDEE ~2050 at 160 lbs. Failing to adjust often leads to weight loss plateaus around months 2-4 of dieting. If you're not progressing on your original calorie targets, recalculate rather than assuming you need extreme deficits. Similarly, if gaining muscle, your TDEE increases as lean mass increases. Professional athletes/competitors recalculate weekly. For most people, quarterly recalculation paired with monthly progress tracking provides optimal adjustment timing.",
   },
   {
     question: 'Why is my TDEE different from other online calculators?',
@@ -172,7 +177,6 @@ export default function TDEECalculator() {
       heightCm !== null &&
       weightKg !== null
     ) {
-
       // Get activity multiplier
       const activityMultiplier = getActivityMultiplier(activityLevel);
 
@@ -270,7 +274,8 @@ export default function TDEECalculator() {
 
         <h1 className="text-3xl font-bold mb-2">TDEE Calculator</h1>
         <p className="text-gray-600 mb-6">
-          Calculate your Total Daily Energy Expenditure (TDEE) to determine your daily calorie needs for weight management.
+          Calculate your Total Daily Energy Expenditure (TDEE) to determine your daily calorie needs
+          for weight management.
         </p>
 
         {/* Social sharing buttons */}
@@ -326,11 +331,7 @@ export default function TDEECalculator() {
         </div>
 
         {/* FAQ Section with structured data */}
-        <FAQSection
-          faqs={faqs}
-          title="Frequently Asked Questions About TDEE"
-          className="mb-8"
-        />
+        <FAQSection faqs={faqs} title="Frequently Asked Questions About TDEE" className="mb-8" />
 
         <TDEEUnderstanding />
 

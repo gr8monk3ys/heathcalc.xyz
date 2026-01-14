@@ -70,11 +70,7 @@ interface DateFormField extends BaseFormField {
 }
 
 // Union type for all form field types
-type FormField =
-  | NumberFormField
-  | RadioFormField
-  | SelectFormField
-  | DateFormField;
+type FormField = NumberFormField | RadioFormField | SelectFormField | DateFormField;
 
 interface CalculatorFormProps {
   title: string;

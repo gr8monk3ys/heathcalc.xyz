@@ -12,9 +12,9 @@ export default function MaximumFatLossUnderstanding() {
       <Card className="p-6">
         <h2 className="text-2xl font-bold mb-4">Understanding Maximum Fat Loss</h2>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          The maximum fat loss approach is based on scientific research showing that your body has
-          a limit to how much fat it can mobilize per day. By respecting this limit, you maximize
-          fat loss while preserving muscle mass and metabolic health.
+          The maximum fat loss approach is based on scientific research showing that your body has a
+          limit to how much fat it can mobilize per day. By respecting this limit, you maximize fat
+          loss while preserving muscle mass and metabolic health.
         </p>
       </Card>
 
@@ -34,14 +34,12 @@ export default function MaximumFatLossUnderstanding() {
                 The more body fat you have, the larger deficit you can sustain without muscle loss
               </li>
               <li>As you lose fat, your maximum sustainable deficit decreases</li>
-              <li>
-                This calculator uses a moderate estimate of 26.5 kcal/lb/day for safety
-              </li>
+              <li>This calculator uses a moderate estimate of 26.5 kcal/lb/day for safety</li>
             </ul>
             <p className="mt-4">
               For example, someone with 40 pounds of body fat can theoretically mobilize about 1,060
-              calories per day from fat stores (40 lbs × 26.5 kcal/lb). A larger deficit would likely
-              result in muscle loss.
+              calories per day from fat stores (40 lbs × 26.5 kcal/lb). A larger deficit would
+              likely result in muscle loss.
             </p>
           </div>
         </Accordion>
@@ -63,8 +61,8 @@ export default function MaximumFatLossUnderstanding() {
                 daily activities and sports
               </li>
               <li>
-                <span className="font-medium">Easier maintenance:</span> Higher muscle mass means you
-                can eat more while maintaining weight
+                <span className="font-medium">Easier maintenance:</span> Higher muscle mass means
+                you can eat more while maintaining weight
               </li>
               <li>
                 <span className="font-medium">Reduced rebound:</span> Less muscle loss means less
@@ -115,7 +113,8 @@ export default function MaximumFatLossUnderstanding() {
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <span className="font-medium">Frequency:</span> Train each muscle group 2-3x per week
+                <span className="font-medium">Frequency:</span> Train each muscle group 2-3x per
+                week
               </li>
               <li>
                 <span className="font-medium">Progressive overload:</span> Strive to maintain or
@@ -130,8 +129,8 @@ export default function MaximumFatLossUnderstanding() {
                 sufficient during a deficit
               </li>
               <li>
-                <span className="font-medium">Don't overtrain:</span> Recovery is harder in a deficit
-                - avoid excessive volume
+                <span className="font-medium">Don't overtrain:</span> Recovery is harder in a
+                deficit - avoid excessive volume
               </li>
             </ul>
           </div>
@@ -151,7 +150,8 @@ export default function MaximumFatLossUnderstanding() {
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
                 <span className="font-medium">Important:</span> As you get leaner, your maximum
                 deficit decreases. When you reach 10-12% body fat (males) or 18-20% (females),
-                consider slower fat loss rates or diet breaks to preserve muscle and hormonal health.
+                consider slower fat loss rates or diet breaks to preserve muscle and hormonal
+                health.
               </p>
             </div>
           </div>
@@ -175,9 +175,9 @@ export default function MaximumFatLossUnderstanding() {
                   Mistake: Cutting calories too aggressively at low body fat
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  <span className="font-medium">Better approach:</span> At body fat percentages below
-                  12% (men) or 20% (women), prioritize slower fat loss and muscle preservation over
-                  speed.
+                  <span className="font-medium">Better approach:</span> At body fat percentages
+                  below 12% (men) or 20% (women), prioritize slower fat loss and muscle preservation
+                  over speed.
                 </p>
               </div>
               <div>
@@ -195,8 +195,8 @@ export default function MaximumFatLossUnderstanding() {
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                   <span className="font-medium">Better approach:</span> If your strength drops more
-                  than 10-15% on main lifts, you're likely losing muscle. Reduce your deficit or take
-                  a diet break.
+                  than 10-15% on main lifts, you're likely losing muscle. Reduce your deficit or
+                  take a diet break.
                 </p>
               </div>
             </div>
@@ -214,15 +214,15 @@ export default function MaximumFatLossUnderstanding() {
                 <div className="font-medium">Diet Breaks (1-2 weeks)</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Eat at maintenance calories every 8-12 weeks. This helps restore leptin levels,
-                  improve energy, and provide a mental break. You won't lose fat during this time, but
-                  you'll be better positioned for continued progress afterward.
+                  improve energy, and provide a mental break. You won't lose fat during this time,
+                  but you'll be better positioned for continued progress afterward.
                 </p>
               </div>
               <div>
                 <div className="font-medium">Refeed Days (1-2 days/week)</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Increase calories to maintenance (primarily from carbs) 1-2 days per week. This can
-                  help restore glycogen, improve training performance, and provide psychological
+                  Increase calories to maintenance (primarily from carbs) 1-2 days per week. This
+                  can help restore glycogen, improve training performance, and provide psychological
                   relief without significantly impacting weekly fat loss.
                 </p>
               </div>

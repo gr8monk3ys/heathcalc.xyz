@@ -32,16 +32,17 @@ export default function WeightManagementUnderstanding() {
                 deficit (eating less than you burn), while weight gain requires a surplus
               </li>
               <li>
-                <span className="font-medium">Metabolic Adaptation:</span> Your metabolism adjusts to
-                prolonged deficits or surpluses, making continued progress more difficult over time
+                <span className="font-medium">Metabolic Adaptation:</span> Your metabolism adjusts
+                to prolonged deficits or surpluses, making continued progress more difficult over
+                time
               </li>
               <li>
                 <span className="font-medium">Body Composition:</span> What you eat and how you
                 exercise determines whether weight changes come from fat or muscle
               </li>
               <li>
-                <span className="font-medium">Individual Variation:</span> Genetics, hormones, sleep,
-                stress, and adherence all affect real-world results
+                <span className="font-medium">Individual Variation:</span> Genetics, hormones,
+                sleep, stress, and adherence all affect real-world results
               </li>
             </ul>
           </div>
@@ -122,8 +123,8 @@ export default function WeightManagementUnderstanding() {
                     increase muscle loss, metabolic slowdown, and rebound risk
                   </li>
                   <li>
-                    <span className="font-medium">Minimum timeline:</span> Allow at least 4 weeks for
-                    any weight loss goal
+                    <span className="font-medium">Minimum timeline:</span> Allow at least 4 weeks
+                    for any weight loss goal
                   </li>
                 </ul>
               </div>
@@ -162,15 +163,15 @@ export default function WeightManagementUnderstanding() {
             </p>
             <div className="space-y-3">
               <div>
-                <div className="font-medium text-blue-700 dark:text-blue-300">Protein (4 cal/g)</div>
+                <div className="font-medium text-blue-700 dark:text-blue-300">
+                  Protein (4 cal/g)
+                </div>
                 <ul className="list-disc pl-5 mt-1 space-y-1 text-sm">
                   <li>Builds and repairs muscle tissue</li>
                   <li>Supports immune function and hormone production</li>
                   <li>Most satiating macronutrient</li>
                   <li>Higher thermic effect (burns calories during digestion)</li>
-                  <li>
-                    Aim for 1.6-2.2g per kg body weight during weight loss or muscle building
-                  </li>
+                  <li>Aim for 1.6-2.2g per kg body weight during weight loss or muscle building</li>
                 </ul>
               </div>
               <div>
@@ -186,7 +187,9 @@ export default function WeightManagementUnderstanding() {
                 </ul>
               </div>
               <div>
-                <div className="font-medium text-yellow-700 dark:text-yellow-300">Fat (9 cal/g)</div>
+                <div className="font-medium text-yellow-700 dark:text-yellow-300">
+                  Fat (9 cal/g)
+                </div>
                 <ul className="list-disc pl-5 mt-1 space-y-1 text-sm">
                   <li>Essential for hormone production (including testosterone)</li>
                   <li>Supports vitamin absorption (A, D, E, K)</li>
@@ -214,8 +217,9 @@ export default function WeightManagementUnderstanding() {
               <div>
                 <div className="font-medium">Track Your Food Intake</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Use a food tracking app (MyFitnessPal, Cronometer, LoseIt) to log everything. Use a
-                  food scale for accuracy—eyeballing portions often leads to 20-50% underestimation.
+                  Use a food tracking app (MyFitnessPal, Cronometer, LoseIt) to log everything. Use
+                  a food scale for accuracy—eyeballing portions often leads to 20-50%
+                  underestimation.
                 </p>
               </div>
               <div>
@@ -254,8 +258,8 @@ export default function WeightManagementUnderstanding() {
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                   <span className="font-medium">Solution:</span> Increase protein and fiber intake.
-                  Consider a smaller deficit or diet break. Ensure you're getting adequate sleep (poor
-                  sleep increases hunger hormones).
+                  Consider a smaller deficit or diet break. Ensure you're getting adequate sleep
+                  (poor sleep increases hunger hormones).
                 </p>
               </div>
               <div>
@@ -292,9 +296,9 @@ export default function WeightManagementUnderstanding() {
               <div>
                 <div className="font-medium">Sleep (7-9 hours/night)</div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Poor sleep increases hunger hormones (ghrelin), decreases satiety hormones (leptin),
-                  impairs insulin sensitivity, and reduces willpower. Prioritize consistent sleep
-                  schedules.
+                  Poor sleep increases hunger hormones (ghrelin), decreases satiety hormones
+                  (leptin), impairs insulin sensitivity, and reduces willpower. Prioritize
+                  consistent sleep schedules.
                 </p>
               </div>
               <div>
@@ -338,8 +342,8 @@ export default function WeightManagementUnderstanding() {
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
                 <span className="font-medium">Important:</span> If you experience extreme fatigue,
                 hair loss, menstrual cycle disruptions, or other concerning symptoms, consult a
-                healthcare provider immediately. These may indicate your deficit is too aggressive or
-                you have nutrient deficiencies.
+                healthcare provider immediately. These may indicate your deficit is too aggressive
+                or you have nutrient deficiencies.
               </p>
             </div>
           </div>

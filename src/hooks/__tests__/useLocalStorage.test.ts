@@ -49,7 +49,6 @@ describe('useLocalStorage Hook', () => {
       });
 
       expect(result.current[0]).toBe('updated');
-     
 
       expect(localStorage.getItem('test-key')).toBe(JSON.stringify('updated'));
     });
@@ -62,7 +61,6 @@ describe('useLocalStorage Hook', () => {
       });
 
       expect(result.current[0]).toBe(15);
-     
     });
 
     it('should remove value from localStorage', () => {
@@ -103,7 +101,6 @@ describe('useLocalStorage Hook', () => {
       });
 
       expect(result.current[0].age).toBe(31);
-     
     });
   });
 
@@ -137,9 +134,7 @@ describe('useLocalStorage Hook', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       const onError = vi.fn();
 
-      const { result } = renderHook(() =>
-        useLocalStorage('test-key', 'initial', { onError })
-      );
+      const { result } = renderHook(() => useLocalStorage('test-key', 'initial', { onError }));
 
       const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
         throw new Error('Storage error');
@@ -218,7 +213,7 @@ describe('useLocalStorage Hook', () => {
 
       // Value should update in state even if localStorage fails
       expect(result.current[0]).toBe('updated');
-     
+
       expect(errorSpy).toHaveBeenCalled();
 
       setItemSpy.mockRestore();
@@ -263,7 +258,7 @@ describe('useLocalStorage Hook', () => {
 
       // State should update even if localStorage fails
       expect(result.current[0]).toBe('very large value that exceeds quota');
-     
+
       expect(errorSpy).toHaveBeenCalled();
 
       setItemSpy.mockRestore();
@@ -288,7 +283,7 @@ describe('useLocalStorage Hook', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       localStorage.setItem('test-key', '{incomplete:');
 
-      const { result} = renderHook(() => useLocalStorage<string>('test-key', 'fallback'));
+      const { result } = renderHook(() => useLocalStorage<string>('test-key', 'fallback'));
 
       expect(result.current[0]).toBe('fallback');
 

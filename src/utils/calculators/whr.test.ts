@@ -251,7 +251,7 @@ describe('WHR Edge Cases', () => {
 
   it('should handle precise decimal measurements', () => {
     const whr = calculateWHR(87.3, 102.7);
-    expect(whr).toBeCloseTo(0.850, 3);
+    expect(whr).toBeCloseTo(0.85, 3);
   });
 
   it('should maintain precision in calculations', () => {

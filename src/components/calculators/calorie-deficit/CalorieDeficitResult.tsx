@@ -49,7 +49,8 @@ export default function CalorieDeficitResultDisplay({
             </div>
           </div>
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            Estimated target date: <span className="font-semibold">{formatTargetDate(result.targetDate)}</span>
+            Estimated target date:{' '}
+            <span className="font-semibold">{formatTargetDate(result.targetDate)}</span>
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
             You'll lose approximately {displayWeeklyLoss.toFixed(2)} {unitLabel}/week
@@ -117,7 +118,14 @@ export default function CalorieDeficitResultDisplay({
 
       {/* Deficit Level Info */}
       <Card className="p-5">
-        <h3 className="text-lg font-semibold mb-3">Deficit Level: {result.deficitLevel === 'mild' ? 'Mild (Slow & Steady)' : result.deficitLevel === 'moderate' ? 'Moderate (Balanced)' : 'Aggressive (Fast Results)'}</h3>
+        <h3 className="text-lg font-semibold mb-3">
+          Deficit Level:{' '}
+          {result.deficitLevel === 'mild'
+            ? 'Mild (Slow & Steady)'
+            : result.deficitLevel === 'moderate'
+              ? 'Moderate (Balanced)'
+              : 'Aggressive (Fast Results)'}
+        </h3>
         <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
           {getDeficitSafetyMessage(result.deficitLevel)}
         </p>
@@ -141,18 +149,14 @@ export default function CalorieDeficitResultDisplay({
               {result.recommendations.waterLiters}L
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">Daily Water</div>
-            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-              Supports metabolism
-            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">Supports metabolism</p>
           </div>
           <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
             <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
               {result.recommendations.minCalories}
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">Minimum Calories</div>
-            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-              Don't go below this
-            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">Don't go below this</p>
           </div>
         </div>
       </Card>
@@ -194,10 +198,19 @@ export default function CalorieDeficitResultDisplay({
               />
 
               {/* Axis labels */}
-              <text x="25" y="130" className="text-xs fill-current text-gray-600 dark:text-gray-400">
+              <text
+                x="25"
+                y="130"
+                className="text-xs fill-current text-gray-600 dark:text-gray-400"
+              >
                 Weight Loss ({unitLabel})
               </text>
-              <text x="300" y="240" className="text-xs fill-current text-gray-600 dark:text-gray-400" textAnchor="middle">
+              <text
+                x="300"
+                y="240"
+                className="text-xs fill-current text-gray-600 dark:text-gray-400"
+                textAnchor="middle"
+              >
                 Weeks
               </text>
             </svg>
@@ -230,7 +243,9 @@ export default function CalorieDeficitResultDisplay({
           </li>
           <li className="flex items-start gap-2">
             <span className="text-green-500 flex-shrink-0">✓</span>
-            <span>Adjust your calorie target as you lose weight (recalculate every 5-10 {unitLabel})</span>
+            <span>
+              Adjust your calorie target as you lose weight (recalculate every 5-10 {unitLabel})
+            </span>
           </li>
         </ul>
       </Card>

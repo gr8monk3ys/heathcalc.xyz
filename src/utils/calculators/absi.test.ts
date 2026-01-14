@@ -88,7 +88,7 @@ describe('ABSI Calculation', () => {
       });
 
       it('should calculate negative z-score for low ABSI', () => {
-        const zScore = calculateABSIZScore(0.070, 30, 'female');
+        const zScore = calculateABSIZScore(0.07, 30, 'female');
         expect(zScore).toBeLessThan(0);
       });
     });
@@ -175,7 +175,7 @@ describe('ABSI Calculation', () => {
 
   describe('getWaistHeightRatioCategory', () => {
     it('should categorize underweight', () => {
-      const result = getWaistHeightRatioCategory(0.40);
+      const result = getWaistHeightRatioCategory(0.4);
       expect(result.name).toBe('Underweight');
       expect(result.description).toBeDefined();
     });

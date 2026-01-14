@@ -18,9 +18,7 @@ describe('useHeight', () => {
   });
 
   it('should initialize with custom values', () => {
-    const { result } = renderHook(() =>
-      useHeight({ initialUnit: 'ft', initialValue: 5.5 })
-    );
+    const { result } = renderHook(() => useHeight({ initialUnit: 'ft', initialValue: 5.5 }));
 
     expect(result.current.value).toBe(5.5);
     expect(result.current.unit).toBe('ft');
@@ -54,9 +52,7 @@ describe('useHeight', () => {
   });
 
   it('should toggle from ft to cm and convert value', () => {
-    const { result } = renderHook(() =>
-      useHeight({ initialUnit: 'ft', initialValue: 6 })
-    );
+    const { result } = renderHook(() => useHeight({ initialUnit: 'ft', initialValue: 6 }));
 
     act(() => {
       result.current.toggle();
@@ -89,9 +85,7 @@ describe('useHeight', () => {
   });
 
   it('should convert ft to cm when toCm is called', () => {
-    const { result } = renderHook(() =>
-      useHeight({ initialUnit: 'ft', initialValue: 6 })
-    );
+    const { result } = renderHook(() => useHeight({ initialUnit: 'ft', initialValue: 6 }));
 
     expect(result.current.toCm()).toBeCloseTo(182.88, 2);
   });
@@ -113,9 +107,7 @@ describe('useWeight', () => {
   });
 
   it('should initialize with custom values', () => {
-    const { result } = renderHook(() =>
-      useWeight({ initialUnit: 'lb', initialValue: 150 })
-    );
+    const { result } = renderHook(() => useWeight({ initialUnit: 'lb', initialValue: 150 }));
 
     expect(result.current.value).toBe(150);
     expect(result.current.unit).toBe('lb');
@@ -149,9 +141,7 @@ describe('useWeight', () => {
   });
 
   it('should toggle from lb to kg and convert value', () => {
-    const { result } = renderHook(() =>
-      useWeight({ initialUnit: 'lb', initialValue: 154.324 })
-    );
+    const { result } = renderHook(() => useWeight({ initialUnit: 'lb', initialValue: 154.324 }));
 
     act(() => {
       result.current.toggle();
@@ -184,9 +174,7 @@ describe('useWeight', () => {
   });
 
   it('should convert lb to kg when toKg is called', () => {
-    const { result } = renderHook(() =>
-      useWeight({ initialUnit: 'lb', initialValue: 154.324 })
-    );
+    const { result } = renderHook(() => useWeight({ initialUnit: 'lb', initialValue: 154.324 }));
 
     expect(result.current.toKg()).toBeCloseTo(70, 2);
   });

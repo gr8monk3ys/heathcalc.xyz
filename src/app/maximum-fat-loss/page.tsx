@@ -24,7 +24,7 @@ const faqs = [
   {
     question: 'What makes this calculator different from other fat loss calculators?',
     answer:
-      'The Maximum Fat Loss Calculator uses your body composition (body fat percentage) to calculate lean body mass and determine the maximum safe rate of fat loss while preserving muscle. Unlike simple calorie calculators, it factors in the 31 kcal per kg of fat mass per day rule, ensuring you don\'t lose muscle along with fat. This science-based approach optimizes fat loss without compromising metabolic health or lean tissue.',
+      "The Maximum Fat Loss Calculator uses your body composition (body fat percentage) to calculate lean body mass and determine the maximum safe rate of fat loss while preserving muscle. Unlike simple calorie calculators, it factors in the 31 kcal per kg of fat mass per day rule, ensuring you don't lose muscle along with fat. This science-based approach optimizes fat loss without compromising metabolic health or lean tissue.",
   },
   {
     question: 'How do I accurately measure my body fat percentage?',
@@ -37,9 +37,9 @@ const faqs = [
       'The calculator caps your deficit based on the maximum energy your fat stores can release per day (approximately 31 kcal per kg of fat mass). Exceeding this limit forces your body to break down muscle for energy, leading to metabolic slowdown, strength loss, and poor body composition. The calculator ensures your deficit is aggressive but sustainable, maximizing fat loss while preserving lean muscle mass and metabolic rate.',
   },
   {
-    question: 'Can I adjust my plan if I\'m also doing strength training?',
+    question: "Can I adjust my plan if I'm also doing strength training?",
     answer:
-      'Yes! If you\'re strength training, you may benefit from a slightly smaller deficit than calculated to support recovery and muscle preservation. Consider staying at the higher end of your recommended calorie range, ensure adequate protein intake (1.6-2.2g per kg lean body mass), and prioritize training performance. The calculator provides a starting point, but listen to your body - if strength is declining rapidly, increase calories slightly.',
+      "Yes! If you're strength training, you may benefit from a slightly smaller deficit than calculated to support recovery and muscle preservation. Consider staying at the higher end of your recommended calorie range, ensure adequate protein intake (1.6-2.2g per kg lean body mass), and prioritize training performance. The calculator provides a starting point, but listen to your body - if strength is declining rapidly, increase calories slightly.",
   },
   {
     question: 'What if my body fat percentage is very high or very low?',
@@ -128,7 +128,8 @@ export default function MaximumFatLossCalculator() {
     if (isEmpty(height)) {
       newErrors.height = 'Height is required';
     } else {
-      const heightForValidation = heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
+      const heightForValidation =
+        heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
       const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
       const heightValidation = validateHeight(heightForValidation, unitSystem);
       if (!heightValidation.isValid) {
@@ -352,7 +353,11 @@ export default function MaximumFatLossCalculator() {
           <div className="md:col-span-2" id="maximum-fat-loss-result">
             {showResult && result ? (
               <>
-                <MaximumFatLossResultDisplay result={result} weightUnit={weightUnit} gender={gender} />
+                <MaximumFatLossResultDisplay
+                  result={result}
+                  weightUnit={weightUnit}
+                  gender={gender}
+                />
 
                 {/* Save result functionality */}
                 <div className="mt-6 flex justify-between items-center">

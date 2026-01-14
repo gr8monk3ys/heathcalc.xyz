@@ -24,14 +24,19 @@ import SaveResult from '@/components/SaveResult';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import FAQSection from '@/components/FAQSection';
 import RelatedArticles from '@/components/RelatedArticles';
-import { useHeight, useWeight, createHeightField, createWeightField } from '@/hooks/useCalculatorUnits';
+import {
+  useHeight,
+  useWeight,
+  createHeightField,
+  createWeightField,
+} from '@/hooks/useCalculatorUnits';
 
 // FAQ data for BMI calculator
 const faqs = [
   {
     question: 'What is a healthy BMI range?',
     answer:
-      'For adults, a healthy BMI typically ranges from 18.5 to 24.9 according to WHO standards. BMI under 18.5 is considered underweight, 25.0-29.9 is overweight, and 30.0 or higher is obese. However, BMI has limitations - it doesn\'t distinguish between muscle and fat mass, doesn\'t account for bone density, and may not accurately represent health risks for athletes, elderly individuals, or certain ethnic groups. For children and teens (ages 2-20), BMI is interpreted differently using CDC growth charts and percentiles that account for age and sex.',
+      "For adults, a healthy BMI typically ranges from 18.5 to 24.9 according to WHO standards. BMI under 18.5 is considered underweight, 25.0-29.9 is overweight, and 30.0 or higher is obese. However, BMI has limitations - it doesn't distinguish between muscle and fat mass, doesn't account for bone density, and may not accurately represent health risks for athletes, elderly individuals, or certain ethnic groups. For children and teens (ages 2-20), BMI is interpreted differently using CDC growth charts and percentiles that account for age and sex.",
   },
   {
     question: 'Is BMI accurate for everyone?',
@@ -46,7 +51,7 @@ const faqs = [
   {
     question: 'What should I do if my BMI is high?',
     answer:
-      'First, consult a healthcare professional to assess your overall health, including waist circumference, blood pressure, cholesterol, and blood sugar. BMI alone doesn\'t diagnose health. If weight loss is recommended: 1) Create a modest calorie deficit (500 kcal/day for 1 lb/week loss), 2) Focus on whole foods, vegetables, lean protein, and fiber, 3) Engage in 150+ minutes of moderate cardio weekly, 4) Add resistance training to preserve muscle mass, 5) Get adequate sleep (7-9 hours) and manage stress. Avoid crash diets or extreme restrictions. Sustainable changes over time are most effective. Even 5-10% weight loss can significantly improve health markers.',
+      "First, consult a healthcare professional to assess your overall health, including waist circumference, blood pressure, cholesterol, and blood sugar. BMI alone doesn't diagnose health. If weight loss is recommended: 1) Create a modest calorie deficit (500 kcal/day for 1 lb/week loss), 2) Focus on whole foods, vegetables, lean protein, and fiber, 3) Engage in 150+ minutes of moderate cardio weekly, 4) Add resistance training to preserve muscle mass, 5) Get adequate sleep (7-9 hours) and manage stress. Avoid crash diets or extreme restrictions. Sustainable changes over time are most effective. Even 5-10% weight loss can significantly improve health markers.",
   },
   {
     question: 'Does BMI change with age?',
@@ -178,8 +183,14 @@ export default function BMICalculator() {
 
       // Convert healthy weight range to the current unit
       const displayHealthyWeightRange = {
-        min: weight.unit === 'kg' ? healthyWeightRange.min : convertWeight(healthyWeightRange.min, 'kg', 'lb'),
-        max: weight.unit === 'kg' ? healthyWeightRange.max : convertWeight(healthyWeightRange.max, 'kg', 'lb'),
+        min:
+          weight.unit === 'kg'
+            ? healthyWeightRange.min
+            : convertWeight(healthyWeightRange.min, 'kg', 'lb'),
+        max:
+          weight.unit === 'kg'
+            ? healthyWeightRange.max
+            : convertWeight(healthyWeightRange.max, 'kg', 'lb'),
       };
 
       // Create result object
@@ -327,11 +338,7 @@ export default function BMICalculator() {
         </div>
 
         {/* FAQ Section with structured data */}
-        <FAQSection
-          faqs={faqs}
-          title="Frequently Asked Questions About BMI"
-          className="mb-8"
-        />
+        <FAQSection faqs={faqs} title="Frequently Asked Questions About BMI" className="mb-8" />
 
         <BMIUnderstanding />
 

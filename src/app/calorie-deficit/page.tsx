@@ -130,7 +130,8 @@ export default function CalorieDeficitCalculator() {
     if (isEmpty(height)) {
       newErrors.height = 'Height is required';
     } else {
-      const heightForValidation = heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
+      const heightForValidation =
+        heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
       const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
       const heightValidation = validateHeight(heightForValidation, unitSystem);
       if (!heightValidation.isValid) {
@@ -344,7 +345,8 @@ export default function CalorieDeficitCalculator() {
 
         <h1 className="text-3xl font-bold mb-2">Calorie Deficit Calculator</h1>
         <p className="text-gray-600 mb-6">
-          Calculate how long it will take to reach your goal weight with different calorie deficit levels
+          Calculate how long it will take to reach your goal weight with different calorie deficit
+          levels
         </p>
 
         {/* Social sharing buttons */}
@@ -382,7 +384,7 @@ export default function CalorieDeficitCalculator() {
                       targetCalories: result.dailyCalorieTarget,
                       deficitCalories: result.dailyDeficit,
                       estimatedWeeks: result.estimatedWeeks,
-                      weightToLose: `${(typeof weight === 'number' && typeof goalWeight === 'number') ? (weight - goalWeight).toFixed(1) : 0} ${weightUnit}`,
+                      weightToLose: `${typeof weight === 'number' && typeof goalWeight === 'number' ? (weight - goalWeight).toFixed(1) : 0} ${weightUnit}`,
                     }}
                   />
 

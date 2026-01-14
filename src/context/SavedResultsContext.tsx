@@ -15,7 +15,11 @@ export interface SavedResult {
 // Rule: Use discriminated unions for complex state types
 interface SavedResultsContextState {
   savedResults: SavedResult[];
-  saveResult: (calculatorType: string, calculatorName: string, data: Record<string, unknown>) => void;
+  saveResult: (
+    calculatorType: string,
+    calculatorName: string,
+    data: Record<string, unknown>
+  ) => void;
   removeResult: (id: string) => void;
   clearAllResults: () => void;
   isResultSaved: (id: string) => boolean;

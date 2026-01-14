@@ -294,7 +294,9 @@ export function generateArticleData(article: {
  * @param faqs - The FAQs
  * @returns The structured data object
  */
-export function generateFaqData(faqs: { question: string; answer: string }[]): Record<string, unknown> {
+export function generateFaqData(
+  faqs: { question: string; answer: string }[]
+): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

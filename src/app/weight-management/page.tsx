@@ -23,9 +23,10 @@ import RelatedArticles from '@/components/RelatedArticles';
 // FAQ data for the calculator
 const faqs = [
   {
-    question: 'How does the Weight Management Calculator differ from the Calorie Deficit Calculator?',
+    question:
+      'How does the Weight Management Calculator differ from the Calorie Deficit Calculator?',
     answer:
-      'While the Calorie Deficit Calculator focuses on how long it will take to reach a goal weight, the Weight Management Calculator provides a complete plan with a specific target date. It includes detailed macro breakdowns (protein, carbs, fats) tailored to your chosen diet type, weekly progress milestones, and adaptive calorie adjustments. It\'s designed for those who want a comprehensive roadmap with a deadline.',
+      "While the Calorie Deficit Calculator focuses on how long it will take to reach a goal weight, the Weight Management Calculator provides a complete plan with a specific target date. It includes detailed macro breakdowns (protein, carbs, fats) tailored to your chosen diet type, weekly progress milestones, and adaptive calorie adjustments. It's designed for those who want a comprehensive roadmap with a deadline.",
   },
   {
     question: 'Why does the calculator suggest different macros for different diet types?',
@@ -35,12 +36,12 @@ const faqs = [
   {
     question: 'What if my target date is too aggressive or not challenging enough?',
     answer:
-      'The calculator will warn you if your target date results in unsafe weight loss or gain rates (more than 1kg/2.2lb per week for loss, or 0.5kg/1.1lb per week for gain). If your timeline is too aggressive, it will adjust your calorie target to the minimum safe level and show a realistic completion date. If it\'s not challenging enough, consider setting a more ambitious date or adjusting your goal weight.',
+      "The calculator will warn you if your target date results in unsafe weight loss or gain rates (more than 1kg/2.2lb per week for loss, or 0.5kg/1.1lb per week for gain). If your timeline is too aggressive, it will adjust your calorie target to the minimum safe level and show a realistic completion date. If it's not challenging enough, consider setting a more ambitious date or adjusting your goal weight.",
   },
   {
     question: 'How should I adjust my plan if I miss a week or plateau?',
     answer:
-      'Weight loss and gain aren\'t always linear. If you miss a week or plateau, first review your tracking accuracy and ensure you\'re consistent with your calorie target. If you plateau for 2-3 weeks despite accurate tracking, recalculate using your current weight as a starting point and adjust your target date accordingly. The calculator provides weekly milestones to help you monitor progress and make timely adjustments.',
+      "Weight loss and gain aren't always linear. If you miss a week or plateau, first review your tracking accuracy and ensure you're consistent with your calorie target. If you plateau for 2-3 weeks despite accurate tracking, recalculate using your current weight as a starting point and adjust your target date accordingly. The calculator provides weekly milestones to help you monitor progress and make timely adjustments.",
   },
   {
     question: 'Can I use this calculator for muscle gain?',
@@ -140,7 +141,8 @@ export default function WeightManagementCalculator() {
     if (isEmpty(height)) {
       newErrors.height = 'Height is required';
     } else {
-      const heightForValidation = heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
+      const heightForValidation =
+        heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
       const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
       const heightValidation = validateHeight(heightForValidation, unitSystem);
       if (!heightValidation.isValid) {
@@ -204,7 +206,8 @@ export default function WeightManagementCalculator() {
       const goalWeightKg = weightUnit === 'kg' ? goalWeight : goalWeight / 2.20462;
 
       // Determine goal type
-      const goalType: GoalType = goalWeightKg < weightKg ? 'lose' : goalWeightKg > weightKg ? 'gain' : 'maintain';
+      const goalType: GoalType =
+        goalWeightKg < weightKg ? 'lose' : goalWeightKg > weightKg ? 'gain' : 'maintain';
 
       try {
         // Calculate weight management plan
@@ -383,7 +386,8 @@ export default function WeightManagementCalculator() {
 
         <h1 className="text-3xl font-bold mb-2">Weight Management Calculator</h1>
         <p className="text-gray-600 mb-6">
-          Plan your weight management journey with a target date and get personalized calorie and macro recommendations
+          Plan your weight management journey with a target date and get personalized calorie and
+          macro recommendations
         </p>
 
         {/* Social sharing buttons */}
@@ -423,7 +427,7 @@ export default function WeightManagementCalculator() {
                       carbsGrams: result.macros.carbsGrams,
                       fatGrams: result.macros.fatGrams,
                       targetDate: targetDate,
-                      weightToChange: `${Math.abs((typeof weight === 'number' && typeof goalWeight === 'number') ? (weight - goalWeight) : 0).toFixed(1)} ${weightUnit}`,
+                      weightToChange: `${Math.abs(typeof weight === 'number' && typeof goalWeight === 'number' ? weight - goalWeight : 0).toFixed(1)} ${weightUnit}`,
                     }}
                   />
 

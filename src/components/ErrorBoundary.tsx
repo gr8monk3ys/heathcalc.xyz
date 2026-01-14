@@ -87,9 +87,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
               <div className="mt-2 text-sm text-red-700">
                 <p>An error occurred while rendering this component.</p>
                 {process.env.NODE_ENV === 'development' && this.state.error && (
-                  <p className="mt-2 font-mono text-xs break-words">
-                    {this.state.error.message}
-                  </p>
+                  <p className="mt-2 font-mono text-xs break-words">{this.state.error.message}</p>
                 )}
               </div>
               <div className="mt-4">

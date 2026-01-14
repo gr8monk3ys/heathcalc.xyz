@@ -91,15 +91,21 @@ describe('TDEE Calculation', () => {
 
     describe('Input Validation', () => {
       it('should throw error for zero age', () => {
-        expect(() => calculateBMR('male', 0, 70, 175)).toThrow('Age must be between 1 and 120 years');
+        expect(() => calculateBMR('male', 0, 70, 175)).toThrow(
+          'Age must be between 1 and 120 years'
+        );
       });
 
       it('should throw error for negative age', () => {
-        expect(() => calculateBMR('male', -5, 70, 175)).toThrow('Age must be between 1 and 120 years');
+        expect(() => calculateBMR('male', -5, 70, 175)).toThrow(
+          'Age must be between 1 and 120 years'
+        );
       });
 
       it('should throw error for unrealistic age', () => {
-        expect(() => calculateBMR('male', 121, 70, 175)).toThrow('Age must be between 1 and 120 years');
+        expect(() => calculateBMR('male', 121, 70, 175)).toThrow(
+          'Age must be between 1 and 120 years'
+        );
       });
 
       it('should throw error for zero weight', () => {
@@ -107,7 +113,9 @@ describe('TDEE Calculation', () => {
       });
 
       it('should throw error for negative weight', () => {
-        expect(() => calculateBMR('male', 30, -70, 175)).toThrow('Weight must be greater than 0 kg');
+        expect(() => calculateBMR('male', 30, -70, 175)).toThrow(
+          'Weight must be greater than 0 kg'
+        );
       });
 
       it('should throw error for zero height', () => {
@@ -115,11 +123,15 @@ describe('TDEE Calculation', () => {
       });
 
       it('should throw error for negative height', () => {
-        expect(() => calculateBMR('male', 30, 70, -175)).toThrow('Height must be greater than 0 cm');
+        expect(() => calculateBMR('male', 30, 70, -175)).toThrow(
+          'Height must be greater than 0 cm'
+        );
       });
 
       it('should throw error for invalid formula', () => {
-        expect(() => calculateBMR('male', 30, 70, 175, 'invalid_formula')).toThrow("Formula 'invalid_formula' not found");
+        expect(() => calculateBMR('male', 30, 70, 175, 'invalid_formula')).toThrow(
+          "Formula 'invalid_formula' not found"
+        );
       });
     });
   });
@@ -263,11 +275,15 @@ describe('TDEE Calculation', () => {
     });
 
     it('should throw error for zero current weight', () => {
-      expect(() => estimateWeightChange(0, 2500, 2000, 30)).toThrow('Current weight must be greater than 0 kg');
+      expect(() => estimateWeightChange(0, 2500, 2000, 30)).toThrow(
+        'Current weight must be greater than 0 kg'
+      );
     });
 
     it('should throw error for negative current weight', () => {
-      expect(() => estimateWeightChange(-80, 2500, 2000, 30)).toThrow('Current weight must be greater than 0 kg');
+      expect(() => estimateWeightChange(-80, 2500, 2000, 30)).toThrow(
+        'Current weight must be greater than 0 kg'
+      );
     });
 
     it('should throw error for zero TDEE', () => {
@@ -275,7 +291,9 @@ describe('TDEE Calculation', () => {
     });
 
     it('should throw error for zero target calories', () => {
-      expect(() => estimateWeightChange(80, 2500, 0, 30)).toThrow('Target calories must be greater than 0');
+      expect(() => estimateWeightChange(80, 2500, 0, 30)).toThrow(
+        'Target calories must be greater than 0'
+      );
     });
 
     it('should throw error for zero days', () => {
@@ -323,19 +341,27 @@ describe('TDEE Calculation', () => {
     });
 
     it('should throw error for zero current weight', () => {
-      expect(() => calculateTimeToTargetWeight(0, 75, 2500, 2000)).toThrow('Current weight must be greater than 0 kg');
+      expect(() => calculateTimeToTargetWeight(0, 75, 2500, 2000)).toThrow(
+        'Current weight must be greater than 0 kg'
+      );
     });
 
     it('should throw error for zero target weight', () => {
-      expect(() => calculateTimeToTargetWeight(80, 0, 2500, 2000)).toThrow('Target weight must be greater than 0 kg');
+      expect(() => calculateTimeToTargetWeight(80, 0, 2500, 2000)).toThrow(
+        'Target weight must be greater than 0 kg'
+      );
     });
 
     it('should throw error for zero TDEE', () => {
-      expect(() => calculateTimeToTargetWeight(80, 75, 0, 2000)).toThrow('TDEE must be greater than 0');
+      expect(() => calculateTimeToTargetWeight(80, 75, 0, 2000)).toThrow(
+        'TDEE must be greater than 0'
+      );
     });
 
     it('should throw error for zero target calories', () => {
-      expect(() => calculateTimeToTargetWeight(80, 75, 2500, 0)).toThrow('Target calories must be greater than 0');
+      expect(() => calculateTimeToTargetWeight(80, 75, 2500, 0)).toThrow(
+        'Target calories must be greater than 0'
+      );
     });
   });
 });

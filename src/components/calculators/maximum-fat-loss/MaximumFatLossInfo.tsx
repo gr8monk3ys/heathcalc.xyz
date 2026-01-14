@@ -12,8 +12,8 @@ export default function MaximumFatLossInfo() {
         <h2 className="text-2xl font-bold mb-4">How It Works</h2>
         <p className="text-gray-700 dark:text-gray-300 mb-4">
           This calculator uses research-based science to determine the maximum calorie deficit you
-          can sustain while primarily losing fat, not muscle. Based on Dr. Alpert's 2005 study,
-          your body can only mobilize about 22-31 calories per pound of body fat per day.
+          can sustain while primarily losing fat, not muscle. Based on Dr. Alpert's 2005 study, your
+          body can only mobilize about 22-31 calories per pound of body fat per day.
         </p>
         <p className="text-gray-700 dark:text-gray-300">
           Enter your stats and body fat percentage to find your optimal cutting calories that
@@ -38,41 +38,87 @@ export default function MaximumFatLossInfo() {
         <h3 className="text-lg font-semibold mb-3">What You'll Get</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3">
-            <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Maximum Safe Deficit</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Maximum Safe Deficit
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Based on your body fat percentage
               </div>
             </div>
           </li>
           <li className="flex items-start gap-3">
-            <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Optimal Calorie Target</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Optimal Calorie Target
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Daily calories for maximum fat loss
               </div>
             </div>
           </li>
           <li className="flex items-start gap-3">
-            <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
-              <div className="font-medium text-gray-900 dark:text-gray-100">Protein Requirements</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                Protein Requirements
+              </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
                 Tailored to your lean body mass
               </div>
             </div>
           </li>
           <li className="flex items-start gap-3">
-            <svg className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
             <div>
               <div className="font-medium text-gray-900 dark:text-gray-100">12-Week Projection</div>

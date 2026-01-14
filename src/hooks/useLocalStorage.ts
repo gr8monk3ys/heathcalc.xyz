@@ -58,29 +58,35 @@ export function useLocalStorage<T>(
 
   // Return a wrapped version of useState's setter function that
   // persists the new value to localStorage
-  const setValue = useCallback((value: T | ((val: T) => T)): void => {
-    try {
-      // Allow value to be a function so we have the same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)): void => {
+      try {
+        // Allow value to be a function so we have the same API as useState
+        const valueToStore = value instanceof Function ? value(storedValue) : value;
 
-      setStoredValue(valueToStore);
-      setError(null);
+        setStoredValue(valueToStore);
+        setError(null);
 
-      // Persist to localStorage
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        // Persist to localStorage
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        }
+      } catch (err) {
+        const storageError: LocalStorageError = {
+          type: 'write',
+          message:
+            err instanceof Error
+              ? err.message
+              : 'Failed to write to localStorage (storage may be full)',
+          key,
+        };
+        console.error(`Error setting localStorage key "${key}":`, err);
+        setError(storageError);
+        options?.onError?.(storageError);
       }
-    } catch (err) {
-      const storageError: LocalStorageError = {
-        type: 'write',
-        message: err instanceof Error ? err.message : 'Failed to write to localStorage (storage may be full)',
-        key,
-      };
-      console.error(`Error setting localStorage key "${key}":`, err);
-      setError(storageError);
-      options?.onError?.(storageError);
-    }
-  }, [key, storedValue, options]);
+    },
+    [key, storedValue, options]
+  );
 
   // Function to remove the item from localStorage
   const removeValue = useCallback((): void => {
