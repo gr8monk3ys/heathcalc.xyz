@@ -68,7 +68,11 @@ export function validateAge(age: number | string): ValidationResult {
 }
 
 /**
- * Validates height input (in cm)
+ * Validates height input
+ * @param height The height value to validate
+ * @param unit The unit system: 'metric' for cm, 'imperial' for feet (decimal)
+ *
+ * Note: Imperial expects height in decimal feet (e.g., 5.75 for 5 feet 9 inches)
  */
 export function validateHeight(height: number | string, unit: 'metric' | 'imperial' = 'metric'): ValidationResult {
   const numHeight = Number(height);
@@ -81,14 +85,17 @@ export function validateHeight(height: number | string, unit: 'metric' | 'imperi
     return { isValid: false, error: 'Height must be greater than 0' };
   }
 
-  const range = unit === 'metric' ? VALIDATION_RANGES.height.cm : { min: 12, max: 120 }; // inches
+  // For imperial, validate in feet (not inches)
+  // Valid range: 1-10 feet (covers ~30cm to ~300cm)
+  const range = unit === 'metric' ? VALIDATION_RANGES.height.cm : VALIDATION_RANGES.height.ft;
+  const unitLabel = unit === 'metric' ? 'cm' : 'ft';
 
   if (numHeight < range.min) {
-    return { isValid: false, error: `Height must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}` };
+    return { isValid: false, error: `Height must be at least ${range.min}${unitLabel}` };
   }
 
   if (numHeight > range.max) {
-    return { isValid: false, error: `Height must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}` };
+    return { isValid: false, error: `Height must be less than ${range.max}${unitLabel}` };
   }
 
   return { isValid: true };

@@ -63,9 +63,10 @@ describe('Height Validation', () => {
     expect(validateHeight(200, 'metric').isValid).toBe(true);
   });
 
-  it('should accept valid imperial heights', () => {
-    expect(validateHeight(70, 'imperial').isValid).toBe(true); // ~5'10"
-    expect(validateHeight(60, 'imperial').isValid).toBe(true); // 5'
+  it('should accept valid imperial heights (in feet)', () => {
+    expect(validateHeight(5.83, 'imperial').isValid).toBe(true); // ~5'10"
+    expect(validateHeight(5, 'imperial').isValid).toBe(true); // 5'
+    expect(validateHeight(6.5, 'imperial').isValid).toBe(true); // 6'6"
   });
 
   it('should reject unrealistically small heights', () => {

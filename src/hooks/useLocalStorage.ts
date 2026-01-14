@@ -1,19 +1,34 @@
 // Rule: Move localStorage logic to dedicated hooks/utilities for better separation of concerns
 
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+
+export interface LocalStorageError {
+  type: 'read' | 'write' | 'remove';
+  message: string;
+  key: string;
+}
+
+export interface UseLocalStorageOptions {
+  /** Called when a storage error occurs */
+  onError?: (error: LocalStorageError) => void;
+}
 
 /**
  * Custom hook for managing localStorage values with type safety
  * @param key The localStorage key
  * @param initialValue The initial value if no value exists in localStorage
- * @returns [storedValue, setValue, removeValue]
+ * @param options Optional configuration including error callback
+ * @returns [storedValue, setValue, removeValue, error]
  */
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T
-): [T, (value: T | ((val: T) => T)) => void, () => void] {
+  initialValue: T,
+  options?: UseLocalStorageOptions
+): [T, (value: T | ((val: T) => T)) => void, () => void, LocalStorageError | null] {
+  const [error, setError] = useState<LocalStorageError | null>(null);
+
   // Rule: Use explicit return types for all functions
-  function getStoredValue(): T {
+  const getStoredValue = useCallback((): T => {
     if (typeof window === 'undefined') {
       return initialValue;
     }
@@ -21,45 +36,85 @@ export function useLocalStorage<T>(
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.error(`Error reading localStorage key "${key}":`, error);
+    } catch (err) {
+      const storageError: LocalStorageError = {
+        type: 'read',
+        message: err instanceof Error ? err.message : 'Failed to read from localStorage',
+        key,
+      };
+      console.error(`Error reading localStorage key "${key}":`, err);
+      setError(storageError);
+      options?.onError?.(storageError);
       return initialValue;
     }
-  }
+  }, [key, initialValue, options]);
 
   const [storedValue, setStoredValue] = useState<T>(getStoredValue);
 
+  // Clear error when key changes
+  useEffect(() => {
+    setError(null);
+  }, [key]);
+
   // Return a wrapped version of useState's setter function that
   // persists the new value to localStorage
-  const setValue = (value: T | ((val: T) => T)): void => {
+  const setValue = useCallback((value: T | ((val: T) => T)): void => {
     try {
       // Allow value to be a function so we have the same API as useState
       const valueToStore = value instanceof Function ? value(storedValue) : value;
 
       setStoredValue(valueToStore);
+      setError(null);
 
       // Persist to localStorage
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
-    } catch (error) {
-      console.error(`Error setting localStorage key "${key}":`, error);
+    } catch (err) {
+      const storageError: LocalStorageError = {
+        type: 'write',
+        message: err instanceof Error ? err.message : 'Failed to write to localStorage (storage may be full)',
+        key,
+      };
+      console.error(`Error setting localStorage key "${key}":`, err);
+      setError(storageError);
+      options?.onError?.(storageError);
     }
-  };
+  }, [key, storedValue, options]);
 
   // Function to remove the item from localStorage
-  const removeValue = (): void => {
+  const removeValue = useCallback((): void => {
     try {
       if (typeof window !== 'undefined') {
         window.localStorage.removeItem(key);
       }
       setStoredValue(initialValue);
-    } catch (error) {
-      console.error(`Error removing localStorage key "${key}":`, error);
+      setError(null);
+    } catch (err) {
+      const storageError: LocalStorageError = {
+        type: 'remove',
+        message: err instanceof Error ? err.message : 'Failed to remove from localStorage',
+        key,
+      };
+      console.error(`Error removing localStorage key "${key}":`, err);
+      setError(storageError);
+      options?.onError?.(storageError);
     }
-  };
+  }, [key, initialValue, options]);
 
-  return [storedValue, setValue, removeValue];
+  return [storedValue, setValue, removeValue, error];
+}
+
+/**
+ * Backwards-compatible version without error state
+ * @deprecated Use useLocalStorage with error handling instead
+ */
+export function useLocalStorageSimple<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T | ((val: T) => T)) => void, () => void] {
+  const [value, setValue, removeValue] = useLocalStorage(key, initialValue);
+  return [value, setValue, removeValue];
 }
 
 /**

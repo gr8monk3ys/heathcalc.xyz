@@ -107,6 +107,86 @@ describe('useLocalStorage Hook', () => {
     });
   });
 
+  describe('Error State and Callbacks', () => {
+    it('should return error state when write fails', () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
+
+      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        throw new Error('QuotaExceededError');
+      });
+
+      act(() => {
+        result.current[1]('new-value');
+      });
+
+      // Error should be returned in result[3]
+      expect(result.current[3]).toEqual(
+        expect.objectContaining({
+          type: 'write',
+          key: 'test-key',
+          message: 'QuotaExceededError',
+        })
+      );
+
+      setItemSpy.mockRestore();
+      errorSpy.mockRestore();
+    });
+
+    it('should call onError callback when storage fails', () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const onError = vi.fn();
+
+      const { result } = renderHook(() =>
+        useLocalStorage('test-key', 'initial', { onError })
+      );
+
+      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        throw new Error('Storage error');
+      });
+
+      act(() => {
+        result.current[1]('new-value');
+      });
+
+      expect(onError).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'write',
+          key: 'test-key',
+        })
+      );
+
+      setItemSpy.mockRestore();
+      errorSpy.mockRestore();
+    });
+
+    it('should clear error on successful write', () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
+
+      // First cause an error
+      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+        throw new Error('Storage error');
+      });
+
+      act(() => {
+        result.current[1]('fail');
+      });
+
+      expect(result.current[3]).not.toBeNull();
+
+      // Restore and succeed
+      setItemSpy.mockRestore();
+
+      act(() => {
+        result.current[1]('success');
+      });
+
+      expect(result.current[3]).toBeNull();
+      errorSpy.mockRestore();
+    });
+  });
+
   describe('Edge Case: localStorage Errors', () => {
     it('should return default value when localStorage getItem throws', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
