@@ -112,10 +112,12 @@ export default function BodyFatBurnCalculator() {
   // State for calculation result
   const [result, setResult] = useState<BodyFatBurnResultType | null>(null);
   const [showResult, setShowResult] = useState<boolean>(false);
+  const [calculationError, setCalculationError] = useState<string | null>(null);
 
   // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setCalculationError(null);
 
     // Validate form
     const newErrors: {
@@ -200,7 +202,9 @@ export default function BodyFatBurnCalculator() {
         }, 100);
       } catch (error) {
         console.error('Error calculating body fat burn:', error);
-        // Handle error (could set an error state here)
+        setCalculationError(
+          'An error occurred while calculating. Please check your inputs and try again.'
+        );
       }
     }
   };
@@ -219,6 +223,7 @@ export default function BodyFatBurnCalculator() {
     setErrors({});
     setResult(null);
     setShowResult(false);
+    setCalculationError(null);
   };
 
   // Get the selected activity
@@ -334,6 +339,11 @@ export default function BodyFatBurnCalculator() {
           </div>
 
           <div className="md:col-span-2" id="body-fat-burn-result">
+            {calculationError && (
+              <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+                {calculationError}
+              </div>
+            )}
             {showResult && result ? (
               <>
                 <BodyFatBurnResultDisplay
