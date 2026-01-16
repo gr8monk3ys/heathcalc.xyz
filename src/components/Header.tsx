@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
@@ -81,10 +81,40 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { preferences } = usePreferences();
   const { darkMode } = preferences;
+  const menuRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    menuButtonRef.current?.focus();
+  }, []);
+
+  // Handle Escape key to close menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && menuOpen) {
+        closeMenu();
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Focus the close button when menu opens
+      closeButtonRef.current?.focus();
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen, closeMenu]);
 
   return (
     <>
@@ -102,9 +132,12 @@ export default function Header() {
             <UnitToggle />
 
             <button
+              ref={menuButtonRef}
               onClick={toggleMenu}
-              className={`neumorph px-4 py-2 rounded-full flex items-center space-x-1 ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : ''}`}
+              className={`neumorph px-4 py-2 rounded-full flex items-center space-x-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : ''}`}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              aria-haspopup="dialog"
             >
               <span>Menu</span>
               <svg
@@ -136,16 +169,27 @@ export default function Header() {
       </header>
 
       {menuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={toggleMenu}>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={closeMenu}
+          role="presentation"
+        >
           <div
+            ref={menuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="menu-title"
             className={`fixed right-0 top-0 h-full w-80 ${darkMode ? 'bg-gray-900 text-white' : 'bg-primary'} shadow-lg z-50 p-4 overflow-y-auto`}
             onClick={e => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold">Calculators</h2>
+              <h2 id="menu-title" className="text-xl font-bold">
+                Calculators
+              </h2>
               <button
-                onClick={toggleMenu}
-                className={`neumorph p-2 rounded-full ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : ''}`}
+                ref={closeButtonRef}
+                onClick={closeMenu}
+                className={`neumorph p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : ''}`}
                 aria-label="Close menu"
               >
                 <svg
@@ -165,18 +209,19 @@ export default function Header() {
               </button>
             </div>
 
-            <nav>
+            <nav aria-label="Main navigation">
               <ul className="space-y-2">
                 {menuItems.map(item => (
                   <li key={item.path}>
                     <Link
                       href={item.path}
-                      className={`block p-3 rounded-lg transition-all ${
+                      className={`block p-3 rounded-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                         pathname === item.path
                           ? `neumorph-inset text-accent ${darkMode ? 'bg-gray-800' : ''}`
                           : `neumorph hover:shadow-neumorph-inset ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : ''}`
                       }`}
-                      onClick={toggleMenu}
+                      onClick={closeMenu}
+                      aria-current={pathname === item.path ? 'page' : undefined}
                     >
                       <div className="font-medium">{item.name}</div>
                       <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
