@@ -163,11 +163,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = ({
             <div id={radioGroupId} className="block text-sm font-medium mb-1">
               {field.label}
             </div>
-            <div
-              className="flex space-x-4"
-              role="radiogroup"
-              aria-labelledby={radioGroupId}
-            >
+            <div className="flex space-x-4" role="radiogroup" aria-labelledby={radioGroupId}>
               {field.options.map(option => (
                 <label key={option.value} className="flex items-center cursor-pointer">
                   <input

@@ -122,99 +122,102 @@ export default function TDEECalculator() {
   const [showResult, setShowResult] = useState<boolean>(false);
 
   // Handle form submission
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
 
-    // Validate form
-    const newErrors: {
-      age?: string;
-      height?: string;
-      weight?: string;
-    } = {};
+      // Validate form
+      const newErrors: {
+        age?: string;
+        height?: string;
+        weight?: string;
+      } = {};
 
-    // Validate age
-    if (isEmpty(age)) {
-      newErrors.age = 'Age is required';
-    } else {
-      const ageValidation = validateAge(age);
-      if (!ageValidation.isValid) {
-        newErrors.age = ageValidation.error;
-      }
-    }
-
-    // Validate height (feet for imperial, cm for metric)
-    if (isEmpty(height.value)) {
-      newErrors.height = 'Height is required';
-    } else {
-      const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
-      const heightValidation = validateHeight(height.value, unitSystem);
-      if (!heightValidation.isValid) {
-        newErrors.height = heightValidation.error;
-      }
-    }
-
-    // Validate weight
-    if (isEmpty(weight.value)) {
-      newErrors.weight = 'Weight is required';
-    } else {
-      const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
-      const weightValidation = validateWeight(weight.value, unitSystem);
-      if (!weightValidation.isValid) {
-        newErrors.weight = weightValidation.error;
-      }
-    }
-
-    setErrors(newErrors);
-
-    // Get converted values
-    const heightCm = height.toCm();
-    const weightKg = weight.toKg();
-
-    // If no errors, calculate TDEE
-    if (
-      Object.keys(newErrors).length === 0 &&
-      typeof age === 'number' &&
-      heightCm !== null &&
-      weightKg !== null
-    ) {
-      // Get activity multiplier
-      const activityMultiplier = getActivityMultiplier(activityLevel);
-
-      // Calculate BMR
-      const bmr = calculateBMR(gender, age, weightKg, heightCm);
-
-      // Calculate TDEE
-      const tdee = calculateTDEE(bmr, activityMultiplier);
-
-      // Calculate daily calories for different goals
-      const dailyCalories = {
-        maintain: Math.round(tdee),
-        mildLoss: Math.round(tdee * 0.9), // 10% deficit
-        moderateLoss: Math.round(tdee * 0.8), // 20% deficit
-        extremeLoss: Math.round(tdee * 0.75), // 25% deficit
-        mildGain: Math.round(tdee * 1.1), // 10% surplus
-        moderateGain: Math.round(tdee * 1.15), // 15% surplus
-        extremeGain: Math.round(tdee * 1.2), // 20% surplus
-      };
-
-      setResult({
-        bmr: Math.round(bmr),
-        tdee: Math.round(tdee),
-        activityMultiplier,
-        dailyCalories,
-      });
-
-      setShowResult(true);
-
-      // Scroll to result with smooth animation
-      setTimeout(() => {
-        const resultElement = document.getElementById('tdee-result');
-        if (resultElement) {
-          resultElement.scrollIntoView({ behavior: 'smooth' });
+      // Validate age
+      if (isEmpty(age)) {
+        newErrors.age = 'Age is required';
+      } else {
+        const ageValidation = validateAge(age);
+        if (!ageValidation.isValid) {
+          newErrors.age = ageValidation.error;
         }
-      }, 100);
-    }
-  }, [age, gender, height, weight, activityLevel]);
+      }
+
+      // Validate height (feet for imperial, cm for metric)
+      if (isEmpty(height.value)) {
+        newErrors.height = 'Height is required';
+      } else {
+        const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+        const heightValidation = validateHeight(height.value, unitSystem);
+        if (!heightValidation.isValid) {
+          newErrors.height = heightValidation.error;
+        }
+      }
+
+      // Validate weight
+      if (isEmpty(weight.value)) {
+        newErrors.weight = 'Weight is required';
+      } else {
+        const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+        const weightValidation = validateWeight(weight.value, unitSystem);
+        if (!weightValidation.isValid) {
+          newErrors.weight = weightValidation.error;
+        }
+      }
+
+      setErrors(newErrors);
+
+      // Get converted values
+      const heightCm = height.toCm();
+      const weightKg = weight.toKg();
+
+      // If no errors, calculate TDEE
+      if (
+        Object.keys(newErrors).length === 0 &&
+        typeof age === 'number' &&
+        heightCm !== null &&
+        weightKg !== null
+      ) {
+        // Get activity multiplier
+        const activityMultiplier = getActivityMultiplier(activityLevel);
+
+        // Calculate BMR
+        const bmr = calculateBMR(gender, age, weightKg, heightCm);
+
+        // Calculate TDEE
+        const tdee = calculateTDEE(bmr, activityMultiplier);
+
+        // Calculate daily calories for different goals
+        const dailyCalories = {
+          maintain: Math.round(tdee),
+          mildLoss: Math.round(tdee * 0.9), // 10% deficit
+          moderateLoss: Math.round(tdee * 0.8), // 20% deficit
+          extremeLoss: Math.round(tdee * 0.75), // 25% deficit
+          mildGain: Math.round(tdee * 1.1), // 10% surplus
+          moderateGain: Math.round(tdee * 1.15), // 15% surplus
+          extremeGain: Math.round(tdee * 1.2), // 20% surplus
+        };
+
+        setResult({
+          bmr: Math.round(bmr),
+          tdee: Math.round(tdee),
+          activityMultiplier,
+          dailyCalories,
+        });
+
+        setShowResult(true);
+
+        // Scroll to result with smooth animation
+        setTimeout(() => {
+          const resultElement = document.getElementById('tdee-result');
+          if (resultElement) {
+            resultElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    },
+    [age, gender, height, weight, activityLevel]
+  );
 
   // Reset form
   const handleReset = useCallback(() => {

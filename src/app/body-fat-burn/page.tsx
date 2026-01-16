@@ -182,7 +182,8 @@ export default function BodyFatBurnCalculator() {
             age,
             height: heightCm,
             weight: weightKg,
-            unitSystem: weight.unit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
+            unitSystem:
+              weight.unit === 'kg' ? ('metric' as UnitSystem) : ('imperial' as UnitSystem),
             activity,
             speed,
             duration,
@@ -232,10 +233,7 @@ export default function BodyFatBurnCalculator() {
   }, [height, weight]);
 
   // Get the selected activity
-  const selectedActivity = useMemo(
-    () => ACTIVITIES.find(a => a.id === activity),
-    [activity]
-  );
+  const selectedActivity = useMemo(() => ACTIVITIES.find(a => a.id === activity), [activity]);
 
   // Form fields for the CalculatorForm component
   const formFields = useMemo(

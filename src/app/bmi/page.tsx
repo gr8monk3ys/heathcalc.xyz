@@ -116,122 +116,125 @@ export default function BMICalculator() {
   const [showResult, setShowResult] = useState<boolean>(false);
 
   // Handle form submission
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
 
-    // Validate form using validation utilities
-    const newErrors: {
-      age?: string;
-      height?: string;
-      weight?: string;
-    } = {};
+      // Validate form using validation utilities
+      const newErrors: {
+        age?: string;
+        height?: string;
+        weight?: string;
+      } = {};
 
-    // Validate age
-    if (isEmpty(age)) {
-      newErrors.age = 'Age is required';
-    } else {
-      const ageValidation = validateAge(age);
-      if (!ageValidation.isValid) {
-        newErrors.age = ageValidation.error;
-      }
-    }
-
-    // Validate height (feet for imperial, cm for metric)
-    if (isEmpty(height.value)) {
-      newErrors.height = 'Height is required';
-    } else {
-      const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
-      const heightValidation = validateHeight(height.value, unitSystem);
-      if (!heightValidation.isValid) {
-        newErrors.height = heightValidation.error;
-      }
-    }
-
-    // Validate weight
-    if (isEmpty(weight.value)) {
-      newErrors.weight = 'Weight is required';
-    } else {
-      const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
-      const weightValidation = validateWeight(weight.value, unitSystem);
-      if (!weightValidation.isValid) {
-        newErrors.weight = weightValidation.error;
-      }
-    }
-
-    setErrors(newErrors);
-
-    // Get converted values
-    const heightCm = height.toCm();
-    const weightKg = weight.toKg();
-
-    // If no errors, calculate BMI
-    if (
-      Object.keys(newErrors).length === 0 &&
-      typeof age === 'number' &&
-      heightCm !== null &&
-      weightKg !== null
-    ) {
-      // Set isChild based on age
-      const childStatus = age < 20;
-      setIsChild(childStatus);
-
-      // Calculate BMI
-      const bmi = calculateBMI(heightCm, weightKg);
-
-      // Get healthy weight range
-      const healthyWeightRange = calculateHealthyWeightRange(heightCm);
-
-      // Convert healthy weight range to the current unit
-      const displayHealthyWeightRange = {
-        min:
-          weight.unit === 'kg'
-            ? healthyWeightRange.min
-            : convertWeight(healthyWeightRange.min, 'kg', 'lb'),
-        max:
-          weight.unit === 'kg'
-            ? healthyWeightRange.max
-            : convertWeight(healthyWeightRange.max, 'kg', 'lb'),
-      };
-
-      // Create result object
-      let bmiResult: BMIResult;
-
-      if (childStatus) {
-        // For children
-        const percentile = estimateBMIPercentile(bmi, age, gender);
-        const { name: category, color } = getBMIPercentileCategory(percentile);
-
-        bmiResult = {
-          bmi: Math.round(bmi * 10) / 10,
-          category,
-          color,
-          healthyWeightRange: displayHealthyWeightRange,
-          percentile,
-        };
+      // Validate age
+      if (isEmpty(age)) {
+        newErrors.age = 'Age is required';
       } else {
-        // For adults
-        const { name: category, color } = getBMICategory(bmi);
-
-        bmiResult = {
-          bmi: Math.round(bmi * 10) / 10,
-          category,
-          color,
-          healthyWeightRange: displayHealthyWeightRange,
-        };
+        const ageValidation = validateAge(age);
+        if (!ageValidation.isValid) {
+          newErrors.age = ageValidation.error;
+        }
       }
 
-      setResult(bmiResult);
-      setShowResult(true);
-
-      // Scroll to result with smooth animation
-      setTimeout(() => {
-        const resultElement = document.getElementById('bmi-result');
-        if (resultElement) {
-          resultElement.scrollIntoView({ behavior: 'smooth' });
+      // Validate height (feet for imperial, cm for metric)
+      if (isEmpty(height.value)) {
+        newErrors.height = 'Height is required';
+      } else {
+        const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+        const heightValidation = validateHeight(height.value, unitSystem);
+        if (!heightValidation.isValid) {
+          newErrors.height = heightValidation.error;
         }
-      }, 100);
-    }
-  }, [age, gender, height, weight]);
+      }
+
+      // Validate weight
+      if (isEmpty(weight.value)) {
+        newErrors.weight = 'Weight is required';
+      } else {
+        const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+        const weightValidation = validateWeight(weight.value, unitSystem);
+        if (!weightValidation.isValid) {
+          newErrors.weight = weightValidation.error;
+        }
+      }
+
+      setErrors(newErrors);
+
+      // Get converted values
+      const heightCm = height.toCm();
+      const weightKg = weight.toKg();
+
+      // If no errors, calculate BMI
+      if (
+        Object.keys(newErrors).length === 0 &&
+        typeof age === 'number' &&
+        heightCm !== null &&
+        weightKg !== null
+      ) {
+        // Set isChild based on age
+        const childStatus = age < 20;
+        setIsChild(childStatus);
+
+        // Calculate BMI
+        const bmi = calculateBMI(heightCm, weightKg);
+
+        // Get healthy weight range
+        const healthyWeightRange = calculateHealthyWeightRange(heightCm);
+
+        // Convert healthy weight range to the current unit
+        const displayHealthyWeightRange = {
+          min:
+            weight.unit === 'kg'
+              ? healthyWeightRange.min
+              : convertWeight(healthyWeightRange.min, 'kg', 'lb'),
+          max:
+            weight.unit === 'kg'
+              ? healthyWeightRange.max
+              : convertWeight(healthyWeightRange.max, 'kg', 'lb'),
+        };
+
+        // Create result object
+        let bmiResult: BMIResult;
+
+        if (childStatus) {
+          // For children
+          const percentile = estimateBMIPercentile(bmi, age, gender);
+          const { name: category, color } = getBMIPercentileCategory(percentile);
+
+          bmiResult = {
+            bmi: Math.round(bmi * 10) / 10,
+            category,
+            color,
+            healthyWeightRange: displayHealthyWeightRange,
+            percentile,
+          };
+        } else {
+          // For adults
+          const { name: category, color } = getBMICategory(bmi);
+
+          bmiResult = {
+            bmi: Math.round(bmi * 10) / 10,
+            category,
+            color,
+            healthyWeightRange: displayHealthyWeightRange,
+          };
+        }
+
+        setResult(bmiResult);
+        setShowResult(true);
+
+        // Scroll to result with smooth animation
+        setTimeout(() => {
+          const resultElement = document.getElementById('bmi-result');
+          if (resultElement) {
+            resultElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    },
+    [age, gender, height, weight]
+  );
 
   // Reset form
   const handleReset = useCallback(() => {

@@ -96,76 +96,79 @@ export default function WHRCalculator() {
   const [calculationError, setCalculationError] = useState<string | null>(null);
 
   // Handle form submission
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    setCalculationError(null);
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      setCalculationError(null);
+      e.preventDefault();
 
-    // Validate form
-    const newErrors: {
-      waist?: string;
-      hips?: string;
-    } = {};
+      // Validate form
+      const newErrors: {
+        waist?: string;
+        hips?: string;
+      } = {};
 
-    // Validate waist
-    if (isEmpty(waist)) {
-      newErrors.waist = 'Waist measurement is required';
-    } else {
-      const waistValidation = validateWaist(waist, 'metric');
-      if (!waistValidation.isValid) {
-        newErrors.waist = waistValidation.error;
+      // Validate waist
+      if (isEmpty(waist)) {
+        newErrors.waist = 'Waist measurement is required';
+      } else {
+        const waistValidation = validateWaist(waist, 'metric');
+        if (!waistValidation.isValid) {
+          newErrors.waist = waistValidation.error;
+        }
       }
-    }
 
-    // Validate hips
-    if (isEmpty(hips)) {
-      newErrors.hips = 'Hip measurement is required';
-    } else {
-      const hipValidation = validateHip(hips, 'metric');
-      if (!hipValidation.isValid) {
-        newErrors.hips = hipValidation.error;
+      // Validate hips
+      if (isEmpty(hips)) {
+        newErrors.hips = 'Hip measurement is required';
+      } else {
+        const hipValidation = validateHip(hips, 'metric');
+        if (!hipValidation.isValid) {
+          newErrors.hips = hipValidation.error;
+        }
       }
-    }
 
-    // Validate waist-hip ratio (waist should be less than hip)
-    if (typeof waist === 'number' && typeof hips === 'number') {
-      const ratioValidation = validateWaistHipRatio(waist, hips);
-      if (!ratioValidation.isValid) {
-        // Note: This is a warning, not an error that blocks calculation
-        // Silently skip - unusual but not impossible (e.g., athletes with large waist muscles)
-        // Could show it to the user as a warning in the future
+      // Validate waist-hip ratio (waist should be less than hip)
+      if (typeof waist === 'number' && typeof hips === 'number') {
+        const ratioValidation = validateWaistHipRatio(waist, hips);
+        if (!ratioValidation.isValid) {
+          // Note: This is a warning, not an error that blocks calculation
+          // Silently skip - unusual but not impossible (e.g., athletes with large waist muscles)
+          // Could show it to the user as a warning in the future
+        }
       }
-    }
 
-    setErrors(newErrors);
+      setErrors(newErrors);
 
-    // If no errors, calculate WHR
-    if (
-      Object.keys(newErrors).length === 0 &&
-      typeof waist === 'number' &&
-      typeof hips === 'number'
-    ) {
-      try {
-        // Calculate WHR and get category
-        const whrResult = calculateWHRWithCategory(waist, hips, gender);
+      // If no errors, calculate WHR
+      if (
+        Object.keys(newErrors).length === 0 &&
+        typeof waist === 'number' &&
+        typeof hips === 'number'
+      ) {
+        try {
+          // Calculate WHR and get category
+          const whrResult = calculateWHRWithCategory(waist, hips, gender);
 
-        setResult(whrResult);
-        setShowResult(true);
+          setResult(whrResult);
+          setShowResult(true);
 
-        // Scroll to result with smooth animation
-        setTimeout(() => {
-          const resultElement = document.getElementById('whr-result');
-          if (resultElement) {
-            resultElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      } catch (error) {
-        console.error('Error calculating WHR:', error);
-        setCalculationError(
-          'An error occurred while calculating. Please check your inputs and try again.'
-        );
+          // Scroll to result with smooth animation
+          setTimeout(() => {
+            const resultElement = document.getElementById('whr-result');
+            if (resultElement) {
+              resultElement.scrollIntoView({ behavior: 'smooth' });
+            }
+          }, 100);
+        } catch (error) {
+          console.error('Error calculating WHR:', error);
+          setCalculationError(
+            'An error occurred while calculating. Please check your inputs and try again.'
+          );
+        }
       }
-    }
-  }, [gender, waist, hips]);
+    },
+    [gender, waist, hips]
+  );
 
   // Reset form
   const handleReset = useCallback(() => {
