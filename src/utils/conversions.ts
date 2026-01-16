@@ -1,8 +1,8 @@
 // Rule: Move calculation logic from /app/api to /utils/calculators for better organization
 
 import {
-  HeightUnit,
-  WeightUnit,
+  ConversionHeightUnit,
+  ConversionWeightUnit,
   TemperatureUnit,
   LengthUnit,
   VolumeUnit,
@@ -14,7 +14,11 @@ import {
  */
 
 // Height conversions
-export function convertHeight(value: number, from: HeightUnit, to: HeightUnit): number {
+export function convertHeight(
+  value: number,
+  from: ConversionHeightUnit,
+  to: ConversionHeightUnit
+): number {
   // Rule: Implement proper error handling and validation in calculation functions
   if (value < 0) {
     throw new Error('Height value cannot be negative');
@@ -24,13 +28,39 @@ export function convertHeight(value: number, from: HeightUnit, to: HeightUnit): 
     return value;
   }
 
-  if (from === 'cm' && to === 'ft') {
-    return value / 30.48;
-  } else if (from === 'ft' && to === 'cm') {
-    return value * 30.48;
+  // Convert to cm first (base unit)
+  let valueCm: number;
+
+  switch (from) {
+    case 'cm':
+      valueCm = value;
+      break;
+    case 'in':
+      valueCm = value * 2.54;
+      break;
+    case 'ft':
+      valueCm = value * 30.48;
+      break;
+    case 'm':
+      valueCm = value * 100;
+      break;
+    default:
+      throw new Error(`Unsupported height unit: ${from}`);
   }
 
-  throw new Error(`Unsupported height conversion from ${from} to ${to}`);
+  // Convert from cm to target unit
+  switch (to) {
+    case 'cm':
+      return valueCm;
+    case 'in':
+      return valueCm / 2.54;
+    case 'ft':
+      return valueCm / 30.48;
+    case 'm':
+      return valueCm / 100;
+    default:
+      throw new Error(`Unsupported height unit: ${to}`);
+  }
 }
 
 /**
@@ -67,7 +97,11 @@ export function heightCmToFtIn(cm: number): { feet: number; inches: number } {
 }
 
 // Weight conversions
-export function convertWeight(value: number, from: WeightUnit, to: WeightUnit): number {
+export function convertWeight(
+  value: number,
+  from: ConversionWeightUnit,
+  to: ConversionWeightUnit
+): number {
   // Rule: Implement proper error handling and validation in calculation functions
   if (value < 0) {
     throw new Error('Weight value cannot be negative');
@@ -77,13 +111,44 @@ export function convertWeight(value: number, from: WeightUnit, to: WeightUnit): 
     return value;
   }
 
-  if (from === 'kg' && to === 'lb') {
-    return value * 2.20462;
-  } else if (from === 'lb' && to === 'kg') {
-    return value / 2.20462;
+  // Convert to kg first (base unit)
+  let valueKg: number;
+
+  switch (from) {
+    case 'kg':
+      valueKg = value;
+      break;
+    case 'lb':
+      valueKg = value / 2.20462;
+      break;
+    case 'g':
+      valueKg = value / 1000;
+      break;
+    case 'oz':
+      valueKg = value / 35.274;
+      break;
+    case 'stone':
+      valueKg = value * 6.35029;
+      break;
+    default:
+      throw new Error(`Unsupported weight unit: ${from}`);
   }
 
-  throw new Error(`Unsupported weight conversion from ${from} to ${to}`);
+  // Convert from kg to target unit
+  switch (to) {
+    case 'kg':
+      return valueKg;
+    case 'lb':
+      return valueKg * 2.20462;
+    case 'g':
+      return valueKg * 1000;
+    case 'oz':
+      return valueKg * 35.274;
+    case 'stone':
+      return valueKg / 6.35029;
+    default:
+      throw new Error(`Unsupported weight unit: ${to}`);
+  }
 }
 
 /**
@@ -237,6 +302,12 @@ export function convertVolume(value: number, from: VolumeUnit, to: VolumeUnit): 
     case 'cup':
       valueMl = value * 236.588;
       break;
+    case 'tbsp':
+      valueMl = value * 14.787;
+      break;
+    case 'tsp':
+      valueMl = value * 4.929;
+      break;
     case 'pt':
       valueMl = value * 473.176;
       break;
@@ -260,6 +331,10 @@ export function convertVolume(value: number, from: VolumeUnit, to: VolumeUnit): 
       return valueMl / 29.5735;
     case 'cup':
       return valueMl / 236.588;
+    case 'tbsp':
+      return valueMl / 14.787;
+    case 'tsp':
+      return valueMl / 4.929;
     case 'pt':
       return valueMl / 473.176;
     case 'qt':

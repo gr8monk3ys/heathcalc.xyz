@@ -17,6 +17,7 @@ import {
   convertTemperature,
   convertEnergy,
 } from '@/utils/conversions';
+import type { ConversionWeightUnit, ConversionHeightUnit, VolumeUnit } from '@/types/common';
 
 type ConversionCategory = 'weight' | 'height' | 'volume' | 'temperature' | 'energy';
 
@@ -147,13 +148,21 @@ export default function MeasurementConversions() {
 
       switch (category) {
         case 'weight':
-          converted = convertWeight(value, fromUnit as any, toUnit as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+          converted = convertWeight(
+            value,
+            fromUnit as ConversionWeightUnit,
+            toUnit as ConversionWeightUnit
+          );
           break;
         case 'height':
-          converted = convertHeight(value, fromUnit as any, toUnit as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+          converted = convertHeight(
+            value,
+            fromUnit as ConversionHeightUnit,
+            toUnit as ConversionHeightUnit
+          );
           break;
         case 'volume':
-          converted = convertVolume(value, fromUnit as any, toUnit as any); // eslint-disable-line @typescript-eslint/no-explicit-any
+          converted = convertVolume(value, fromUnit as VolumeUnit, toUnit as VolumeUnit);
           break;
         case 'temperature':
           converted = convertTemperature(value, fromUnit as 'c' | 'f', toUnit as 'c' | 'f');

@@ -38,13 +38,19 @@ export interface ActivityFactor {
 
 export type UnitSystem = 'metric' | 'imperial';
 
+// Basic units used in calculators (narrow types for compatibility)
 export type HeightUnit = 'cm' | 'ft';
 
 export type WeightUnit = 'kg' | 'lb';
 
+// Extended units for conversion utilities (broader types)
+export type ConversionHeightUnit = 'cm' | 'in' | 'ft' | 'm';
+
+export type ConversionWeightUnit = 'kg' | 'lb' | 'g' | 'oz' | 'stone';
+
 export type LengthUnit = 'cm' | 'in' | 'm' | 'ft' | 'yd' | 'mi' | 'km';
 
-export type VolumeUnit = 'ml' | 'l' | 'floz' | 'cup' | 'pt' | 'qt' | 'gal';
+export type VolumeUnit = 'ml' | 'l' | 'floz' | 'cup' | 'pt' | 'qt' | 'gal' | 'tbsp' | 'tsp';
 
 export type TemperatureUnit = 'c' | 'f';
 
