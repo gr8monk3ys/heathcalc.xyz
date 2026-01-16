@@ -36,7 +36,11 @@ export default function Input({
         id={inputId}
         className={combinedClasses}
         aria-invalid={error ? 'true' : 'false'}
-        aria-describedby={helperText ? `${inputId}-helper` : undefined}
+        aria-describedby={
+          [helperText && `${inputId}-helper`, error && `${inputId}-error`]
+            .filter(Boolean)
+            .join(' ') || undefined
+        }
         {...props}
       />
 
@@ -46,7 +50,16 @@ export default function Input({
         </p>
       )}
 
-      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+      {error && (
+        <p
+          id={`${inputId}-error`}
+          className="mt-1 text-xs text-red-500"
+          role="alert"
+          aria-live="polite"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 }
