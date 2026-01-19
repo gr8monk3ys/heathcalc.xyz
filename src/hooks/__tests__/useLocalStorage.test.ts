@@ -109,7 +109,7 @@ describe('useLocalStorage Hook', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
 
-      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      const setItemSpy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
         throw new Error('QuotaExceededError');
       });
 
@@ -136,7 +136,7 @@ describe('useLocalStorage Hook', () => {
 
       const { result } = renderHook(() => useLocalStorage('test-key', 'initial', { onError }));
 
-      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      const setItemSpy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
         throw new Error('Storage error');
       });
 
@@ -160,7 +160,7 @@ describe('useLocalStorage Hook', () => {
       const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
 
       // First cause an error
-      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      const setItemSpy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
         throw new Error('Storage error');
       });
 
@@ -185,7 +185,7 @@ describe('useLocalStorage Hook', () => {
   describe('Edge Case: localStorage Errors', () => {
     it('should return default value when localStorage getItem throws', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      const getItemSpy = vi.spyOn(localStorage, 'getItem').mockImplementation(() => {
         throw new Error('localStorage is disabled');
       });
 
@@ -203,7 +203,7 @@ describe('useLocalStorage Hook', () => {
       const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
 
       // Mock setItem to throw after hook initializes
-      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      const setItemSpy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
         throw new Error('localStorage is disabled');
       });
 
@@ -224,7 +224,7 @@ describe('useLocalStorage Hook', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       const { result } = renderHook(() => useLocalStorage('test-key', 'default'));
 
-      const removeItemSpy = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+      const removeItemSpy = vi.spyOn(localStorage, 'removeItem').mockImplementation(() => {
         throw new Error('localStorage is disabled');
       });
 
@@ -246,7 +246,7 @@ describe('useLocalStorage Hook', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
 
-      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      const setItemSpy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
         const error = new Error('QuotaExceededError');
         error.name = 'QuotaExceededError';
         throw error;
@@ -319,7 +319,7 @@ describe('Utility Functions', () => {
 
     it('should handle localStorage errors', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      const getItemSpy = vi.spyOn(localStorage, 'getItem').mockImplementation(() => {
         throw new Error('localStorage error');
       });
 
@@ -355,7 +355,7 @@ describe('Utility Functions', () => {
 
     it('should return false on quota exceeded', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      const setItemSpy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
         const error = new Error('QuotaExceededError');
         error.name = 'QuotaExceededError';
         throw error;
@@ -372,7 +372,7 @@ describe('Utility Functions', () => {
 
     it('should return false when localStorage is disabled', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      const setItemSpy = vi.spyOn(localStorage, 'setItem').mockImplementation(() => {
         throw new Error('localStorage is disabled');
       });
 
@@ -410,7 +410,7 @@ describe('Utility Functions', () => {
 
     it('should return false when localStorage is disabled', () => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const removeItemSpy = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+      const removeItemSpy = vi.spyOn(localStorage, 'removeItem').mockImplementation(() => {
         throw new Error('localStorage is disabled');
       });
 
@@ -471,7 +471,7 @@ describe('PreferencesContext Integration Tests', () => {
 
   it('should use default preferences when localStorage fails', () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+    const getItemSpy = vi.spyOn(localStorage, 'getItem').mockImplementation(() => {
       throw new Error('localStorage error');
     });
 
