@@ -9,8 +9,8 @@ import React, {
   useCallback,
 } from 'react';
 import { useLocalStorage, LocalStorageError } from '@/hooks/useLocalStorage';
-import { useDarkMode, DarkModeContextType } from './DarkModeContext';
-import { useUnitSystem, UnitSystemContextType } from './UnitSystemContext';
+import { useDarkMode } from './DarkModeContext';
+import { useUnitSystem } from './UnitSystemContext';
 
 // Define the types for our preferences (kept for backward compatibility)
 export interface UserPreferences {

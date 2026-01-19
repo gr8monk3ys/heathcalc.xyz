@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState, useMemo, useCallback } from 'react';
+import { createLogger } from '@/utils/logger';
+
+const logger = createLogger({ component: 'BodyFatCalculator' });
 import dynamic from 'next/dynamic';
 import { Gender } from '@/types/common';
 import { BodyFatMethod, BodyFatResult as BodyFatResultType } from '@/types/bodyFat';
@@ -226,28 +229,14 @@ export default function BodyFatCalculator() {
             }
           }, 100);
         } catch (error) {
-          console.error('Error calculating body fat:', error);
+          logger.logError('Error calculating body fat', error);
           setCalculationError(
             'An error occurred during calculation. Please check your inputs and try again.'
           );
         }
       }
     },
-    [
-      age,
-      gender,
-      height.value,
-      height.unit,
-      weight.value,
-      weight.unit,
-      method,
-      waist,
-      neck,
-      hips,
-      bodyFatPercentage,
-      height,
-      weight,
-    ]
+    [age, gender, height, weight, method, waist, neck, hips, bodyFatPercentage]
   );
 
   // Reset form with useCallback
