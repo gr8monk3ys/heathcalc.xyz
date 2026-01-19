@@ -7,6 +7,9 @@ import {
   LengthUnit,
   VolumeUnit,
   EnergyUnit,
+  ExtendedWeightUnit,
+  ExtendedHeightUnit,
+  ExtendedVolumeUnit,
 } from '@/types/common';
 
 /**
@@ -354,4 +357,189 @@ export function formatNumber(num: number, decimals: number = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
+}
+
+// Extended conversion functions for the conversions page
+
+/**
+ * Extended weight conversion supporting additional units (g, oz, stone)
+ */
+export function convertExtendedWeight(
+  value: number,
+  from: ExtendedWeightUnit,
+  to: ExtendedWeightUnit
+): number {
+  if (value < 0) {
+    throw new Error('Weight value cannot be negative');
+  }
+
+  if (from === to) {
+    return value;
+  }
+
+  // Convert to grams first (base unit)
+  let valueGrams: number;
+
+  switch (from) {
+    case 'g':
+      valueGrams = value;
+      break;
+    case 'kg':
+      valueGrams = value * 1000;
+      break;
+    case 'lb':
+      valueGrams = value * 453.592;
+      break;
+    case 'oz':
+      valueGrams = value * 28.3495;
+      break;
+    case 'stone':
+      valueGrams = value * 6350.29;
+      break;
+    default:
+      throw new Error(`Unsupported weight unit: ${from}`);
+  }
+
+  // Convert from grams to target unit
+  switch (to) {
+    case 'g':
+      return valueGrams;
+    case 'kg':
+      return valueGrams / 1000;
+    case 'lb':
+      return valueGrams / 453.592;
+    case 'oz':
+      return valueGrams / 28.3495;
+    case 'stone':
+      return valueGrams / 6350.29;
+    default:
+      throw new Error(`Unsupported weight unit: ${to}`);
+  }
+}
+
+/**
+ * Extended height/length conversion for the conversion page
+ */
+export function convertExtendedHeight(
+  value: number,
+  from: ExtendedHeightUnit,
+  to: ExtendedHeightUnit
+): number {
+  if (value < 0) {
+    throw new Error('Height value cannot be negative');
+  }
+
+  if (from === to) {
+    return value;
+  }
+
+  // Convert to cm first (base unit)
+  let valueCm: number;
+
+  switch (from) {
+    case 'cm':
+      valueCm = value;
+      break;
+    case 'in':
+      valueCm = value * 2.54;
+      break;
+    case 'ft':
+      valueCm = value * 30.48;
+      break;
+    case 'm':
+      valueCm = value * 100;
+      break;
+    default:
+      throw new Error(`Unsupported height unit: ${from}`);
+  }
+
+  // Convert from cm to target unit
+  switch (to) {
+    case 'cm':
+      return valueCm;
+    case 'in':
+      return valueCm / 2.54;
+    case 'ft':
+      return valueCm / 30.48;
+    case 'm':
+      return valueCm / 100;
+    default:
+      throw new Error(`Unsupported height unit: ${to}`);
+  }
+}
+
+/**
+ * Extended volume conversion supporting additional units (tbsp, tsp)
+ */
+export function convertExtendedVolume(
+  value: number,
+  from: ExtendedVolumeUnit,
+  to: ExtendedVolumeUnit
+): number {
+  if (value < 0) {
+    throw new Error('Volume value cannot be negative');
+  }
+
+  if (from === to) {
+    return value;
+  }
+
+  // Convert to ml first (base unit)
+  let valueMl: number;
+
+  switch (from) {
+    case 'ml':
+      valueMl = value;
+      break;
+    case 'l':
+      valueMl = value * 1000;
+      break;
+    case 'floz':
+      valueMl = value * 29.5735;
+      break;
+    case 'cup':
+      valueMl = value * 236.588;
+      break;
+    case 'pt':
+      valueMl = value * 473.176;
+      break;
+    case 'qt':
+      valueMl = value * 946.353;
+      break;
+    case 'gal':
+      valueMl = value * 3785.41;
+      break;
+    case 'tbsp':
+      valueMl = value * 14.7868;
+      break;
+    case 'tsp':
+      valueMl = value * 4.92892;
+      break;
+    default:
+      throw new Error(`Unsupported volume unit: ${from}`);
+  }
+
+  // Convert from ml to target unit
+  switch (to) {
+    case 'ml':
+      return valueMl;
+    case 'l':
+      return valueMl / 1000;
+    case 'floz':
+      return valueMl / 29.5735;
+    case 'cup':
+      return valueMl / 236.588;
+    case 'pt':
+      return valueMl / 473.176;
+    case 'qt':
+      return valueMl / 946.353;
+    case 'gal':
+      return valueMl / 3785.41;
+    case 'tbsp':
+      return valueMl / 14.7868;
+    case 'tsp':
+      return valueMl / 4.92892;
+    default:
+      throw new Error(`Unsupported volume unit: ${to}`);
+  }
 }

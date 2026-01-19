@@ -13,11 +13,17 @@ import RelatedArticles from '@/components/RelatedArticles';
 import {
   convertWeight,
   convertHeight,
-  convertVolume,
+  convertExtendedVolume,
   convertTemperature,
   convertEnergy,
 } from '@/utils/conversions';
-import type { ConversionWeightUnit, ConversionHeightUnit, VolumeUnit } from '@/types/common';
+import type {
+  ConversionWeightUnit,
+  ConversionHeightUnit,
+  ExtendedVolumeUnit,
+  TemperatureUnit,
+  EnergyUnit,
+} from '@/types/common';
 
 type ConversionCategory = 'weight' | 'height' | 'volume' | 'temperature' | 'energy';
 
@@ -162,13 +168,21 @@ export default function MeasurementConversions() {
           );
           break;
         case 'volume':
-          converted = convertVolume(value, fromUnit as VolumeUnit, toUnit as VolumeUnit);
+          converted = convertExtendedVolume(
+            value,
+            fromUnit as ExtendedVolumeUnit,
+            toUnit as ExtendedVolumeUnit
+          );
           break;
         case 'temperature':
-          converted = convertTemperature(value, fromUnit as 'c' | 'f', toUnit as 'c' | 'f');
+          converted = convertTemperature(
+            value,
+            fromUnit as TemperatureUnit,
+            toUnit as TemperatureUnit
+          );
           break;
         case 'energy':
-          converted = convertEnergy(value, fromUnit as 'kcal' | 'kj', toUnit as 'kcal' | 'kj');
+          converted = convertEnergy(value, fromUnit as EnergyUnit, toUnit as EnergyUnit);
           break;
         default:
           throw new Error('Invalid category');

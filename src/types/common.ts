@@ -48,9 +48,18 @@ export type ConversionHeightUnit = 'cm' | 'in' | 'ft' | 'm';
 
 export type ConversionWeightUnit = 'kg' | 'lb' | 'g' | 'oz' | 'stone';
 
+/** Extended weight units for conversion page (alias) */
+export type ExtendedWeightUnit = ConversionWeightUnit;
+
+/** Extended height/length units for conversion page (alias) */
+export type ExtendedHeightUnit = ConversionHeightUnit;
+
 export type LengthUnit = 'cm' | 'in' | 'm' | 'ft' | 'yd' | 'mi' | 'km';
 
 export type VolumeUnit = 'ml' | 'l' | 'floz' | 'cup' | 'pt' | 'qt' | 'gal' | 'tbsp' | 'tsp';
+
+/** Extended volume units for conversion page */
+export type ExtendedVolumeUnit = 'ml' | 'l' | 'floz' | 'cup' | 'pt' | 'qt' | 'gal' | 'tbsp' | 'tsp';
 
 export type TemperatureUnit = 'c' | 'f';
 
