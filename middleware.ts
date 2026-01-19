@@ -25,13 +25,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
-  // Redirect www to non-www (if applicable)
-  const host = request.headers.get('host');
-  if (host?.startsWith('www.')) {
-    const newUrl = new URL(request.url);
-    newUrl.host = host.replace('www.', '');
-    return NextResponse.redirect(newUrl, 301);
-  }
+  // Note: www to non-www redirects should be configured in Vercel dashboard
+  // under Settings > Domains to avoid redirect loops
 
   return response;
 }
