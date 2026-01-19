@@ -5,7 +5,9 @@ import {
   calculateHealthyWeightRange,
   estimateBMIPercentile,
   getBMIPercentileCategory,
+  processBMICalculation,
 } from './bmi';
+import { BMIFormValues } from '@/types/bmi';
 
 describe('BMI Calculation', () => {
   describe('calculateBMI', () => {
@@ -288,5 +290,196 @@ describe('BMI Real-World Examples', () => {
     const percentile = estimateBMIPercentile(bmi, 10, 'female');
     expect(percentile).toBeGreaterThan(0);
     expect(percentile).toBeLessThan(100);
+  });
+});
+
+describe('processBMICalculation', () => {
+  describe('adult calculations with metric units', () => {
+    it('should process BMI for adult with cm/kg', () => {
+      const values: BMIFormValues = {
+        category: 'adult',
+        gender: 'male',
+        age: 30,
+        heightCm: 175,
+        heightFt: 0,
+        heightIn: 0,
+        heightUnit: 'cm',
+        weightKg: 70,
+        weightLb: 0,
+        weightUnit: 'kg',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeCloseTo(22.9, 1);
+      expect(result.category).toBe('Normal');
+      expect(result.color).toBe('#10B981');
+      expect(result.healthyWeightRange).toBeDefined();
+      expect(result.percentile).toBeUndefined();
+    });
+
+    it('should categorize adult as underweight', () => {
+      const values: BMIFormValues = {
+        category: 'adult',
+        gender: 'female',
+        age: 25,
+        heightCm: 170,
+        heightFt: 0,
+        heightIn: 0,
+        heightUnit: 'cm',
+        weightKg: 50,
+        weightLb: 0,
+        weightUnit: 'kg',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeCloseTo(17.3, 1);
+      expect(result.category).toBe('Underweight');
+    });
+
+    it('should categorize adult as overweight', () => {
+      const values: BMIFormValues = {
+        category: 'adult',
+        gender: 'male',
+        age: 40,
+        heightCm: 175,
+        heightFt: 0,
+        heightIn: 0,
+        heightUnit: 'cm',
+        weightKg: 85,
+        weightLb: 0,
+        weightUnit: 'kg',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeCloseTo(27.8, 1);
+      expect(result.category).toBe('Overweight');
+    });
+
+    it('should categorize adult as obese', () => {
+      const values: BMIFormValues = {
+        category: 'adult',
+        gender: 'male',
+        age: 35,
+        heightCm: 170,
+        heightFt: 0,
+        heightIn: 0,
+        heightUnit: 'cm',
+        weightKg: 100,
+        weightLb: 0,
+        weightUnit: 'kg',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeCloseTo(34.6, 1);
+      expect(result.category).toBe('Obese');
+    });
+  });
+
+  describe('adult calculations with imperial units', () => {
+    it('should process BMI for adult with ft/in and lb', () => {
+      const values: BMIFormValues = {
+        category: 'adult',
+        gender: 'male',
+        age: 30,
+        heightCm: 0,
+        heightFt: 5,
+        heightIn: 9,
+        heightUnit: 'ft',
+        weightKg: 0,
+        weightLb: 160,
+        weightUnit: 'lb',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeGreaterThan(20);
+      expect(result.bmi).toBeLessThan(30);
+      expect(result.category).toBeDefined();
+      expect(result.healthyWeightRange).toBeDefined();
+    });
+  });
+
+  describe('child calculations', () => {
+    it('should process BMI for child with percentile', () => {
+      const values: BMIFormValues = {
+        category: 'child',
+        gender: 'male',
+        age: 10,
+        heightCm: 140,
+        heightFt: 0,
+        heightIn: 0,
+        heightUnit: 'cm',
+        weightKg: 35,
+        weightLb: 0,
+        weightUnit: 'kg',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeCloseTo(17.9, 1);
+      expect(result.percentile).toBeDefined();
+      expect(result.percentile).toBeGreaterThanOrEqual(0);
+      expect(result.percentile).toBeLessThanOrEqual(100);
+      expect(result.category).toBeDefined();
+      expect(result.healthyWeightRange).toBeDefined();
+    });
+
+    it('should process BMI for female child', () => {
+      const values: BMIFormValues = {
+        category: 'child',
+        gender: 'female',
+        age: 12,
+        heightCm: 150,
+        heightFt: 0,
+        heightIn: 0,
+        heightUnit: 'cm',
+        weightKg: 45,
+        weightLb: 0,
+        weightUnit: 'kg',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeCloseTo(20, 0);
+      expect(result.percentile).toBeDefined();
+      expect(result.category).toBeDefined();
+    });
+
+    it('should process BMI for child with imperial units', () => {
+      const values: BMIFormValues = {
+        category: 'child',
+        gender: 'male',
+        age: 8,
+        heightCm: 0,
+        heightFt: 4,
+        heightIn: 2,
+        heightUnit: 'ft',
+        weightKg: 0,
+        weightLb: 55,
+        weightUnit: 'lb',
+      };
+
+      const result = processBMICalculation(values);
+
+      expect(result.bmi).toBeGreaterThan(10);
+      expect(result.bmi).toBeLessThan(30);
+      expect(result.percentile).toBeDefined();
+    });
+  });
+
+  describe('error handling', () => {
+    it('should throw error for null values', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect(() => processBMICalculation(null as any)).toThrow('Form values are required');
+    });
+
+    it('should throw error for undefined values', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect(() => processBMICalculation(undefined as any)).toThrow('Form values are required');
+    });
   });
 });

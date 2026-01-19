@@ -262,3 +262,63 @@ describe('WHR Edge Cases', () => {
     expect(result1).toBe(result2);
   });
 });
+
+describe('WHR Input Validation', () => {
+  it('should throw error for NaN waist', () => {
+    expect(() => calculateWHR(NaN, 100)).toThrow('Both measurements must be valid numbers');
+  });
+
+  it('should throw error for NaN hips', () => {
+    expect(() => calculateWHR(80, NaN)).toThrow('Both measurements must be valid numbers');
+  });
+
+  it('should throw error for Infinity waist', () => {
+    expect(() => calculateWHR(Infinity, 100)).toThrow('Measurements must be finite numbers');
+  });
+
+  it('should throw error for Infinity hips', () => {
+    expect(() => calculateWHR(80, Infinity)).toThrow('Measurements must be finite numbers');
+  });
+
+  it('should throw error for negative Infinity', () => {
+    expect(() => calculateWHR(-Infinity, 100)).toThrow(
+      'Both waist and hip measurements must be positive numbers'
+    );
+  });
+
+  it('should throw error for negative waist', () => {
+    expect(() => calculateWHR(-80, 100)).toThrow(
+      'Both waist and hip measurements must be positive numbers'
+    );
+  });
+
+  it('should throw error for negative hips', () => {
+    expect(() => calculateWHR(80, -100)).toThrow(
+      'Both waist and hip measurements must be positive numbers'
+    );
+  });
+
+  it('should throw error for WHR below realistic range', () => {
+    // WHR of 0.4 (40/100) is below 0.5 threshold
+    expect(() => calculateWHR(40, 100)).toThrow(
+      'WHR result is outside realistic range - please check your measurements'
+    );
+  });
+
+  it('should throw error for WHR above realistic range', () => {
+    // WHR of 1.6 (160/100) is above 1.5 threshold
+    expect(() => calculateWHR(160, 100)).toThrow(
+      'WHR result is outside realistic range - please check your measurements'
+    );
+  });
+
+  it('should accept WHR at lower boundary (0.5)', () => {
+    const whr = calculateWHR(50, 100);
+    expect(whr).toBe(0.5);
+  });
+
+  it('should accept WHR at upper boundary (1.5)', () => {
+    const whr = calculateWHR(150, 100);
+    expect(whr).toBe(1.5);
+  });
+});

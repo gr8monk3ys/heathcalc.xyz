@@ -351,3 +351,74 @@ describe('ABSI Formula Validation', () => {
     expect(zScore).toBeCloseTo(expectedZScore, 4);
   });
 });
+
+describe('ABSI Input Validation', () => {
+  describe('calculateABSI validation', () => {
+    it('should throw error for NaN waist', () => {
+      expect(() => calculateABSI(NaN, 175, 70)).toThrow('All measurements must be valid numbers');
+    });
+
+    it('should throw error for NaN height', () => {
+      expect(() => calculateABSI(90, NaN, 70)).toThrow('All measurements must be valid numbers');
+    });
+
+    it('should throw error for NaN weight', () => {
+      expect(() => calculateABSI(90, 175, NaN)).toThrow('All measurements must be valid numbers');
+    });
+
+    it('should throw error for zero waist', () => {
+      expect(() => calculateABSI(0, 175, 70)).toThrow('All measurements must be positive numbers');
+    });
+
+    it('should throw error for zero height', () => {
+      expect(() => calculateABSI(90, 0, 70)).toThrow('All measurements must be positive numbers');
+    });
+
+    it('should throw error for zero weight', () => {
+      expect(() => calculateABSI(90, 175, 0)).toThrow('All measurements must be positive numbers');
+    });
+
+    it('should throw error for negative values', () => {
+      expect(() => calculateABSI(-90, 175, 70)).toThrow(
+        'All measurements must be positive numbers'
+      );
+      expect(() => calculateABSI(90, -175, 70)).toThrow(
+        'All measurements must be positive numbers'
+      );
+      expect(() => calculateABSI(90, 175, -70)).toThrow(
+        'All measurements must be positive numbers'
+      );
+    });
+  });
+
+  describe('getWaistHeightRatioCategory edge cases', () => {
+    it('should categorize very low ratio', () => {
+      const result = getWaistHeightRatioCategory(0.35);
+      expect(result.name).toBe('Underweight');
+    });
+
+    it('should categorize very high ratio', () => {
+      const result = getWaistHeightRatioCategory(0.65);
+      expect(result.name).toBeDefined();
+      expect(result.description).toBeDefined();
+    });
+
+    it('should categorize at boundary 0.5', () => {
+      const result = getWaistHeightRatioCategory(0.5);
+      expect(result.name).toBeDefined();
+      expect(result.description).toBeDefined();
+    });
+  });
+
+  describe('getABSIRiskCategory edge cases', () => {
+    it('should categorize extremely low z-score', () => {
+      const result = getABSIRiskCategory(-3.0);
+      expect(result.name).toBe('Very Low Risk');
+    });
+
+    it('should categorize extremely high z-score', () => {
+      const result = getABSIRiskCategory(3.0);
+      expect(result.name).toBe('Very High Risk');
+    });
+  });
+});
