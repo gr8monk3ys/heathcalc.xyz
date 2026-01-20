@@ -83,6 +83,62 @@ describe('Body Fat Calculation', () => {
         expect(bodyFat).toBeGreaterThanOrEqual(2);
       });
     });
+
+    describe('Error handling', () => {
+      it('should throw error for non-positive waist measurement', () => {
+        expect(() => calculateNavyMethodBodyFat('male', 0, 38, 175)).toThrow(
+          'All measurements must be positive numbers'
+        );
+        expect(() => calculateNavyMethodBodyFat('male', -90, 38, 175)).toThrow(
+          'All measurements must be positive numbers'
+        );
+      });
+
+      it('should throw error for non-positive neck measurement', () => {
+        expect(() => calculateNavyMethodBodyFat('male', 90, 0, 175)).toThrow(
+          'All measurements must be positive numbers'
+        );
+        expect(() => calculateNavyMethodBodyFat('male', 90, -38, 175)).toThrow(
+          'All measurements must be positive numbers'
+        );
+      });
+
+      it('should throw error for non-positive height measurement', () => {
+        expect(() => calculateNavyMethodBodyFat('male', 90, 38, 0)).toThrow(
+          'All measurements must be positive numbers'
+        );
+        expect(() => calculateNavyMethodBodyFat('male', 90, 38, -175)).toThrow(
+          'All measurements must be positive numbers'
+        );
+      });
+
+      it('should throw error when waist is less than or equal to neck', () => {
+        expect(() => calculateNavyMethodBodyFat('male', 38, 38, 175)).toThrow(
+          'Waist circumference must be greater than neck circumference'
+        );
+        expect(() => calculateNavyMethodBodyFat('male', 35, 40, 175)).toThrow(
+          'Waist circumference must be greater than neck circumference'
+        );
+      });
+
+      it('should throw error for NaN measurements', () => {
+        expect(() => calculateNavyMethodBodyFat('male', NaN, 38, 175)).toThrow(
+          'All measurements must be valid numbers'
+        );
+        expect(() => calculateNavyMethodBodyFat('male', 90, NaN, 175)).toThrow(
+          'All measurements must be valid numbers'
+        );
+        expect(() => calculateNavyMethodBodyFat('male', 90, 38, NaN)).toThrow(
+          'All measurements must be valid numbers'
+        );
+      });
+
+      it('should throw error for female with zero hip measurement', () => {
+        expect(() => calculateNavyMethodBodyFat('female', 90, 32, 165, 0)).toThrow(
+          'Hip measurement is required for women and must be positive'
+        );
+      });
+    });
   });
 
   describe('calculateBMIMethodBodyFat', () => {

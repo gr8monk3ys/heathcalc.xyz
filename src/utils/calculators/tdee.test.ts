@@ -6,7 +6,9 @@ import {
   calculateWeightGoals,
   estimateWeightChange,
   calculateTimeToTargetWeight,
+  processTDEECalculation,
 } from './tdee';
+import { TDEEFormValues } from '@/types/tdee';
 
 describe('TDEE Calculation', () => {
   describe('calculateBMR', () => {
@@ -411,5 +413,120 @@ describe('TDEE Real-World Examples', () => {
 
     // But should differ from each other
     expect(Math.abs(mifflin - harris)).toBeGreaterThan(20);
+  });
+});
+
+describe('processTDEECalculation', () => {
+  it('should process metric form values correctly', () => {
+    const formValues: TDEEFormValues = {
+      gender: 'male',
+      age: 30,
+      heightUnit: 'cm',
+      heightCm: 175,
+      heightFt: 0,
+      heightIn: 0,
+      weightUnit: 'kg',
+      weightKg: 70,
+      weightLb: 0,
+      activityLevel: 'sedentary',
+    };
+
+    const result = processTDEECalculation(formValues);
+
+    expect(result.bmr).toBeGreaterThan(1600);
+    expect(result.bmr).toBeLessThan(1700);
+    expect(result.tdee).toBeGreaterThan(1900);
+    expect(result.tdee).toBeLessThan(2100);
+    expect(result.activityMultiplier).toBe(1.2);
+    expect(result.weightGoals).toHaveProperty('maintain');
+    expect(result.weightGoals).toHaveProperty('mildLoss');
+    expect(result.weightGoals).toHaveProperty('moderateLoss');
+  });
+
+  it('should process imperial form values correctly', () => {
+    const formValues: TDEEFormValues = {
+      gender: 'female',
+      age: 25,
+      heightUnit: 'ft',
+      heightCm: 0,
+      heightFt: 5,
+      heightIn: 6,
+      weightUnit: 'lb',
+      weightKg: 0,
+      weightLb: 140,
+      activityLevel: 'moderately_active',
+    };
+
+    const result = processTDEECalculation(formValues);
+
+    expect(result.bmr).toBeGreaterThan(1300);
+    expect(result.bmr).toBeLessThan(1500);
+    expect(result.tdee).toBeGreaterThan(1900);
+    expect(result.tdee).toBeLessThan(2400);
+    expect(result.activityMultiplier).toBe(1.55);
+  });
+
+  it('should handle very active activity level', () => {
+    const formValues: TDEEFormValues = {
+      gender: 'male',
+      age: 28,
+      heightUnit: 'cm',
+      heightCm: 180,
+      heightFt: 0,
+      heightIn: 0,
+      weightUnit: 'kg',
+      weightKg: 75,
+      weightLb: 0,
+      activityLevel: 'very_active',
+    };
+
+    const result = processTDEECalculation(formValues);
+
+    expect(result.activityMultiplier).toBe(1.725);
+    expect(result.tdee).toBeGreaterThan(2800);
+  });
+
+  it('should handle extremely active activity level', () => {
+    const formValues: TDEEFormValues = {
+      gender: 'male',
+      age: 25,
+      heightUnit: 'cm',
+      heightCm: 185,
+      heightFt: 0,
+      heightIn: 0,
+      weightUnit: 'kg',
+      weightKg: 80,
+      weightLb: 0,
+      activityLevel: 'extremely_active',
+    };
+
+    const result = processTDEECalculation(formValues);
+
+    expect(result.activityMultiplier).toBe(1.9);
+    expect(result.tdee).toBeGreaterThan(3200);
+  });
+
+  it('should calculate weight goals correctly', () => {
+    const formValues: TDEEFormValues = {
+      gender: 'male',
+      age: 30,
+      heightUnit: 'cm',
+      heightCm: 175,
+      heightFt: 0,
+      heightIn: 0,
+      weightUnit: 'kg',
+      weightKg: 70,
+      weightLb: 0,
+      activityLevel: 'lightly_active',
+    };
+
+    const result = processTDEECalculation(formValues);
+
+    // Weight goals should be based on TDEE with proper adjustments
+    expect(result.weightGoals.maintain).toBe(result.tdee);
+    expect(result.weightGoals.mildLoss).toBeLessThan(result.tdee);
+    expect(result.weightGoals.mildGain).toBeGreaterThan(result.tdee);
+    expect(result.weightGoals.extremeLoss).toBeLessThan(result.weightGoals.moderateLoss);
+    expect(result.weightGoals.extremeGain).toBeGreaterThan(result.weightGoals.moderateGain);
   });
 });

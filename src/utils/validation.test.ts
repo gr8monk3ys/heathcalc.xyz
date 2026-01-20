@@ -13,6 +13,7 @@ import {
   validateFrequency,
   validateBurnGoal,
   validateWaistHipRatio,
+  validateBMIInputs,
   sanitizeNumericInput,
   isEmpty,
   VALIDATION_RANGES,
@@ -255,11 +256,29 @@ describe('Burn Goal Validation', () => {
     expect(validateBurnGoal(10).isValid).toBe(true);
     expect(validateBurnGoal(20).isValid).toBe(true);
     expect(validateBurnGoal(0.5).isValid).toBe(true);
+    expect(validateBurnGoal(0.1).isValid).toBe(true); // minimum valid value
   });
 
   it('should reject unrealistic burn goals', () => {
     expect(validateBurnGoal(0).isValid).toBe(false);
     expect(validateBurnGoal(600).isValid).toBe(false);
+  });
+
+  it('should reject non-numeric burn goals', () => {
+    const result = validateBurnGoal('abc');
+    expect(result.isValid).toBe(false);
+    expect(result.error).toContain('valid number');
+  });
+
+  it('should reject burn goals below minimum threshold', () => {
+    const result = validateBurnGoal(0.05);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toContain('at least 0.1');
+  });
+
+  it('should handle string inputs', () => {
+    expect(validateBurnGoal('10').isValid).toBe(true);
+    expect(validateBurnGoal('abc').isValid).toBe(false);
   });
 });
 
@@ -355,5 +374,64 @@ describe('Validation Ranges', () => {
 
     // Weight should cover extreme cases
     expect(VALIDATION_RANGES.weight.kg.max).toBeGreaterThanOrEqual(300);
+  });
+});
+
+describe('BMI Input Validation', () => {
+  it('should return empty errors for valid metric inputs', () => {
+    const errors = validateBMIInputs(25, 170, 70, 'metric');
+    expect(errors.age).toBeUndefined();
+    expect(errors.height).toBeUndefined();
+    expect(errors.weight).toBeUndefined();
+  });
+
+  it('should return empty errors for valid imperial inputs', () => {
+    // Note: imperial height expects decimal feet (e.g., 5.6 for ~5'7")
+    const errors = validateBMIInputs(25, 5.6, 150, 'imperial');
+    expect(errors.age).toBeUndefined();
+    expect(errors.height).toBeUndefined();
+    expect(errors.weight).toBeUndefined();
+  });
+
+  it('should return age error for invalid age', () => {
+    const errors = validateBMIInputs(-5, 170, 70, 'metric');
+    expect(errors.age).toBeDefined();
+    expect(errors.height).toBeUndefined();
+    expect(errors.weight).toBeUndefined();
+  });
+
+  it('should return height error for invalid height', () => {
+    const errors = validateBMIInputs(25, 5, 70, 'metric');
+    expect(errors.age).toBeUndefined();
+    expect(errors.height).toBeDefined();
+    expect(errors.weight).toBeUndefined();
+  });
+
+  it('should return weight error for invalid weight', () => {
+    const errors = validateBMIInputs(25, 170, -10, 'metric');
+    expect(errors.age).toBeUndefined();
+    expect(errors.height).toBeUndefined();
+    expect(errors.weight).toBeDefined();
+  });
+
+  it('should return multiple errors for multiple invalid inputs', () => {
+    const errors = validateBMIInputs(-5, 5, -10, 'metric');
+    expect(errors.age).toBeDefined();
+    expect(errors.height).toBeDefined();
+    expect(errors.weight).toBeDefined();
+  });
+
+  it('should handle string inputs', () => {
+    const errors = validateBMIInputs('25', '170', '70', 'metric');
+    expect(errors.age).toBeUndefined();
+    expect(errors.height).toBeUndefined();
+    expect(errors.weight).toBeUndefined();
+  });
+
+  it('should handle non-numeric string inputs', () => {
+    const errors = validateBMIInputs('abc', 'xyz', 'not-a-number', 'metric');
+    expect(errors.age).toBeDefined();
+    expect(errors.height).toBeDefined();
+    expect(errors.weight).toBeDefined();
   });
 });
