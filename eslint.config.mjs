@@ -32,4 +32,11 @@ export default [
       'react/no-unescaped-entities': 'off',
     },
   },
+  // Allow console statements in test files (needed for testing logger output)
+  {
+    files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
 ];
