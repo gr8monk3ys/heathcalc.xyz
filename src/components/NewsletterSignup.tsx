@@ -67,7 +67,7 @@ export default function NewsletterSignup({
   return (
     <div className={`neumorph p-6 rounded-lg ${className}`}>
       <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p className="text-gray-600 mb-4">{description}</p>
+      <p className="text-gray-600 dark:text-gray-400 mb-4">{description}</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -80,7 +80,7 @@ export default function NewsletterSignup({
             placeholder="Your email address"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
             disabled={loading}
             required
             aria-required="true"
@@ -101,7 +101,9 @@ export default function NewsletterSignup({
       {message && (
         <div
           className={`mt-4 p-3 rounded-lg ${
-            message.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+            message.type === 'success'
+              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+              : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
           }`}
           role="alert"
         >
@@ -109,7 +111,7 @@ export default function NewsletterSignup({
         </div>
       )}
 
-      <p className="text-xs text-gray-500 mt-4">
+      <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
         By subscribing, you agree to our{' '}
         <a href="/privacy" className="text-accent hover:underline">
           Privacy Policy

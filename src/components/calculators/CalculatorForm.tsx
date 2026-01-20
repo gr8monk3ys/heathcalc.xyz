@@ -109,7 +109,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                 <button
                   type="button"
                   onClick={field.unitToggle}
-                  className="px-4 neumorph rounded-r-lg hover:shadow-neumorph-inset transition-all"
+                  className="px-4 neumorph rounded-r-lg hover:shadow-neumorph-inset transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                   aria-label={`Toggle ${field.label.toLowerCase()} unit, currently ${field.unit}`}
                 >
                   {field.unit}
@@ -132,7 +132,9 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                 max={field.max}
               />
             )}
-            {field.error && <p className="text-red-500 text-sm mt-1">{field.error}</p>}
+            {field.error && (
+              <p className="text-red-500 dark:text-red-400 text-sm mt-1">{field.error}</p>
+            )}
           </div>
         );
 
@@ -175,7 +177,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
               ))}
             </select>
             {field.options?.find(option => option.value === field.value)?.description && (
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                 {field.options.find(option => option.value === field.value)?.description}
               </p>
             )}
@@ -199,7 +201,9 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
               min={field.min as string}
               max={field.max as string}
             />
-            {field.error && <p className="text-red-500 text-sm mt-1">{field.error}</p>}
+            {field.error && (
+              <p className="text-red-500 dark:text-red-400 text-sm mt-1">{field.error}</p>
+            )}
           </div>
         );
 
@@ -218,14 +222,14 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
         <div className="flex space-x-4 pt-2">
           <button
             type="submit"
-            className="flex-1 py-3 px-4 neumorph text-accent font-medium rounded-lg hover:shadow-neumorph-inset transition-all"
+            className="flex-1 py-3 px-4 neumorph text-accent font-medium rounded-lg hover:shadow-neumorph-inset transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             {submitButtonText}
           </button>
           <button
             type="button"
             onClick={onReset}
-            className="py-3 px-4 neumorph text-gray-500 font-medium rounded-lg hover:shadow-neumorph-inset transition-all"
+            className="py-3 px-4 neumorph text-gray-500 dark:text-gray-400 font-medium rounded-lg hover:shadow-neumorph-inset transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             {resetButtonText}
           </button>

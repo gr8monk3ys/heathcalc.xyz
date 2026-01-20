@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-primary p-6 border-t border-gray-200">
+    <footer className="bg-primary p-6 border-t border-gray-200 dark:border-gray-700">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-600">
+        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400">
           &copy; {new Date().getFullYear()} HealthCheck. All rights reserved.
         </div>
       </div>

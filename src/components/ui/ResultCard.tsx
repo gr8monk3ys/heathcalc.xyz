@@ -21,9 +21,9 @@ export default function ResultCard({
   className = '',
 }: ResultCardProps) {
   const statusColors = {
-    success: 'text-green-600',
-    warning: 'text-yellow-600',
-    danger: 'text-red-600',
+    success: 'text-green-600 dark:text-green-400',
+    warning: 'text-yellow-600 dark:text-yellow-400',
+    danger: 'text-red-600 dark:text-red-400',
     info: 'text-accent',
   };
 
@@ -33,15 +33,17 @@ export default function ResultCard({
         {icon && <div className={`mr-4 ${statusColors[status]}`}>{icon}</div>}
 
         <div className="flex-1">
-          <h3 className="text-sm font-medium text-gray-600 mb-1">{title}</h3>
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">{title}</h3>
 
           <div className="flex items-baseline">
             <span className={`text-2xl font-bold ${statusColors[status]}`}>{value}</span>
 
-            {unit && <span className="ml-1 text-gray-600">{unit}</span>}
+            {unit && <span className="ml-1 text-gray-600 dark:text-gray-400">{unit}</span>}
           </div>
 
-          {description && <p className="mt-2 text-sm text-gray-600">{description}</p>}
+          {description && (
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{description}</p>
+          )}
         </div>
       </div>
     </Card>

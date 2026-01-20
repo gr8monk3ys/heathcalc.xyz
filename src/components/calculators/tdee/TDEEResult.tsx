@@ -29,15 +29,21 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div className="neumorph-inset p-4 rounded-lg">
-          <h3 className="text-sm font-medium text-gray-500">Basal Metabolic Rate (BMR)</h3>
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            Basal Metabolic Rate (BMR)
+          </h3>
           <p className="text-2xl font-bold">{result.bmr} calories/day</p>
-          <p className="text-xs text-gray-500 mt-1">Calories your body needs at complete rest</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            Calories your body needs at complete rest
+          </p>
         </div>
 
         <div className="neumorph-inset p-4 rounded-lg">
-          <h3 className="text-sm font-medium text-gray-500">Total Daily Energy Expenditure</h3>
+          <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            Total Daily Energy Expenditure
+          </h3>
           <p className="text-2xl font-bold">{result.tdee} calories/day</p>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             Total calories burned daily with your activity level
           </p>
         </div>
@@ -51,7 +57,9 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
             <div className="flex justify-between items-center">
               <div>
                 <h4 className="font-medium">Weight Maintenance</h4>
-                <p className="text-sm text-gray-500">To maintain your current weight</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  To maintain your current weight
+                </p>
               </div>
               <div className="text-right">
                 <p className="text-xl font-bold">{result.dailyCalories.maintain} calories</p>
@@ -66,11 +74,13 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="font-medium">Mild weight loss</p>
-                    <p className="text-xs text-gray-500">0.25 kg (0.5 lb) per week</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      0.25 kg (0.5 lb) per week
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">{result.dailyCalories.mildLoss} calories</p>
-                    <p className="text-xs text-gray-500">10% deficit</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">10% deficit</p>
                   </div>
                 </div>
               </div>
@@ -79,13 +89,15 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="font-medium">Moderate weight loss</p>
-                    <p className="text-xs text-gray-500">0.5 kg (1 lb) per week</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      0.5 kg (1 lb) per week
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">
                       {result.dailyCalories.moderateLoss} calories
                     </p>
-                    <p className="text-xs text-gray-500">20% deficit</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">20% deficit</p>
                   </div>
                 </div>
               </div>
@@ -94,11 +106,13 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="font-medium">Aggressive weight loss</p>
-                    <p className="text-xs text-gray-500">0.75 kg (1.5 lb) per week</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      0.75 kg (1.5 lb) per week
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">{result.dailyCalories.extremeLoss} calories</p>
-                    <p className="text-xs text-gray-500">25% deficit</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">25% deficit</p>
                   </div>
                 </div>
               </div>
@@ -112,11 +126,13 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="font-medium">Mild weight gain</p>
-                    <p className="text-xs text-gray-500">0.25 kg (0.5 lb) per week</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      0.25 kg (0.5 lb) per week
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">{result.dailyCalories.mildGain} calories</p>
-                    <p className="text-xs text-gray-500">10% surplus</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">10% surplus</p>
                   </div>
                 </div>
               </div>
@@ -125,13 +141,15 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="font-medium">Moderate weight gain</p>
-                    <p className="text-xs text-gray-500">0.5 kg (1 lb) per week</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      0.5 kg (1 lb) per week
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">
                       {result.dailyCalories.moderateGain} calories
                     </p>
-                    <p className="text-xs text-gray-500">15% surplus</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">15% surplus</p>
                   </div>
                 </div>
               </div>
@@ -140,11 +158,13 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="font-medium">Aggressive weight gain</p>
-                    <p className="text-xs text-gray-500">0.75 kg (1.5 lb) per week</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      0.75 kg (1.5 lb) per week
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold">{result.dailyCalories.extremeGain} calories</p>
-                    <p className="text-xs text-gray-500">20% surplus</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">20% surplus</p>
                   </div>
                 </div>
               </div>
@@ -165,7 +185,7 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
           To lose weight, you need to consume fewer calories than your TDEE (calorie deficit). To
           gain weight, you need to consume more calories than your TDEE (calorie surplus).
         </p>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Note: These calculations provide estimates based on formulas. Individual metabolism can
           vary. For best results, track your calorie intake and weight changes over time to find
           your true maintenance calories.
