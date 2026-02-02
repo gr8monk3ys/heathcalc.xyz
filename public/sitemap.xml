@@ -175,7 +175,17 @@
       <image:title>Waist-to-Hip Ratio Guide: What It Means for Your Health</image:title>
     </image:image>
   </url>
-  
+  <url>
+    <loc>https://www.heathcheck.info/blog/best-smart-scales-body-composition</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/blog/best-smart-scales.jpg</image:loc>
+      <image:title>Best Smart Scales for Body Composition Tracking in 2026</image:title>
+    </image:image>
+  </url>
+
   <!-- Informational Pages -->
   <url>
     <loc>https://www.heathcheck.info/about</loc>
