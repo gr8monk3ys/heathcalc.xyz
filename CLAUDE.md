@@ -4,39 +4,40 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-HealthCheck is a Next.js 16 health calculator application with 6 working calculators and 4 placeholder pages. Built with TypeScript, React 19, and TailwindCSS.
+HealthCheck is a Next.js 16 health calculator application with 10 fully functional calculators. Built with TypeScript, React 19, and TailwindCSS.
 
-**Working Calculators (6/10):** BMI, TDEE, Body Fat, Body Fat Burn, ABSI, WHR
-**Placeholder Pages (4/10):** Calorie Deficit, Weight Management, Maximum Fat Loss, Conversions
+**Working Calculators (10/10):** BMI, TDEE, Body Fat, Body Fat Burn, ABSI, WHR, Calorie Deficit, Weight Management, Maximum Fat Loss, Conversions
 
 ## Development Commands
 
+This project uses **Bun** as the package manager and runtime for faster installs and execution.
+
 ```bash
 # Development
-npm run dev                    # Start dev server at localhost:3000
-npm run build                  # Build for production
-npm run start                  # Start production server
+bun run dev                    # Start dev server at localhost:3000
+bun run build                  # Build for production
+bun run start                  # Start production server
 
-# Testing
-npm test                       # Run all tests (565 tests across 13 files)
-npm test -- --run              # Run tests once (CI mode)
-npm run test:watch             # Watch mode
-npm run test:coverage          # Run with coverage report
-npm test -- src/utils/calculators/bmi.test.ts  # Run single test file
+# Testing (uses Vitest with jsdom environment)
+bun run test                   # Run all tests (859 tests across 18 files)
+bun run test -- --run          # Run tests once (CI mode)
+bun run test:watch             # Watch mode
+bun run test:coverage          # Run with coverage report
+bun run test -- src/utils/calculators/bmi.test.ts  # Run single test file
 
 # Code Quality
-npm run lint                   # ESLint check
-npm run lint:fix               # Auto-fix lint errors
-npm run format                 # Format with Prettier
-npm run format:check           # Check formatting
-npm run type-check             # TypeScript type check
-npm run validate               # Run all checks + tests
+bun run lint                   # ESLint check
+bun run lint:fix               # Auto-fix lint errors
+bun run format                 # Format with Prettier
+bun run format:check           # Check formatting
+bun run type-check             # TypeScript type check
+bun run validate               # Run all checks + tests
 
 # Maintenance
-npm run clean                  # Remove .next, out, cache
+bun run clean                  # Remove .next, out, cache
 ```
 
-Note: Use `npm install --legacy-peer-deps` if you encounter peer dependency conflicts.
+Note: Install dependencies with `bun install`. The lockfile is `bun.lock`.
 
 ## Architecture
 
@@ -160,10 +161,6 @@ GitHub Actions workflow at `.github/workflows/ci.yml`:
 - Security audit
 
 ## Known Issues
-
-### Placeholder Pages
-
-4 calculator pages (Calorie Deficit, Weight Management, Maximum Fat Loss, Conversions) have full SEO metadata but show "Coming Soon" content. This creates poor UX when users land from search.
 
 ### Bundle Size
 

@@ -107,7 +107,37 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
+  <url>
+    <loc>https://www.heathcheck.info/macro</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/calculators/macro-calculator.jpg</image:loc>
+      <image:title>Macro Calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.heathcheck.info/one-rep-max</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/calculators/one-rep-max-calculator.jpg</image:loc>
+      <image:title>One Rep Max Calculator</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.heathcheck.info/protein</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/calculators/protein-calculator.jpg</image:loc>
+      <image:title>Protein Intake Calculator</image:title>
+    </image:image>
+  </url>
+
   <!-- Blog Pages -->
   <url>
     <loc>https://www.heathcheck.info/blog</loc>
@@ -175,7 +205,57 @@
       <image:title>Waist-to-Hip Ratio Guide: What It Means for Your Health</image:title>
     </image:image>
   </url>
-  
+  <url>
+    <loc>https://www.heathcheck.info/blog/best-smart-scales-body-composition</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/blog/best-smart-scales.jpg</image:loc>
+      <image:title>Best Smart Scales for Body Composition Tracking in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.heathcheck.info/blog/best-fitness-trackers-calorie-tracking</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/blog/best-fitness-trackers.jpg</image:loc>
+      <image:title>Best Fitness Trackers for Calorie Tracking in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.heathcheck.info/blog/meal-delivery-services-weight-loss</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/blog/meal-delivery-weight-loss.jpg</image:loc>
+      <image:title>Best Meal Delivery Services for Weight Loss in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.heathcheck.info/blog/best-fitness-apps-macro-tracking</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/blog/best-fitness-apps.jpg</image:loc>
+      <image:title>Best Fitness Apps for Tracking Macros and Calories in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.heathcheck.info/blog/best-kitchen-scales-portion-control</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.heathcheck.info/images/blog/best-kitchen-scales.jpg</image:loc>
+      <image:title>Best Kitchen Scales for Portion Control in 2026</image:title>
+    </image:image>
+  </url>
+
   <!-- Informational Pages -->
   <url>
     <loc>https://www.heathcheck.info/about</loc>
