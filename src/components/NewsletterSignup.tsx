@@ -45,14 +45,28 @@ export default function NewsletterSignup({
           text: result.message,
           type: result.success ? 'success' : 'error',
         });
+        if (result.success) {
+          setEmail('');
+        }
       } else {
-        // Mock successful submission for demo purposes
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setMessage({
-          text: 'Thank you for subscribing! Please check your email to confirm your subscription.',
-          type: 'success',
+        // Call the newsletter API endpoint
+        const response = await fetch('/api/newsletter', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
         });
-        setEmail('');
+
+        const result = await response.json();
+        setMessage({
+          text: result.message,
+          type: result.success ? 'success' : 'error',
+        });
+
+        if (result.success) {
+          setEmail('');
+        }
       }
     } catch {
       setMessage({

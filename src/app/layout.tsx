@@ -11,6 +11,7 @@ import { PreferencesProvider } from '@/context/PreferencesContext';
 import { SavedResultsProvider } from '@/context/SavedResultsContext';
 import { Analytics } from '@vercel/analytics/react';
 import PWAInit from '@/components/PWAInit';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'HealthCheck - Health and Fitness Calculators',
@@ -95,25 +96,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           ]}
         />
 
-        {/* Google Analytics Script */}
-        {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-                `,
-              }}
-            />
-          </>
-        )}
+        {/* Google Analytics Script - loaded after page is interactive for better performance */}
 
         {/* Google AdSense Script */}
         {process.env.NODE_ENV === 'production' && (
@@ -149,6 +132,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
                 {/* Global structured data for organization and website */}
                 <GlobalStructuredData />
+
+                {/* Google Analytics - loaded after page is interactive for better performance */}
+                {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
+                  <>
+                    <Script
+                      src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+                      strategy="afterInteractive"
+                    />
+                    <Script id="google-analytics" strategy="afterInteractive">
+                      {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+                      `}
+                    </Script>
+                  </>
+                )}
               </SavedResultsProvider>
             </PreferencesProvider>
           </UnitSystemProvider>
