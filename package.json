@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-affiliate-links.js",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint src",
@@ -15,6 +16,7 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
+    "create:calculator": "bun run scripts/create-calculator.ts",
     "validate": "npm run format:check && npm run lint && npm run type-check && npm run test",
     "clean": "rm -rf .next out node_modules/.cache",
     "audit:fix": "npm audit fix",
