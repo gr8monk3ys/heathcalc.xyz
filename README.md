@@ -57,9 +57,6 @@ Vercel preview deployments only issue TLS certificates for the base preview host
 `www.` subdomain on preview URLs or you will see `ERR_CERT_COMMON_NAME_INVALID`. Use the base URL
 Vercel provides (for example, `https://your-project.vercel.app`) instead.
 
-If you want `www` in production, add `www.your-domain.com` in Vercel **and** set
-`NEXT_PUBLIC_CANONICAL_HOST` to the `www` host so apex requests redirect consistently.
-
 ### Installation
 
 1. Clone the repository:
