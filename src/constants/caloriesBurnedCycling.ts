@@ -1,0 +1,1 @@
+export const CALORIESBURNEDCYCLING_PLACEHOLDER = true;

@@ -16,12 +16,13 @@ import WeightManagementResultDisplay from '@/components/calculators/weight-manag
 import WeightManagementInfo from '@/components/calculators/weight-management/WeightManagementInfo';
 import WeightManagementUnderstanding from '@/components/calculators/weight-management/WeightManagementUnderstanding';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import FAQSection from '@/components/FAQSection';
 import RelatedArticles from '@/components/RelatedArticles';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 
 // FAQ data for the calculator
 const faqs = [
@@ -403,6 +404,12 @@ export default function WeightManagementCalculator() {
           />
         </div>
 
+        <EmbedCalculator
+          calculatorSlug="weight-management"
+          title="Weight Management Calculator"
+          className="mb-8"
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -473,22 +480,11 @@ export default function WeightManagementCalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'Weight Management Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Plan your weight management journey with a target date and get personalized calorie and macro recommendations. Complete roadmap for weight loss or muscle gain.',
-            url: 'https://www.heathcheck.info/weight-management',
-          }}
+        <CalculatorStructuredData
+          name="Weight Management Calculator"
+          description="Plan your weight management journey with a target date and get personalized calorie and macro recommendations. Complete roadmap for weight loss or muscle gain."
+          url="https://www.heathcheck.info/weight-management"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

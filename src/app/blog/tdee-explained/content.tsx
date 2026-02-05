@@ -8,6 +8,28 @@ export const metadata: Metadata = {
     "Understand the components of Total Daily Energy Expenditure (TDEE), how it's calculated, and why knowing your TDEE is crucial for effective weight management.",
   keywords:
     'TDEE, total daily energy expenditure, BMR, calorie needs, metabolism, weight management, energy balance, activity level, exercise, non-exercise activity thermogenesis',
+  openGraph: {
+    title: 'TDEE Explained: How Many Calories Do You Really Need? | HealthCheck Blog',
+    description:
+      "Understand the components of Total Daily Energy Expenditure (TDEE), how it's calculated, and why knowing your TDEE is crucial for effective weight management.",
+    type: 'article',
+    url: 'https://www.heathcheck.info/blog/tdee-explained',
+    images: [
+      {
+        url: '/images/blog/tdee-explained.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'TDEE Explained',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TDEE Explained: How Many Calories Do You Really Need? | HealthCheck Blog',
+    description:
+      "Understand the components of Total Daily Energy Expenditure (TDEE), how it's calculated, and why knowing your TDEE is crucial for effective weight management.",
+    images: ['/images/blog/tdee-explained.jpg'],
+  },
 };
 
 export default function TDEEExplainedPage() {

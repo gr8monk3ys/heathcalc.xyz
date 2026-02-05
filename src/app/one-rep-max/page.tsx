@@ -19,10 +19,11 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import OneRepMaxResultDisplay from '@/components/calculators/oneRepMax/OneRepMaxResult';
 import OneRepMaxInfo from '@/components/calculators/oneRepMax/OneRepMaxInfo';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
 import { ONE_REP_MAX_FORMULAS } from '@/constants/oneRepMax';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 
 // Dynamic imports for below-the-fold components
 const FAQSection = dynamic(() => import('@/components/FAQSection'));
@@ -267,6 +268,12 @@ export default function OneRepMaxCalculator() {
           />
         </div>
 
+        <EmbedCalculator
+          calculatorSlug="one-rep-max"
+          title="One Rep Max Calculator"
+          className="mb-8"
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -342,22 +349,11 @@ export default function OneRepMaxCalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'One Rep Max Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Calculate your One Rep Max (1RM) from submaximal lifts using Epley, Brzycki, or Lombardi formulas. Get training zone recommendations and percentage charts for strength programming.',
-            url: 'https://www.heathcheck.info/one-rep-max',
-          }}
+        <CalculatorStructuredData
+          name="One Rep Max Calculator"
+          description="Calculate your One Rep Max (1RM) from submaximal lifts using Epley, Brzycki, or Lombardi formulas. Get training zone recommendations and percentage charts for strength programming."
+          url="https://www.heathcheck.info/one-rep-max"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

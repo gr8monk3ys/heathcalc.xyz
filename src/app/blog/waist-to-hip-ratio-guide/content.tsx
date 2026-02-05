@@ -15,6 +15,21 @@ export const metadata = {
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'article',
+    images: [
+      {
+        url: '/images/blog/waist-to-hip-ratio-guide.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Waist-to-Hip Ratio Guide',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Waist-to-Hip Ratio: A Complete Guide to Understanding Your Body Shape',
+    description:
+      'Learn about Waist-to-Hip Ratio (WHR), how to measure it correctly, what your results mean, and why body shape matters for your health.',
+    images: ['/images/blog/waist-to-hip-ratio-guide.jpg'],
   },
   alternates: {
     canonical: 'https://www.heathcheck.info/blog/waist-to-hip-ratio-guide',

@@ -14,9 +14,10 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import WHRResultDisplay from '@/components/calculators/whr/WHRResult';
 import WHRInfo from '@/components/calculators/whr/WHRInfo';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 
 // Dynamic imports for below-the-fold components
 const WHRUnderstanding = dynamic(() => import('@/components/calculators/whr/WHRUnderstanding'));
@@ -248,6 +249,12 @@ export default function WHRCalculator() {
           />
         </div>
 
+        <EmbedCalculator
+          calculatorSlug="whr"
+          title="Waist-to-Hip Ratio Calculator"
+          className="mb-8"
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -319,22 +326,11 @@ export default function WHRCalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'Waist-to-Hip Ratio Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Calculate your waist-to-hip ratio (WHR) to assess body fat distribution and health risks. More accurate than BMI for predicting cardiovascular disease risk.',
-            url: 'https://www.heathcheck.info/whr',
-          }}
+        <CalculatorStructuredData
+          name="Waist-to-Hip Ratio Calculator"
+          description="Calculate your waist-to-hip ratio (WHR) to assess body fat distribution and health risks. More accurate than BMI for predicting cardiovascular disease risk."
+          url="https://www.heathcheck.info/whr"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

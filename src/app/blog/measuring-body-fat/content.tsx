@@ -15,6 +15,31 @@ export const metadata: Metadata = {
     'Compare the accuracy, accessibility, and practicality of various body fat assessment techniques, from DEXA scans to skinfold calipers to Navy method measurements.',
   keywords:
     'body fat measurement, DEXA scan, skinfold calipers, Navy method, bioelectrical impedance, body fat percentage, hydrostatic weighing, accuracy, body composition',
+  openGraph: {
+    title: 'The Pros and Cons of Different Body Fat Measurement Methods | HealthCheck Blog',
+    description:
+      'Compare the accuracy, accessibility, and practicality of various body fat assessment techniques, from DEXA scans to skinfold calipers to Navy method measurements.',
+    type: 'article',
+    url: 'https://www.heathcheck.info/blog/measuring-body-fat',
+    images: [
+      {
+        url: '/images/blog/measuring-body-fat.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Measuring Body Fat',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The Pros and Cons of Different Body Fat Measurement Methods | HealthCheck Blog',
+    description:
+      'Compare the accuracy, accessibility, and practicality of various body fat assessment techniques, from DEXA scans to skinfold calipers to Navy method measurements.',
+    images: ['/images/blog/measuring-body-fat.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.heathcheck.info/blog/measuring-body-fat',
+  },
 };
 
 // Blog article data for related articles

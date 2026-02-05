@@ -1,0 +1,1 @@
+export const BODYFRAMESIZE_PLACEHOLDER = true;

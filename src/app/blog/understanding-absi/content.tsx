@@ -15,6 +15,21 @@ export const metadata = {
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'article',
+    images: [
+      {
+        url: '/images/blog/understanding-absi.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Understanding ABSI',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Understanding ABSI: Beyond BMI for Health Risk Assessment',
+    description:
+      'Learn about A Body Shape Index (ABSI), how it differs from BMI, and why it might be a better predictor of health risks associated with body shape and fat distribution.',
+    images: ['/images/blog/understanding-absi.jpg'],
   },
   alternates: {
     canonical: 'https://www.heathcheck.info/blog/understanding-absi',

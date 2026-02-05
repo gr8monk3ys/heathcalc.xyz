@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
+import { CALCULATOR_HUBS } from '@/constants/calculatorCatalog';
 
 // Metadata for the sitemap page
 export const metadata: Metadata = {
@@ -30,10 +31,78 @@ export default function Sitemap() {
           url: '/',
           description: 'Health and fitness calculators for body fat, BMI, TDEE, and more',
         },
+        {
+          title: 'Calculator Categories',
+          url: '/calculators',
+          description: 'Browse calculators by category',
+        },
         { title: 'About', url: '/about', description: 'Learn about our mission and team' },
         { title: 'Contact', url: '/contact', description: 'Get in touch with us' },
         { title: 'Blog', url: '/blog', description: 'Health and fitness articles and guides' },
+        {
+          title: 'Health Guides',
+          url: '/learn',
+          description: 'Quick guides for key health metrics',
+        },
+        {
+          title: 'Calculator Widgets',
+          url: '/calculator-widgets',
+          description: 'Embed HealthCheck calculators with attribution',
+        },
+        {
+          title: 'Embed Terms',
+          url: '/embed-terms',
+          description: 'Terms for embedding HealthCheck calculators',
+        },
       ],
+    },
+    {
+      title: 'Guides',
+      pages: [
+        {
+          title: 'Health Guides',
+          url: '/learn',
+          description: 'Educational hubs for key health metrics',
+        },
+        {
+          title: 'Calorie Basics',
+          url: '/learn/calorie-basics',
+          description: 'How calories work for maintenance, loss, and gain',
+        },
+        {
+          title: 'Macro Planning',
+          url: '/learn/macro-planning',
+          description: 'Set carb, fat, and protein targets',
+        },
+        {
+          title: 'Heart Rate Training',
+          url: '/learn/heart-rate-training',
+          description: 'Use max heart rate and zones to train smarter',
+        },
+        {
+          title: 'Body Composition Guide',
+          url: '/learn/body-composition-guide',
+          description: 'Understand BMI, body fat, and lean mass',
+        },
+        {
+          title: 'Walking & Running Energy',
+          url: '/learn/walking-running-energy',
+          description: 'Estimate calories burned from walking or running',
+        },
+        {
+          title: 'Pregnancy Health',
+          url: '/learn/pregnancy-health',
+          description: 'Due dates and pregnancy weight guidance',
+        },
+      ],
+    },
+    {
+      title: 'Calculator Categories',
+      pages: CALCULATOR_HUBS.map(hub => ({
+        title: hub.title,
+        url: `/calculators/${hub.slug}`,
+        description: hub.description,
+      })),
     },
     {
       title: 'Calculators',
@@ -48,6 +117,36 @@ export default function Sitemap() {
           title: 'TDEE Calculator',
           url: '/tdee',
           description: 'Calculate your Total Daily Energy Expenditure',
+        },
+        {
+          title: 'Calorie Calculator',
+          url: '/calorie',
+          description: 'Calculate daily calorie needs for maintenance or goals',
+        },
+        {
+          title: 'Calories Burned Calculator',
+          url: '/calories-burned',
+          description: 'Estimate calories burned from workouts',
+        },
+        {
+          title: 'Calories Burned Walking Calculator',
+          url: '/calories-burned-walking',
+          description: 'Estimate calories burned from walking',
+        },
+        {
+          title: 'Calories Burned Running Calculator',
+          url: '/calories-burned-running',
+          description: 'Estimate calories burned from running',
+        },
+        {
+          title: 'Calories Burned Cycling Calculator',
+          url: '/calories-burned-cycling',
+          description: 'Estimate calories burned from cycling',
+        },
+        {
+          title: 'Calories Burned Swimming Calculator',
+          url: '/calories-burned-swimming',
+          description: 'Estimate calories burned from swimming',
         },
         {
           title: 'Body Fat Burn Calculator',
@@ -80,9 +179,154 @@ export default function Sitemap() {
           description: 'Calculate your Waist-to-Hip Ratio',
         },
         {
+          title: 'Waist-to-Height Ratio Calculator',
+          url: '/waist-to-height-ratio',
+          description: 'Calculate your Waist-to-Height Ratio',
+        },
+        {
+          title: 'Body Frame Size Calculator',
+          url: '/body-frame-size',
+          description: 'Estimate body frame size from wrist measurements',
+        },
+        {
+          title: 'Adjusted Body Weight Calculator',
+          url: '/adjusted-body-weight',
+          description: 'Estimate adjusted body weight based on ideal weight',
+        },
+        {
+          title: 'Army Body Fat Calculator',
+          url: '/army-body-fat',
+          description: 'Estimate body fat with circumference measurements',
+        },
+        {
           title: 'Conversions',
           url: '/conversions',
           description: 'Convert between different units of measurement',
+        },
+        {
+          title: 'Age Calculator',
+          url: '/age',
+          description: 'Calculate age in years, months, and days',
+        },
+        {
+          title: 'Macro Calculator',
+          url: '/macro',
+          description: 'Calculate macro targets based on calories and goals',
+        },
+        {
+          title: 'Carb Intake Calculator',
+          url: '/carb-intake',
+          description: 'Calculate daily carbohydrate targets',
+        },
+        {
+          title: 'Fat Intake Calculator',
+          url: '/fat-intake',
+          description: 'Calculate daily fat targets',
+        },
+        {
+          title: 'Protein Calculator',
+          url: '/protein',
+          description: 'Calculate daily protein intake targets',
+        },
+        {
+          title: 'One Rep Max Calculator',
+          url: '/one-rep-max',
+          description: 'Estimate your one rep max strength',
+        },
+        {
+          title: 'Ideal Weight Calculator',
+          url: '/ideal-weight',
+          description: 'Estimate your ideal weight range',
+        },
+        {
+          title: 'Lean Body Mass Calculator',
+          url: '/lean-body-mass',
+          description: 'Estimate lean body mass from height and weight',
+        },
+        {
+          title: 'Body Surface Area Calculator',
+          url: '/body-surface-area',
+          description: 'Calculate body surface area from height and weight',
+        },
+        {
+          title: 'Max Heart Rate Calculator',
+          url: '/max-heart-rate',
+          description: 'Estimate your maximum heart rate',
+        },
+        {
+          title: 'Heart Rate Zones Calculator',
+          url: '/heart-rate-zones',
+          description: 'Calculate training zones for cardio',
+        },
+        {
+          title: 'Target Heart Rate Calculator',
+          url: '/target-heart-rate',
+          description: 'Calculate target heart rate zones',
+        },
+        {
+          title: 'Resting Heart Rate Calculator',
+          url: '/resting-heart-rate',
+          description: 'Classify resting heart rate fitness',
+        },
+        {
+          title: 'Water Intake Calculator',
+          url: '/water-intake',
+          description: 'Estimate daily hydration needs',
+        },
+        {
+          title: 'Sleep Calculator',
+          url: '/sleep',
+          description: 'Find optimal sleep and wake times',
+        },
+        {
+          title: 'Blood Pressure Calculator',
+          url: '/blood-pressure',
+          description: 'Check your blood pressure category',
+        },
+        {
+          title: 'BMR Calculator',
+          url: '/bmr',
+          description: 'Calculate basal metabolic rate',
+        },
+        {
+          title: 'VO2 Max Calculator',
+          url: '/vo2-max',
+          description: 'Estimate cardiovascular fitness',
+        },
+        {
+          title: 'Running Pace Calculator',
+          url: '/running-pace',
+          description: 'Calculate pace per mile or kilometer',
+        },
+        {
+          title: 'Pregnancy Due Date Calculator',
+          url: '/pregnancy-due-date',
+          description: 'Estimate pregnancy due date',
+        },
+        {
+          title: 'Due Date by Conception Calculator',
+          url: '/due-date-by-conception',
+          description: 'Estimate due date from conception date',
+        },
+        {
+          title: 'Pregnancy Weight Gain Calculator',
+          url: '/pregnancy-weight-gain',
+          description: 'Estimate recommended pregnancy weight gain',
+        },
+        {
+          title: 'Ovulation Calculator',
+          url: '/ovulation',
+          description: 'Estimate ovulation and fertile window',
+        },
+        {
+          title: 'Steps to Miles Calculator',
+          url: '/steps-to-miles',
+          description: 'Convert steps into distance',
+        },
+        {
+          title: 'Steps to Calories Calculator',
+          url: '/steps-to-calories',
+          description: 'Estimate calories burned from steps',
         },
       ],
     },

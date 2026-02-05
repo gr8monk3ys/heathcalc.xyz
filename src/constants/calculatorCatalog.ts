@@ -1,0 +1,438 @@
+export interface CalculatorHub {
+  slug: string;
+  title: string;
+  description: string;
+}
+
+export interface CalculatorCatalogItem {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  hub: string;
+  image: string;
+}
+
+export const CALCULATOR_HUBS: CalculatorHub[] = [
+  {
+    slug: 'weight-loss',
+    title: 'Weight Loss & Management',
+    description: 'Plan sustainable fat loss with calorie, activity, and timeline tools.',
+  },
+  {
+    slug: 'body-composition',
+    title: 'Body Composition',
+    description:
+      'Understand body fat, shape, and healthy weight ranges with science-backed metrics.',
+  },
+  {
+    slug: 'metabolism-energy',
+    title: 'Metabolism & Energy',
+    description: 'Calculate calories burned at rest and across daily activity.',
+  },
+  {
+    slug: 'nutrition',
+    title: 'Nutrition & Macros',
+    description: 'Set protein and macro targets for weight loss, maintenance, or muscle gain.',
+  },
+  {
+    slug: 'performance',
+    title: 'Performance & Training',
+    description: 'Optimize workouts with pacing, heart rate, and strength tools.',
+  },
+  {
+    slug: 'wellness-recovery',
+    title: 'Wellness & Recovery',
+    description: 'Support hydration and sleep with daily recovery targets.',
+  },
+  {
+    slug: 'pregnancy',
+    title: 'Pregnancy & Fertility',
+    description: 'Track due dates and ovulation windows with confidence.',
+  },
+  {
+    slug: 'health-vitals',
+    title: 'Health & Vitals',
+    description: 'Monitor key vitals like blood pressure with clear categories.',
+  },
+  {
+    slug: 'utilities',
+    title: 'Utilities',
+    description: 'Quick conversions for weight, height, and fitness-related units.',
+  },
+];
+
+const IMAGE_OVERRIDES: Record<string, string> = {
+  conversions: '/images/calculators/conversions-calculator.jpg',
+};
+
+const getCalculatorImage = (slug: string) =>
+  IMAGE_OVERRIDES[slug] || `/images/calculators/${slug}-calculator.jpg`;
+
+export const CALCULATOR_CATALOG: CalculatorCatalogItem[] = [
+  {
+    slug: 'bmi',
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index to assess your weight relative to height.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('bmi'),
+  },
+  {
+    slug: 'body-fat',
+    title: 'Body Fat Calculator',
+    description: 'Estimate body fat percentage using Navy, skinfold, or BMI methods.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('body-fat'),
+  },
+  {
+    slug: 'body-frame-size',
+    title: 'Body Frame Size Calculator',
+    description: 'Determine body frame size using height and wrist circumference.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('body-frame-size'),
+  },
+  {
+    slug: 'army-body-fat',
+    title: 'Army Body Fat Calculator',
+    description: 'Estimate body fat using the U.S. Army circumference method.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('army-body-fat'),
+  },
+  {
+    slug: 'absi',
+    title: 'ABSI Calculator',
+    description: 'Assess health risk using A Body Shape Index.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('absi'),
+  },
+  {
+    slug: 'whr',
+    title: 'Waist-to-Hip Ratio Calculator',
+    description: 'Evaluate body fat distribution and risk with WHR.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('whr'),
+  },
+  {
+    slug: 'waist-to-height-ratio',
+    title: 'Waist-to-Height Ratio Calculator',
+    description: 'Assess central body fat with a waist-to-height ratio.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('waist-to-height-ratio'),
+  },
+  {
+    slug: 'ideal-weight',
+    title: 'Ideal Weight Calculator',
+    description: 'Estimate healthy weight ranges using common formulas.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('ideal-weight'),
+  },
+  {
+    slug: 'adjusted-body-weight',
+    title: 'Adjusted Body Weight Calculator',
+    description: 'Estimate adjusted body weight using clinical formulas.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('adjusted-body-weight'),
+  },
+  {
+    slug: 'body-surface-area',
+    title: 'Body Surface Area Calculator',
+    description: 'Estimate body surface area from height and weight.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('body-surface-area'),
+  },
+  {
+    slug: 'lean-body-mass',
+    title: 'Lean Body Mass Calculator',
+    description: 'Estimate lean body mass based on height and weight.',
+    category: 'Body Composition',
+    hub: 'body-composition',
+    image: getCalculatorImage('lean-body-mass'),
+  },
+  {
+    slug: 'tdee',
+    title: 'TDEE Calculator',
+    description: 'Calculate total daily energy expenditure and maintenance calories.',
+    category: 'Energy Expenditure',
+    hub: 'metabolism-energy',
+    image: getCalculatorImage('tdee'),
+  },
+  {
+    slug: 'calorie',
+    title: 'Calorie Calculator',
+    description: 'Estimate daily calorie needs for maintenance, loss, or gain.',
+    category: 'Energy Expenditure',
+    hub: 'metabolism-energy',
+    image: getCalculatorImage('calorie'),
+  },
+  {
+    slug: 'bmr',
+    title: 'BMR Calculator',
+    description: 'Estimate calories your body burns at rest.',
+    category: 'Metabolism',
+    hub: 'metabolism-energy',
+    image: getCalculatorImage('bmr'),
+  },
+  {
+    slug: 'calorie-deficit',
+    title: 'Calorie Deficit Calculator',
+    description: 'Plan safe weight loss with a personalized deficit.',
+    category: 'Weight Management',
+    hub: 'weight-loss',
+    image: getCalculatorImage('calorie-deficit'),
+  },
+  {
+    slug: 'weight-management',
+    title: 'Weight Management Calculator',
+    description: 'Build a weight change plan with a target date.',
+    category: 'Weight Management',
+    hub: 'weight-loss',
+    image: getCalculatorImage('weight-management'),
+  },
+  {
+    slug: 'maximum-fat-loss',
+    title: 'Maximum Fat Loss Calculator',
+    description: 'Find a sustainable rate of fat loss based on body composition.',
+    category: 'Weight Management',
+    hub: 'weight-loss',
+    image: getCalculatorImage('maximum-fat-loss'),
+  },
+  {
+    slug: 'body-fat-burn',
+    title: 'Body Fat Burn Calculator',
+    description: 'Estimate calories burned during activities and fat-loss timelines.',
+    category: 'Weight Management',
+    hub: 'weight-loss',
+    image: getCalculatorImage('body-fat-burn'),
+  },
+  {
+    slug: 'macro',
+    title: 'Macro Calculator',
+    description: 'Set daily protein, carbs, and fat targets.',
+    category: 'Nutrition',
+    hub: 'nutrition',
+    image: getCalculatorImage('macro'),
+  },
+  {
+    slug: 'carb-intake',
+    title: 'Carb Intake Calculator',
+    description: 'Set daily carbohydrate targets from calories.',
+    category: 'Nutrition',
+    hub: 'nutrition',
+    image: getCalculatorImage('carb-intake'),
+  },
+  {
+    slug: 'fat-intake',
+    title: 'Fat Intake Calculator',
+    description: 'Set daily fat targets from calories.',
+    category: 'Nutrition',
+    hub: 'nutrition',
+    image: getCalculatorImage('fat-intake'),
+  },
+  {
+    slug: 'protein',
+    title: 'Protein Intake Calculator',
+    description: 'Estimate daily protein needs for your goals.',
+    category: 'Nutrition',
+    hub: 'nutrition',
+    image: getCalculatorImage('protein'),
+  },
+  {
+    slug: 'one-rep-max',
+    title: 'One Rep Max Calculator',
+    description: 'Estimate 1RM and training zones safely.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('one-rep-max'),
+  },
+  {
+    slug: 'heart-rate-zones',
+    title: 'Heart Rate Zones Calculator',
+    description: 'Calculate training zones from max or resting heart rate.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('heart-rate-zones'),
+  },
+  {
+    slug: 'target-heart-rate',
+    title: 'Target Heart Rate Calculator',
+    description: 'Calculate target heart rate ranges for cardio training.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('target-heart-rate'),
+  },
+  {
+    slug: 'max-heart-rate',
+    title: 'Max Heart Rate Calculator',
+    description: 'Estimate max heart rate using age-based formulas.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('max-heart-rate'),
+  },
+  {
+    slug: 'vo2-max',
+    title: 'VO2 Max Calculator',
+    description: 'Estimate cardiovascular fitness using the Rockport test.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('vo2-max'),
+  },
+  {
+    slug: 'running-pace',
+    title: 'Running Pace Calculator',
+    description: 'Convert time and distance into pace and speed.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('running-pace'),
+  },
+  {
+    slug: 'calories-burned',
+    title: 'Calories Burned Calculator',
+    description: 'Estimate workout calorie burn from activity and time.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('calories-burned'),
+  },
+  {
+    slug: 'calories-burned-walking',
+    title: 'Calories Burned Walking Calculator',
+    description: 'Estimate calories burned while walking.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('calories-burned-walking'),
+  },
+  {
+    slug: 'calories-burned-running',
+    title: 'Calories Burned Running Calculator',
+    description: 'Estimate calories burned while running.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('calories-burned-running'),
+  },
+  {
+    slug: 'calories-burned-cycling',
+    title: 'Calories Burned Cycling Calculator',
+    description: 'Estimate calories burned while cycling.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('calories-burned-cycling'),
+  },
+  {
+    slug: 'calories-burned-swimming',
+    title: 'Calories Burned Swimming Calculator',
+    description: 'Estimate calories burned while swimming.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('calories-burned-swimming'),
+  },
+  {
+    slug: 'steps-to-calories',
+    title: 'Steps to Calories Calculator',
+    description: 'Estimate calories burned from daily steps.',
+    category: 'Performance',
+    hub: 'performance',
+    image: getCalculatorImage('steps-to-calories'),
+  },
+  {
+    slug: 'water-intake',
+    title: 'Water Intake Calculator',
+    description: 'Estimate daily hydration targets based on weight and activity.',
+    category: 'Wellness',
+    hub: 'wellness-recovery',
+    image: getCalculatorImage('water-intake'),
+  },
+  {
+    slug: 'sleep',
+    title: 'Sleep Calculator',
+    description: 'Plan sleep cycles and ideal bedtimes.',
+    category: 'Recovery',
+    hub: 'wellness-recovery',
+    image: getCalculatorImage('sleep'),
+  },
+  {
+    slug: 'pregnancy-due-date',
+    title: 'Pregnancy Due Date Calculator',
+    description: 'Estimate due date from last period or conception.',
+    category: 'Pregnancy',
+    hub: 'pregnancy',
+    image: getCalculatorImage('pregnancy-due-date'),
+  },
+  {
+    slug: 'due-date-by-conception',
+    title: 'Due Date by Conception Calculator',
+    description: 'Estimate due date from conception date.',
+    category: 'Pregnancy',
+    hub: 'pregnancy',
+    image: getCalculatorImage('due-date-by-conception'),
+  },
+  {
+    slug: 'pregnancy-weight-gain',
+    title: 'Pregnancy Weight Gain Calculator',
+    description: 'Estimate recommended pregnancy weight gain ranges.',
+    category: 'Pregnancy',
+    hub: 'pregnancy',
+    image: getCalculatorImage('pregnancy-weight-gain'),
+  },
+  {
+    slug: 'ovulation',
+    title: 'Ovulation Calculator',
+    description: 'Estimate fertile window and ovulation date.',
+    category: 'Pregnancy',
+    hub: 'pregnancy',
+    image: getCalculatorImage('ovulation'),
+  },
+  {
+    slug: 'blood-pressure',
+    title: 'Blood Pressure Calculator',
+    description: 'Check your blood pressure category and ranges.',
+    category: 'Health',
+    hub: 'health-vitals',
+    image: getCalculatorImage('blood-pressure'),
+  },
+  {
+    slug: 'resting-heart-rate',
+    title: 'Resting Heart Rate Calculator',
+    description: 'Evaluate resting heart rate and fitness category.',
+    category: 'Health',
+    hub: 'health-vitals',
+    image: getCalculatorImage('resting-heart-rate'),
+  },
+  {
+    slug: 'conversions',
+    title: 'Measurement Conversions',
+    description: 'Convert weight, height, volume, and energy units quickly.',
+    category: 'Utilities',
+    hub: 'utilities',
+    image: getCalculatorImage('conversions'),
+  },
+  {
+    slug: 'age',
+    title: 'Age Calculator',
+    description: 'Calculate exact age in years, months, and days.',
+    category: 'Utilities',
+    hub: 'utilities',
+    image: getCalculatorImage('age'),
+  },
+  {
+    slug: 'steps-to-miles',
+    title: 'Steps to Miles Calculator',
+    description: 'Convert steps into miles or kilometers.',
+    category: 'Utilities',
+    hub: 'utilities',
+    image: getCalculatorImage('steps-to-miles'),
+  },
+];
+
+export const getCalculatorHub = (slug: string) => CALCULATOR_HUBS.find(hub => hub.slug === slug);
+
+export const getCalculatorsForHub = (hubSlug: string) =>
+  CALCULATOR_CATALOG.filter(item => item.hub === hubSlug);

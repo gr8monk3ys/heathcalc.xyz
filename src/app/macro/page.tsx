@@ -16,10 +16,11 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import MacroResult from '@/components/calculators/macro/MacroResult';
 import MacroInfo from '@/components/calculators/macro/MacroInfo';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
 import AffiliateLinks from '@/components/AffiliateLinks';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 import {
   useHeight,
   useWeight,
@@ -370,6 +371,8 @@ export default function MacroCalculator() {
           />
         </div>
 
+        <EmbedCalculator calculatorSlug="macro" title="Macro Calculator" className="mb-8" />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -452,22 +455,11 @@ export default function MacroCalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'Macro Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Calculate your daily macronutrient (protein, carbs, fat) targets based on your TDEE and dietary goals. Supports weight loss, maintenance, and muscle gain presets.',
-            url: 'https://www.heathcheck.info/macro',
-          }}
+        <CalculatorStructuredData
+          name="Macro Calculator"
+          description="Calculate your daily macronutrient (protein, carbs, fat) targets based on your TDEE and dietary goals. Supports weight loss, maintenance, and muscle gain presets."
+          url="https://www.heathcheck.info/macro"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

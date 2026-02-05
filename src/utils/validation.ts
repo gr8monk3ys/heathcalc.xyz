@@ -30,6 +30,10 @@ export const VALIDATION_RANGES = {
     cm: { min: 20, max: 300 },
     in: { min: 8, max: 120 },
   },
+  wrist: {
+    cm: { min: 10, max: 40 },
+    in: { min: 4, max: 16 },
+  },
   neck: {
     cm: { min: 10, max: 100 },
     in: { min: 4, max: 40 },
@@ -40,6 +44,10 @@ export const VALIDATION_RANGES = {
   duration: { min: 1, max: 1440 }, // minutes (max 24 hours)
   frequency: { min: 1, max: 14 }, // times per week
   burnGoal: { min: 0.1, max: 500 }, // pounds
+  heartRate: { min: 30, max: 220 }, // bpm
+  systolic: { min: 70, max: 250 }, // mmHg
+  diastolic: { min: 40, max: 150 }, // mmHg
+  cycleLength: { min: 21, max: 45 }, // days
 } as const;
 
 /**
@@ -242,6 +250,162 @@ export function validateNeck(
     return {
       isValid: false,
       error: `Neck must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}`,
+    };
+  }
+
+  return { isValid: true };
+}
+
+/**
+ * Validates wrist circumference
+ */
+export function validateWrist(
+  wrist: number | string,
+  unit: 'metric' | 'imperial' = 'metric'
+): ValidationResult {
+  const numWrist = Number(wrist);
+
+  if (isNaN(numWrist)) {
+    return { isValid: false, error: 'Wrist must be a valid number' };
+  }
+
+  if (numWrist <= 0) {
+    return { isValid: false, error: 'Wrist must be greater than 0' };
+  }
+
+  const range = unit === 'metric' ? VALIDATION_RANGES.wrist.cm : VALIDATION_RANGES.wrist.in;
+
+  if (numWrist < range.min) {
+    return {
+      isValid: false,
+      error: `Wrist must be at least ${range.min}${unit === 'metric' ? 'cm' : '"'}`,
+    };
+  }
+
+  if (numWrist > range.max) {
+    return {
+      isValid: false,
+      error: `Wrist must be less than ${range.max}${unit === 'metric' ? 'cm' : '"'}`,
+    };
+  }
+
+  return { isValid: true };
+}
+
+/**
+ * Validates a heart rate input
+ */
+export function validateHeartRate(rate: number | string, label = 'Heart rate'): ValidationResult {
+  const numRate = Number(rate);
+
+  if (isNaN(numRate)) {
+    return { isValid: false, error: `${label} must be a valid number` };
+  }
+
+  if (numRate <= 0) {
+    return { isValid: false, error: `${label} must be greater than 0` };
+  }
+
+  if (numRate < VALIDATION_RANGES.heartRate.min) {
+    return {
+      isValid: false,
+      error: `${label} must be at least ${VALIDATION_RANGES.heartRate.min} bpm`,
+    };
+  }
+
+  if (numRate > VALIDATION_RANGES.heartRate.max) {
+    return {
+      isValid: false,
+      error: `${label} must be less than ${VALIDATION_RANGES.heartRate.max} bpm`,
+    };
+  }
+
+  if (!Number.isFinite(numRate)) {
+    return { isValid: false, error: `${label} must be a valid number` };
+  }
+
+  return { isValid: true };
+}
+
+/**
+ * Validates systolic blood pressure
+ */
+export function validateSystolic(systolic: number | string): ValidationResult {
+  const numValue = Number(systolic);
+
+  if (isNaN(numValue)) {
+    return { isValid: false, error: 'Systolic must be a valid number' };
+  }
+
+  if (numValue < VALIDATION_RANGES.systolic.min) {
+    return {
+      isValid: false,
+      error: `Systolic must be at least ${VALIDATION_RANGES.systolic.min} mmHg`,
+    };
+  }
+
+  if (numValue > VALIDATION_RANGES.systolic.max) {
+    return {
+      isValid: false,
+      error: `Systolic must be less than ${VALIDATION_RANGES.systolic.max} mmHg`,
+    };
+  }
+
+  return { isValid: true };
+}
+
+/**
+ * Validates diastolic blood pressure
+ */
+export function validateDiastolic(diastolic: number | string): ValidationResult {
+  const numValue = Number(diastolic);
+
+  if (isNaN(numValue)) {
+    return { isValid: false, error: 'Diastolic must be a valid number' };
+  }
+
+  if (numValue < VALIDATION_RANGES.diastolic.min) {
+    return {
+      isValid: false,
+      error: `Diastolic must be at least ${VALIDATION_RANGES.diastolic.min} mmHg`,
+    };
+  }
+
+  if (numValue > VALIDATION_RANGES.diastolic.max) {
+    return {
+      isValid: false,
+      error: `Diastolic must be less than ${VALIDATION_RANGES.diastolic.max} mmHg`,
+    };
+  }
+
+  return { isValid: true };
+}
+
+/**
+ * Validates menstrual cycle length
+ */
+export function validateCycleLength(length: number | string): ValidationResult {
+  const numValue = Number(length);
+
+  if (isNaN(numValue)) {
+    return { isValid: false, error: 'Cycle length must be a valid number' };
+  }
+
+  if (!Number.isInteger(numValue)) {
+    return { isValid: false, error: 'Cycle length must be a whole number' };
+  }
+
+  if (numValue < VALIDATION_RANGES.cycleLength.min) {
+    return {
+      isValid: false,
+      error: `Cycle length must be at least ${VALIDATION_RANGES.cycleLength.min} days`,
+    };
+  }
+
+  if (numValue > VALIDATION_RANGES.cycleLength.max) {
+    return {
+      isValid: false,
+      error: `Cycle length must be less than ${VALIDATION_RANGES.cycleLength.max} days`,
     };
   }
 

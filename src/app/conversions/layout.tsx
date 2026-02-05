@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     url: 'https://www.heathcheck.info/conversions',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/calculators/conversions-calculator.jpg',
         width: 1200,
         height: 630,
         alt: 'Unit Converter',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: 'Unit Converter | Measurement Conversions',
     description:
       'Convert between different units for weight, height, volume, temperature, and energy.',
-    images: ['/images/og-image.jpg'],
+    images: ['/images/calculators/conversions-calculator.jpg'],
   },
 };
 

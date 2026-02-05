@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
+import Link from 'next/link';
 import {
   type CalculatorType,
   type AffiliateProduct,
@@ -8,6 +9,7 @@ import {
   AFFILIATE_CATEGORY_CONFIG,
   AFFILIATE_DISCLOSURE,
   getProductsForCalculator,
+  getGuidesForCalculator,
 } from '@/constants/affiliates';
 
 interface AffiliateLinksProps {
@@ -20,6 +22,13 @@ interface AffiliateLinksProps {
 
 interface ProductCardProps {
   product: AffiliateProduct;
+}
+
+interface GuideCardProps {
+  title: string;
+  description: string;
+  href: string;
+  category: ProductCategory;
 }
 
 /**
@@ -188,6 +197,31 @@ function ProductCard({ product }: ProductCardProps) {
   );
 }
 
+function GuideCard({ title, description, href, category }: GuideCardProps) {
+  return (
+    <Link
+      href={href}
+      className="block border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white/70 dark:bg-gray-900/50 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+    >
+      <div className="flex items-start gap-3">
+        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
+          <CategoryIcon category={category} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className="font-semibold text-sm">{title}</h4>
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
+            {description}
+          </p>
+          <span className="text-xs text-accent font-medium mt-2 inline-flex items-center gap-1">
+            Read the guide
+            <span aria-hidden="true">→</span>
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 /**
  * AffiliateLinks component displays contextually relevant affiliate product recommendations
  * based on the calculator type being used.
@@ -209,8 +243,9 @@ export default function AffiliateLinks({
     () => getProductsForCalculator(calculatorType, maxProducts),
     [calculatorType, maxProducts]
   );
+  const guides = useMemo(() => getGuidesForCalculator(calculatorType, 2), [calculatorType]);
 
-  if (products.length === 0) {
+  if (products.length === 0 && guides.length === 0) {
     return null;
   }
 
@@ -226,6 +261,25 @@ export default function AffiliateLinks({
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
         Tools and resources to help you achieve your health and fitness goals
       </p>
+
+      {guides.length > 0 && (
+        <div className="mb-6">
+          <h4 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-3">
+            Top Guides
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {guides.map(guide => (
+              <GuideCard
+                key={guide.slug}
+                title={guide.title}
+                description={guide.description}
+                href={`/blog/${guide.slug}`}
+                category={guide.category}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map(product => (

@@ -4,6 +4,7 @@ import React, { Suspense } from 'react';
 import { useParams } from 'next/navigation';
 import { BlogLoadingFallback } from '@/components/DynamicComponent';
 import dynamic from 'next/dynamic';
+import AffiliateDisclosure from '@/components/AffiliateDisclosure';
 
 // Map of blog post slugs to their dynamic components
 const BLOG_POSTS: Record<string, React.ComponentType<Record<string, never>>> = {
@@ -28,7 +29,45 @@ const BLOG_POSTS: Record<string, React.ComponentType<Record<string, never>>> = {
   'calorie-deficit-myths': dynamic(() => import('@/app/blog/calorie-deficit-myths/content'), {
     loading: () => <BlogLoadingFallback />,
   }),
+  'best-smart-scales-body-composition': dynamic(
+    () => import('@/app/blog/best-smart-scales-body-composition/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'best-fitness-trackers-calorie-tracking': dynamic(
+    () => import('@/app/blog/best-fitness-trackers-calorie-tracking/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'best-kitchen-scales-portion-control': dynamic(
+    () => import('@/app/blog/best-kitchen-scales-portion-control/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'best-fitness-apps-macro-tracking': dynamic(
+    () => import('@/app/blog/best-fitness-apps-macro-tracking/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'meal-delivery-services-weight-loss': dynamic(
+    () => import('@/app/blog/meal-delivery-services-weight-loss/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
 };
+
+const AFFILIATE_BLOG_SLUGS = new Set([
+  'best-smart-scales-body-composition',
+  'best-fitness-trackers-calorie-tracking',
+  'best-kitchen-scales-portion-control',
+  'best-fitness-apps-macro-tracking',
+  'meal-delivery-services-weight-loss',
+]);
 
 /**
  * Dynamic blog post page that uses code splitting to load content
@@ -52,6 +91,7 @@ export default function BlogPost(): React.JSX.Element {
   return (
     <Suspense fallback={<BlogLoadingFallback />}>
       <PostContent />
+      {AFFILIATE_BLOG_SLUGS.has(slug) && <AffiliateDisclosure />}
     </Suspense>
   );
 }

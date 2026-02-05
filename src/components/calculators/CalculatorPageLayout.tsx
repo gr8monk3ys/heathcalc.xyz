@@ -2,10 +2,17 @@
 
 import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Breadcrumb from '@/components/Breadcrumb';
 import SocialShare from '@/components/SocialShare';
-import StructuredData from '@/components/StructuredData';
+import StructuredData, {
+  createCalculatorSchema,
+  createFAQSchema,
+} from '@/components/StructuredData';
+import RelatedCalculators from '@/components/RelatedCalculators';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
 
 // Dynamic imports for below-the-fold components (performance optimization)
 const FAQSection = dynamic(() => import('@/components/FAQSection'), {
@@ -142,6 +149,26 @@ export function CalculatorPageLayout({
 }: CalculatorPageLayoutProps): React.ReactElement {
   const socialTitle = shareTitle || title;
   const socialDescription = shareDescription || description;
+  const searchParams = useSearchParams();
+  const isEmbed = searchParams.get('embed') === '1';
+
+  if (isEmbed) {
+    return (
+      <ErrorBoundary>
+        <div className="max-w-4xl mx-auto px-4 py-6">
+          <h1 className="text-2xl font-bold mb-2">{title}</h1>
+          <p className="text-sm text-gray-600 mb-6">{description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">{children}</div>
+          <div className="mt-4 text-xs text-gray-500">
+            Powered by{' '}
+            <Link href={`/${calculatorSlug}`} className="text-accent hover:underline">
+              HealthCheck
+            </Link>
+          </div>
+        </div>
+      </ErrorBoundary>
+    );
+  }
 
   return (
     <ErrorBoundary>
@@ -160,7 +187,11 @@ export function CalculatorPageLayout({
           />
         </div>
 
+        <EmbedCalculator calculatorSlug={calculatorSlug} title={title} className="mb-8" />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
+
+        <RelatedCalculators currentSlug={calculatorSlug} />
 
         <Suspense
           fallback={
@@ -228,6 +259,14 @@ export function CalculatorPageLayout({
         </Suspense>
 
         <StructuredData data={structuredData} />
+        <StructuredData
+          data={createCalculatorSchema({
+            name: title,
+            description,
+            url: `https://www.heathcheck.info/${calculatorSlug}`,
+          })}
+        />
+        <StructuredData data={createFAQSchema(faqs)} />
       </div>
     </ErrorBoundary>
   );

@@ -20,9 +20,10 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import BodyFatBurnResultDisplay from '@/components/calculators/bodyFatBurn/BodyFatBurnResult';
 import BodyFatBurnInfo from '@/components/calculators/bodyFatBurn/BodyFatBurnInfo';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 import {
   useHeight,
   useWeight,
@@ -357,6 +358,12 @@ export default function BodyFatBurnCalculator() {
           />
         </div>
 
+        <EmbedCalculator
+          calculatorSlug="body-fat-burn"
+          title="Body Fat Burn Calculator"
+          className="mb-8"
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -444,22 +451,11 @@ export default function BodyFatBurnCalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'Body Fat Burn Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise.',
-            url: 'https://www.heathcheck.info/body-fat-burn',
-          }}
+        <CalculatorStructuredData
+          name="Body Fat Burn Calculator"
+          description="Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise."
+          url="https://www.heathcheck.info/body-fat-burn"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

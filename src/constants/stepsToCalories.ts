@@ -1,0 +1,1 @@
+export const STEPSTOCALORIES_PLACEHOLDER = true;

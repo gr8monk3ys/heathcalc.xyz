@@ -30,6 +30,7 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import BodyFatResultDisplay from '@/components/calculators/body-fat/BodyFatResult';
 import BodyFatInfo from '@/components/calculators/body-fat/BodyFatInfo';
 import AffiliateLinks from '@/components/AffiliateLinks';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
 import {
   useHeight,
   useWeight,
@@ -382,6 +383,8 @@ export default function BodyFatCalculator() {
         <p className="text-gray-600 mb-6">
           Calculate your body fat percentage using various methods including Navy, skinfold, and BMI
         </p>
+
+        <EmbedCalculator calculatorSlug="body-fat" title="Body Fat Calculator" className="mb-8" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-1">

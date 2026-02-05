@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import BlogIndexClient from '@/components/BlogIndexClient';
 
 export const metadata: Metadata = {
   title: 'Health & Fitness Blog | HealthCheck',
@@ -17,9 +18,60 @@ interface BlogPost {
   date: string;
   readTime: string;
   category: string;
+  image: string;
 }
 
 const blogPosts: BlogPost[] = [
+  {
+    title: 'Best Smart Scales for Body Composition Tracking in 2026',
+    description:
+      'Compare top smart scales for tracking body fat, muscle mass, BMI, and more. See which scale fits your goals.',
+    slug: 'best-smart-scales-body-composition',
+    date: 'February 2, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-smart-scales-body-composition.jpg',
+  },
+  {
+    title: 'Best Fitness Trackers for Calorie Tracking in 2026',
+    description:
+      'Find the best fitness trackers for accurate calorie burn estimates, heart rate monitoring, and activity tracking.',
+    slug: 'best-fitness-trackers-calorie-tracking',
+    date: 'February 2, 2026',
+    readTime: '15 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-fitness-trackers-calorie-tracking.jpg',
+  },
+  {
+    title: 'Best Kitchen Scales for Portion Control and Calorie Tracking in 2026',
+    description:
+      'Compare top food scales for accurate portion control and calorie counting to stay on track with your macros.',
+    slug: 'best-kitchen-scales-portion-control',
+    date: 'February 2, 2026',
+    readTime: '10 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-kitchen-scales-portion-control.jpg',
+  },
+  {
+    title: 'Best Fitness Apps for Tracking Macros and Calories in 2026',
+    description:
+      'Compare the top calorie and macro tracking apps to find the right fit for consistent logging.',
+    slug: 'best-fitness-apps-macro-tracking',
+    date: 'February 2, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-fitness-apps-macro-tracking.jpg',
+  },
+  {
+    title: 'Best Meal Delivery Services for Weight Loss in 2026',
+    description:
+      'Compare meal delivery services built for calorie control, portion consistency, and weight loss goals.',
+    slug: 'meal-delivery-services-weight-loss',
+    date: 'February 2, 2026',
+    readTime: '14 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/meal-delivery-services-weight-loss.jpg',
+  },
   {
     title: '5 Myths About Calorie Deficits Debunked',
     description:
@@ -28,6 +80,7 @@ const blogPosts: BlogPost[] = [
     date: 'February 25, 2025',
     readTime: '8 min read',
     category: 'Weight Management',
+    image: '/images/blog/calorie-deficit-myths.jpg',
   },
   {
     title: 'TDEE Explained: How Many Calories Do You Really Need?',
@@ -37,6 +90,7 @@ const blogPosts: BlogPost[] = [
     date: 'February 20, 2025',
     readTime: '10 min read',
     category: 'Energy Expenditure',
+    image: '/images/blog/tdee-explained.jpg',
   },
   {
     title: 'The Pros and Cons of Different Body Fat Measurement Methods',
@@ -46,6 +100,7 @@ const blogPosts: BlogPost[] = [
     date: 'February 15, 2025',
     readTime: '12 min read',
     category: 'Measurement Methods',
+    image: '/images/blog/measuring-body-fat.jpg',
   },
 ];
 
@@ -57,27 +112,7 @@ export default function BlogPage() {
         Explore evidence-based articles on weight management, body composition, nutrition, and
         fitness to help you make informed decisions about your health.
       </p>
-
-      <div className="space-y-8">
-        {blogPosts.map(post => (
-          <Link
-            href={`/blog/${post.slug}`}
-            key={post.slug}
-            className="block neumorph rounded-lg p-6 transition-all hover:shadow-neumorph-inset"
-          >
-            <span className="inline-block bg-accent/10 text-accent text-sm px-3 py-1 rounded-full mb-2">
-              {post.category}
-            </span>
-            <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-            <p className="text-gray-600 mb-4">{post.description}</p>
-            <div className="flex items-center text-sm text-gray-500">
-              <span>{post.date}</span>
-              <span className="mx-2">•</span>
-              <span>{post.readTime}</span>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <BlogIndexClient posts={blogPosts} />
 
       <div className="mt-12 neumorph p-6 rounded-lg">
         <h2 className="text-xl font-bold mb-4">Looking for Our Calculators?</h2>

@@ -20,9 +20,10 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import ABSIResultDisplay from '@/components/calculators/absi/ABSIResult';
 import ABSIInfo from '@/components/calculators/absi/ABSIInfo';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 import {
   useHeight,
   useWeight,
@@ -288,6 +289,8 @@ export default function ABSICalculator() {
           />
         </div>
 
+        <EmbedCalculator calculatorSlug="absi" title="ABSI Calculator" className="mb-8" />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -359,22 +362,11 @@ export default function ABSICalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'ABSI Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Calculate your A Body Shape Index (ABSI) to assess health risks related to body shape and fat distribution. More accurate than BMI for mortality risk prediction.',
-            url: 'https://www.heathcheck.info/absi',
-          }}
+        <CalculatorStructuredData
+          name="ABSI Calculator"
+          description="Calculate your A Body Shape Index (ABSI) to assess health risks related to body shape and fat distribution. More accurate than BMI for mortality risk prediction."
+          url="https://www.heathcheck.info/absi"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

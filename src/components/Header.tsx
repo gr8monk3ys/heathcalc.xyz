@@ -20,6 +20,16 @@ const menuItems: MenuItem[] = [
     description: 'Dashboard of all calculators',
   },
   {
+    name: 'Calculator Categories',
+    path: '/calculators',
+    description: 'Browse calculators by category',
+  },
+  {
+    name: 'Calculator Widgets',
+    path: '/calculator-widgets',
+    description: 'Embed HealthCheck calculators on your site',
+  },
+  {
     name: 'Body Fat Calculator',
     path: '/body-fat',
     description: 'Calculate your body fat percentage using various methods',
@@ -58,6 +68,56 @@ const menuItems: MenuItem[] = [
     name: 'BMI Calculator',
     path: '/bmi',
     description: 'Calculate Body Mass Index for adults and children',
+  },
+  {
+    name: 'BMR Calculator',
+    path: '/bmr',
+    description: 'Calculate calories burned at rest',
+  },
+  {
+    name: 'VO2 Max Calculator',
+    path: '/vo2-max',
+    description: 'Estimate cardiovascular fitness with the Rockport test',
+  },
+  {
+    name: 'Running Pace Calculator',
+    path: '/running-pace',
+    description: 'Calculate pace per mile or kilometer',
+  },
+  {
+    name: 'Pregnancy Due Date',
+    path: '/pregnancy-due-date',
+    description: 'Estimate pregnancy due date based on key dates',
+  },
+  {
+    name: 'Ovulation Calculator',
+    path: '/ovulation',
+    description: 'Estimate ovulation and fertile window',
+  },
+  {
+    name: 'Ideal Weight Calculator',
+    path: '/ideal-weight',
+    description: 'Estimate your ideal weight range using common formulas',
+  },
+  {
+    name: 'Heart Rate Zones',
+    path: '/heart-rate-zones',
+    description: 'Calculate training zones using max heart rate',
+  },
+  {
+    name: 'Water Intake Calculator',
+    path: '/water-intake',
+    description: 'Estimate daily hydration needs',
+  },
+  {
+    name: 'Sleep Calculator',
+    path: '/sleep',
+    description: 'Find optimal bedtimes or wake times',
+  },
+  {
+    name: 'Blood Pressure Calculator',
+    path: '/blood-pressure',
+    description: 'Check your blood pressure category',
   },
   {
     name: 'Waist-to-Hip Ratio',

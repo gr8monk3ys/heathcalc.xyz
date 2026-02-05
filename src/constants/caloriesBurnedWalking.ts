@@ -1,0 +1,1 @@
+export const CALORIESBURNEDWALKING_PLACEHOLDER = true;

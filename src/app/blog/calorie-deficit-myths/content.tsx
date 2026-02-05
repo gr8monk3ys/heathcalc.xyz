@@ -8,6 +8,28 @@ export const metadata: Metadata = {
     "Discover the truth behind common misconceptions about calorie deficits, weight loss, and metabolism. Learn why weight loss isn't always linear and how to set realistic expectations.",
   keywords:
     'calorie deficit myths, weight loss myths, 3500 calorie rule, starvation mode, metabolism myths, weight loss plateau, sustainable weight loss',
+  openGraph: {
+    title: '5 Myths About Calorie Deficits Debunked | HealthCheck Blog',
+    description:
+      "Discover the truth behind common misconceptions about calorie deficits, weight loss, and metabolism. Learn why weight loss isn't always linear and how to set realistic expectations.",
+    type: 'article',
+    url: 'https://www.heathcheck.info/blog/calorie-deficit-myths',
+    images: [
+      {
+        url: '/images/blog/calorie-deficit-myths.jpg',
+        width: 1200,
+        height: 630,
+        alt: '5 Myths About Calorie Deficits Debunked',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '5 Myths About Calorie Deficits Debunked | HealthCheck Blog',
+    description:
+      "Discover the truth behind common misconceptions about calorie deficits, weight loss, and metabolism. Learn why weight loss isn't always linear and how to set realistic expectations.",
+    images: ['/images/blog/calorie-deficit-myths.jpg'],
+  },
 };
 
 export default function CalorieDeficitMythsPage() {

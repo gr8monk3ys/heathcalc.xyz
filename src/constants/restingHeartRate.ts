@@ -1,0 +1,1 @@
+export const RESTINGHEARTRATE_PLACEHOLDER = true;

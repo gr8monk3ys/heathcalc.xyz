@@ -15,10 +15,11 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import ProteinResult from '@/components/calculators/protein/ProteinResult';
 import ProteinInfo from '@/components/calculators/protein/ProteinInfo';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
 import AffiliateLinks from '@/components/AffiliateLinks';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 import { useWeight } from '@/hooks/useCalculatorUnits';
 
 // Dynamic imports for below-the-fold components
@@ -295,6 +296,12 @@ export default function ProteinCalculator() {
           />
         </div>
 
+        <EmbedCalculator
+          calculatorSlug="protein"
+          title="Protein Intake Calculator"
+          className="mb-8"
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -379,22 +386,11 @@ export default function ProteinCalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'Protein Intake Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Calculate your optimal daily protein intake based on weight, activity level, age, and fitness goals. Get science-backed recommendations for muscle building, weight loss, or general health.',
-            url: 'https://www.heathcheck.info/protein',
-          }}
+        <CalculatorStructuredData
+          name="Protein Intake Calculator"
+          description="Calculate your optimal daily protein intake based on weight, activity level, age, and fitness goals. Get science-backed recommendations for muscle building, weight loss, or general health."
+          url="https://www.heathcheck.info/protein"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

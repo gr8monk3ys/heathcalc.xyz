@@ -190,6 +190,156 @@ const icons = {
       />
     </svg>
   ),
+  heartRateZones: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+      />
+    </svg>
+  ),
+  idealWeight: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 12h6m-8 8h10a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2z"
+      />
+    </svg>
+  ),
+  waterIntake: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 3l4 7a5 5 0 11-8 0l4-7z"
+      />
+    </svg>
+  ),
+  sleep: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+      />
+    </svg>
+  ),
+  bloodPressure: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 12h3l2 4 4-8 2 4h3"
+      />
+    </svg>
+  ),
+  bmr: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v18m-7-7h14" />
+    </svg>
+  ),
+  vo2Max: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 12h4l2-4 4 8 2-4h4"
+      />
+    </svg>
+  ),
+  runningPace: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M5 12h4l2-4 4 8 2-4h4"
+      />
+    </svg>
+  ),
+  pregnancyDueDate: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12m6-6H6" />
+    </svg>
+  ),
+  ovulation: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-8 w-8"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 4c3.866 0 7 3.582 7 8s-3.134 8-7 8-7-3.582-7-8 3.134-8 7-8z"
+      />
+    </svg>
+  ),
 };
 
 export default function Home() {
@@ -326,6 +476,76 @@ export default function Home() {
             description="Calculate Body Mass Index for adults and children with age-appropriate interpretations."
             path="/bmi"
             icon={icons.bmi}
+          />
+
+          <CalculatorCard
+            title="Ideal Weight Calculator"
+            description="Estimate your ideal weight range using widely used clinical formulas."
+            path="/ideal-weight"
+            icon={icons.idealWeight}
+          />
+
+          <CalculatorCard
+            title="Heart Rate Zones"
+            description="Calculate personalized training zones using max heart rate or Karvonen method."
+            path="/heart-rate-zones"
+            icon={icons.heartRateZones}
+          />
+
+          <CalculatorCard
+            title="Water Intake Calculator"
+            description="Estimate daily hydration needs based on weight and activity level."
+            path="/water-intake"
+            icon={icons.waterIntake}
+          />
+
+          <CalculatorCard
+            title="Sleep Calculator"
+            description="Find optimal bedtimes or wake times based on 90-minute sleep cycles."
+            path="/sleep"
+            icon={icons.sleep}
+          />
+
+          <CalculatorCard
+            title="Blood Pressure Calculator"
+            description="Check your blood pressure category from systolic and diastolic values."
+            path="/blood-pressure"
+            icon={icons.bloodPressure}
+          />
+
+          <CalculatorCard
+            title="BMR Calculator"
+            description="Calculate your basal metabolic rate and calories at rest."
+            path="/bmr"
+            icon={icons.bmr}
+          />
+
+          <CalculatorCard
+            title="VO2 Max Calculator"
+            description="Estimate cardiovascular fitness using the Rockport 1-mile walk test."
+            path="/vo2-max"
+            icon={icons.vo2Max}
+          />
+
+          <CalculatorCard
+            title="Running Pace Calculator"
+            description="Calculate pace per mile or kilometer plus average speed."
+            path="/running-pace"
+            icon={icons.runningPace}
+          />
+
+          <CalculatorCard
+            title="Pregnancy Due Date"
+            description="Estimate pregnancy due date based on key dates."
+            path="/pregnancy-due-date"
+            icon={icons.pregnancyDueDate}
+          />
+
+          <CalculatorCard
+            title="Ovulation Calculator"
+            description="Estimate ovulation date and fertile window."
+            path="/ovulation"
+            icon={icons.ovulation}
           />
 
           <CalculatorCard

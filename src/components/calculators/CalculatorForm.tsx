@@ -61,8 +61,20 @@ interface DateFormField extends BaseFormField {
   max?: string;
 }
 
+interface TimeFormField extends BaseFormField {
+  type: 'time';
+  value: string;
+  /**
+   * onChange handler that receives the time string value.
+   * Compatible with React state setters for string types.
+   */
+  onChange: (value: string) => void;
+  min?: string;
+  max?: string;
+}
+
 // Union type for all form field types
-type FormField = NumberFormField | RadioFormField | SelectFormField | DateFormField;
+type FormField = NumberFormField | RadioFormField | SelectFormField | DateFormField | TimeFormField;
 
 interface CalculatorFormProps {
   title: string;
@@ -200,6 +212,29 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
               }`}
               min={field.min as string}
               max={field.max as string}
+            />
+            {field.error && (
+              <p className="text-red-500 dark:text-red-400 text-sm mt-1">{field.error}</p>
+            )}
+          </div>
+        );
+
+      case 'time':
+        return (
+          <div key={field.name}>
+            <label htmlFor={field.name} className="block text-sm font-medium mb-1">
+              {field.label}
+            </label>
+            <input
+              type="time"
+              id={field.name}
+              value={field.value}
+              onChange={e => field.onChange(e.target.value)}
+              className={`w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent ${
+                field.error ? 'border border-red-500' : ''
+              }`}
+              min={field.min}
+              max={field.max}
             />
             {field.error && (
               <p className="text-red-500 dark:text-red-400 text-sm mt-1">{field.error}</p>

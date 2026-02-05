@@ -14,10 +14,11 @@ import CalculatorForm from '@/components/calculators/CalculatorForm';
 import TDEEResult from '@/components/calculators/tdee/TDEEResult';
 import TDEEInfo from '@/components/calculators/tdee/TDEEInfo';
 import Breadcrumb from '@/components/Breadcrumb';
-import StructuredData from '@/components/StructuredData';
 import SocialShare from '@/components/SocialShare';
 import SaveResult from '@/components/SaveResult';
 import AffiliateLinks from '@/components/AffiliateLinks';
+import EmbedCalculator from '@/components/calculators/EmbedCalculator';
+import CalculatorStructuredData from '@/components/calculators/CalculatorStructuredData';
 import {
   useHeight,
   useWeight,
@@ -313,6 +314,8 @@ export default function TDEECalculator() {
           />
         </div>
 
+        <EmbedCalculator calculatorSlug="tdee" title="TDEE Calculator" className="mb-8" />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
             <CalculatorForm
@@ -394,22 +397,11 @@ export default function TDEECalculator() {
         />
 
         {/* Structured data for the calculator */}
-        <StructuredData
-          data={{
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'TDEE Calculator',
-            applicationCategory: 'HealthApplication',
-            operatingSystem: 'Web',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            description:
-              'Calculate your Total Daily Energy Expenditure (TDEE) and discover your daily calorie needs. Supports multiple formulas (Mifflin-St Jeor, Harris-Benedict, Katch-McArdle) for accurate metabolism calculations.',
-            url: 'https://www.heathcheck.info/tdee',
-          }}
+        <CalculatorStructuredData
+          name="TDEE Calculator"
+          description="Calculate your Total Daily Energy Expenditure (TDEE) and discover your daily calorie needs. Supports multiple formulas (Mifflin-St Jeor, Harris-Benedict, Katch-McArdle) for accurate metabolism calculations."
+          url="https://www.heathcheck.info/tdee"
+          faqs={faqs}
         />
       </div>
     </ErrorBoundary>

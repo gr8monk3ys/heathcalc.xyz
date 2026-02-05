@@ -22,6 +22,16 @@ const popularCalculators = [
     path: '/body-fat-burn',
     description: 'Plan your fat loss journey',
   },
+  {
+    name: 'Sleep Calculator',
+    path: '/sleep',
+    description: 'Find optimal bedtimes or wake times',
+  },
+  {
+    name: 'Blood Pressure Calculator',
+    path: '/blood-pressure',
+    description: 'Check your blood pressure category',
+  },
 ];
 
 // Popular blog posts to show on the 404 page

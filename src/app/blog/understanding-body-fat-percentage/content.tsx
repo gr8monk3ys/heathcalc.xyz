@@ -5,6 +5,33 @@ export const metadata = {
   title: "Understanding Body Fat Percentage: What's Healthy and Why It Matters | HealthCheck",
   description:
     "Learn what body fat percentage means, how it's measured, and what ranges are considered healthy for different ages and fitness levels.",
+  keywords:
+    'body fat percentage, healthy body fat, body composition, body fat ranges, how to measure body fat',
+  openGraph: {
+    title: "Understanding Body Fat Percentage: What's Healthy and Why It Matters | HealthCheck",
+    description:
+      "Learn what body fat percentage means, how it's measured, and what ranges are considered healthy for different ages and fitness levels.",
+    type: 'article',
+    url: 'https://www.heathcheck.info/blog/understanding-body-fat-percentage',
+    images: [
+      {
+        url: '/images/blog/understanding-body-fat-percentage.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Understanding Body Fat Percentage',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Understanding Body Fat Percentage: What's Healthy and Why It Matters | HealthCheck",
+    description:
+      "Learn what body fat percentage means, how it's measured, and what ranges are considered healthy for different ages and fitness levels.",
+    images: ['/images/blog/understanding-body-fat-percentage.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.heathcheck.info/blog/understanding-body-fat-percentage',
+  },
 };
 
 export default function BlogPostPage() {
