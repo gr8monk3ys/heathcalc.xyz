@@ -13,6 +13,8 @@ import { AuthProvider } from '@/context/AuthContext';
 import { Analytics } from '@vercel/analytics/react';
 import PWAInit from '@/components/PWAInit';
 import Script from 'next/script';
+import { ClerkProvider } from '@clerk/nextjs';
+import { clerkEnabled } from '@/utils/auth';
 
 export const metadata: Metadata = {
   title: 'HealthCheck - Health and Fitness Calculators',
@@ -109,8 +111,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         )}
       </head>
       <body>
-        {/* Rule: Use React Context for global state management */}
-        {/* Split providers for granular re-renders:
+        {clerkEnabled ? (
+          <ClerkProvider>
+            {/* Rule: Use React Context for global state management */}
+            {/* Split providers for granular re-renders:
             - DarkModeProvider: only re-renders when dark mode changes
             - UnitSystemProvider: only re-renders when unit preferences change
             - PreferencesProvider: backward compatibility wrapper combining both

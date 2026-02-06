@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import CalculatorCard from '@/components/CalculatorCard';
+import Search from '@/components/Search';
 
 export const metadata = {
   title: 'HeathCheck - Free Body Fat, BMI, TDEE Calculators',
