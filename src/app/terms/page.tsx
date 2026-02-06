@@ -31,9 +31,8 @@ export default function TermsPage() {
       <div className="neumorph mb-8 rounded-lg p-6">
         <h2 className="mb-4 text-2xl font-semibold">Accounts and Saved Results</h2>
         <p className="mb-3">
-          We offer account sign-in/sign-up through Clerk to support saved results and account
-          sessions. Saved-result data may be stored locally in your browser and associated with your
-          account ID.
+          We offer a lightweight sign-in/sign-up experience to save calculator results. Account and
+          saved-result data may be stored locally in your browser.
         </p>
         <p>
           You are responsible for safeguarding access to your device/browser profile and for the

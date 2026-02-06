@@ -2,8 +2,7 @@
 
 import React, { createContext, useContext, ReactNode } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { useUser } from '@clerk/nextjs';
-import { clerkEnabled } from '@/utils/auth';
+import { useAuth } from '@/context/AuthContext';
 
 export interface SavedResult {
   id: string;
@@ -39,25 +38,19 @@ function generateResultId(type: string, resultData: Record<string, unknown>): st
   for (let i = 0; i < dataString.length; i++) {
     const char = dataString.charCodeAt(i);
     hash = (hash << 5) - hash + char;
-    hash &= hash;
+    hash = hash & hash;
   }
 
   return `${type}-${hash}`;
 }
 
-function SavedResultsProviderBase({
-  children,
-  userKey,
-  canSaveResults,
-}: {
-  children: ReactNode;
-  userKey: string;
-  canSaveResults: boolean;
-}): React.JSX.Element {
+export function SavedResultsProvider({ children }: SavedResultsProviderProps): React.JSX.Element {
+  const { user } = useAuth();
   const [savedResultsByUser, setSavedResultsByUser] = useLocalStorage<
     Record<string, SavedResult[]>
   >('healthcheck-saved-results-by-user', {});
 
+  const userKey = user?.email ?? 'guest';
   const savedResults = savedResultsByUser[userKey] ?? [];
 
   function saveResult(
@@ -65,7 +58,7 @@ function SavedResultsProviderBase({
     calculatorName: string,
     data: Record<string, unknown>
   ): boolean {
-    if (!canSaveResults) {
+    if (!user) {
       return false;
     }
 
@@ -112,7 +105,7 @@ function SavedResultsProviderBase({
 
   const value: SavedResultsContextState = {
     savedResults,
-    canSaveResults,
+    canSaveResults: Boolean(user),
     saveResult,
     removeResult,
     clearAllResults,
@@ -120,36 +113,6 @@ function SavedResultsProviderBase({
   };
 
   return <SavedResultsContext.Provider value={value}>{children}</SavedResultsContext.Provider>;
-}
-
-function SavedResultsProviderWithClerk({ children }: SavedResultsProviderProps): React.JSX.Element {
-  const { user } = useUser();
-  const userKey = user?.id ?? 'guest';
-  const canSaveResults = Boolean(user);
-
-  return (
-    <SavedResultsProviderBase userKey={userKey} canSaveResults={canSaveResults}>
-      {children}
-    </SavedResultsProviderBase>
-  );
-}
-
-function SavedResultsProviderWithoutClerk({
-  children,
-}: SavedResultsProviderProps): React.JSX.Element {
-  return (
-    <SavedResultsProviderBase userKey="guest" canSaveResults={false}>
-      {children}
-    </SavedResultsProviderBase>
-  );
-}
-
-export function SavedResultsProvider({ children }: SavedResultsProviderProps): React.JSX.Element {
-  if (clerkEnabled) {
-    return <SavedResultsProviderWithClerk>{children}</SavedResultsProviderWithClerk>;
-  }
-
-  return <SavedResultsProviderWithoutClerk>{children}</SavedResultsProviderWithoutClerk>;
 }
 
 export function useSavedResults(): SavedResultsContextState {

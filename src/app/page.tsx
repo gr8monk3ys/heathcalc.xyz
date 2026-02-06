@@ -419,10 +419,23 @@ export default function Home() {
           </div>
 
           <div className="mt-8 rounded-2xl border border-accent/15 bg-white p-3 shadow-lg">
-            <Search
-              placeholder="Search calculators, guides, and blog posts..."
-              className="rounded-xl border border-accent/10"
-            />
+            <div className="flex items-center gap-3 rounded-xl border border-accent/10 px-4 py-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-4.35-4.35M10.8 18a7.2 7.2 0 100-14.4 7.2 7.2 0 000 14.4z"
+                />
+              </svg>
+              <span className="text-gray-500">Search calculators, guides, and blog posts…</span>
+            </div>
           </div>
         </div>
       </section>

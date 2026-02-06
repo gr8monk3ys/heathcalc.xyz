@@ -9,6 +9,7 @@ import { DarkModeProvider } from '@/context/DarkModeContext';
 import { UnitSystemProvider } from '@/context/UnitSystemContext';
 import { PreferencesProvider } from '@/context/PreferencesContext';
 import { SavedResultsProvider } from '@/context/SavedResultsContext';
+import { AuthProvider } from '@/context/AuthContext';
 import { Analytics } from '@vercel/analytics/react';
 import PWAInit from '@/components/PWAInit';
 import Script from 'next/script';
@@ -118,51 +119,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             - UnitSystemProvider: only re-renders when unit preferences change
             - PreferencesProvider: backward compatibility wrapper combining both
         */}
-            <DarkModeProvider>
-              <UnitSystemProvider>
-                <PreferencesProvider>
-                  <SavedResultsProvider>
-                    <div className="min-h-screen flex flex-col">
-                      <Header />
-                      <main className="flex-grow container mx-auto px-4 py-8">{children}</main>
-                      <Footer />
-                    </div>
-
-                    {/* Analytics component for tracking */}
-                    <Analytics />
-
-                    {/* PWA initialization and service worker registration */}
-                    <PWAInit />
-
-                    {/* Global structured data for organization and website */}
-                    <GlobalStructuredData />
-
-                    {/* Google Analytics - loaded after page is interactive for better performance */}
-                    {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
-                      <>
-                        <Script
-                          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-                          strategy="afterInteractive"
-                        />
-                        <Script id="google-analytics" strategy="afterInteractive">
-                          {`
-                          window.dataLayer = window.dataLayer || [];
-                          function gtag(){dataLayer.push(arguments);}
-                          gtag('js', new Date());
-                          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-                        `}
-                        </Script>
-                      </>
-                    )}
-                  </SavedResultsProvider>
-                </PreferencesProvider>
-              </UnitSystemProvider>
-            </DarkModeProvider>
-          </ClerkProvider>
-        ) : (
-          <DarkModeProvider>
-            <UnitSystemProvider>
-              <PreferencesProvider>
+        <DarkModeProvider>
+          <UnitSystemProvider>
+            <PreferencesProvider>
+              <AuthProvider>
                 <SavedResultsProvider>
                   <div className="min-h-screen flex flex-col">
                     <Header />
@@ -170,10 +130,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     <Footer />
                   </div>
 
+                  {/* Analytics component for tracking */}
                   <Analytics />
+
+                  {/* PWA initialization and service worker registration */}
                   <PWAInit />
+
+                  {/* Global structured data for organization and website */}
                   <GlobalStructuredData />
 
+                  {/* Google Analytics - loaded after page is interactive for better performance */}
                   {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
                     <>
                       <Script
@@ -191,10 +157,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     </>
                   )}
                 </SavedResultsProvider>
-              </PreferencesProvider>
-            </UnitSystemProvider>
-          </DarkModeProvider>
-        )}
+              </AuthProvider>
+            </PreferencesProvider>
+          </UnitSystemProvider>
+        </DarkModeProvider>
       </body>
     </html>
   );
