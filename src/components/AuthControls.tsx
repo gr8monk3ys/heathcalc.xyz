@@ -2,50 +2,15 @@
 
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { clerkEnabled } from '@/utils/auth';
 
-function ClerkAuthControls(): React.JSX.Element {
-  // Dynamic import to avoid loading Clerk when not configured
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { SignInButton, SignUpButton, UserButton, SignedIn, SignedOut } = require('@clerk/nextjs');
-
-  return (
-    <>
-      <SignedOut>
-        <div className="flex items-center gap-2">
-          <SignInButton mode="redirect">
-            <button
-              type="button"
-              className="rounded-full border border-accent/20 bg-white px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/5"
-            >
-              Log in
-            </button>
-          </SignInButton>
-          <SignUpButton mode="redirect">
-            <button
-              type="button"
-              className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
-            >
-              Sign up
-            </button>
-          </SignUpButton>
-        </div>
-      </SignedOut>
-
-      <SignedIn>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/saved-results"
-            className="rounded-full border border-accent/20 bg-white px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/5"
-          >
-            Saved results
-          </Link>
-          <UserButton afterSignOutUrl="/" />
-        </div>
-      </SignedIn>
-    </>
-  );
-}
+/**
+ * Dynamically loaded Clerk auth controls - client-side only to avoid SSG issues.
+ */
+const ClerkAuthControls = clerkEnabled
+  ? dynamic(() => import('@/components/ClerkAuthControls'), { ssr: false })
+  : null;
 
 function FallbackAuthControls(): React.JSX.Element {
   return (
@@ -67,7 +32,7 @@ function FallbackAuthControls(): React.JSX.Element {
 }
 
 export default function AuthControls(): React.JSX.Element {
-  if (clerkEnabled) {
+  if (ClerkAuthControls) {
     return <ClerkAuthControls />;
   }
 

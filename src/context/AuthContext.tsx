@@ -1,19 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, useMemo, ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import { clerkEnabled } from '@/utils/auth';
-
-// Conditionally import useUser only when Clerk is enabled
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let useUser: () => { isSignedIn: boolean | undefined; user: any };
-
-if (clerkEnabled) {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const clerk = require('@clerk/nextjs');
-  useUser = clerk.useUser;
-} else {
-  useUser = () => ({ isSignedIn: undefined, user: null });
-}
 
 export interface AuthUser {
   email: string;
@@ -26,43 +15,53 @@ interface AuthContextState {
   isAuthenticated: boolean;
 }
 
+const UNAUTHENTICATED: AuthContextState = {
+  user: null,
+  isAuthenticated: false,
+};
+
 const AuthContext = createContext<AuthContextState | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-export function AuthProvider({ children }: AuthProviderProps): React.JSX.Element {
-  const { isSignedIn, user: clerkUser } = useUser();
-
-  const user: AuthUser | null = useMemo(() => {
-    if (!isSignedIn || !clerkUser) {
-      return null;
-    }
-
-    return {
-      email: clerkUser.primaryEmailAddress?.emailAddress ?? '',
-      name:
-        clerkUser.fullName ??
-        clerkUser.firstName ??
-        clerkUser.primaryEmailAddress?.emailAddress ??
-        '',
-      createdAt: clerkUser.createdAt
-        ? new Date(clerkUser.createdAt).toISOString()
-        : new Date().toISOString(),
-    };
-  }, [isSignedIn, clerkUser]);
-
-  const value = useMemo<AuthContextState>(
-    () => ({
-      user,
-      isAuthenticated: Boolean(isSignedIn),
-    }),
-    [user, isSignedIn]
-  );
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+/**
+ * Fallback AuthProvider used when Clerk is not configured or during SSR/SSG.
+ */
+function FallbackAuthProvider({ children }: AuthProviderProps): React.JSX.Element {
+  return <AuthContext.Provider value={UNAUTHENTICATED}>{children}</AuthContext.Provider>;
 }
+
+/**
+ * Dynamically loaded Clerk auth provider - only loaded client-side
+ * to avoid SSG prerendering issues with Clerk's useUser() hook.
+ */
+const ClerkAuthProviderLazy = clerkEnabled
+  ? dynamic(
+      () =>
+        import('@/context/ClerkAuthProvider').then(mod => ({
+          default: mod.ClerkAuthProvider,
+        })),
+      {
+        ssr: false,
+        loading: () => null,
+      }
+    )
+  : null;
+
+/**
+ * AuthProvider that delegates to Clerk (client-side only) or fallback.
+ */
+export function AuthProvider({ children }: AuthProviderProps): React.JSX.Element {
+  if (ClerkAuthProviderLazy) {
+    return <ClerkAuthProviderLazy>{children}</ClerkAuthProviderLazy>;
+  }
+
+  return <FallbackAuthProvider>{children}</FallbackAuthProvider>;
+}
+
+export { AuthContext };
 
 export function useAuth(): AuthContextState {
   const context = useContext(AuthContext);
