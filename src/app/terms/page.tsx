@@ -31,12 +31,27 @@ export default function TermsPage() {
       <div className="neumorph mb-8 rounded-lg p-6">
         <h2 className="mb-4 text-2xl font-semibold">Accounts and Saved Results</h2>
         <p className="mb-3">
-          We offer a lightweight sign-in/sign-up experience to save calculator results. Account and
-          saved-result data may be stored locally in your browser.
+          We offer account creation to save calculator results. Authentication is managed by Clerk,
+          a secure third-party provider. Saved calculator results may be stored locally in your
+          browser.
         </p>
         <p>
-          You are responsible for safeguarding access to your device/browser profile and for the
-          activity associated with your use of the site.
+          You are responsible for safeguarding access to your account and for the activity
+          associated with your use of the site.
+        </p>
+      </div>
+
+      <div className="neumorph mb-8 rounded-lg p-6">
+        <h2 className="mb-4 text-2xl font-semibold">Affiliate Links and Advertising</h2>
+        <p className="mb-3">
+          Some pages contain affiliate links to products and services. When you make a purchase
+          through these links, we may earn a small commission at no extra cost to you. We are a
+          participant in the Amazon Services LLC Associates Program.
+        </p>
+        <p>
+          We also display advertisements through Google AdSense. These ads may use cookies to
+          personalize content. Affiliate recommendations and advertisements do not constitute
+          endorsements of specific medical treatments or products.
         </p>
       </div>
 

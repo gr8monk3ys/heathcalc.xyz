@@ -27,9 +27,8 @@ export default function PrivacyPolicyPage() {
             <strong>Calculator inputs/results:</strong> processed client-side in your browser.
           </li>
           <li>
-            <strong>Optional account data:</strong> if you use our simple sign-in feature, your
-            name, email, and password are stored in your browser&apos;s local storage on that
-            device.
+            <strong>Optional account data:</strong> if you create an account, your name and email
+            are managed securely by our authentication provider (Clerk). We do not store passwords.
           </li>
           <li>
             <strong>Usage analytics:</strong> we may collect aggregate site usage data (e.g., page
@@ -50,21 +49,63 @@ export default function PrivacyPolicyPage() {
       <div className="neumorph mb-8 rounded-lg p-6">
         <h2 className="mb-4 text-2xl font-semibold">Storage and Security</h2>
         <p className="mb-3">
-          Saved results and simple account credentials are currently stored locally in your browser.
-          This is a lightweight authentication approach and should not be treated like
-          enterprise-grade account security.
+          Account authentication is handled by Clerk, a secure third-party authentication provider.
+          Your password is never stored on our servers or in your browser. Saved calculator results
+          are stored locally in your browser for convenience.
         </p>
         <p>
-          If you share a device, other users of that browser profile may access locally stored
-          account and saved result data.
+          If you share a device, other users of that browser profile may access locally stored saved
+          result data.
         </p>
       </div>
 
       <div className="neumorph mb-8 rounded-lg p-6">
         <h2 className="mb-4 text-2xl font-semibold">Third-Party Services</h2>
         <p>
-          We may use third-party analytics and advertising tools. Their handling of data is governed
-          by their own privacy policies.
+          We use third-party analytics and advertising tools. Their handling of data is governed by
+          their own privacy policies.
+        </p>
+      </div>
+
+      <div className="neumorph mb-8 rounded-lg p-6">
+        <h2 className="mb-4 text-2xl font-semibold">Advertising and Affiliate Links</h2>
+        <p className="mb-3">
+          We display advertisements through Google AdSense, which may use cookies and similar
+          technologies to serve ads based on your prior visits to this or other websites. You can
+          opt out of personalized advertising by visiting{' '}
+          <a
+            href="https://www.google.com/settings/ads"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:underline"
+          >
+            Google&apos;s Ads Settings
+          </a>
+          .
+        </p>
+        <p className="mb-3">
+          Some pages on this site contain affiliate links to products we recommend. When you
+          purchase through these links, we may earn a small commission at no additional cost to you.
+          This helps support our free health calculators and content.
+        </p>
+        <p>
+          We participate in the Amazon Services LLC Associates Program, an affiliate advertising
+          program designed to provide a means for sites to earn advertising fees by advertising and
+          linking to Amazon.com. We only recommend products we believe will be valuable to our
+          users.
+        </p>
+      </div>
+
+      <div className="neumorph mb-8 rounded-lg p-6">
+        <h2 className="mb-4 text-2xl font-semibold">Cookies</h2>
+        <p className="mb-3">
+          We use cookies and similar technologies for analytics, advertising, and to remember your
+          preferences (such as dark mode and unit system settings). Third-party services like Google
+          Analytics and Google AdSense may also set cookies.
+        </p>
+        <p>
+          You can manage cookie preferences through your browser settings. Disabling cookies may
+          affect some site functionality.
         </p>
       </div>
 
