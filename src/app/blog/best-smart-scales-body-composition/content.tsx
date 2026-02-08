@@ -142,7 +142,7 @@ export default function BestSmartScalesPage() {
             </ul>
           </div>
 
-          <div className="neumorph p-4 rounded-lg mb-6 lg:sticky lg:top-24">
+          <div className="neumorph p-4 rounded-lg mb-6">
             <h3 className="text-lg font-semibold mb-3">Top picks at a glance</h3>
             <ul className="list-disc list-inside space-y-2">
               <li>
