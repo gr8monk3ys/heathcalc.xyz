@@ -15,6 +15,7 @@ import RelatedCalculators from '@/components/RelatedCalculators';
 import EmbedCalculator from '@/components/calculators/EmbedCalculator';
 import AdBlock from '@/components/AdBlock';
 import RelatedGuides from '@/components/RelatedGuides';
+import Accordion from '@/components/ui/Accordion';
 
 // Dynamic imports for below-the-fold components (performance optimization)
 const FAQSection = dynamic(() => import('@/components/FAQSection'), {
@@ -180,6 +181,10 @@ export function CalculatorPageLayout({
         <h1 className="text-3xl font-bold mb-2">{title}</h1>
         <p className="text-gray-600 mb-6">{description}</p>
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
+
+        <AdBlock slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_RESULT} format="rectangle" />
+
         <div className="mb-6">
           <SocialShare
             url={`/${calculatorSlug}`}
@@ -189,11 +194,9 @@ export function CalculatorPageLayout({
           />
         </div>
 
-        <EmbedCalculator calculatorSlug={calculatorSlug} title={title} className="mb-8" />
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
-
-        <AdBlock slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_RESULT} format="rectangle" />
+        <Accordion title="Embed This Calculator" defaultOpen={false}>
+          <EmbedCalculator calculatorSlug={calculatorSlug} title={title} />
+        </Accordion>
 
         <RelatedCalculators currentSlug={calculatorSlug} />
 

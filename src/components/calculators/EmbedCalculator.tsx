@@ -56,16 +56,11 @@ export default function EmbedCalculator({
   };
 
   return (
-    <section className={`neumorph p-6 rounded-lg ${className}`} aria-labelledby="embed-heading">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-        <div>
-          <h3 id="embed-heading" className="text-xl font-bold">
-            Embed This Calculator
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Add this calculator to your site and keep the attribution link for SEO value.
-          </p>
-        </div>
+    <section className={className} aria-labelledby="embed-heading">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Add this calculator to your site and keep the attribution link for SEO value.
+        </p>
         <button
           type="button"
           onClick={handleCopy}
@@ -75,7 +70,7 @@ export default function EmbedCalculator({
         </button>
       </div>
 
-      <div className="mt-4">
+      <div>
         <label className="block text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">
           Embed Code
         </label>
