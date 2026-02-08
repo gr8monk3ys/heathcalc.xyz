@@ -2,8 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useCookieConsent } from '@/components/CookieConsent';
 
-export default function Footer() {
+export default function Footer(): React.JSX.Element {
+  const { openConsentBanner } = useCookieConsent();
   return (
     <footer className="bg-primary p-6 border-t border-gray-200 dark:border-gray-700">
       <div className="container mx-auto">
@@ -79,6 +81,15 @@ export default function Footer() {
                 <Link href="/disclaimer" className="text-sm hover:text-accent">
                   Disclaimer
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={openConsentBanner}
+                  className="text-sm hover:text-accent"
+                >
+                  Cookie Settings
+                </button>
               </li>
             </ul>
           </div>

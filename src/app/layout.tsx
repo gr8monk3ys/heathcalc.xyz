@@ -12,9 +12,9 @@ import { SavedResultsProvider } from '@/context/SavedResultsContext';
 import { AuthProvider } from '@/context/AuthContext';
 import { Analytics } from '@vercel/analytics/react';
 import PWAInit from '@/components/PWAInit';
-import Script from 'next/script';
 import { ClerkProvider } from '@clerk/nextjs';
 import { clerkEnabled } from '@/utils/auth';
+import { CookieConsentProvider } from '@/components/CookieConsent';
 
 function LayoutProviders({ children }: { children: ReactNode }): React.JSX.Element {
   const inner = (
@@ -22,7 +22,9 @@ function LayoutProviders({ children }: { children: ReactNode }): React.JSX.Eleme
       <UnitSystemProvider>
         <PreferencesProvider>
           <AuthProvider>
-            <SavedResultsProvider>{children}</SavedResultsProvider>
+            <SavedResultsProvider>
+              <CookieConsentProvider>{children}</CookieConsentProvider>
+            </SavedResultsProvider>
           </AuthProvider>
         </PreferencesProvider>
       </UnitSystemProvider>
@@ -119,16 +121,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           ]}
         />
 
-        {/* Google Analytics Script - loaded after page is interactive for better performance */}
-
-        {/* Google AdSense Script */}
-        {process.env.NODE_ENV === 'production' && (
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4505962980988232"
-            crossOrigin="anonymous"
-          />
-        )}
+        {/* AdSense and Analytics scripts are now loaded dynamically by
+            CookieConsentProvider after the user grants consent. */}
       </head>
       <body>
         <LayoutProviders>
@@ -146,24 +140,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
           {/* Global structured data for organization and website */}
           <GlobalStructuredData />
-
-          {/* Google Analytics - loaded after page is interactive for better performance */}
-          {process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_GA_ID && (
-            <>
-              <Script
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-                strategy="afterInteractive"
-              />
-              <Script id="google-analytics" strategy="afterInteractive">
-                {`
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-                `}
-              </Script>
-            </>
-          )}
         </LayoutProviders>
       </body>
     </html>
