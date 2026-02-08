@@ -9,7 +9,15 @@ import { clerkEnabled } from '@/utils/auth';
  * Dynamically loaded Clerk auth controls - client-side only to avoid SSG issues.
  */
 const ClerkAuthControls = clerkEnabled
-  ? dynamic(() => import('@/components/ClerkAuthControls'), { ssr: false })
+  ? dynamic(() => import('@/components/ClerkAuthControls'), {
+      ssr: false,
+      loading: () => (
+        <div className="flex items-center gap-2">
+          <div className="h-9 w-16 rounded-full bg-gray-200 animate-pulse" />
+          <div className="h-9 w-20 rounded-full bg-gray-200 animate-pulse" />
+        </div>
+      ),
+    })
   : null;
 
 function FallbackAuthControls(): React.JSX.Element {
