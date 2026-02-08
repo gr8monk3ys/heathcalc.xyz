@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from '@/utils/logger';
+import { rateLimit } from '@/utils/rateLimit';
 
 /**
  * Newsletter subscription API endpoint
@@ -14,6 +16,8 @@ import { NextRequest, NextResponse } from 'next/server';
  * - Custom: Implement your own integration below
  */
 
+const logger = createLogger({ component: 'NewsletterAPI' });
+
 interface SubscribeRequest {
   email: string;
 }
@@ -27,6 +31,17 @@ interface SubscribeResponse {
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: NextRequest): Promise<NextResponse<SubscribeResponse>> {
+  const { success: withinLimit } = rateLimit(request);
+  if (!withinLimit) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Too many requests. Please try again later.',
+      },
+      { status: 429 }
+    );
+  }
+
   try {
     const body = (await request.json()) as SubscribeRequest;
     const { email } = body;
@@ -81,9 +96,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
         });
       }
 
-      console.error('Mailchimp error:', error);
+      logger.error('Mailchimp error', { error });
       return NextResponse.json(
-        { success: false, message: 'Failed to subscribe. Please try again later.' },
+        {
+          success: false,
+          message: 'Failed to subscribe. Please try again later.',
+        },
         { status: 500 }
       );
     }
@@ -112,9 +130,14 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
         });
       }
 
-      console.error('ConvertKit error:', await response.text());
+      logger.error('ConvertKit error', {
+        responseBody: await response.text(),
+      });
       return NextResponse.json(
-        { success: false, message: 'Failed to subscribe. Please try again later.' },
+        {
+          success: false,
+          message: 'Failed to subscribe. Please try again later.',
+        },
         { status: 500 }
       );
     }
@@ -143,16 +166,19 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
         });
       }
 
-      console.error('Resend error:', await response.text());
+      logger.error('Resend error', { responseBody: await response.text() });
       return NextResponse.json(
-        { success: false, message: 'Failed to subscribe. Please try again later.' },
+        {
+          success: false,
+          message: 'Failed to subscribe. Please try again later.',
+        },
         { status: 500 }
       );
     }
 
-    // No email provider configured - log the email for manual processing
+    // No email provider configured - log without the email address
     // In production, you should configure an email provider
-    console.warn('Newsletter subscription (no provider configured):', email);
+    logger.warn('Newsletter subscription (no provider configured)');
 
     // For development/demo: Store in a simple way or just acknowledge
     if (process.env.NODE_ENV === 'development') {
@@ -164,7 +190,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     }
 
     // Production without provider - return a clear error so integrations don't silently fail
-    console.warn(
+    logger.warn(
       'Newsletter subscription received but no email provider configured. Please set up Mailchimp, ConvertKit, or Resend.'
     );
 
@@ -177,9 +203,14 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       { status: 503 }
     );
   } catch (error) {
-    console.error('Newsletter subscription error:', error);
+    logger.error('Newsletter subscription error', {
+      error: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json(
-      { success: false, message: 'An error occurred. Please try again later.' },
+      {
+        success: false,
+        message: 'An error occurred. Please try again later.',
+      },
       { status: 500 }
     );
   }
