@@ -1,6 +1,8 @@
 'use client';
 
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
+import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
+import { EmbedCodeGenerator } from '@/components/EmbedCodeGenerator';
 
 // Discriminated union for type-safe form fields
 type NumberFieldValue = number | '';
@@ -83,7 +85,11 @@ interface CalculatorFormProps {
   onReset: () => void;
   submitButtonText?: string;
   resetButtonText?: string;
+  /** When provided, shows a subtle "Embed this calculator" link below the form */
+  calculatorSlug?: string;
 }
+
+const EMBEDDABLE_SLUGS = new Set(['bmi', 'tdee', 'body-fat', 'calorie-deficit']);
 
 const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorForm({
   title,
@@ -92,7 +98,10 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
   onReset,
   submitButtonText = 'Calculate',
   resetButtonText = 'Reset',
+  calculatorSlug,
 }) {
+  const [showEmbed, setShowEmbed] = useState(false);
+  const isEmbeddable = calculatorSlug && EMBEDDABLE_SLUGS.has(calculatorSlug);
   const renderField = (field: FormField) => {
     switch (field.type) {
       case 'number':
@@ -117,6 +126,8 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                   step={field.step || '0.1'}
                   min={field.min}
                   max={field.max}
+                  aria-invalid={field.error ? true : undefined}
+                  aria-describedby={field.error ? `${field.name}-error` : undefined}
                 />
                 <button
                   type="button"
@@ -142,10 +153,19 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                 step={field.step || '0.1'}
                 min={field.min}
                 max={field.max}
+                aria-invalid={field.error ? true : undefined}
+                aria-describedby={field.error ? `${field.name}-error` : undefined}
               />
             )}
             {field.error && (
-              <p className="text-red-500 dark:text-red-400 text-sm mt-1">{field.error}</p>
+              <p
+                id={`${field.name}-error`}
+                role="alert"
+                aria-live="polite"
+                className="text-red-500 dark:text-red-400 text-sm mt-1"
+              >
+                {field.error}
+              </p>
             )}
           </div>
         );
@@ -159,6 +179,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                 <label key={option.value} className="flex items-center">
                   <input
                     type="radio"
+                    name={field.name}
                     checked={field.value === option.value}
                     onChange={() => field.onChange(option.value)}
                     className="mr-2"
@@ -212,9 +233,18 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
               }`}
               min={field.min as string}
               max={field.max as string}
+              aria-invalid={field.error ? true : undefined}
+              aria-describedby={field.error ? `${field.name}-error` : undefined}
             />
             {field.error && (
-              <p className="text-red-500 dark:text-red-400 text-sm mt-1">{field.error}</p>
+              <p
+                id={`${field.name}-error`}
+                role="alert"
+                aria-live="polite"
+                className="text-red-500 dark:text-red-400 text-sm mt-1"
+              >
+                {field.error}
+              </p>
             )}
           </div>
         );
@@ -235,9 +265,18 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
               }`}
               min={field.min}
               max={field.max}
+              aria-invalid={field.error ? true : undefined}
+              aria-describedby={field.error ? `${field.name}-error` : undefined}
             />
             {field.error && (
-              <p className="text-red-500 dark:text-red-400 text-sm mt-1">{field.error}</p>
+              <p
+                id={`${field.name}-error`}
+                role="alert"
+                aria-live="polite"
+                className="text-red-500 dark:text-red-400 text-sm mt-1"
+              >
+                {field.error}
+              </p>
             )}
           </div>
         );
@@ -270,6 +309,25 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
           </button>
         </div>
       </form>
+
+      <MedicalDisclaimer variant="compact" className="mt-4" />
+
+      {isEmbeddable && (
+        <div className="mt-3 text-center">
+          <button
+            type="button"
+            onClick={() => setShowEmbed(!showEmbed)}
+            className="text-xs text-gray-400 dark:text-gray-500 hover:text-accent dark:hover:text-accent transition-colors focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded"
+            aria-expanded={showEmbed}
+          >
+            Embed this calculator
+          </button>
+        </div>
+      )}
+
+      {showEmbed && isEmbeddable && calculatorSlug && (
+        <EmbedCodeGenerator calculatorSlug={calculatorSlug} calculatorTitle={title} />
+      )}
     </div>
   );
 });
