@@ -93,6 +93,376 @@ const blogPosts: BlogPost[] = [
     image: '/images/blog/best-home-gym-equipment-beginners.jpg',
   },
   {
+    title: 'Best Treadmills for Home Weight Loss in 2026',
+    description:
+      'Compare the best home treadmills for weight loss. Reviews of NordicTrack Commercial 1750, Sole F80, ProForm Pro 2000, Horizon 7.0 AT, and budget options.',
+    slug: 'best-treadmills-home-weight-loss',
+    date: 'February 8, 2026',
+    readTime: '14 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-treadmills-home-weight-loss.jpg',
+  },
+  {
+    title: 'Best Running Shoes for Weight Loss in 2026',
+    description:
+      'Compare the best running shoes for weight loss and beginners. Reviews of Brooks Ghost 16, HOKA Clifton 9, Nike Pegasus 41, and more.',
+    slug: 'best-running-shoes-weight-loss',
+    date: 'February 8, 2026',
+    readTime: '14 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-running-shoes-weight-loss.jpg',
+  },
+  {
+    title: 'Best Resistance Bands for Strength Training in 2026',
+    description:
+      'Compare the best resistance bands for home workouts and strength training. Reviews of Fit Simplify, WHATAFIT, Undersun, and more.',
+    slug: 'best-resistance-bands-strength-training',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-resistance-bands-strength-training.jpg',
+  },
+  {
+    title: 'Best Body Tape Measures for Tracking Composition in 2026',
+    description:
+      'Compare the best body tape measures for tracking waist, hip, and body composition changes. Reviews of MyoTape, RENPHO, and more.',
+    slug: 'best-body-tape-measures-composition',
+    date: 'February 8, 2026',
+    readTime: '10 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-body-tape-measures-composition.jpg',
+  },
+  {
+    title: 'Best Protein Bars for On-the-Go Nutrition in 2026',
+    description:
+      'Compare the best protein bars for weight loss, muscle building, and on-the-go nutrition. Reviews of Quest, Barebells, RXBAR, and more.',
+    slug: 'best-protein-bars-on-the-go',
+    date: 'February 8, 2026',
+    readTime: '13 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-protein-bars-on-the-go.jpg',
+  },
+  {
+    title: 'Best Foam Rollers and Recovery Tools in 2026',
+    description:
+      'Compare the best foam rollers and recovery tools for muscle soreness and workout recovery. Reviews of TriggerPoint GRID, LuxFit, TheraGun Mini, and more.',
+    slug: 'best-foam-rollers-recovery',
+    date: 'February 8, 2026',
+    readTime: '11 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-foam-rollers-recovery.jpg',
+  },
+  {
+    title: 'Best Yoga Mats for Home Workouts in 2026',
+    description:
+      'Compare the best yoga mats for home workouts, from premium Manduka PRO to budget BalanceFrom. Reviews with real pros and cons.',
+    slug: 'best-yoga-mats-home-workouts',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-yoga-mats-home-workouts.jpg',
+  },
+  {
+    title: 'Best Jump Ropes for Cardio and Weight Loss in 2026',
+    description:
+      'Compare the best jump ropes for cardio, weight loss, and HIIT workouts. Reviews of Crossrope, WOD Nation, Rogue, and more.',
+    slug: 'best-jump-ropes-cardio-weight-loss',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-jump-ropes-cardio-weight-loss.jpg',
+  },
+  {
+    title: 'Best Water Bottles for Hydration Tracking in 2026',
+    description:
+      'Compare the best water bottles for tracking daily water intake. Reviews of HidrateSpark, Nalgene, Hydro Flask, and more.',
+    slug: 'best-water-bottles-hydration-tracking',
+    date: 'February 8, 2026',
+    readTime: '11 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-water-bottles-hydration-tracking.jpg',
+  },
+  {
+    title: 'Best Kettlebells for Full-Body Workouts in 2026',
+    description:
+      'Compare the best kettlebells for home workouts and strength training. Reviews of Kettlebell Kings, CAP Barbell, Rogue, and more.',
+    slug: 'best-kettlebells-full-body-workouts',
+    date: 'February 8, 2026',
+    readTime: '13 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-kettlebells-full-body-workouts.jpg',
+  },
+  {
+    title: 'Best Pull-Up Bars for Home Fitness in 2026',
+    description:
+      'Compare the best pull-up bars for home workouts. Reviews of doorway, wall-mount, and freestanding options.',
+    slug: 'best-pull-up-bars-home-fitness',
+    date: 'February 8, 2026',
+    readTime: '14 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-pull-up-bars-home-fitness.jpg',
+  },
+  {
+    title: 'Best Heart Rate Monitors for Training in 2026',
+    description:
+      'Compare the best heart rate monitors and chest straps for accurate training data. Reviews of Polar H10, Garmin HRM-Pro, and more.',
+    slug: 'best-heart-rate-monitors-training',
+    date: 'February 8, 2026',
+    readTime: '13 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-heart-rate-monitors-training.jpg',
+  },
+  {
+    title: 'Best Workout Headphones for the Gym in 2026',
+    description:
+      'Compare the best workout headphones and earbuds for the gym, running, and HIIT. Reviews of Beats Fit Pro, Jabra Elite 8, Shokz OpenRun, and more.',
+    slug: 'best-workout-headphones-gym',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-workout-headphones-gym.jpg',
+  },
+  {
+    title: 'Best Adjustable Dumbbells for Your Home Gym in 2026',
+    description:
+      'Compare the best adjustable dumbbells for home workouts. Reviews of Bowflex SelectTech 552, PowerBlock Elite EXP, NordicTrack, Flybird, and Amazon Basics with real pros and cons.',
+    slug: 'best-adjustable-dumbbells-home-gym',
+    date: 'February 8, 2026',
+    readTime: '14 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-adjustable-dumbbells-home-gym.jpg',
+  },
+  {
+    title: 'Best Blender Bottles and Shaker Cups in 2026',
+    description:
+      'Compare the best blender bottles and shaker cups for protein shakes. Reviews of BlenderBottle Classic, BlenderBottle Pro, Helimix, Ice Shaker, and SHAKESPHERE.',
+    slug: 'best-blender-bottles-protein-shakes',
+    date: 'February 8, 2026',
+    readTime: '14 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-blender-bottles-protein-shakes.jpg',
+  },
+  {
+    title: 'Best Pre-Workout Supplements for Energy in 2026',
+    description:
+      'Compare the best pre-workout supplements for energy and performance. Reviews of C4 Original, Optimum Nutrition, Legion Pulse, Transparent Labs, and Ghost Legend.',
+    slug: 'best-pre-workout-supplements-energy',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-pre-workout-supplements-energy.jpg',
+  },
+  {
+    title: 'Best Rowing Machines for Full-Body Workouts in 2026',
+    description:
+      'Compare the best rowing machines for home cardio and strength training. Reviews of Concept2 Model D, Hydrow, Sunny Health, and more with honest pros and cons.',
+    slug: 'best-rowing-machines-full-body',
+    date: 'February 8, 2026',
+    readTime: '13 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-rowing-machines-full-body.jpg',
+  },
+  {
+    title: 'Best Exercise Bikes for Weight Loss in 2026',
+    description:
+      'Compare the best exercise bikes for home weight loss. Reviews of Schwinn IC4, Sunny Health, Bowflex VeloCore, and more.',
+    slug: 'best-exercise-bikes-weight-loss',
+    date: 'February 8, 2026',
+    readTime: '14 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-exercise-bikes-weight-loss.jpg',
+  },
+  {
+    title: 'Best Weight Benches for Home Gym in 2026',
+    description:
+      'Compare the best weight benches for home workouts. Reviews of REP AB-3000, Bowflex 5.1S, Fitness Reality, and more.',
+    slug: 'best-weight-benches-home-gym',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-weight-benches-home-gym.jpg',
+  },
+  {
+    title: 'Best Creatine Supplements for Muscle Gain in 2026',
+    description:
+      'Compare the best creatine supplements for muscle gain and performance. Reviews of Optimum Nutrition, Thorne, BulkSupplements, and more.',
+    slug: 'best-creatine-supplements-muscle-gain',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-creatine-supplements-muscle-gain.jpg',
+  },
+  {
+    title: 'Best Massage Guns for Muscle Recovery in 2026',
+    description:
+      'Compare the best percussion massage guns for post-workout recovery. Reviews of Theragun Elite, Hypervolt 2, RENPHO R3, and more.',
+    slug: 'best-massage-guns-recovery',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-massage-guns-recovery.jpg',
+  },
+  {
+    title: 'Best Meal Prep Containers for Weight Loss in 2026',
+    description:
+      'Compare the best meal prep containers for portion control and weight loss. Reviews of Prep Naturals, Freshware, Fitpacker, and more.',
+    slug: 'best-meal-prep-containers-weight-loss',
+    date: 'February 8, 2026',
+    readTime: '10 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-meal-prep-containers-weight-loss.jpg',
+  },
+  {
+    title: 'Best Workout Gloves for Weightlifting in 2026',
+    description:
+      'Compare the best workout gloves for weightlifting and CrossFit. Reviews of Harbinger Pro, Fit Active Sports, RIMSports, and more.',
+    slug: 'best-workout-gloves-weightlifting',
+    date: 'February 8, 2026',
+    readTime: '10 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-workout-gloves-weightlifting.jpg',
+  },
+  {
+    title: 'Best Ab Rollers for Core Training in 2026',
+    description:
+      'Compare the top ab rollers and ab wheels for building core strength. Reviews of Perfect Fitness Ab Carver Pro, Vinsguir, and more.',
+    slug: 'best-ab-rollers-core-training',
+    date: 'February 8, 2026',
+    readTime: '10 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-ab-rollers-core-training.jpg',
+  },
+  {
+    title: 'Best Gym Bags for Workout Gear in 2026',
+    description:
+      'Compare the best gym bags and duffel bags for workout gear. Reviews of Adidas Defender, Under Armour Undeniable, Nike Brasilia, and more.',
+    slug: 'best-gym-bags-workout-gear',
+    date: 'February 8, 2026',
+    readTime: '10 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-gym-bags-workout-gear.jpg',
+  },
+  {
+    title: 'Best Compression Gear for Recovery in 2026',
+    description:
+      'Compare the best compression clothing for workout recovery and performance. Reviews of 2XU, CEP, Under Armour HeatGear, and more.',
+    slug: 'best-compression-gear-recovery',
+    date: 'February 8, 2026',
+    readTime: '11 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-compression-gear-recovery.jpg',
+  },
+  {
+    title: 'Best Barbell Weight Sets for Home Gym in 2026',
+    description:
+      'Compare the best barbell and weight plate sets for home gyms. Reviews of CAP 300lb set, REP Iron Plates, and more.',
+    slug: 'best-barbell-weight-sets-home-gym',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-barbell-weight-sets-home-gym.jpg',
+  },
+  {
+    title: 'Best Fitness Trackers for Kids in 2026',
+    description:
+      'Compare the best fitness trackers and smartwatches for kids. Reviews of Fitbit Ace 3, Garmin Vivofit Jr 3, BIGGERFIVE, and more.',
+    slug: 'best-fitness-trackers-kids',
+    date: 'February 8, 2026',
+    readTime: '11 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-fitness-trackers-kids.jpg',
+  },
+  {
+    title: 'Best Sleep Trackers for Recovery in 2026',
+    description:
+      'Compare the best sleep trackers for workout recovery and health. Reviews of Oura Ring, Whoop 4.0, Fitbit Sense 2, and more.',
+    slug: 'best-sleep-trackers-recovery',
+    date: 'February 8, 2026',
+    readTime: '13 min read',
+    category: 'Product Reviews',
+    image: '/images/blog/best-sleep-trackers-recovery.jpg',
+  },
+  {
+    title: 'How to Measure Body Fat at Home: Methods, Accuracy, and What Works',
+    description:
+      'Learn how to measure body fat at home with the Navy method, calipers, smart scales, and more. Honest accuracy comparisons.',
+    slug: 'how-to-measure-body-fat-at-home',
+    date: 'February 8, 2026',
+    readTime: '15 min read',
+    category: 'Health & Science',
+    image: '/images/blog/how-to-measure-body-fat-at-home.jpg',
+  },
+  {
+    title: 'Heart Rate Zones Explained: A Guide to Training Smarter',
+    description:
+      'Understand heart rate training zones, Zone 2 cardio, the Karvonen method, and when to push harder for better results.',
+    slug: 'heart-rate-zones-explained-training',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Training',
+    image: '/images/blog/heart-rate-zones-explained-training.jpg',
+  },
+  {
+    title: 'Counting Calories vs Tracking Macros: Which Approach Fits You?',
+    description:
+      'Compare calorie counting vs macro tracking to find which approach works best for your personality and goals.',
+    slug: 'counting-calories-vs-tracking-macros',
+    date: 'February 8, 2026',
+    readTime: '11 min read',
+    category: 'Nutrition',
+    image: '/images/blog/counting-calories-vs-tracking-macros.jpg',
+  },
+  {
+    title: 'How Fast Can You Build Muscle? Natural Expectations and Reality',
+    description:
+      'Realistic muscle building timelines based on research. Progressive overload, nutrition, and what to expect in your first year.',
+    slug: 'how-fast-can-you-build-muscle',
+    date: 'February 8, 2026',
+    readTime: '13 min read',
+    category: 'Training',
+    image: '/images/blog/how-fast-can-you-build-muscle.jpg',
+  },
+  {
+    title: 'Treadmill vs Exercise Bike: Which Burns More Calories?',
+    description:
+      'Compare treadmills and exercise bikes for calorie burn, joint impact, and weight loss effectiveness with real data.',
+    slug: 'treadmill-vs-exercise-bike-calories',
+    date: 'February 8, 2026',
+    readTime: '11 min read',
+    category: 'Comparisons',
+    image: '/images/blog/treadmill-vs-exercise-bike-calories.jpg',
+  },
+  {
+    title: 'Adjustable Dumbbells vs Barbell for Home Gym: Which Should You Buy First?',
+    description:
+      'Compare adjustable dumbbells and barbells for home gym setups. Space, cost, exercise versatility, and recommendations.',
+    slug: 'adjustable-dumbbells-vs-barbell-home-gym',
+    date: 'February 8, 2026',
+    readTime: '12 min read',
+    category: 'Comparisons',
+    image: '/images/blog/adjustable-dumbbells-vs-barbell-home-gym.jpg',
+  },
+  {
+    title: 'Smart Scale vs Body Fat Calipers: Which Is More Accurate?',
+    description:
+      'Compare smart scales and body fat calipers for accuracy, consistency, and practical body composition tracking.',
+    slug: 'smart-scale-vs-body-fat-calipers',
+    date: 'February 8, 2026',
+    readTime: '11 min read',
+    category: 'Comparisons',
+    image: '/images/blog/smart-scale-vs-body-fat-calipers.jpg',
+  },
+  {
+    title: 'Cardio vs Weights for Fat Loss: What Science Actually Says',
+    description:
+      'The truth about cardio versus resistance training for fat loss. Learn what research shows about EPOC, muscle mass, and metabolism - plus practical training splits that work.',
+    slug: 'cardio-vs-weights-fat-loss',
+    date: 'February 8, 2026',
+    readTime: '13 min read',
+    category: 'Training',
+    image: '/images/blog/cardio-vs-weights-fat-loss.jpg',
+  },
+  {
     title: '5 Myths About Calorie Deficits Debunked',
     description:
       "Discover the truth behind common misconceptions about calorie deficits, weight loss, and metabolism. Learn why weight loss isn't always linear and how to set realistic expectations.",
