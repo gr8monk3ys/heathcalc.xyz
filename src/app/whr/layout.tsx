@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   keywords:
     'waist-to-hip ratio, whr calculator, body shape calculator, apple shape, pear shape, central obesity, fat distribution, waist circumference, hip circumference, health risk calculator',
   alternates: {
-    canonical: 'https://www.heathcheck.info/whr',
+    canonical: 'https://www.healthcalc.xyz/whr',
   },
   openGraph: {
     title: 'Waist-to-Hip Ratio Calculator | WHR Calculator',
     description: 'Calculate waist-to-hip ratio to understand fat distribution and health risk.',
-    url: 'https://www.heathcheck.info/whr',
+    url: 'https://www.healthcalc.xyz/whr',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',

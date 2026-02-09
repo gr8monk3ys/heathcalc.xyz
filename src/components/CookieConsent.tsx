@@ -147,10 +147,15 @@ function GoogleAnalyticsLoader(): React.JSX.Element | null {
 
   useEffect(() => {
     const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
+    // Validate GA Measurement ID format to prevent script injection via
+    // a compromised or misconfigured environment variable.
+    const GA_ID_PATTERN = /^G-[A-Z0-9]+$/;
     if (
       !analytics ||
       loaded ||
       !gaId ||
+      !GA_ID_PATTERN.test(gaId) ||
       typeof window === 'undefined' ||
       process.env.NODE_ENV !== 'production'
     ) {

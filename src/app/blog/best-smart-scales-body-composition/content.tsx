@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       'Compare the top smart scales for tracking body fat, muscle mass, BMI, and more. In-depth reviews of Withings, RENPHO, Eufy, and other leading body composition scales.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/best-smart-scales-body-composition',
+    url: 'https://www.healthcalc.xyz/blog/best-smart-scales-body-composition',
     images: [
       {
         url: '/images/blog/best-smart-scales-body-composition.jpg',
@@ -44,18 +44,18 @@ export default function BestSmartScalesPage() {
     author: {
       '@type': 'Organization',
       name: 'HealthCheck',
-      url: 'https://www.heathcheck.info',
+      url: 'https://www.healthcalc.xyz',
     },
     publisher: {
       '@type': 'Organization',
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/images/og-image.jpg',
+        url: 'https://www.healthcalc.xyz/images/og-image.jpg',
       },
     },
-    mainEntityOfPage: 'https://www.heathcheck.info/blog/best-smart-scales-body-composition',
-    image: ['https://www.heathcheck.info/images/blog/best-smart-scales-body-composition.jpg'],
+    mainEntityOfPage: 'https://www.healthcalc.xyz/blog/best-smart-scales-body-composition',
+    image: ['https://www.healthcalc.xyz/images/blog/best-smart-scales-body-composition.jpg'],
   };
   const productListJsonLd = {
     '@context': 'https://schema.org',
@@ -346,6 +346,16 @@ export default function BestSmartScalesPage() {
                 subscription
               </p>
             </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B0C3JNJPZ7?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 id="renpho-smart-scale" className="text-2xl font-bold mt-8 mb-4">
@@ -403,6 +413,16 @@ export default function BestSmartScalesPage() {
                 <strong>Cons:</strong> Bluetooth only (need phone nearby), body fat accuracy
                 slightly lower than premium options
               </p>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B01N1UX8RW?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
             </div>
           </div>
 
@@ -465,6 +485,16 @@ export default function BestSmartScalesPage() {
                 gimmick than useful
               </p>
             </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B09PDTB2XB?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 id="etekcity-esf-551" className="text-2xl font-bold mt-8 mb-4">
@@ -506,6 +536,16 @@ export default function BestSmartScalesPage() {
               </Link>
               .
             </p>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B095YJW56C?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 className="text-2xl font-bold mt-8 mb-4">

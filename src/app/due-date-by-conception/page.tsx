@@ -90,9 +90,10 @@ export default function DueDateByConceptionCalculator() {
         '@type': 'WebPage',
         name: 'Due Date by Conception Calculator',
         description: 'Estimate pregnancy due date from conception date.',
-        url: 'https://www.heathcheck.info/due-date-by-conception',
+        url: 'https://www.healthcalc.xyz/due-date-by-conception',
       }}
       understandingSection={<DueDateByConceptionInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

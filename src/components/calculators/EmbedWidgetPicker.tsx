@@ -152,7 +152,7 @@ export default function EmbedWidgetPicker() {
           <div className="neumorph p-3 rounded-lg bg-white/70 dark:bg-gray-900/40">
             <iframe
               id="embed-preview"
-              src={`https://www.heathcheck.info/${selectedSlug}?embed=1`}
+              src={`https://www.healthcalc.xyz/${selectedSlug}?embed=1`}
               title={`${selectedCalculator?.title ?? 'Calculator'} preview`}
               className="w-full"
               style={{ height: `${height}px`, border: 0 }}

@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ component: 'MaximumFatLossCalculator' });
-import { Gender, ActivityLevel, HeightUnit, WeightUnit } from '@/types/common';
+import { Gender, ActivityLevel } from '@/types/common';
 import { MaximumFatLossResult } from '@/types/maximumFatLoss';
 import { calculateMaximumFatLoss } from '@/app/api/maximumFatLoss';
 import { ACTIVITY_MULTIPLIERS } from '@/constants/tdee';
@@ -15,6 +15,12 @@ import MaximumFatLossResultDisplay from '@/components/calculators/maximum-fat-lo
 import MaximumFatLossInfo from '@/components/calculators/maximum-fat-loss/MaximumFatLossInfo';
 import MaximumFatLossUnderstanding from '@/components/calculators/maximum-fat-loss/MaximumFatLossUnderstanding';
 import SaveResult from '@/components/SaveResult';
+import {
+  useHeight,
+  useWeight,
+  createHeightField,
+  createWeightField,
+} from '@/hooks/useCalculatorUnits';
 
 // FAQ data for the calculator
 const faqs = [
@@ -80,10 +86,8 @@ export default function MaximumFatLossCalculator() {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
-  const [height, setHeight] = useState<number | ''>('');
-  const [heightUnit, setHeightUnit] = useState<HeightUnit>('cm');
-  const [weight, setWeight] = useState<number | ''>('');
-  const [weightUnit, setWeightUnit] = useState<WeightUnit>('kg');
+  const height = useHeight();
+  const weight = useWeight();
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>('sedentary');
   const [bodyFatPercentage, setBodyFatPercentage] = useState<number | ''>('');
 
@@ -100,221 +104,177 @@ export default function MaximumFatLossCalculator() {
   const [showResult, setShowResult] = useState<boolean>(false);
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
 
-    // Validate form
-    const newErrors: {
-      age?: string;
-      height?: string;
-      weight?: string;
-      bodyFatPercentage?: string;
-    } = {};
+      // Validate form
+      const newErrors: {
+        age?: string;
+        height?: string;
+        weight?: string;
+        bodyFatPercentage?: string;
+      } = {};
 
-    // Validate age
-    if (isEmpty(age)) {
-      newErrors.age = 'Age is required';
-    } else {
-      const ageValidation = validateAge(age);
-      if (!ageValidation.isValid) {
-        newErrors.age = ageValidation.error;
-      }
-    }
-
-    // Validate height
-    if (isEmpty(height)) {
-      newErrors.height = 'Height is required';
-    } else {
-      const heightForValidation =
-        heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
-      const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
-      const heightValidation = validateHeight(heightForValidation, unitSystem);
-      if (!heightValidation.isValid) {
-        newErrors.height = heightValidation.error;
-      }
-    }
-
-    // Validate weight
-    if (isEmpty(weight)) {
-      newErrors.weight = 'Weight is required';
-    } else {
-      const unitSystem = weightUnit === 'kg' ? 'metric' : 'imperial';
-      const weightValidation = validateWeight(weight, unitSystem);
-      if (!weightValidation.isValid) {
-        newErrors.weight = weightValidation.error;
-      }
-    }
-
-    // Validate body fat percentage
-    if (isEmpty(bodyFatPercentage)) {
-      newErrors.bodyFatPercentage = 'Body fat percentage is required';
-    } else if (typeof bodyFatPercentage === 'number') {
-      if (bodyFatPercentage < 3 || bodyFatPercentage > 60) {
-        newErrors.bodyFatPercentage = 'Body fat percentage must be between 3% and 60%';
-      } else if (bodyFatPercentage < 5 && gender === 'male') {
-        newErrors.bodyFatPercentage = 'Body fat below 5% is dangerous for males';
-      } else if (bodyFatPercentage < 12 && gender === 'female') {
-        newErrors.bodyFatPercentage = 'Body fat below 12% is dangerous for females';
-      }
-    }
-
-    setErrors(newErrors);
-
-    // If no errors, calculate maximum fat loss
-    if (
-      Object.keys(newErrors).length === 0 &&
-      typeof age === 'number' &&
-      typeof height === 'number' &&
-      typeof weight === 'number' &&
-      typeof bodyFatPercentage === 'number'
-    ) {
-      // Convert height to cm if needed
-      const heightCm = heightUnit === 'cm' ? height : height * 30.48;
-
-      // Convert weight to kg if needed
-      const weightKg = weightUnit === 'kg' ? weight : weight / 2.20462;
-
-      try {
-        // Calculate maximum fat loss plan
-        const maxFatLossResult = calculateMaximumFatLoss({
-          gender,
-          age,
-          heightCm,
-          weightKg,
-          activityLevel,
-          bodyFatPercentage,
-        });
-
-        setResult(maxFatLossResult);
-        setShowResult(true);
-
-        // Scroll to result with smooth animation
-        setTimeout(() => {
-          const resultElement = document.getElementById('maximum-fat-loss-result');
-          if (resultElement) {
-            resultElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      } catch (error) {
-        logger.logError('Error calculating maximum fat loss', error);
-        if (error instanceof Error) {
-          setErrors({ ...newErrors, bodyFatPercentage: error.message });
+      // Validate age
+      if (isEmpty(age)) {
+        newErrors.age = 'Age is required';
+      } else {
+        const ageValidation = validateAge(age);
+        if (!ageValidation.isValid) {
+          newErrors.age = ageValidation.error;
         }
       }
-    }
-  };
 
-  // Handle unit toggle
-  const toggleHeightUnit = () => {
-    if (heightUnit === 'cm' && typeof height === 'number') {
-      setHeight(parseFloat((height / 30.48).toFixed(1)));
-      setHeightUnit('ft');
-    } else if (heightUnit === 'ft' && typeof height === 'number') {
-      setHeight(parseFloat((height * 30.48).toFixed(1)));
-      setHeightUnit('cm');
-    } else {
-      setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
-    }
-  };
+      // Validate height (feet for imperial, cm for metric)
+      if (isEmpty(height.value)) {
+        newErrors.height = 'Height is required';
+      } else {
+        const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+        const heightValidation = validateHeight(height.value, unitSystem);
+        if (!heightValidation.isValid) {
+          newErrors.height = heightValidation.error;
+        }
+      }
 
-  const toggleWeightUnit = () => {
-    if (weightUnit === 'kg' && typeof weight === 'number') {
-      setWeight(parseFloat((weight * 2.20462).toFixed(1)));
-      setWeightUnit('lb');
-    } else if (weightUnit === 'lb' && typeof weight === 'number') {
-      setWeight(parseFloat((weight / 2.20462).toFixed(1)));
-      setWeightUnit('kg');
-    } else {
-      setWeightUnit(weightUnit === 'kg' ? 'lb' : 'kg');
-    }
-  };
+      // Validate weight
+      if (isEmpty(weight.value)) {
+        newErrors.weight = 'Weight is required';
+      } else {
+        const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+        const weightValidation = validateWeight(weight.value, unitSystem);
+        if (!weightValidation.isValid) {
+          newErrors.weight = weightValidation.error;
+        }
+      }
+
+      // Validate body fat percentage
+      if (isEmpty(bodyFatPercentage)) {
+        newErrors.bodyFatPercentage = 'Body fat percentage is required';
+      } else if (typeof bodyFatPercentage === 'number') {
+        if (bodyFatPercentage < 3 || bodyFatPercentage > 60) {
+          newErrors.bodyFatPercentage = 'Body fat percentage must be between 3% and 60%';
+        } else if (bodyFatPercentage < 5 && gender === 'male') {
+          newErrors.bodyFatPercentage = 'Body fat below 5% is dangerous for males';
+        } else if (bodyFatPercentage < 12 && gender === 'female') {
+          newErrors.bodyFatPercentage = 'Body fat below 12% is dangerous for females';
+        }
+      }
+
+      setErrors(newErrors);
+
+      // Get converted values
+      const heightCm = height.toCm();
+      const weightKg = weight.toKg();
+
+      // If no errors, calculate maximum fat loss
+      if (
+        Object.keys(newErrors).length === 0 &&
+        typeof age === 'number' &&
+        heightCm !== null &&
+        weightKg !== null &&
+        typeof bodyFatPercentage === 'number'
+      ) {
+        try {
+          // Calculate maximum fat loss plan
+          const maxFatLossResult = calculateMaximumFatLoss({
+            gender,
+            age,
+            heightCm,
+            weightKg,
+            activityLevel,
+            bodyFatPercentage,
+          });
+
+          setResult(maxFatLossResult);
+          setShowResult(true);
+
+          // Scroll to result with smooth animation
+          setTimeout(() => {
+            const resultElement = document.getElementById('maximum-fat-loss-result');
+            if (resultElement) {
+              resultElement.scrollIntoView({ behavior: 'smooth' });
+            }
+          }, 100);
+        } catch (error) {
+          logger.logError('Error calculating maximum fat loss', error);
+          if (error instanceof Error) {
+            setErrors({ ...newErrors, bodyFatPercentage: error.message });
+          }
+        }
+      }
+    },
+    [age, gender, height, weight, activityLevel, bodyFatPercentage]
+  );
 
   // Reset form
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setGender('male');
     setAge('');
-    setHeight('');
-    setHeightUnit('cm');
-    setWeight('');
-    setWeightUnit('kg');
+    height.setValue('');
+    weight.setValue('');
     setActivityLevel('sedentary');
     setBodyFatPercentage('');
     setErrors({});
     setResult(null);
     setShowResult(false);
-  };
+  }, [height, weight]);
 
-  // Form fields for the CalculatorForm component
-  const formFields = [
-    {
-      name: 'gender',
-      label: 'Gender',
-      type: 'radio' as const,
-      value: gender,
-      onChange: (value: string) => setGender(value as Gender),
-      options: [
-        { value: 'male', label: 'Male' },
-        { value: 'female', label: 'Female' },
-      ],
-    },
-    {
-      name: 'age',
-      label: 'Age',
-      type: 'number' as const,
-      value: age,
-      onChange: setAge,
-      error: errors.age,
-      placeholder: 'Years',
-    },
-    {
-      name: 'height',
-      label: 'Height',
-      type: 'number' as const,
-      value: height,
-      onChange: setHeight,
-      error: errors.height,
-      placeholder: heightUnit === 'cm' ? 'Centimeters' : 'Feet',
-      unit: heightUnit === 'cm' ? 'cm' : 'ft',
-      unitToggle: toggleHeightUnit,
-      step: '0.1',
-    },
-    {
-      name: 'weight',
-      label: 'Current Weight',
-      type: 'number' as const,
-      value: weight,
-      onChange: setWeight,
-      error: errors.weight,
-      placeholder: weightUnit === 'kg' ? 'Kilograms' : 'Pounds',
-      unit: weightUnit === 'kg' ? 'kg' : 'lb',
-      unitToggle: toggleWeightUnit,
-      step: '0.1',
-    },
-    {
-      name: 'bodyFatPercentage',
-      label: 'Body Fat %',
-      type: 'number' as const,
-      value: bodyFatPercentage,
-      onChange: setBodyFatPercentage,
-      error: errors.bodyFatPercentage,
-      placeholder: 'Percentage',
-      step: '0.1',
-      min: 3,
-      max: 60,
-    },
-    {
-      name: 'activity',
-      label: 'Activity Level',
-      type: 'select' as const,
-      value: activityLevel,
-      onChange: (value: string) => setActivityLevel(value as ActivityLevel),
-      options: ACTIVITY_MULTIPLIERS.map(level => ({
-        value: level.level,
-        label: level.label,
-        description: level.description,
-      })),
-    },
-  ];
+  // Form fields for the CalculatorForm component - memoized for performance
+  const formFields = useMemo(
+    () => [
+      {
+        name: 'gender',
+        label: 'Gender',
+        type: 'radio' as const,
+        value: gender,
+        onChange: (value: string) => setGender(value as Gender),
+        options: [
+          { value: 'male', label: 'Male' },
+          { value: 'female', label: 'Female' },
+        ],
+      },
+      {
+        name: 'age',
+        label: 'Age',
+        type: 'number' as const,
+        value: age,
+        onChange: setAge,
+        error: errors.age,
+        placeholder: 'Years',
+      },
+      createHeightField(height, errors.height),
+      {
+        ...createWeightField(weight, errors.weight),
+        label: 'Current Weight',
+      },
+      {
+        name: 'bodyFatPercentage',
+        label: 'Body Fat %',
+        type: 'number' as const,
+        value: bodyFatPercentage,
+        onChange: setBodyFatPercentage,
+        error: errors.bodyFatPercentage,
+        placeholder: 'Percentage',
+        step: '0.1',
+        min: 3,
+        max: 60,
+      },
+      {
+        name: 'activity',
+        label: 'Activity Level',
+        type: 'select' as const,
+        value: activityLevel,
+        onChange: (value: string) => setActivityLevel(value as ActivityLevel),
+        options: ACTIVITY_MULTIPLIERS.map(level => ({
+          value: level.level,
+          label: level.label,
+          description: level.description,
+        })),
+      },
+    ],
+    [age, gender, height, weight, activityLevel, bodyFatPercentage, errors]
+  );
 
   return (
     <CalculatorPageLayout
@@ -333,11 +293,12 @@ export default function MaximumFatLossCalculator() {
         name: 'Maximum Fat Loss Calculator',
         description:
           'Find the optimal calorie intake for maximum fat loss while preserving muscle mass. Science-based approach using body composition analysis.',
-        url: 'https://www.heathcheck.info/maximum-fat-loss',
+        url: 'https://www.healthcalc.xyz/maximum-fat-loss',
       }}
       understandingSection={<MaximumFatLossUnderstanding />}
       newsletterTitle="Get Fat Loss Tips & Updates"
       newsletterDescription="Subscribe to receive the latest fat loss strategies, body composition tips, calculator updates, and exclusive content to help you achieve your physique goals."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm
@@ -351,7 +312,7 @@ export default function MaximumFatLossCalculator() {
       <div className="md:col-span-2" id="maximum-fat-loss-result">
         {showResult && result ? (
           <>
-            <MaximumFatLossResultDisplay result={result} weightUnit={weightUnit} gender={gender} />
+            <MaximumFatLossResultDisplay result={result} weightUnit={weight.unit} gender={gender} />
 
             {/* Save result functionality */}
             <div className="mt-6 flex justify-between items-center">

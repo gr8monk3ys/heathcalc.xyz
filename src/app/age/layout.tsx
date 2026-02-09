@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Age Calculator | HealthCheck',
   description: 'Calculate your exact age in years, months, and days.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/age',
+    canonical: 'https://www.healthcalc.xyz/age',
   },
   openGraph: {
     title: 'Age Calculator | HealthCheck',
     description: 'Calculate your exact age in years, months, and days.',
     type: 'website',
-    url: 'https://www.heathcheck.info/age',
+    url: 'https://www.healthcalc.xyz/age',
     images: [
       {
         url: '/images/calculators/age-calculator.jpg',

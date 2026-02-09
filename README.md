@@ -62,8 +62,8 @@ Vercel provides (for example, `https://your-project.vercel.app`) instead.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/gr8monk3ys/heathcheck.info.git
-   cd heathcheck.info
+   git clone https://github.com/gr8monk3ys/healthcalc.xyz.git
+   cd healthcalc.xyz
    ```
 
 2. Install dependencies:

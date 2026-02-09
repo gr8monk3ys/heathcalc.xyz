@@ -115,9 +115,10 @@ export default function FatIntakeCalculator() {
         '@type': 'WebPage',
         name: 'Fat Intake Calculator',
         description: 'Calculate daily fat intake from calories or targets.',
-        url: 'https://www.heathcheck.info/fat-intake',
+        url: 'https://www.healthcalc.xyz/fat-intake',
       }}
       understandingSection={<FatIntakeInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

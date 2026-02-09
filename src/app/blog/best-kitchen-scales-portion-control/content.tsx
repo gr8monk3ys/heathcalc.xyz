@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description:
       'Compare the top food scales for accurate portion control and calorie counting. Reviews of OXO, Etekcity, URAMAZ, and more digital kitchen scales.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/best-kitchen-scales-portion-control',
+    url: 'https://www.healthcalc.xyz/blog/best-kitchen-scales-portion-control',
     images: [
       {
         url: '/images/blog/best-kitchen-scales-portion-control.jpg',
@@ -46,18 +46,18 @@ export default function BestKitchenScalesPage() {
     author: {
       '@type': 'Organization',
       name: 'HealthCheck',
-      url: 'https://www.heathcheck.info',
+      url: 'https://www.healthcalc.xyz',
     },
     publisher: {
       '@type': 'Organization',
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/images/og-image.jpg',
+        url: 'https://www.healthcalc.xyz/images/og-image.jpg',
       },
     },
-    mainEntityOfPage: 'https://www.heathcheck.info/blog/best-kitchen-scales-portion-control',
-    image: ['https://www.heathcheck.info/images/blog/best-kitchen-scales-portion-control.jpg'],
+    mainEntityOfPage: 'https://www.healthcalc.xyz/blog/best-kitchen-scales-portion-control',
+    image: ['https://www.healthcalc.xyz/images/blog/best-kitchen-scales-portion-control.jpg'],
   };
   const productListJsonLd = {
     '@context': 'https://schema.org',
@@ -340,6 +340,16 @@ export default function BestKitchenScalesPage() {
                 <strong>Cons:</strong> Higher price, no app connectivity, requires batteries
               </p>
             </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B079D9B82W?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 id="etekcity-digital-scale" className="text-2xl font-bold mt-8 mb-4">
@@ -389,6 +399,16 @@ export default function BestKitchenScalesPage() {
               <p className="text-sm mt-2">
                 <strong>Cons:</strong> Display can be blocked by large bowls, basic features
               </p>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B0113UZJE2?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
             </div>
           </div>
 
@@ -441,6 +461,16 @@ export default function BestKitchenScalesPage() {
                 <strong>Cons:</strong> Food code lookup can be tedious, limited database vs. apps
               </p>
             </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B00O5U4NDQ?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 id="uramaz-smart-scale" className="text-2xl font-bold mt-8 mb-4">
@@ -491,6 +521,16 @@ export default function BestKitchenScalesPage() {
                 <strong>Cons:</strong> Requires phone nearby, app quality varies, dependency on app
                 updates
               </p>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B09KRTHFPY?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
             </div>
           </div>
 

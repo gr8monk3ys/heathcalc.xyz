@@ -53,7 +53,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self'",
-              "connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com https://va.vercel-scripts.com https://clerk.heathcheck.info https://*.clerk.accounts.dev",
+              "connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com https://va.vercel-scripts.com https://clerk.healthcalc.xyz https://*.clerk.accounts.dev",
               'frame-src https://www.google.com https://pagead2.googlesyndication.com https://challenges.cloudflare.com',
               "object-src 'none'",
               "base-uri 'self'",

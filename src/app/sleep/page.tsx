@@ -96,9 +96,10 @@ export default function SleepCalculator() {
         '@type': 'WebPage',
         name: 'Sleep Calculator',
         description: 'Find ideal bedtimes or wake times based on 90-minute sleep cycles.',
-        url: 'https://www.heathcheck.info/sleep',
+        url: 'https://www.healthcalc.xyz/sleep',
       }}
       understandingSection={<SleepInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

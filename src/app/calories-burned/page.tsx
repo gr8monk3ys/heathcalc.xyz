@@ -131,9 +131,10 @@ export default function CaloriesBurnedCalculator() {
         '@type': 'WebPage',
         name: 'Calories Burned Calculator',
         description: 'Estimate calories burned from workouts using weight, duration, and activity.',
-        url: 'https://www.heathcheck.info/calories-burned',
+        url: 'https://www.healthcalc.xyz/calories-burned',
       }}
       understandingSection={<CaloriesBurnedInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

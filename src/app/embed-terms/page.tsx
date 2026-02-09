@@ -55,7 +55,7 @@ export default function EmbedTermsPage() {
 
         <section>
           <h2 className="text-xl font-semibold mb-2">Contact</h2>
-          <p>Questions about embeds or partnerships? Email us at info@heathcheck.info.</p>
+          <p>Questions about embeds or partnerships? Email us at info@healthcalc.xyz.</p>
         </section>
       </div>
     </div>

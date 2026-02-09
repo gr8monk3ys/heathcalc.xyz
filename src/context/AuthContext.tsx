@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useMemo, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { clerkEnabled } from '@/utils/auth';
 

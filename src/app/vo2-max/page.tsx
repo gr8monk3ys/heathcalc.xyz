@@ -155,9 +155,10 @@ export default function Vo2MaxCalculator() {
         '@type': 'WebPage',
         name: 'VO2 Max Calculator',
         description: 'Estimate VO2 max using the Rockport 1-mile walk test formula.',
-        url: 'https://www.heathcheck.info/vo2-max',
+        url: 'https://www.healthcalc.xyz/vo2-max',
       }}
       understandingSection={<Vo2MaxInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

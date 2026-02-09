@@ -49,7 +49,7 @@ export default function DisclaimerPage() {
 
       <div className="neumorph rounded-lg p-6">
         <h2 className="mb-4 text-2xl font-semibold">Contact</h2>
-        <p>Questions about this disclaimer: info@heathcheck.info</p>
+        <p>Questions about this disclaimer: info@healthcalc.xyz</p>
       </div>
     </div>
   );

@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Due Date by Conception Calculator | HealthCheck',
   description: 'Estimate pregnancy due date from conception date.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/due-date-by-conception',
+    canonical: 'https://www.healthcalc.xyz/due-date-by-conception',
   },
   openGraph: {
     title: 'Due Date by Conception Calculator | HealthCheck',
     description: 'Estimate pregnancy due date from conception date.',
     type: 'website',
-    url: 'https://www.heathcheck.info/due-date-by-conception',
+    url: 'https://www.healthcalc.xyz/due-date-by-conception',
     images: [
       {
         url: '/images/calculators/due-date-by-conception-calculator.jpg',

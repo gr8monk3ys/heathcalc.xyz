@@ -99,9 +99,10 @@ export default function AgeCalculator() {
         '@type': 'WebPage',
         name: 'Age Calculator',
         description: 'Calculate your exact age in years, months, and days.',
-        url: 'https://www.heathcheck.info/age',
+        url: 'https://www.healthcalc.xyz/age',
       }}
       understandingSection={<AgeInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

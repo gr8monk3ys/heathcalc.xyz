@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       'Compare popular body fat measurement methods and learn which option fits your goals.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/measuring-body-fat',
+    url: 'https://www.healthcalc.xyz/blog/measuring-body-fat',
     images: [
       {
         url: '/images/blog/measuring-body-fat.jpg',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ['/images/blog/measuring-body-fat.jpg'],
   },
   alternates: {
-    canonical: 'https://www.heathcheck.info/blog/measuring-body-fat',
+    canonical: 'https://www.healthcalc.xyz/blog/measuring-body-fat',
   },
 };
 
@@ -82,8 +82,8 @@ export default function MeasuringBodyFatPage() {
     title: 'The Pros and Cons of Different Body Fat Measurement Methods',
     description:
       'Compare popular body fat measurement methods and learn which option fits your goals.',
-    url: 'https://www.heathcheck.info/blog/measuring-body-fat',
-    imageUrl: 'https://www.heathcheck.info/images/blog/measuring-body-fat.jpg',
+    url: 'https://www.healthcalc.xyz/blog/measuring-body-fat',
+    imageUrl: 'https://www.healthcalc.xyz/images/blog/measuring-body-fat.jpg',
     datePublished: '2025-02-15T08:00:00Z',
     dateModified: '2025-02-15T08:00:00Z',
     authorName: 'HealthCheck Team',

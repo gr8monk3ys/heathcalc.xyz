@@ -356,10 +356,11 @@ export default function MacroCalculator() {
         name: 'Macro Calculator',
         description:
           'Calculate your daily macronutrient (protein, carbs, fat) targets based on your TDEE and dietary goals. Supports weight loss, maintenance, and muscle gain presets.',
-        url: 'https://www.heathcheck.info/macro',
+        url: 'https://www.healthcalc.xyz/macro',
       }}
       newsletterTitle="Get Nutrition & Macro Tips"
       newsletterDescription="Subscribe to receive the latest macro tracking strategies, meal prep ideas, and evidence-based nutrition advice delivered to your inbox."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

@@ -164,9 +164,10 @@ export default function BMRCalculator() {
         '@type': 'WebPage',
         name: 'BMR Calculator',
         description: 'Calculate your basal metabolic rate using popular formulas.',
-        url: 'https://www.heathcheck.info/bmr',
+        url: 'https://www.healthcalc.xyz/bmr',
       }}
       understandingSection={<BMRInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

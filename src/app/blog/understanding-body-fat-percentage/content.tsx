@@ -15,7 +15,7 @@ export const metadata = {
     description:
       'Understand healthy body fat ranges, how body fat is measured, and what the numbers mean.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/understanding-body-fat-percentage',
+    url: 'https://www.healthcalc.xyz/blog/understanding-body-fat-percentage',
     images: [
       {
         url: '/images/blog/understanding-body-fat-percentage.jpg',
@@ -33,7 +33,7 @@ export const metadata = {
     images: ['/images/blog/understanding-body-fat-percentage.jpg'],
   },
   alternates: {
-    canonical: 'https://www.heathcheck.info/blog/understanding-body-fat-percentage',
+    canonical: 'https://www.healthcalc.xyz/blog/understanding-body-fat-percentage',
   },
 };
 

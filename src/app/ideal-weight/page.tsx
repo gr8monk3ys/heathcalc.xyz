@@ -115,9 +115,10 @@ export default function IdealWeightCalculator() {
         '@type': 'WebPage',
         name: 'Ideal Weight Calculator',
         description: 'Estimate your ideal weight range using common formulas.',
-        url: 'https://www.heathcheck.info/ideal-weight',
+        url: 'https://www.healthcalc.xyz/ideal-weight',
       }}
       understandingSection={<IdealWeightInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

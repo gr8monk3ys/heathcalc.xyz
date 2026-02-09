@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Fat Intake Calculator | HealthCheck',
   description: 'Calculate daily fat intake from calories or targets.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/fat-intake',
+    canonical: 'https://www.healthcalc.xyz/fat-intake',
   },
   openGraph: {
     title: 'Fat Intake Calculator | HealthCheck',
     description: 'Calculate daily fat intake from calories or targets.',
     type: 'website',
-    url: 'https://www.heathcheck.info/fat-intake',
+    url: 'https://www.healthcalc.xyz/fat-intake',
     images: [
       {
         url: '/images/calculators/fat-intake-calculator.jpg',

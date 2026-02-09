@@ -99,9 +99,10 @@ export default function PregnancyDueDateCalculator() {
         '@type': 'WebPage',
         name: 'Pregnancy Due Date Calculator',
         description: 'Estimate your due date based on last menstrual period or conception date.',
-        url: 'https://www.heathcheck.info/pregnancy-due-date',
+        url: 'https://www.healthcalc.xyz/pregnancy-due-date',
       }}
       understandingSection={<PregnancyDueDateInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

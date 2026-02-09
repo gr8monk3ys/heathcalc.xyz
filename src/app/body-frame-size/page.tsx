@@ -133,9 +133,10 @@ export default function BodyFrameSizeCalculator() {
         '@type': 'WebPage',
         name: 'Body Frame Size Calculator',
         description: 'Determine body frame size using height and wrist circumference.',
-        url: 'https://www.heathcheck.info/body-frame-size',
+        url: 'https://www.healthcalc.xyz/body-frame-size',
       }}
       understandingSection={<BodyFrameSizeInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

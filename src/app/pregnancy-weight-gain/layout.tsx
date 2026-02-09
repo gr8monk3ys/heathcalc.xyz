@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Pregnancy Weight Gain Calculator | HealthCheck',
   description: 'Estimate recommended pregnancy weight gain by BMI.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/pregnancy-weight-gain',
+    canonical: 'https://www.healthcalc.xyz/pregnancy-weight-gain',
   },
   openGraph: {
     title: 'Pregnancy Weight Gain Calculator | HealthCheck',
     description: 'Estimate recommended pregnancy weight gain by BMI.',
     type: 'website',
-    url: 'https://www.heathcheck.info/pregnancy-weight-gain',
+    url: 'https://www.healthcalc.xyz/pregnancy-weight-gain',
     images: [
       {
         url: '/images/calculators/pregnancy-weight-gain-calculator.jpg',

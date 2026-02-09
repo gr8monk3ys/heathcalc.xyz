@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Max Heart Rate Calculator | HealthCheck',
   description: 'Estimate max heart rate using age-based formulas.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/max-heart-rate',
+    canonical: 'https://www.healthcalc.xyz/max-heart-rate',
   },
   openGraph: {
     title: 'Max Heart Rate Calculator | HealthCheck',
     description: 'Estimate max heart rate using age-based formulas.',
     type: 'website',
-    url: 'https://www.heathcheck.info/max-heart-rate',
+    url: 'https://www.healthcalc.xyz/max-heart-rate',
     images: [
       {
         url: '/images/calculators/max-heart-rate-calculator.jpg',

@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Target Heart Rate Calculator | HealthCheck',
   description: 'Calculate target heart rate zones for cardio training.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/target-heart-rate',
+    canonical: 'https://www.healthcalc.xyz/target-heart-rate',
   },
   openGraph: {
     title: 'Target Heart Rate Calculator | HealthCheck',
     description: 'Calculate target heart rate zones for cardio training.',
     type: 'website',
-    url: 'https://www.heathcheck.info/target-heart-rate',
+    url: 'https://www.healthcalc.xyz/target-heart-rate',
     images: [
       {
         url: '/images/calculators/target-heart-rate-calculator.jpg',

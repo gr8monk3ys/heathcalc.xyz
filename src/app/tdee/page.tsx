@@ -302,10 +302,11 @@ export default function TDEECalculator() {
         name: 'TDEE Calculator',
         description:
           'Calculate your Total Daily Energy Expenditure (TDEE) and discover your daily calorie needs. Supports multiple formulas (Mifflin-St Jeor, Harris-Benedict, Katch-McArdle) for accurate metabolism calculations.',
-        url: 'https://www.heathcheck.info/tdee',
+        url: 'https://www.healthcalc.xyz/tdee',
       }}
       understandingSection={<TDEEUnderstanding />}
       newsletterDescription="Subscribe to receive the latest metabolism insights, calorie management strategies, and evidence-based nutrition advice delivered to your inbox."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

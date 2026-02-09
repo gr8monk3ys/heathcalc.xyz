@@ -5,6 +5,7 @@
 Your `public/manifest.json` references the following icon files that need to be created:
 
 ### App Icons (8 required)
+
 1. `/public/icons/icon-72x72.png`
 2. `/public/icons/icon-96x96.png`
 3. `/public/icons/icon-128x128.png`
@@ -15,11 +16,13 @@ Your `public/manifest.json` references the following icon files that need to be 
 8. `/public/icons/icon-512x512.png` (Android splash)
 
 ### Shortcut Icons (3 required)
+
 9. `/public/icons/bmi-icon-192x192.png`
 10. `/public/icons/body-fat-icon-192x192.png`
 11. `/public/icons/tdee-icon-192x192.png`
 
 ### Notification Badge (1 required)
+
 12. `/public/icons/badge-72x72.png`
 
 **Total Icons Needed: 12**
@@ -29,17 +32,20 @@ Your `public/manifest.json` references the following icon files that need to be 
 ## Design Specifications
 
 ### Brand Colors
+
 - **Primary**: #4f46e5 (Indigo-500)
 - **Accent**: #10b981 (Green)
 - **Background**: #f0f2f5 (Light Gray)
 
 ### Design Style
+
 - Clean, modern, professional
 - Neumorphic design with soft shadows
 - Health-focused aesthetic
 - High contrast for visibility
 
 ### Content Guidelines
+
 - **Main Icon**: "HC" monogram or full "HealthCheck" wordmark
 - **Shortcut Icons**: Include calculator type (BMI, Body Fat, TDEE)
 - **Badge Icon**: Simple notification indicator
@@ -49,9 +55,11 @@ Your `public/manifest.json` references the following icon files that need to be 
 ## Automated Generation Options
 
 ### Option 1: RealFaviconGenerator (Recommended - FREE)
+
 **Website**: https://realfavicongenerator.net/
 
 **Steps**:
+
 1. Create a single 512x512px master icon
 2. Upload to RealFaviconGenerator
 3. Configure platform-specific options
@@ -59,20 +67,24 @@ Your `public/manifest.json` references the following icon files that need to be 
 5. Extract to `/public/icons/`
 
 **Pros**:
+
 - Free
 - Generates all required sizes automatically
 - Platform-optimized (iOS, Android, Windows)
 - Includes manifest updates
 
 **Cons**:
+
 - Still requires manual creation of calculator-specific icons
 
 ---
 
 ### Option 2: PWA Builder
+
 **Website**: https://www.pwabuilder.com/imageGenerator
 
 **Steps**:
+
 1. Upload 512x512px source image
 2. Generate icon set
 3. Download and extract to `/public/icons/`
@@ -80,6 +92,7 @@ Your `public/manifest.json` references the following icon files that need to be 
 ---
 
 ### Option 3: Figma + Export Script
+
 **For developers with design tools**:
 
 1. Create icons in Figma at 512x512px
@@ -90,11 +103,12 @@ Your `public/manifest.json` references the following icon files that need to be 
 ---
 
 ### Option 4: ImageMagick CLI (Technical)
+
 If you have a source PNG at 512x512px:
 
 ```bash
 # Navigate to project root
-cd /Users/gr8monk3ys/code/heathcheck.info/public/icons
+cd /Users/gr8monk3ys/code/healthcalc.xyz/public/icons
 
 # Generate all sizes from source.png
 convert source.png -resize 72x72 icon-72x72.png
@@ -120,27 +134,33 @@ convert source.png -resize 72x72 badge-72x72.png
 ## Quick Start (Recommended Flow)
 
 ### Step 1: Design Master Icon (15 min)
+
 Use Canva, Figma, or Photoshop:
+
 - Size: 512x512px
 - Format: PNG with transparency
 - Content: "HC" monogram or HealthCheck logo
 - Colors: Indigo (#4f46e5) on light background
 
 ### Step 2: Generate Sizes (5 min)
+
 - Upload to RealFaviconGenerator.net
 - Download generated package
 - Extract all icons to `/public/icons/`
 
 ### Step 3: Create Calculator Icons (30 min)
+
 Create 3 calculator-specific variants:
+
 - **BMI**: Add "BMI" text overlay
 - **Body Fat**: Add "Body Fat" or scale icon
 - **TDEE**: Add "TDEE" text or energy symbol
 
 ### Step 4: Verify (10 min)
+
 ```bash
 # Check all files exist
-ls -l /Users/gr8monk3ys/code/heathcheck.info/public/icons/
+ls -l /Users/gr8monk3ys/code/healthcalc.xyz/public/icons/
 
 # Should show 12 files:
 # icon-72x72.png through icon-512x512.png
@@ -151,12 +171,14 @@ ls -l /Users/gr8monk3ys/code/heathcheck.info/public/icons/
 ```
 
 ### Step 5: Test PWA
+
 ```bash
 npm run build
 npm run start
 ```
 
 Visit http://localhost:3000 and test PWA installation on:
+
 - Chrome desktop (install prompt)
 - Mobile device (add to home screen)
 
@@ -165,6 +187,7 @@ Visit http://localhost:3000 and test PWA installation on:
 ## Design Templates
 
 ### Canva Template (Free)
+
 1. Go to Canva.com
 2. Create custom size: 512x512px
 3. Use these elements:
@@ -174,7 +197,9 @@ Visit http://localhost:3000 and test PWA installation on:
    - Export as PNG
 
 ### Simple Text-Based Icon
+
 For quick prototyping, create solid color icons with text:
+
 - Background: #4f46e5 (indigo)
 - Text: "HC" in white, 200px font
 - Border radius: 20% for rounded corners
@@ -186,6 +211,7 @@ For quick prototyping, create solid color icons with text:
 After creating icons, validate with:
 
 1. **Lighthouse PWA Audit**:
+
    ```bash
    npm run build
    # Open Chrome DevTools > Lighthouse > PWA audit

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       'Debunk common calorie deficit myths and learn what actually drives sustainable fat loss.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/calorie-deficit-myths',
+    url: 'https://www.healthcalc.xyz/blog/calorie-deficit-myths',
     images: [
       {
         url: '/images/blog/calorie-deficit-myths.jpg',

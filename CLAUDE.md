@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-HealthCheck is a Next.js 16 health calculator application with 10 fully functional calculators. Built with TypeScript, React 19, and TailwindCSS.
+HealthCheck is a Next.js 16 health calculator application with 44+ fully functional calculators and 40+ blog posts. Built with TypeScript, React 19, and TailwindCSS.
 
-**Working Calculators (10/10):** BMI, TDEE, Body Fat, Body Fat Burn, ABSI, WHR, Calorie Deficit, Weight Management, Maximum Fat Loss, Conversions
+**Calculator Categories:** Body Composition (11), Weight Management (4), Metabolism & Energy (3), Nutrition & Macros (4), Performance & Training (12), Wellness & Recovery (2), Pregnancy & Fertility (4), Health & Vitals (2), Utilities (3), plus 5 new specialty calculators (FFMI, Body Recomposition, Intermittent Fasting, Keto Macros, Caffeine Intake)
 
 ## Development Commands
 

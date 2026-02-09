@@ -18,6 +18,7 @@ This agent is responsible for:
 ### 1. Code Quality ✅
 
 #### Remove Debug Code
+
 ```bash
 # Find console.log statements
 grep -rn "console.log" src/ --include="*.ts" --include="*.tsx"
@@ -35,6 +36,7 @@ grep -rn "debugger" src/ --include="*.ts" --include="*.tsx"
 **Action**: Remove or replace with proper logging/error tracking
 
 #### Verify No TODO/FIXME in Critical Code
+
 ```bash
 # Find TODO comments
 grep -rn "TODO" src/ --include="*.ts" --include="*.tsx"
@@ -51,6 +53,7 @@ grep -rn "XXX" src/ --include="*.ts" --include="*.tsx"
 ### 2. Build & Performance ✅
 
 #### Production Build
+
 ```bash
 # Clean build
 npm run clean
@@ -63,18 +66,21 @@ ls -lh .next/
 ```
 
 **Verify**:
+
 - Build completes without errors
 - All 22 pages generated
 - No webpack warnings about bundle size
 - Service worker generated correctly
 
 #### Bundle Analysis
+
 ```bash
 # Run build and analyze
 npm run build
 ```
 
 **Check**:
+
 - All pages < 250 kB (currently all under this limit)
 - First Load JS optimized
 - Shared chunks properly split
@@ -83,6 +89,7 @@ npm run build
 ### 3. Testing ✅
 
 #### Run Full Test Suite
+
 ```bash
 # Run all tests
 npm test
@@ -92,22 +99,26 @@ npm test -- --coverage
 ```
 
 **Requirements**:
+
 - 537/537 tests passing (100%)
 - Coverage ≥ 90% for lines and statements
 - No skipped or disabled tests
 
 #### Type Checking
+
 ```bash
 # TypeScript compilation
 npm run type-check
 ```
 
 **Requirements**:
+
 - No type errors
 - No implicit `any` warnings
 - All imports resolve correctly
 
 #### Linting
+
 ```bash
 # Lint all files
 npm run lint
@@ -117,6 +128,7 @@ npm run lint:fix
 ```
 
 **Requirements**:
+
 - No linting errors
 - All code follows style guide
 - No accessibility violations
@@ -124,6 +136,7 @@ npm run lint:fix
 ### 4. SEO & Metadata ✅
 
 #### Verify Metadata
+
 ```bash
 # Check all layout.tsx files exist
 find src/app -name "layout.tsx" | wc -l  # Should be 10+ (one per calculator)
@@ -133,6 +146,7 @@ grep -r "export const metadata" src/app/*/layout.tsx
 ```
 
 **Check Each Calculator**:
+
 - Title and description present
 - Keywords relevant
 - OpenGraph image exists (1200x630px)
@@ -140,6 +154,7 @@ grep -r "export const metadata" src/app/*/layout.tsx
 - Canonical URLs correct
 
 #### Sitemap Verification
+
 ```bash
 # Verify sitemap exists
 cat public/sitemap.xml
@@ -148,6 +163,7 @@ cat public/sitemap.xml
 ```
 
 **Verify**:
+
 - All 10 calculators listed
 - All 6 blog posts listed
 - Static pages (about, privacy, terms, etc.)
@@ -155,12 +171,14 @@ cat public/sitemap.xml
 - Lastmod dates accurate
 
 #### Robots.txt
+
 ```bash
 # Check robots.txt
 cat public/robots.txt
 ```
 
 **Verify**:
+
 - Allows all crawlers
 - References sitemap.xml
 - No unnecessary blocks
@@ -168,6 +186,7 @@ cat public/robots.txt
 ### 5. Security & Performance 🔒
 
 #### Security Audit
+
 ```bash
 # Run npm audit
 npm audit
@@ -180,23 +199,28 @@ npm audit fix
 ```
 
 **Requirements**:
+
 - No critical or high vulnerabilities
 - All dependencies up to date
 - No known security issues
 
 #### Environment Variables
+
 ```bash
 # Check .env.example exists
 cat .env.example
 ```
 
 **Verify**:
+
 - All required env vars documented
 - No secrets in code
 - Production env vars configured in Vercel
 
 #### HTTPS & Security Headers
+
 **Verify in deployment**:
+
 - HTTPS enforced
 - Security headers configured (CSP, X-Frame-Options, etc.)
 - No mixed content warnings
@@ -204,6 +228,7 @@ cat .env.example
 ### 6. PWA & Offline Support 📱
 
 #### Service Worker
+
 ```bash
 # Verify service worker exists
 ls -lh public/sw.js
@@ -213,13 +238,16 @@ cat public/manifest.json
 ```
 
 **Verify**:
+
 - Service worker registers in production
 - Caching strategies correct
 - Offline fallback page works
 - Icons for all sizes included
 
 #### Manifest
+
 **Check**:
+
 - App name and description
 - Icons (192x192, 512x512)
 - Theme colors
@@ -229,36 +257,42 @@ cat public/manifest.json
 ### 7. Analytics & Monitoring 📊
 
 #### Sentry Setup
+
 ```bash
 # Verify Sentry is configured
 grep -r "sentry" src/ --include="*.ts" --include="*.tsx"
 ```
 
 **Action**:
+
 - Set up Sentry project
 - Configure auth token
 - Test error reporting
 - Set up alerts
 
 #### Google Analytics
+
 ```bash
 # Check Analytics implementation
 grep -r "gtag\|analytics" src/ --include="*.tsx"
 ```
 
 **Verify**:
+
 - Google Analytics ID configured
 - Tracking code loads in production only
 - Privacy policy mentions analytics
 - Cookie consent if required
 
 #### Google AdSense
+
 ```bash
 # Check AdSense setup
 grep -r "adsbygoogle" src/
 ```
 
 **Verify**:
+
 - AdSense script loads correctly
 - Ad placements appropriate
 - Doesn't hurt performance
@@ -266,6 +300,7 @@ grep -r "adsbygoogle" src/
 ### 8. Content & UX ✨
 
 #### Content Review
+
 - [ ] All calculator pages have accurate information
 - [ ] FAQ sections complete (5 questions each)
 - [ ] Blog posts well-written and informative
@@ -273,6 +308,7 @@ grep -r "adsbygoogle" src/
 - [ ] All links work (internal and external)
 
 #### Accessibility
+
 ```bash
 # Run accessibility audit (manual testing recommended)
 npm run build && npm run start
@@ -280,6 +316,7 @@ npm run build && npm run start
 ```
 
 **Verify**:
+
 - All images have alt text
 - Proper heading hierarchy
 - ARIA labels where needed
@@ -287,13 +324,16 @@ npm run build && npm run start
 - Color contrast meets WCAG AA
 
 #### Cross-Browser Testing
+
 **Test in**:
+
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari (latest)
 - Mobile browsers (iOS Safari, Chrome Android)
 
 **Check**:
+
 - All calculators work correctly
 - UI renders properly
 - No JavaScript errors
@@ -302,25 +342,30 @@ npm run build && npm run start
 ### 9. Final Deployment Checks 🚀
 
 #### Domain & DNS
-- [ ] Domain configured (www.heathcheck.info)
+
+- [ ] Domain configured (www.healthcalc.xyz)
 - [ ] SSL certificate active
 - [ ] www redirects configured
 - [ ] DNS propagated
 
 #### Vercel Configuration
+
 ```bash
 # Check vercel.json if exists
 cat vercel.json
 ```
 
 **Verify**:
+
 - Build settings correct
 - Environment variables set
 - Edge functions configured
 - Analytics enabled
 
 #### Post-Deployment Smoke Test
+
 After deployment:
+
 - [ ] Homepage loads correctly
 - [ ] All 10 calculators accessible
 - [ ] Calculations work correctly
@@ -406,6 +451,7 @@ If issues are found in production:
 ## Post-Launch Monitoring
 
 ### First 24 Hours
+
 - Monitor Sentry for errors
 - Check Google Analytics for traffic
 - Verify all calculators being used
@@ -413,6 +459,7 @@ If issues are found in production:
 - Monitor server response times
 
 ### First Week
+
 - Review user feedback
 - Check for any broken links
 - Monitor performance metrics

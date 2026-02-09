@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Lean Body Mass Calculator | HealthCheck',
   description: 'Estimate lean body mass using weight, height, and sex.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/lean-body-mass',
+    canonical: 'https://www.healthcalc.xyz/lean-body-mass',
   },
   openGraph: {
     title: 'Lean Body Mass Calculator | HealthCheck',
     description: 'Estimate lean body mass using weight, height, and sex.',
     type: 'website',
-    url: 'https://www.heathcheck.info/lean-body-mass',
+    url: 'https://www.healthcalc.xyz/lean-body-mass',
     images: [
       {
         url: '/images/calculators/lean-body-mass-calculator.jpg',

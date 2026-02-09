@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Resting Heart Rate Calculator | HealthCheck',
   description: 'Evaluate your resting heart rate and fitness category.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/resting-heart-rate',
+    canonical: 'https://www.healthcalc.xyz/resting-heart-rate',
   },
   openGraph: {
     title: 'Resting Heart Rate Calculator | HealthCheck',
     description: 'Evaluate your resting heart rate and fitness category.',
     type: 'website',
-    url: 'https://www.heathcheck.info/resting-heart-rate',
+    url: 'https://www.healthcalc.xyz/resting-heart-rate',
     images: [
       {
         url: '/images/calculators/resting-heart-rate-calculator.jpg',

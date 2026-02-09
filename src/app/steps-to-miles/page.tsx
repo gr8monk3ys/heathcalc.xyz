@@ -122,9 +122,10 @@ export default function StepsToMilesCalculator() {
         '@type': 'WebPage',
         name: 'Steps to Miles Calculator',
         description: 'Convert daily steps into miles or kilometers.',
-        url: 'https://www.heathcheck.info/steps-to-miles',
+        url: 'https://www.healthcalc.xyz/steps-to-miles',
       }}
       understandingSection={<StepsToMilesInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

@@ -131,9 +131,10 @@ export default function CaloriesBurnedSwimmingCalculator() {
         '@type': 'WebPage',
         name: 'Calories Burned Swimming Calculator',
         description: 'Estimate calories burned while swimming based on intensity and time.',
-        url: 'https://www.heathcheck.info/calories-burned-swimming',
+        url: 'https://www.healthcalc.xyz/calories-burned-swimming',
       }}
       understandingSection={<CaloriesBurnedSwimmingInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

@@ -1,21 +1,28 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ component: 'WeightManagementCalculator' });
-import { Gender, ActivityLevel, HeightUnit, WeightUnit } from '@/types/common';
+import { Gender, ActivityLevel } from '@/types/common';
 import { WeightManagementResult, DietType, GoalType } from '@/types/weightManagement';
 import { calculateWeightManagement } from '@/app/api/weightManagement';
 import { ACTIVITY_MULTIPLIERS } from '@/constants/tdee';
 import { DIET_TYPES } from '@/constants/weightManagement';
 import { validateAge, validateHeight, validateWeight, isEmpty } from '@/utils/validation';
+import { convertWeight } from '@/utils/conversions';
 import CalculatorPageLayout from '@/components/calculators/CalculatorPageLayout';
 import CalculatorForm from '@/components/calculators/CalculatorForm';
 import WeightManagementResultDisplay from '@/components/calculators/weight-management/WeightManagementResult';
 import WeightManagementInfo from '@/components/calculators/weight-management/WeightManagementInfo';
 import WeightManagementUnderstanding from '@/components/calculators/weight-management/WeightManagementUnderstanding';
 import SaveResult from '@/components/SaveResult';
+import {
+  useHeight,
+  useWeight,
+  createHeightField,
+  createWeightField,
+} from '@/hooks/useCalculatorUnits';
 
 // FAQ data for the calculator
 const faqs = [
@@ -82,10 +89,8 @@ export default function WeightManagementCalculator() {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
-  const [height, setHeight] = useState<number | ''>('');
-  const [heightUnit, setHeightUnit] = useState<HeightUnit>('cm');
-  const [weight, setWeight] = useState<number | ''>('');
-  const [weightUnit, setWeightUnit] = useState<WeightUnit>('kg');
+  const height = useHeight();
+  const weight = useWeight();
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>('sedentary');
   const [goalWeight, setGoalWeight] = useState<number | ''>('');
   const [targetDate, setTargetDate] = useState<string>('');
@@ -111,169 +116,154 @@ export default function WeightManagementCalculator() {
     return tomorrow.toISOString().split('T')[0];
   };
 
+  // Wrap the weight toggle to also convert goalWeight
+  const toggleWeightUnitWithGoal = useCallback(() => {
+    if (typeof goalWeight === 'number') {
+      if (weight.unit === 'kg') {
+        setGoalWeight(parseFloat(convertWeight(goalWeight, 'kg', 'lb').toFixed(1)));
+      } else {
+        setGoalWeight(parseFloat(convertWeight(goalWeight, 'lb', 'kg').toFixed(1)));
+      }
+    }
+    weight.toggle();
+  }, [weight, goalWeight]);
+
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
 
-    // Validate form
-    const newErrors: {
-      age?: string;
-      height?: string;
-      weight?: string;
-      goalWeight?: string;
-      targetDate?: string;
-    } = {};
+      // Validate form
+      const newErrors: {
+        age?: string;
+        height?: string;
+        weight?: string;
+        goalWeight?: string;
+        targetDate?: string;
+      } = {};
 
-    // Validate age
-    if (isEmpty(age)) {
-      newErrors.age = 'Age is required';
-    } else {
-      const ageValidation = validateAge(age);
-      if (!ageValidation.isValid) {
-        newErrors.age = ageValidation.error;
-      }
-    }
-
-    // Validate height
-    if (isEmpty(height)) {
-      newErrors.height = 'Height is required';
-    } else {
-      const heightForValidation =
-        heightUnit === 'ft' ? (typeof height === 'number' ? height * 12 : height) : height;
-      const unitSystem = heightUnit === 'cm' ? 'metric' : 'imperial';
-      const heightValidation = validateHeight(heightForValidation, unitSystem);
-      if (!heightValidation.isValid) {
-        newErrors.height = heightValidation.error;
-      }
-    }
-
-    // Validate weight
-    if (isEmpty(weight)) {
-      newErrors.weight = 'Weight is required';
-    } else {
-      const unitSystem = weightUnit === 'kg' ? 'metric' : 'imperial';
-      const weightValidation = validateWeight(weight, unitSystem);
-      if (!weightValidation.isValid) {
-        newErrors.weight = weightValidation.error;
-      }
-    }
-
-    // Validate goal weight
-    if (isEmpty(goalWeight)) {
-      newErrors.goalWeight = 'Goal weight is required';
-    } else if (typeof goalWeight === 'number' && typeof weight === 'number') {
-      if (goalWeight === weight) {
-        newErrors.goalWeight = 'Goal weight must be different from current weight';
-      } else if (goalWeight < 40 && weightUnit === 'kg') {
-        newErrors.goalWeight = 'Goal weight seems too low for safety';
-      } else if (goalWeight < 88 && weightUnit === 'lb') {
-        newErrors.goalWeight = 'Goal weight seems too low for safety';
-      }
-    }
-
-    // Validate target date
-    if (!targetDate) {
-      newErrors.targetDate = 'Target date is required';
-    } else {
-      const selectedDate = new Date(targetDate);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      if (selectedDate <= today) {
-        newErrors.targetDate = 'Target date must be in the future';
-      }
-    }
-
-    setErrors(newErrors);
-
-    // If no errors, calculate weight management plan
-    if (
-      Object.keys(newErrors).length === 0 &&
-      typeof age === 'number' &&
-      typeof height === 'number' &&
-      typeof weight === 'number' &&
-      typeof goalWeight === 'number' &&
-      targetDate
-    ) {
-      // Convert height to cm if needed
-      const heightCm = heightUnit === 'cm' ? height : height * 30.48;
-
-      // Convert weights to kg if needed
-      const weightKg = weightUnit === 'kg' ? weight : weight / 2.20462;
-      const goalWeightKg = weightUnit === 'kg' ? goalWeight : goalWeight / 2.20462;
-
-      // Determine goal type
-      const goalType: GoalType =
-        goalWeightKg < weightKg ? 'lose' : goalWeightKg > weightKg ? 'gain' : 'maintain';
-
-      try {
-        // Calculate weight management plan
-        const weightManagementResult = calculateWeightManagement({
-          gender,
-          age,
-          heightCm,
-          weightKg,
-          activityLevel,
-          goalWeightKg,
-          goalType,
-          targetDate: new Date(targetDate),
-          dietType,
-        });
-
-        setResult(weightManagementResult);
-        setShowResult(true);
-
-        // Scroll to result with smooth animation
-        setTimeout(() => {
-          const resultElement = document.getElementById('weight-management-result');
-          if (resultElement) {
-            resultElement.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      } catch (error) {
-        logger.logError('Error calculating weight management plan', error);
-        if (error instanceof Error) {
-          setErrors({ ...newErrors, goalWeight: error.message });
+      // Validate age
+      if (isEmpty(age)) {
+        newErrors.age = 'Age is required';
+      } else {
+        const ageValidation = validateAge(age);
+        if (!ageValidation.isValid) {
+          newErrors.age = ageValidation.error;
         }
       }
-    }
-  };
 
-  // Handle unit toggle
-  const toggleHeightUnit = () => {
-    if (heightUnit === 'cm' && typeof height === 'number') {
-      setHeight(parseFloat((height / 30.48).toFixed(1)));
-      setHeightUnit('ft');
-    } else if (heightUnit === 'ft' && typeof height === 'number') {
-      setHeight(parseFloat((height * 30.48).toFixed(1)));
-      setHeightUnit('cm');
-    } else {
-      setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
-    }
-  };
+      // Validate height (feet for imperial, cm for metric)
+      if (isEmpty(height.value)) {
+        newErrors.height = 'Height is required';
+      } else {
+        const unitSystem = height.unit === 'cm' ? 'metric' : 'imperial';
+        const heightValidation = validateHeight(height.value, unitSystem);
+        if (!heightValidation.isValid) {
+          newErrors.height = heightValidation.error;
+        }
+      }
 
-  const toggleWeightUnit = () => {
-    if (weightUnit === 'kg') {
-      if (typeof weight === 'number') setWeight(parseFloat((weight * 2.20462).toFixed(1)));
-      if (typeof goalWeight === 'number')
-        setGoalWeight(parseFloat((goalWeight * 2.20462).toFixed(1)));
-      setWeightUnit('lb');
-    } else {
-      if (typeof weight === 'number') setWeight(parseFloat((weight / 2.20462).toFixed(1)));
-      if (typeof goalWeight === 'number')
-        setGoalWeight(parseFloat((goalWeight / 2.20462).toFixed(1)));
-      setWeightUnit('kg');
-    }
-  };
+      // Validate weight
+      if (isEmpty(weight.value)) {
+        newErrors.weight = 'Weight is required';
+      } else {
+        const unitSystem = weight.unit === 'kg' ? 'metric' : 'imperial';
+        const weightValidation = validateWeight(weight.value, unitSystem);
+        if (!weightValidation.isValid) {
+          newErrors.weight = weightValidation.error;
+        }
+      }
+
+      // Validate goal weight
+      if (isEmpty(goalWeight)) {
+        newErrors.goalWeight = 'Goal weight is required';
+      } else if (typeof goalWeight === 'number' && typeof weight.value === 'number') {
+        if (goalWeight === weight.value) {
+          newErrors.goalWeight = 'Goal weight must be different from current weight';
+        } else if (goalWeight < 40 && weight.unit === 'kg') {
+          newErrors.goalWeight = 'Goal weight seems too low for safety';
+        } else if (goalWeight < 88 && weight.unit === 'lb') {
+          newErrors.goalWeight = 'Goal weight seems too low for safety';
+        }
+      }
+
+      // Validate target date
+      if (!targetDate) {
+        newErrors.targetDate = 'Target date is required';
+      } else {
+        const selectedDate = new Date(targetDate);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (selectedDate <= today) {
+          newErrors.targetDate = 'Target date must be in the future';
+        }
+      }
+
+      setErrors(newErrors);
+
+      // Get converted values
+      const heightCm = height.toCm();
+      const weightKg = weight.toKg();
+
+      // If no errors, calculate weight management plan
+      if (
+        Object.keys(newErrors).length === 0 &&
+        typeof age === 'number' &&
+        heightCm !== null &&
+        weightKg !== null &&
+        typeof goalWeight === 'number' &&
+        targetDate
+      ) {
+        // Convert goal weight to kg if needed
+        const goalWeightKg =
+          weight.unit === 'kg' ? goalWeight : convertWeight(goalWeight, 'lb', 'kg');
+
+        // Determine goal type
+        const goalType: GoalType =
+          goalWeightKg < weightKg ? 'lose' : goalWeightKg > weightKg ? 'gain' : 'maintain';
+
+        try {
+          // Calculate weight management plan
+          const weightManagementResult = calculateWeightManagement({
+            gender,
+            age,
+            heightCm,
+            weightKg,
+            activityLevel,
+            goalWeightKg,
+            goalType,
+            targetDate: new Date(targetDate),
+            dietType,
+          });
+
+          setResult(weightManagementResult);
+          setShowResult(true);
+
+          // Scroll to result with smooth animation
+          setTimeout(() => {
+            const resultElement = document.getElementById('weight-management-result');
+            if (resultElement) {
+              resultElement.scrollIntoView({ behavior: 'smooth' });
+            }
+          }, 100);
+        } catch (error) {
+          logger.logError('Error calculating weight management plan', error);
+          if (error instanceof Error) {
+            setErrors({ ...newErrors, goalWeight: error.message });
+          }
+        }
+      }
+    },
+    [age, gender, height, weight, activityLevel, goalWeight, targetDate, dietType]
+  );
 
   // Reset form
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setGender('male');
     setAge('');
-    setHeight('');
-    setHeightUnit('cm');
-    setWeight('');
-    setWeightUnit('kg');
+    height.setValue('');
+    weight.setValue('');
     setActivityLevel('sedentary');
     setGoalWeight('');
     setTargetDate('');
@@ -281,99 +271,95 @@ export default function WeightManagementCalculator() {
     setErrors({});
     setResult(null);
     setShowResult(false);
-  };
+  }, [height, weight]);
 
-  // Form fields for the CalculatorForm component
-  const formFields = [
-    {
-      name: 'gender',
-      label: 'Gender',
-      type: 'radio' as const,
-      value: gender,
-      onChange: (value: string) => setGender(value as Gender),
-      options: [
-        { value: 'male', label: 'Male' },
-        { value: 'female', label: 'Female' },
-      ],
-    },
-    {
-      name: 'age',
-      label: 'Age',
-      type: 'number' as const,
-      value: age,
-      onChange: setAge,
-      error: errors.age,
-      placeholder: 'Years',
-    },
-    {
-      name: 'height',
-      label: 'Height',
-      type: 'number' as const,
-      value: height,
-      onChange: setHeight,
-      error: errors.height,
-      placeholder: heightUnit === 'cm' ? 'Centimeters' : 'Feet',
-      unit: heightUnit === 'cm' ? 'cm' : 'ft',
-      unitToggle: toggleHeightUnit,
-      step: '0.1',
-    },
-    {
-      name: 'weight',
-      label: 'Current Weight',
-      type: 'number' as const,
-      value: weight,
-      onChange: setWeight,
-      error: errors.weight,
-      placeholder: weightUnit === 'kg' ? 'Kilograms' : 'Pounds',
-      unit: weightUnit === 'kg' ? 'kg' : 'lb',
-      unitToggle: toggleWeightUnit,
-      step: '0.1',
-    },
-    {
-      name: 'goalWeight',
-      label: 'Goal Weight',
-      type: 'number' as const,
-      value: goalWeight,
-      onChange: setGoalWeight,
-      error: errors.goalWeight,
-      placeholder: weightUnit === 'kg' ? 'Kilograms' : 'Pounds',
-      unit: weightUnit === 'kg' ? 'kg' : 'lb',
-      step: '0.1',
-    },
-    {
-      name: 'targetDate',
-      label: 'Target Date',
-      type: 'date' as const,
-      value: targetDate,
-      onChange: setTargetDate,
-      error: errors.targetDate,
-      min: getMinDate(),
-    },
-    {
-      name: 'activity',
-      label: 'Activity Level',
-      type: 'select' as const,
-      value: activityLevel,
-      onChange: (value: string) => setActivityLevel(value as ActivityLevel),
-      options: ACTIVITY_MULTIPLIERS.map(level => ({
-        value: level.level,
-        label: level.label,
-        description: level.description,
-      })),
-    },
-    {
-      name: 'dietType',
-      label: 'Diet Type',
-      type: 'select' as const,
-      value: dietType,
-      onChange: (value: string) => setDietType(value as DietType),
-      options: DIET_TYPES.map(diet => ({
-        value: diet.type,
-        label: diet.label,
-        description: diet.description,
-      })),
-    },
-  ];
+  // Form fields for the CalculatorForm component - memoized for performance
+  const formFields = useMemo(
+    () => [
+      {
+        name: 'gender',
+        label: 'Gender',
+        type: 'radio' as const,
+        value: gender,
+        onChange: (value: string) => setGender(value as Gender),
+        options: [
+          { value: 'male', label: 'Male' },
+          { value: 'female', label: 'Female' },
+        ],
+      },
+      {
+        name: 'age',
+        label: 'Age',
+        type: 'number' as const,
+        value: age,
+        onChange: setAge,
+        error: errors.age,
+        placeholder: 'Years',
+      },
+      createHeightField(height, errors.height),
+      {
+        ...createWeightField(weight, errors.weight),
+        label: 'Current Weight',
+        unitToggle: toggleWeightUnitWithGoal,
+      },
+      {
+        name: 'goalWeight',
+        label: 'Goal Weight',
+        type: 'number' as const,
+        value: goalWeight,
+        onChange: setGoalWeight,
+        error: errors.goalWeight,
+        placeholder: weight.placeholder,
+        unit: weight.unit,
+        step: '0.1',
+      },
+      {
+        name: 'targetDate',
+        label: 'Target Date',
+        type: 'date' as const,
+        value: targetDate,
+        onChange: setTargetDate,
+        error: errors.targetDate,
+        min: getMinDate(),
+      },
+      {
+        name: 'activity',
+        label: 'Activity Level',
+        type: 'select' as const,
+        value: activityLevel,
+        onChange: (value: string) => setActivityLevel(value as ActivityLevel),
+        options: ACTIVITY_MULTIPLIERS.map(level => ({
+          value: level.level,
+          label: level.label,
+          description: level.description,
+        })),
+      },
+      {
+        name: 'dietType',
+        label: 'Diet Type',
+        type: 'select' as const,
+        value: dietType,
+        onChange: (value: string) => setDietType(value as DietType),
+        options: DIET_TYPES.map(diet => ({
+          value: diet.type,
+          label: diet.label,
+          description: diet.description,
+        })),
+      },
+    ],
+    [
+      age,
+      gender,
+      height,
+      weight,
+      activityLevel,
+      goalWeight,
+      targetDate,
+      dietType,
+      errors,
+      toggleWeightUnitWithGoal,
+    ]
+  );
 
   return (
     <CalculatorPageLayout
@@ -392,11 +378,12 @@ export default function WeightManagementCalculator() {
         name: 'Weight Management Calculator',
         description:
           'Plan your weight management journey with a target date and get personalized calorie and macro recommendations. Complete roadmap for weight loss or muscle gain.',
-        url: 'https://www.heathcheck.info/weight-management',
+        url: 'https://www.healthcalc.xyz/weight-management',
       }}
       understandingSection={<WeightManagementUnderstanding />}
       newsletterTitle="Get Weight Management Tips & Updates"
       newsletterDescription="Subscribe to receive the latest nutrition and fitness tips, calculator updates, and exclusive content to help you achieve your weight management goals."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm
@@ -410,7 +397,7 @@ export default function WeightManagementCalculator() {
       <div className="md:col-span-2" id="weight-management-result">
         {showResult && result ? (
           <>
-            <WeightManagementResultDisplay result={result} weightUnit={weightUnit} />
+            <WeightManagementResultDisplay result={result} weightUnit={weight.unit} />
 
             {/* Save result functionality */}
             <div className="mt-6 flex justify-between items-center">
@@ -424,7 +411,7 @@ export default function WeightManagementCalculator() {
                   carbsGrams: result.macros.carbsGrams,
                   fatGrams: result.macros.fatGrams,
                   targetDate: targetDate,
-                  weightToChange: `${Math.abs(typeof weight === 'number' && typeof goalWeight === 'number' ? weight - goalWeight : 0).toFixed(1)} ${weightUnit}`,
+                  weightToChange: `${Math.abs(typeof weight.value === 'number' && typeof goalWeight === 'number' ? weight.value - goalWeight : 0).toFixed(1)} ${weight.unit}`,
                 }}
               />
 

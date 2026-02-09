@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import CalculatorCard from '@/components/CalculatorCard';
-import Search from '@/components/Search';
 
 export const metadata = {
   title: 'HeathCheck - Free Body Fat, BMI, TDEE Calculators',
@@ -16,7 +15,7 @@ export const metadata = {
     title: 'HeathCheck - Free Body Fat, BMI, TDEE Calculators',
     description:
       'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health goals.',
-    url: 'https://www.heathcheck.info/',
+    url: 'https://www.healthcalc.xyz/',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',
@@ -418,7 +417,10 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-8 rounded-2xl border border-accent/15 bg-white p-3 shadow-lg">
+          <Link
+            href="/search"
+            className="mt-8 block rounded-2xl border border-accent/15 bg-white p-3 shadow-lg transition-all hover:border-accent/30 hover:shadow-xl"
+          >
             <div className="flex items-center gap-3 rounded-xl border border-accent/10 px-4 py-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -436,7 +438,7 @@ export default function Home() {
               </svg>
               <span className="text-gray-500">Search calculators, guides, and blog posts…</span>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 

@@ -12,11 +12,13 @@
 HealthCheck is 95% production-ready but BLOCKED by 16 missing OpenGraph (OG) images. These images are critical for social media sharing on Facebook, Twitter, LinkedIn, and other platforms. Without them, shared links will appear broken or unprofessional.
 
 **Current State**:
+
 - Directories created: `/public/images/og/`, `/public/images/blog/`, `/public/images/calculators/`
 - Existing images: 0 of 16
 - Missing images: 16 (100%)
 
 **Impact**:
+
 - Poor social media presentation
 - Reduced click-through rates on shared links
 - Unprofessional appearance
@@ -53,11 +55,13 @@ HealthCheck is 95% production-ready but BLOCKED by 16 missing OpenGraph (OG) ima
 To install Canva MCP server for image creation:
 
 1. **Install the MCP server**:
+
 ```bash
 npm install -g @anthropic/canva-mcp-server
 ```
 
 2. **Configure Claude Desktop** (`~/.config/claude/claude_desktop_config.json`):
+
 ```json
 {
   "mcpServers": {
@@ -87,29 +91,34 @@ npm install -g @anthropic/canva-mcp-server
 ### Color Palette
 
 **Primary Colors** (from `/src/app/globals.css` and `/tailwind.config.js`):
+
 - **Background Light**: `#f0f2f5` (Light gray-blue)
 - **Background Dark**: `#121212` (Near black)
 - **Primary White**: `#ffffff`
 - **Primary Gray**: `#e5e7eb`
 
 **Accent Colors**:
+
 - **Primary Accent**: `#4f46e5` (Indigo-500)
 - **Accent Light**: `#6366f1` (Indigo-400)
 - **Accent Dark**: `#4338ca` (Indigo-600)
 
 **Semantic Colors**:
+
 - **Success**: `#10b981` (Green)
 - **Warning**: `#f59e0b` (Amber)
 - **Danger**: `#ef4444` (Red)
 - **Info**: `#3b82f6` (Blue)
 
 ### Typography
+
 - **Font Family**: Inter (or fallback to -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto)
 - **Title Font Size**: 64-72px (bold, 900 weight)
 - **Subtitle Font Size**: 28-32px (medium, 500-600 weight)
 - **Body Font Size**: 20-24px (regular, 400 weight)
 
 ### Design Style
+
 - **Style**: Neumorphic (soft shadows, subtle depth)
 - **Shadows**: Soft, multi-layered
   - Light shadow: `rgba(255, 255, 255, 0.9)`
@@ -118,6 +127,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Design Philosophy**: Clean, modern, professional, health-focused
 
 ### Logo/Branding
+
 - **Site Name**: HealthCheck
 - **Tagline Options**:
   - "Health and Fitness Calculators"
@@ -132,6 +142,7 @@ npm install -g @anthropic/canva-mcp-server
 ### Category 1: Main Site Images (1 image)
 
 #### 1. Homepage OpenGraph Image
+
 - **Filename**: `og-image.jpg`
 - **Directory**: `/public/images/og/`
 - **Referenced in**: `/src/app/layout.tsx` (line 35)
@@ -151,6 +162,7 @@ npm install -g @anthropic/canva-mcp-server
 ### Category 2: Implemented Calculator Images (5 images)
 
 #### 2. BMI Calculator
+
 - **Filename**: `bmi-calculator-og.jpg`
 - **Directory**: `/public/images/`
 - **Referenced in**: `/src/app/bmi/metadata.ts` (line 18)
@@ -163,6 +175,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Colors**: Indigo accent with info blue (#3b82f6)
 
 #### 3. TDEE Calculator
+
 - **Filename**: `tdee-calculator-og.jpg`
 - **Directory**: `/public/images/`
 - **Referenced in**: `/src/app/tdee/metadata.ts` (line 19)
@@ -175,6 +188,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Colors**: Indigo accent with warning amber (#f59e0b)
 
 #### 4. Body Fat Calculator
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/`
 - **Referenced in**: `/src/app/body-fat/metadata.ts` (MISSING openGraph.images)
@@ -188,6 +202,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Note**: NEEDS TO BE ADDED to metadata.ts
 
 #### 5. Body Fat Burn Calculator
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/`
 - **Referenced in**: `/src/app/body-fat-burn/metadata.ts` (MISSING openGraph.images)
@@ -201,6 +216,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Note**: NEEDS TO BE ADDED to metadata.ts
 
 #### 6. ABSI Calculator
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/`
 - **Referenced in**: `/src/app/absi/metadata.ts` (MISSING openGraph.images)
@@ -214,6 +230,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Note**: NEEDS TO BE ADDED to metadata.ts
 
 #### 7. WHR Calculator
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/`
 - **Referenced in**: `/src/app/whr/metadata.ts` (MISSING openGraph.images)
@@ -231,6 +248,7 @@ npm install -g @anthropic/canva-mcp-server
 ### Category 3: Coming Soon Calculator Images (4 images)
 
 #### 8. Calorie Deficit Calculator
+
 - **Filename**: `calorie-deficit-calculator.jpg`
 - **Directory**: `/public/images/calculators/`
 - **Referenced in**: `/src/app/calorie-deficit/layout.tsx` (line 21)
@@ -243,6 +261,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Colors**: Indigo accent with success green (#10b981)
 
 #### 9. Weight Management Planner
+
 - **Filename**: `weight-management-calculator.jpg`
 - **Directory**: `/public/images/calculators/`
 - **Referenced in**: `/src/app/weight-management/layout.tsx` (line 21)
@@ -255,6 +274,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Colors**: Indigo accent with info blue (#3b82f6)
 
 #### 10. Maximum Fat Loss Calculator
+
 - **Filename**: `maximum-fat-loss-calculator.jpg`
 - **Directory**: `/public/images/calculators/`
 - **Referenced in**: `/src/app/maximum-fat-loss/layout.tsx` (line 21)
@@ -267,6 +287,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Colors**: Indigo accent with danger red (#ef4444)
 
 #### 11. Unit Converter
+
 - **Filename**: `og-image.jpg` (reusing homepage image)
 - **Directory**: `/public/images/`
 - **Referenced in**: `/src/app/conversions/layout.tsx` (line 21)
@@ -284,6 +305,7 @@ npm install -g @anthropic/canva-mcp-server
 ### Category 4: Blog Post Images (5 images)
 
 #### 12. Measuring Body Fat (Blog)
+
 - **Filename**: `measuring-body-fat.jpg`
 - **Directory**: `/public/images/blog/`
 - **Referenced in**: `/src/app/blog/measuring-body-fat/content.tsx` (line 58)
@@ -297,6 +319,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Article Style**: Educational, professional
 
 #### 13. Calorie Deficit Myths (Blog)
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/blog/`
 - **Referenced in**: `/src/app/blog/calorie-deficit-myths/content.tsx` (MISSING openGraph)
@@ -310,6 +333,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Note**: NEEDS TO BE ADDED to metadata
 
 #### 14. TDEE Explained (Blog)
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/blog/`
 - **Referenced in**: `/src/app/blog/tdee-explained/content.tsx` (MISSING openGraph)
@@ -323,6 +347,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Note**: NEEDS TO BE ADDED to metadata
 
 #### 15. Understanding ABSI (Blog)
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/blog/`
 - **Referenced in**: `/src/app/blog/understanding-absi/content.tsx` (MISSING openGraph.images)
@@ -336,6 +361,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Note**: NEEDS TO BE ADDED to metadata
 
 #### 16. Understanding Body Fat Percentage (Blog)
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/blog/`
 - **Referenced in**: `/src/app/blog/understanding-body-fat-percentage/content.tsx` (MISSING openGraph)
@@ -349,6 +375,7 @@ npm install -g @anthropic/canva-mcp-server
 - **Note**: NEEDS TO BE ADDED to metadata
 
 #### 17. Waist-to-Hip Ratio Guide (Blog)
+
 - **Filename**: Currently MISSING (no OG image defined)
 - **Directory**: `/public/images/blog/`
 - **Referenced in**: `/src/app/blog/waist-to-hip-ratio-guide/content.tsx` (MISSING openGraph.images)
@@ -401,6 +428,7 @@ All images should follow this consistent layout:
 ### Text Specifications
 
 **Title Text**:
+
 - Font: Inter Bold (900 weight) or system fallback
 - Size: 64-72px
 - Color: `#1f2937` (dark gray) or `#ffffff` (white, depending on background)
@@ -408,6 +436,7 @@ All images should follow this consistent layout:
 - Letter spacing: -1px (tight)
 
 **Subtitle Text**:
+
 - Font: Inter Medium (500-600 weight)
 - Size: 28-32px
 - Color: `#4b5563` (medium gray) or accent color
@@ -415,6 +444,7 @@ All images should follow this consistent layout:
 - Letter spacing: 0
 
 **Brand Name**:
+
 - Font: Inter Bold (700 weight)
 - Size: 24px
 - Color: `#4f46e5` (primary accent)
@@ -423,16 +453,19 @@ All images should follow this consistent layout:
 ### Background Options
 
 **Option 1: Gradient Background**
+
 - Primary: `#f0f2f5` → `#ffffff`
 - Direction: Diagonal (135deg)
 - Subtle, professional
 
 **Option 2: Solid + Accent**
+
 - Background: `#ffffff`
 - Accent panel: `#4f46e5` (20% opacity)
 - Creates depth
 
 **Option 3: Neumorphic**
+
 - Background: `#f0f2f5`
 - Soft shadows: `rgba(255, 255, 255, 0.9)` and `rgba(0, 0, 0, 0.1)`
 - Card-like elements with depth
@@ -456,6 +489,7 @@ All images should follow this consistent layout:
 **Dimensions**: 1200x630px
 
 **Layout**:
+
 ```
 Background: White (#ffffff) with subtle gradient to #f0f2f5
 ┌─────────────────────────────────────────┐
@@ -473,6 +507,7 @@ Background: White (#ffffff) with subtle gradient to #f0f2f5
 ```
 
 **Elements**:
+
 - **Title**: "BMI Calculator" - 72px, Inter Bold, #1f2937
 - **Subtitle**: "Calculate Your Body Mass Index" - 32px, Inter Medium, #4b5563
 - **Icon**: Scale or body measurement icon, 150x150px, #4f46e5
@@ -486,6 +521,7 @@ Background: White (#ffffff) with subtle gradient to #f0f2f5
 **Dimensions**: 1200x630px
 
 **Layout**:
+
 ```
 Background: Light gray (#f0f2f5)
 ┌─────────────────────────────────────────┐
@@ -503,6 +539,7 @@ Background: Light gray (#f0f2f5)
 ```
 
 **Elements**:
+
 - **Title**: "TDEE Calculator" - 72px, Inter Bold, #1f2937
 - **Subtitle**: "Total Daily Energy Expenditure" - 28px, Inter Medium, #f59e0b (amber)
 - **Icons**: Flame icon + activity icons, #f59e0b
@@ -515,6 +552,7 @@ Background: Light gray (#f0f2f5)
 **Dimensions**: 1200x630px
 
 **Layout**:
+
 ```
 Background: White to light blue gradient
 ┌─────────────────────────────────────────┐
@@ -532,6 +570,7 @@ Background: White to light blue gradient
 ```
 
 **Elements**:
+
 - **Title**: "Measuring Body Fat" - 68px, Inter Bold, #1f2937
 - **Subtitle**: "Pros & Cons of Different Methods" - 30px, Inter Medium, #4b5563
 - **Icons**: 4 measurement method icons, 100x100px each, #10b981 (green)
@@ -545,6 +584,7 @@ Background: White to light blue gradient
 Since Canva MCP is not currently installed, here are alternative approaches:
 
 ### Option 1: Manual Creation with Canva (Recommended)
+
 1. Visit https://www.canva.com
 2. Create custom size: 1200x630px
 3. Use brand colors and fonts specified above
@@ -553,18 +593,21 @@ Since Canva MCP is not currently installed, here are alternative approaches:
 6. Save to appropriate directory
 
 ### Option 2: Figma
+
 1. Create 1200x630px frame
 2. Apply HealthCheck design system
 3. Export as JPG or PNG
 4. Save to appropriate directory
 
 ### Option 3: Adobe Photoshop/Illustrator
+
 1. Create artboard: 1200x630px, 72 DPI
 2. Follow design templates
 3. Export for web (JPG, optimized)
 4. Save to appropriate directory
 
 ### Option 4: Programmatic (Node.js + Canvas)
+
 ```javascript
 // Example using node-canvas
 const { createCanvas, loadImage } = require('canvas');
@@ -622,7 +665,7 @@ const metadata: Metadata = {
   openGraph: {
     title: 'Body Fat Calculator | Calculate Your Body Fat Percentage',
     description: '...',
-    url: 'https://www.heathcheck.info/body-fat',
+    url: 'https://www.healthcalc.xyz/body-fat',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',
@@ -650,7 +693,9 @@ const metadata: Metadata = {
 ## Priority Order for Creation
 
 ### Phase 1: Critical (Must-Have) - 7 Images
+
 These are referenced in existing metadata and will break social sharing:
+
 1. `og-image.jpg` - Homepage
 2. `bmi-calculator-og.jpg` - BMI Calculator
 3. `tdee-calculator-og.jpg` - TDEE Calculator
@@ -660,19 +705,12 @@ These are referenced in existing metadata and will break social sharing:
 7. `maximum-fat-loss-calculator.jpg` - Coming Soon page
 
 ### Phase 2: Important (Should-Have) - 4 Images
-These need metadata updates first:
-8. `body-fat-calculator-og.jpg` - Body Fat Calculator
-9. `body-fat-burn-calculator-og.jpg` - Body Fat Burn Calculator
-10. `absi-calculator-og.jpg` - ABSI Calculator
-11. `whr-calculator-og.jpg` - WHR Calculator
+
+These need metadata updates first: 8. `body-fat-calculator-og.jpg` - Body Fat Calculator 9. `body-fat-burn-calculator-og.jpg` - Body Fat Burn Calculator 10. `absi-calculator-og.jpg` - ABSI Calculator 11. `whr-calculator-og.jpg` - WHR Calculator
 
 ### Phase 3: Nice-to-Have - 5 Images
-Blog posts (need metadata updates):
-12. `calorie-deficit-myths.jpg` - Blog
-13. `tdee-explained.jpg` - Blog
-14. `understanding-absi.jpg` - Blog
-15. `understanding-body-fat-percentage.jpg` - Blog
-16. `waist-to-hip-ratio-guide.jpg` - Blog
+
+Blog posts (need metadata updates): 12. `calorie-deficit-myths.jpg` - Blog 13. `tdee-explained.jpg` - Blog 14. `understanding-absi.jpg` - Blog 15. `understanding-body-fat-percentage.jpg` - Blog 16. `waist-to-hip-ratio-guide.jpg` - Blog
 
 ---
 
@@ -681,21 +719,24 @@ Blog posts (need metadata updates):
 After creating images, validate with:
 
 ### 1. OpenGraph Validators
+
 - **Facebook Sharing Debugger**: https://developers.facebook.com/tools/debug/
 - **Twitter Card Validator**: https://cards-dev.twitter.com/validator
 - **LinkedIn Post Inspector**: https://www.linkedin.com/post-inspector/
 
 ### 2. Local Testing
+
 ```bash
 # Check file sizes (should be < 1MB each)
-ls -lh /Users/gr8monk3ys/code/heathcheck.info/public/images/**/*.jpg
+ls -lh /Users/gr8monk3ys/code/healthcalc.xyz/public/images/**/*.jpg
 
 # Verify dimensions
-file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
+file /Users/gr8monk3ys/code/healthcalc.xyz/public/images/og/og-image.jpg
 # Should show: JPEG image data, 1200 x 630
 ```
 
 ### 3. Browser Testing
+
 - Open page in browser
 - View page source
 - Verify `<meta property="og:image" content="...">` tags
@@ -706,6 +747,7 @@ file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
 ## Next Steps
 
 ### Without Canva MCP (Manual Workflow):
+
 1. ✅ Create directory structure (`/public/images/og/`, `/blog/`, `/calculators/`)
 2. ⬜ Create 7 critical images (Phase 1) using Canva or Figma
 3. ⬜ Upload images to correct directories
@@ -715,6 +757,7 @@ file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
 7. ⬜ Final validation and deployment
 
 ### With Canva MCP (Automated Workflow):
+
 1. ⬜ Install Canva MCP server
 2. ⬜ Configure Claude Desktop with API key
 3. ⬜ Restart Claude Desktop
@@ -727,11 +770,13 @@ file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
 ## Blockers & Issues
 
 ### Current Blockers:
+
 1. **No Canva MCP installed** - Limits automation capabilities
 2. **10 metadata files missing OpenGraph images** - Must be updated before deployment
 3. **Zero images created** - 100% of images missing
 
 ### Recommendations:
+
 1. **Short-term**: Create critical images manually using Canva (free tier)
 2. **Medium-term**: Update all metadata files to reference correct image paths
 3. **Long-term**: Install Canva MCP for easier future updates and variations
@@ -741,6 +786,7 @@ file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
 ## Estimated Time to Complete
 
 **Manual Creation (Canva)**:
+
 - Per image: 15-20 minutes
 - 16 images × 20 min = ~5.5 hours
 - Metadata updates: 1.5 hours
@@ -748,6 +794,7 @@ file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
 - **Total: ~8 hours**
 
 **With Canva MCP (if installed)**:
+
 - Setup: 30 minutes
 - Image generation: 1-2 hours (batch)
 - Metadata updates: 1.5 hours
@@ -759,21 +806,25 @@ file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
 ## Resources
 
 ### Design Tools:
+
 - Canva: https://www.canva.com
 - Figma: https://www.figma.com
 - Adobe Express: https://www.adobe.com/express/
 
 ### OpenGraph Resources:
+
 - OG Protocol: https://ogp.me/
 - Image Specs: https://www.opengraph.xyz/
 - Best Practices: https://css-tricks.com/essential-meta-tags-social-media/
 
 ### Icon Resources:
+
 - Heroicons: https://heroicons.com/ (matches site style)
 - Phosphor Icons: https://phosphoricons.com/
 - Lucide Icons: https://lucide.dev/
 
 ### Color Tools:
+
 - Coolors Palette: https://coolors.co/
 - Tailwind Colors: https://tailwindcss.com/docs/customizing-colors
 
@@ -781,29 +832,30 @@ file /Users/gr8monk3ys/code/heathcheck.info/public/images/og/og-image.jpg
 
 ## Appendix: Image Paths Reference
 
-| Page/Calculator | Expected Image Path | Status | Priority |
-|----------------|---------------------|--------|----------|
-| Homepage | `/images/og-image.jpg` | Missing | Critical |
-| BMI Calculator | `/images/bmi-calculator-og.jpg` | Missing | Critical |
-| TDEE Calculator | `/images/tdee-calculator-og.jpg` | Missing | Critical |
-| Body Fat | `/images/body-fat-calculator-og.jpg` | Missing + Metadata | Important |
-| Body Fat Burn | `/images/body-fat-burn-calculator-og.jpg` | Missing + Metadata | Important |
-| ABSI | `/images/absi-calculator-og.jpg` | Missing + Metadata | Important |
-| WHR | `/images/whr-calculator-og.jpg` | Missing + Metadata | Important |
-| Calorie Deficit | `/images/calculators/calorie-deficit-calculator.jpg` | Missing | Critical |
-| Weight Management | `/images/calculators/weight-management-calculator.jpg` | Missing | Critical |
-| Max Fat Loss | `/images/calculators/maximum-fat-loss-calculator.jpg` | Missing | Critical |
-| Conversions | `/images/og-image.jpg` (dedicated TBD) | Missing | Nice-to-Have |
-| Blog: Measuring BF | `/images/blog/measuring-body-fat.jpg` | Missing | Critical |
-| Blog: Cal Deficit | `/images/blog/calorie-deficit-myths.jpg` | Missing + Metadata | Nice-to-Have |
-| Blog: TDEE | `/images/blog/tdee-explained.jpg` | Missing + Metadata | Nice-to-Have |
-| Blog: ABSI | `/images/blog/understanding-absi.jpg` | Missing + Metadata | Nice-to-Have |
-| Blog: Body Fat % | `/images/blog/understanding-body-fat-percentage.jpg` | Missing + Metadata | Nice-to-Have |
-| Blog: WHR Guide | `/images/blog/waist-to-hip-ratio-guide.jpg` | Missing + Metadata | Nice-to-Have |
+| Page/Calculator    | Expected Image Path                                    | Status             | Priority     |
+| ------------------ | ------------------------------------------------------ | ------------------ | ------------ |
+| Homepage           | `/images/og-image.jpg`                                 | Missing            | Critical     |
+| BMI Calculator     | `/images/bmi-calculator-og.jpg`                        | Missing            | Critical     |
+| TDEE Calculator    | `/images/tdee-calculator-og.jpg`                       | Missing            | Critical     |
+| Body Fat           | `/images/body-fat-calculator-og.jpg`                   | Missing + Metadata | Important    |
+| Body Fat Burn      | `/images/body-fat-burn-calculator-og.jpg`              | Missing + Metadata | Important    |
+| ABSI               | `/images/absi-calculator-og.jpg`                       | Missing + Metadata | Important    |
+| WHR                | `/images/whr-calculator-og.jpg`                        | Missing + Metadata | Important    |
+| Calorie Deficit    | `/images/calculators/calorie-deficit-calculator.jpg`   | Missing            | Critical     |
+| Weight Management  | `/images/calculators/weight-management-calculator.jpg` | Missing            | Critical     |
+| Max Fat Loss       | `/images/calculators/maximum-fat-loss-calculator.jpg`  | Missing            | Critical     |
+| Conversions        | `/images/og-image.jpg` (dedicated TBD)                 | Missing            | Nice-to-Have |
+| Blog: Measuring BF | `/images/blog/measuring-body-fat.jpg`                  | Missing            | Critical     |
+| Blog: Cal Deficit  | `/images/blog/calorie-deficit-myths.jpg`               | Missing + Metadata | Nice-to-Have |
+| Blog: TDEE         | `/images/blog/tdee-explained.jpg`                      | Missing + Metadata | Nice-to-Have |
+| Blog: ABSI         | `/images/blog/understanding-absi.jpg`                  | Missing + Metadata | Nice-to-Have |
+| Blog: Body Fat %   | `/images/blog/understanding-body-fat-percentage.jpg`   | Missing + Metadata | Nice-to-Have |
+| Blog: WHR Guide    | `/images/blog/waist-to-hip-ratio-guide.jpg`            | Missing + Metadata | Nice-to-Have |
 
 ---
 
 ## Document Version
+
 - **Version**: 1.0
 - **Created**: November 7, 2025
 - **Last Updated**: November 7, 2025

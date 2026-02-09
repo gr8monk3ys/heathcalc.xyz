@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       'Discover the best home gym equipment for beginners in 2026. Reviews of resistance bands, yoga mats, adjustable dumbbells, pull-up bars, kettlebells, and jump ropes to build your first home gym.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/best-home-gym-equipment-beginners',
+    url: 'https://www.healthcalc.xyz/blog/best-home-gym-equipment-beginners',
     images: [
       {
         url: '/images/blog/best-home-gym-equipment-beginners.jpg',
@@ -44,18 +44,18 @@ export default function BestHomeGymEquipmentPage() {
     author: {
       '@type': 'Organization',
       name: 'HealthCheck',
-      url: 'https://www.heathcheck.info',
+      url: 'https://www.healthcalc.xyz',
     },
     publisher: {
       '@type': 'Organization',
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/images/og-image.jpg',
+        url: 'https://www.healthcalc.xyz/images/og-image.jpg',
       },
     },
-    mainEntityOfPage: 'https://www.heathcheck.info/blog/best-home-gym-equipment-beginners',
-    image: ['https://www.heathcheck.info/images/blog/best-home-gym-equipment-beginners.jpg'],
+    mainEntityOfPage: 'https://www.healthcalc.xyz/blog/best-home-gym-equipment-beginners',
+    image: ['https://www.healthcalc.xyz/images/blog/best-home-gym-equipment-beginners.jpg'],
   };
   const productListJsonLd = {
     '@context': 'https://schema.org',

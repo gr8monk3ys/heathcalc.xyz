@@ -387,9 +387,10 @@ export default function BodyFatCalculator() {
         name: 'Body Fat Calculator',
         description:
           'Calculate your body fat percentage using various methods including Navy, skinfold, and BMI.',
-        url: 'https://www.heathcheck.info/body-fat',
+        url: 'https://www.healthcalc.xyz/body-fat',
       }}
       understandingSection={<BodyFatUnderstanding />}
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

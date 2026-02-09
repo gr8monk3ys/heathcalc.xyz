@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   keywords:
     'TDEE calculator, total daily energy expenditure, calorie calculator, BMR calculator, daily calorie needs',
   alternates: {
-    canonical: 'https://www.heathcheck.info/tdee',
+    canonical: 'https://www.healthcalc.xyz/tdee',
   },
   openGraph: {
     title: 'TDEE Calculator | HealthCheck',
     description: 'Estimate TDEE and daily calorie needs based on activity level and goals.',
     type: 'website',
-    url: 'https://www.heathcheck.info/tdee',
+    url: 'https://www.healthcalc.xyz/tdee',
     images: [
       {
         url: '/images/calculators/tdee-calculator.jpg',

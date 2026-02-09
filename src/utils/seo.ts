@@ -8,7 +8,7 @@
  * @returns The canonical URL
  */
 export function getCanonicalUrl(path: string): string {
-  const baseUrl = 'https://www.heathcheck.info';
+  const baseUrl = 'https://www.healthcalc.xyz';
   const normalizedPath = path === '/' ? '' : path.startsWith('/') ? path : `/${path}`;
   return `${baseUrl}${normalizedPath}`;
 }
@@ -218,7 +218,7 @@ export function generateImageMetadata(
   // Ensure src is an absolute URL
   const absoluteSrc = src.startsWith('http')
     ? src
-    : `https://www.heathcheck.info${src.startsWith('/') ? '' : '/'}${src}`;
+    : `https://www.healthcalc.xyz${src.startsWith('/') ? '' : '/'}${src}`;
 
   return {
     url: absoluteSrc,
@@ -267,7 +267,7 @@ export function generateArticleData(article: {
     '@type': 'Article',
     headline: article.title,
     description: article.description,
-    image: article.imageUrl || 'https://www.heathcheck.info/images/og-image.jpg',
+    image: article.imageUrl || 'https://www.healthcalc.xyz/images/og-image.jpg',
     datePublished: article.datePublished,
     dateModified: article.dateModified || article.datePublished,
     author: {
@@ -279,7 +279,7 @@ export function generateArticleData(article: {
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/icons/icon-512x512.png',
+        url: 'https://www.healthcalc.xyz/icons/icon-512x512.png',
       },
     },
     mainEntityOfPage: {

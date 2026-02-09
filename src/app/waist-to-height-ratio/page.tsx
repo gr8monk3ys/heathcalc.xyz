@@ -146,9 +146,10 @@ export default function WaistToHeightRatioCalculator() {
         '@type': 'WebPage',
         name: 'Waist-to-Height Ratio Calculator',
         description: 'Calculate your waist-to-height ratio to assess body shape and health risk.',
-        url: 'https://www.heathcheck.info/waist-to-height-ratio',
+        url: 'https://www.healthcalc.xyz/waist-to-height-ratio',
       }}
       understandingSection={<WaistToHeightRatioInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

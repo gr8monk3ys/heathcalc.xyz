@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'protein calculator, daily protein intake, protein needs calculator, protein per kg, protein for muscle gain, protein for weight loss, macros calculator, nutrition calculator',
   alternates: {
-    canonical: 'https://www.heathcheck.info/protein',
+    canonical: 'https://www.healthcalc.xyz/protein',
   },
   openGraph: {
     title: 'Protein Intake Calculator | Daily Protein Needs | HealthCheck',
     description:
       'Calculate your optimal daily protein intake based on weight, activity level, and fitness goals. Free calculator with science-backed recommendations.',
     type: 'website',
-    url: 'https://www.heathcheck.info/protein',
+    url: 'https://www.healthcalc.xyz/protein',
     images: [
       {
         url: '/images/calculators/protein-calculator.jpg',

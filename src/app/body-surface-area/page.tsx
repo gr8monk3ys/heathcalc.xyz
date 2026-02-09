@@ -122,9 +122,10 @@ export default function BodySurfaceAreaCalculator() {
         '@type': 'WebPage',
         name: 'Body Surface Area Calculator',
         description: 'Calculate body surface area using height and weight.',
-        url: 'https://www.heathcheck.info/body-surface-area',
+        url: 'https://www.healthcalc.xyz/body-surface-area',
       }}
       understandingSection={<BodySurfaceAreaInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

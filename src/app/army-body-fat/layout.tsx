@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Army Body Fat Calculator | HealthCheck',
   description: 'Estimate body fat percentage using U.S. Army circumference method.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/army-body-fat',
+    canonical: 'https://www.healthcalc.xyz/army-body-fat',
   },
   openGraph: {
     title: 'Army Body Fat Calculator | HealthCheck',
     description: 'Estimate body fat percentage using U.S. Army circumference method.',
     type: 'website',
-    url: 'https://www.heathcheck.info/army-body-fat',
+    url: 'https://www.healthcalc.xyz/army-body-fat',
     images: [
       {
         url: '/images/calculators/army-body-fat-calculator.jpg',

@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'unit converter, measurement conversion, weight converter, height converter, metric to imperial, kg to lbs, cm to feet',
   alternates: {
-    canonical: 'https://www.heathcheck.info/conversions',
+    canonical: 'https://www.healthcalc.xyz/conversions',
   },
   openGraph: {
     title: 'Unit Converter | Measurement Conversions | HealthCheck',
     description:
       'Convert weight, height, volume, temperature, and energy units quickly and accurately.',
     type: 'website',
-    url: 'https://www.heathcheck.info/conversions',
+    url: 'https://www.healthcalc.xyz/conversions',
     images: [
       {
         url: '/images/calculators/conversions-calculator.jpg',

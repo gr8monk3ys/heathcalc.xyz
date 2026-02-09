@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   keywords:
     'body fat burn calculator, calorie burn calculator, exercise calculator, weight loss planner, activity planner, MET calculator, calories burned, exercise planner',
   alternates: {
-    canonical: 'https://www.heathcheck.info/body-fat-burn',
+    canonical: 'https://www.healthcalc.xyz/body-fat-burn',
   },
   openGraph: {
     title: 'Body Fat Burn Calculator | Activity & Weight Loss Planner',
     description:
       'Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise.',
-    url: 'https://www.heathcheck.info/body-fat-burn',
+    url: 'https://www.healthcalc.xyz/body-fat-burn',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',

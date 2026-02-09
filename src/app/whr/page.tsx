@@ -236,11 +236,12 @@ export default function WHRCalculator() {
         name: 'Waist-to-Hip Ratio Calculator',
         description:
           'Calculate your waist-to-hip ratio (WHR) to assess body fat distribution and health risks. More accurate than BMI for predicting cardiovascular disease risk.',
-        url: 'https://www.heathcheck.info/whr',
+        url: 'https://www.healthcalc.xyz/whr',
       }}
       understandingSection={<WHRUnderstanding />}
       newsletterTitle="Get Body Composition Insights"
       newsletterDescription="Subscribe to receive the latest body composition tips, health metrics updates, and exclusive content to help you understand your health better."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

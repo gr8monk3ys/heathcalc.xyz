@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       'Learn how to calculate TDEE, what affects daily calorie needs, and how to use it for fat loss.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/tdee-explained',
+    url: 'https://www.healthcalc.xyz/blog/tdee-explained',
     images: [
       {
         url: '/images/blog/tdee-explained.jpg',

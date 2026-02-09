@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       'Compare the top fitness trackers and smartwatches for accurate calorie burn tracking. In-depth reviews of Fitbit, Garmin, Apple Watch, and Samsung Galaxy Watch.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/best-fitness-trackers-calorie-tracking',
+    url: 'https://www.healthcalc.xyz/blog/best-fitness-trackers-calorie-tracking',
     images: [
       {
         url: '/images/blog/best-fitness-trackers-calorie-tracking.jpg',
@@ -44,18 +44,18 @@ export default function BestFitnessTrackersPage() {
     author: {
       '@type': 'Organization',
       name: 'HealthCheck',
-      url: 'https://www.heathcheck.info',
+      url: 'https://www.healthcalc.xyz',
     },
     publisher: {
       '@type': 'Organization',
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/images/og-image.jpg',
+        url: 'https://www.healthcalc.xyz/images/og-image.jpg',
       },
     },
-    mainEntityOfPage: 'https://www.heathcheck.info/blog/best-fitness-trackers-calorie-tracking',
-    image: ['https://www.heathcheck.info/images/blog/best-fitness-trackers-calorie-tracking.jpg'],
+    mainEntityOfPage: 'https://www.healthcalc.xyz/blog/best-fitness-trackers-calorie-tracking',
+    image: ['https://www.healthcalc.xyz/images/blog/best-fitness-trackers-calorie-tracking.jpg'],
   };
   const productListJsonLd = {
     '@context': 'https://schema.org',
@@ -332,6 +332,16 @@ export default function BestFitnessTrackersPage() {
                 <strong>Cons:</strong> Premium price, Garmin ecosystem can be complex for beginners
               </p>
             </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B0FRG18TLS?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 id="fitbit-charge-6" className="text-2xl font-bold mt-8 mb-4">
@@ -384,6 +394,16 @@ export default function BestFitnessTrackersPage() {
               <p className="text-sm mt-2">
                 <strong>Cons:</strong> Premium features require Fitbit subscription, smaller display
               </p>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B0CC63GZ3R?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
             </div>
           </div>
 
@@ -438,6 +458,16 @@ export default function BestFitnessTrackersPage() {
                 <strong>Cons:</strong> Expensive, requires iPhone, calorie accuracy can vary
               </p>
             </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B0CHWZ5VVM?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 id="samsung-galaxy-watch-7" className="text-2xl font-bold mt-8 mb-4">
@@ -490,6 +520,16 @@ export default function BestFitnessTrackersPage() {
                 accuracy varies
               </p>
             </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B0D1YQKDML?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
+            </div>
           </div>
 
           <h2 id="xiaomi-mi-band-9" className="text-2xl font-bold mt-8 mb-4">
@@ -540,6 +580,16 @@ export default function BestFitnessTrackersPage() {
               <p className="text-sm mt-2">
                 <strong>Cons:</strong> Small display, basic app, no GPS
               </p>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.amazon.com/dp/B0D98HTWRR?tag=gr8monk3ys-20"
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="inline-block bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90 transition-colors"
+              >
+                Check Price on Amazon
+              </a>
             </div>
           </div>
 

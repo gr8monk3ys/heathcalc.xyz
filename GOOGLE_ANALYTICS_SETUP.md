@@ -38,9 +38,9 @@ Visit [Google Analytics](https://analytics.google.com/) and sign in with your Go
 
 1. Select **Web** as your platform
 2. Enter your website details:
-   - **Website URL**: `https://www.heathcheck.info` (your actual domain)
+   - **Website URL**: `https://www.healthcalc.xyz` (your actual domain)
    - **Stream name**: HealthCheck.info Web
-3. *(Optional)* Enable enhanced measurement for automatic event tracking:
+3. _(Optional)_ Enable enhanced measurement for automatic event tracking:
    - Page views ✓
    - Scrolls ✓
    - Outbound clicks ✓
@@ -53,6 +53,7 @@ Visit [Google Analytics](https://analytics.google.com/) and sign in with your Go
 ### 1.5 Get Your Measurement ID
 
 After creating the stream, you'll see your **Measurement ID** in the format:
+
 ```
 G-XXXXXXXXXX
 ```
@@ -96,14 +97,17 @@ npm run dev
 For other hosting platforms (Netlify, AWS, etc.), add the environment variable:
 
 **Netlify:**
+
 - Go to Site settings > Environment variables
 - Add `NEXT_PUBLIC_GA_ID` with your Measurement ID
 
 **AWS Amplify:**
+
 - Go to App settings > Environment variables
 - Add `NEXT_PUBLIC_GA_ID` with your Measurement ID
 
 **Custom Server:**
+
 - Set environment variable before starting the app:
   ```bash
   export NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
@@ -130,6 +134,7 @@ For other hosting platforms (Netlify, AWS, etc.), add the environment variable:
 ### 3.3 Check Browser Console
 
 Open Developer Tools (F12) and check for:
+
 - No JavaScript errors related to gtag
 - Network requests to `www.googletagmanager.com`
 - Successful data layer pushes
@@ -143,6 +148,7 @@ Open Developer Tools (F12) and check for:
 3. Set up custom events for calculator usage:
 
 **Example: BMI Calculator Usage**
+
 - Event name: `calculator_use`
 - Parameter matching:
   - `calculator_type` equals `bmi`
@@ -192,6 +198,7 @@ trackEvent('button_click', {
 ### Analytics Not Working
 
 **Check 1: Environment Variable**
+
 ```bash
 # Verify the variable is set
 echo $NEXT_PUBLIC_GA_ID
@@ -202,6 +209,7 @@ console.log(process.env.NEXT_PUBLIC_GA_ID)
 
 **Check 2: Production Mode**
 Analytics only runs in production. Test with:
+
 ```bash
 npm run build
 npm start
@@ -212,6 +220,7 @@ Disable ad blockers or tracking protection in your browser.
 
 **Check 4: Browser Console**
 Look for errors related to:
+
 - `gtag is not defined`
 - Failed network requests to `googletagmanager.com`
 - CSP (Content Security Policy) violations
@@ -237,6 +246,7 @@ If your users are in the EU, you need to:
 4. **IP Anonymization**: GA4 does this automatically
 
 **Recommended Cookie Consent Libraries:**
+
 - [CookieConsent](https://www.npmjs.com/package/vanilla-cookieconsent)
 - [React Cookie Consent](https://www.npmjs.com/package/react-cookie-consent)
 
@@ -245,12 +255,14 @@ If your users are in the EU, you need to:
 ### Where Analytics is Implemented
 
 **1. Global Tag Loading** (`src/app/layout.tsx`)
+
 ```typescript
 // Loads gtag.js script
 <script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
 ```
 
 **2. Page View Tracking** (`src/components/Analytics.tsx`)
+
 ```typescript
 // Automatically tracks page views on route changes
 const trackPageView = (url: string) => {
@@ -259,6 +271,7 @@ const trackPageView = (url: string) => {
 ```
 
 **3. Custom Event Tracking**
+
 ```typescript
 // Export function for custom events
 export const trackEvent = (eventName, eventParams) => {
@@ -278,23 +291,27 @@ export const trackEvent = (eventName, eventParams) => {
 Once set up, monitor these important metrics:
 
 ### User Engagement
+
 - **Active users**: Daily/weekly/monthly active users
 - **Session duration**: Average time users spend on site
 - **Pages per session**: How many pages users visit per session
 - **Bounce rate**: Percentage of single-page sessions
 
 ### Calculator Usage
+
 - **Calculator views**: Which calculators are most popular
 - **Completion rate**: How many users complete calculator forms
 - **Result actions**: Do users save/share their results?
 
 ### Traffic Sources
+
 - **Organic search**: Users from Google, Bing, etc.
 - **Direct**: Users typing URL directly
 - **Referral**: Users from other websites
 - **Social**: Users from social media platforms
 
 ### Performance
+
 - **Page load time**: How fast pages load for users
 - **Engagement rate**: Percentage of engaged sessions
 - **Conversions**: Custom events you've set up

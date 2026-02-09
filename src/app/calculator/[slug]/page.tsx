@@ -34,12 +34,12 @@ export async function generateMetadata({ params }: CalculatorDetailPageProps): P
     title: `${calculator.title} | HealthCheck`,
     description: calculator.detail?.intro || calculator.description,
     alternates: {
-      canonical: `https://www.heathcheck.info/calculator/${calculator.slug}`,
+      canonical: `https://www.healthcalc.xyz/calculator/${calculator.slug}`,
     },
     openGraph: {
       title: `${calculator.title} | HealthCheck`,
       description: calculator.detail?.intro || calculator.description,
-      url: `https://www.heathcheck.info/calculator/${calculator.slug}`,
+      url: `https://www.healthcalc.xyz/calculator/${calculator.slug}`,
       images: [
         {
           url: calculator.image,
@@ -134,7 +134,7 @@ export default async function CalculatorDetailPage({ params }: CalculatorDetailP
         data={createCalculatorSchema({
           name: calculator.title,
           description: detail?.intro || calculator.description,
-          url: `https://www.heathcheck.info/calculator/${calculator.slug}`,
+          url: `https://www.healthcalc.xyz/calculator/${calculator.slug}`,
         })}
       />
       {detail?.faqs?.length ? <StructuredData data={createFAQSchema(detail.faqs)} /> : null}

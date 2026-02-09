@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   keywords:
     'water intake calculator, hydration, daily water, how much water to drink, hydration calculator',
   alternates: {
-    canonical: 'https://www.heathcheck.info/water-intake',
+    canonical: 'https://www.healthcalc.xyz/water-intake',
   },
   openGraph: {
     title: 'Water Intake Calculator | HealthCheck',
     description: 'Calculate your daily water intake based on body weight and activity level.',
     type: 'website',
-    url: 'https://www.heathcheck.info/water-intake',
+    url: 'https://www.healthcalc.xyz/water-intake',
     images: [
       {
         url: '/images/calculators/water-intake-calculator.jpg',

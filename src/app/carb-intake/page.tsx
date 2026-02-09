@@ -114,9 +114,10 @@ export default function CarbIntakeCalculator() {
         '@type': 'WebPage',
         name: 'Carb Intake Calculator',
         description: 'Calculate daily carbohydrate intake from calories or targets.',
-        url: 'https://www.heathcheck.info/carb-intake',
+        url: 'https://www.healthcalc.xyz/carb-intake',
       }}
       understandingSection={<CarbIntakeInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

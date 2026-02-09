@@ -9,12 +9,14 @@ This repository uses GitHub Actions for continuous integration and deployment. T
 ### 1. CI/CD Pipeline (`ci.yml`)
 
 **Triggers:**
+
 - Push to `master` or `main` branch
 - Pull requests targeting `master` or `main`
 
 **Jobs:**
 
 #### Quality Checks
+
 Runs on Node.js 18.x and 20.x to ensure compatibility.
 
 - **Format Check**: Verifies code formatting with Prettier
@@ -25,6 +27,7 @@ Runs on Node.js 18.x and 20.x to ensure compatibility.
 - **Bundle Size Check**: Reports the size of the production bundle
 
 #### Lighthouse Performance Check
+
 Runs on pull requests only.
 
 - Builds the project locally
@@ -33,6 +36,7 @@ Runs on pull requests only.
 - Provides performance metrics for review
 
 #### Security Audit
+
 - Runs npm audit to check for security vulnerabilities
 - Reports high-severity issues
 - Continues even if vulnerabilities are found (non-blocking)
@@ -42,6 +46,7 @@ Runs on pull requests only.
 To fully utilize the CI/CD pipeline, configure these secrets in your GitHub repository settings:
 
 ### Codecov (Optional - for test coverage reports)
+
 - **`CODECOV_TOKEN`**: Token from [codecov.io](https://codecov.io)
   - Sign up at codecov.io
   - Add your repository
@@ -49,12 +54,14 @@ To fully utilize the CI/CD pipeline, configure these secrets in your GitHub repo
   - Add as repository secret
 
 ### Google Analytics (Optional - for production builds)
+
 - **`NEXT_PUBLIC_GA_ID`**: Your Google Analytics Measurement ID
   - Format: `G-XXXXXXXXXX`
   - Get from Google Analytics Admin panel
   - Add as repository secret
 
 ### Sentry (Optional - for error monitoring)
+
 - **`NEXT_PUBLIC_SENTRY_DSN`**: Your Sentry DSN
   - Get from Sentry project settings
   - Format: `https://[key]@[org].ingest.sentry.io/[project-id]`
@@ -76,6 +83,7 @@ To fully utilize the CI/CD pipeline, configure these secrets in your GitHub repo
 ## Vercel Deployment
 
 This project uses Vercel for deployment. Vercel automatically:
+
 - Deploys on push to `master`/`main` (production)
 - Creates preview deployments for pull requests
 - Builds using the same configuration as local builds
@@ -93,6 +101,7 @@ This project uses Vercel for deployment. Vercel automatically:
 4. Deploy!
 
 Vercel will automatically:
+
 - Run builds on every commit
 - Deploy to production on merge to main
 - Create preview URLs for PRs
@@ -121,6 +130,7 @@ npm run build
 ## Workflow Status
 
 You can view the status of workflows:
+
 - In the **Actions** tab of your GitHub repository
 - On pull request pages (status checks)
 - Via status badges (add to README.md)
@@ -130,7 +140,7 @@ You can view the status of workflows:
 Add this to your README.md:
 
 ```markdown
-![CI/CD Pipeline](https://github.com/YOUR_USERNAME/heathcheck.info/actions/workflows/ci.yml/badge.svg)
+![CI/CD Pipeline](https://github.com/YOUR_USERNAME/healthcalc.xyz/actions/workflows/ci.yml/badge.svg)
 ```
 
 ## Troubleshooting
@@ -138,24 +148,29 @@ Add this to your README.md:
 ### Build Failures
 
 **Format check fails:**
+
 ```bash
 npm run format
 ```
 
 **Linting fails:**
+
 ```bash
 npm run lint:fix
 ```
 
 **Type check fails:**
+
 - Fix TypeScript errors in your IDE
 - Run `npm run type-check` to verify
 
 **Tests fail:**
+
 - Run `npm test` locally to debug
 - Check test output in GitHub Actions logs
 
 **Build fails:**
+
 - Check for missing environment variables
 - Verify all dependencies are in package.json
 - Run `npm run build` locally
@@ -163,6 +178,7 @@ npm run lint:fix
 ### Performance Issues
 
 If Lighthouse scores are low:
+
 - Check the Lighthouse report artifacts
 - Review performance recommendations
 - Optimize images, code splitting, lazy loading
@@ -171,6 +187,7 @@ If Lighthouse scores are low:
 ### Security Vulnerabilities
 
 If security audit fails:
+
 ```bash
 # Review vulnerabilities
 npm audit
@@ -191,12 +208,13 @@ Edit `.github/workflows/ci.yml`:
 ```yaml
 strategy:
   matrix:
-    node-version: [18.x, 20.x, 22.x]  # Add or remove versions
+    node-version: [18.x, 20.x, 22.x] # Add or remove versions
 ```
 
 ### Skip Lighthouse on Some PRs
 
 Add this to PR description:
+
 ```
 [skip lighthouse]
 ```

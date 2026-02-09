@@ -127,9 +127,10 @@ export default function AdjustedBodyWeightCalculator() {
         '@type': 'WebPage',
         name: 'Adjusted Body Weight Calculator',
         description: 'Estimate adjusted body weight using height and current weight.',
-        url: 'https://www.heathcheck.info/adjusted-body-weight',
+        url: 'https://www.healthcalc.xyz/adjusted-body-weight',
       }}
       understandingSection={<AdjustedBodyWeightInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

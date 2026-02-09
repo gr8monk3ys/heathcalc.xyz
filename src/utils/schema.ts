@@ -11,8 +11,8 @@ export function createOrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'HealthCheck',
-    url: 'https://www.heathcheck.info',
-    logo: 'https://www.heathcheck.info/icons/icon-512x512.png',
+    url: 'https://www.healthcalc.xyz',
+    logo: 'https://www.healthcalc.xyz/icons/icon-512x512.png',
     sameAs: [
       // Add social media profiles when available
       // 'https://www.facebook.com/healthcheck',
@@ -22,8 +22,8 @@ export function createOrganizationSchema() {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',
-      email: 'support@heathcheck.info',
-      url: 'https://www.heathcheck.info/contact',
+      email: 'support@healthcalc.xyz',
+      url: 'https://www.healthcalc.xyz/contact',
     },
   };
 }
@@ -36,10 +36,10 @@ export function createWebsiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'HealthCheck',
-    url: 'https://www.heathcheck.info',
+    url: 'https://www.healthcalc.xyz',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://www.heathcheck.info/search?q={search_term_string}',
+      target: 'https://www.healthcalc.xyz/search?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
@@ -104,7 +104,7 @@ export function createArticleSchema({
     '@type': 'Article',
     headline: title,
     description: description,
-    image: imageUrl || 'https://www.heathcheck.info/images/og-image.jpg',
+    image: imageUrl || 'https://www.healthcalc.xyz/images/og-image.jpg',
     datePublished: datePublished,
     dateModified: dateModified || datePublished,
     author: {
@@ -116,7 +116,7 @@ export function createArticleSchema({
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/icons/icon-512x512.png',
+        url: 'https://www.healthcalc.xyz/icons/icon-512x512.png',
       },
     },
     mainEntityOfPage: {

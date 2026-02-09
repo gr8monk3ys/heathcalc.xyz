@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { createLogger } from '@/utils/logger';
+
+const logger = createLogger({ component: 'AdUnit' });
 
 interface AdUnitProps {
   /**
@@ -70,7 +73,7 @@ export default function AdUnit({
         isAdLoaded.current = true;
       }
     } catch (error) {
-      console.error('AdSense error:', error);
+      logger.logError('AdSense error', error);
     }
   }, [testMode]);
 

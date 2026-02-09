@@ -129,9 +129,10 @@ export default function PregnancyWeightGainCalculator() {
         '@type': 'WebPage',
         name: 'Pregnancy Weight Gain Calculator',
         description: 'Estimate recommended pregnancy weight gain by BMI.',
-        url: 'https://www.heathcheck.info/pregnancy-weight-gain',
+        url: 'https://www.healthcalc.xyz/pregnancy-weight-gain',
       }}
       understandingSection={<PregnancyWeightGainInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

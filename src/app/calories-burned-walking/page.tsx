@@ -141,9 +141,10 @@ export default function CaloriesBurnedWalkingCalculator() {
         '@type': 'WebPage',
         name: 'Calories Burned Walking Calculator',
         description: 'Estimate calories burned while walking based on speed and time.',
-        url: 'https://www.heathcheck.info/calories-burned-walking',
+        url: 'https://www.healthcalc.xyz/calories-burned-walking',
       }}
       understandingSection={<CaloriesBurnedWalkingInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

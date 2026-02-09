@@ -51,12 +51,12 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.heathcheck.info'),
+  metadataBase: new URL('https://www.healthcalc.xyz'),
   openGraph: {
     title: 'HealthCheck - Health and Fitness Calculators',
     description:
       'Your go-to resource for health and fitness calculators. Calculate body fat, BMI, calorie needs, and more.',
-    url: 'https://www.heathcheck.info',
+    url: 'https://www.healthcalc.xyz',
     siteName: 'HealthCheck',
     images: [
       {
@@ -98,8 +98,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         {/* Core Web Vitals optimizations */}
-        <link rel="preconnect" href="https://www.heathcheck.info" />
-        <link rel="dns-prefetch" href="https://www.heathcheck.info" />
+        <link rel="preconnect" href="https://www.healthcalc.xyz" />
+        <link rel="dns-prefetch" href="https://www.healthcalc.xyz" />
 
         {/* PWA and app settings */}
         <link rel="manifest" href="/manifest.json" />

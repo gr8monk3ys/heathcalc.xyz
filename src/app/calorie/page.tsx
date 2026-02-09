@@ -160,9 +160,10 @@ export default function CalorieCalculator() {
         name: 'Calorie Calculator',
         description:
           'Calculate your daily calorie needs for maintenance, weight loss, or muscle gain.',
-        url: 'https://www.heathcheck.info/calorie',
+        url: 'https://www.healthcalc.xyz/calorie',
       }}
       understandingSection={<CalorieInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

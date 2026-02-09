@@ -277,11 +277,12 @@ export default function ABSICalculator() {
         name: 'ABSI Calculator',
         description:
           'Calculate your A Body Shape Index (ABSI) to assess health risks related to body shape and fat distribution. More accurate than BMI for mortality risk prediction.',
-        url: 'https://www.heathcheck.info/absi',
+        url: 'https://www.healthcalc.xyz/absi',
       }}
       understandingSection={<ABSIUnderstanding />}
       newsletterTitle="Get Health Metrics Insights"
       newsletterDescription="Subscribe to receive the latest health assessment tips, calculator updates, and exclusive content to help you understand your body composition better."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

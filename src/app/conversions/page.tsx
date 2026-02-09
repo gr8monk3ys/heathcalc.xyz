@@ -304,11 +304,12 @@ export default function MeasurementConversions() {
         name: 'Measurement Conversions Tool',
         description:
           'Accurate unit converter for weight, height, volume, temperature, and energy. Perfect for health tracking, fitness planning, and nutrition calculations.',
-        url: 'https://www.heathcheck.info/conversions',
+        url: 'https://www.healthcalc.xyz/conversions',
       }}
       understandingSection={educationalContent}
       newsletterTitle="Get Health & Fitness Tips"
       newsletterDescription="Subscribe to receive the latest health calculators, conversion tools, fitness tips, and exclusive content to help you achieve your health goals."
+      showResultsCapture={result !== null}
     >
       <div className="md:col-span-1">
         <Card className="p-6">

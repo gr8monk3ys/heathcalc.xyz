@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'calorie deficit calculator, weight loss calculator, calorie deficit, weight loss timeline, goal weight calculator',
   alternates: {
-    canonical: 'https://www.heathcheck.info/calorie-deficit',
+    canonical: 'https://www.healthcalc.xyz/calorie-deficit',
   },
   openGraph: {
     title: 'Calorie Deficit Calculator | HealthCheck',
     description:
       'Estimate your weight-loss timeline using calorie deficit levels and goal weight targets.',
     type: 'website',
-    url: 'https://www.heathcheck.info/calorie-deficit',
+    url: 'https://www.healthcalc.xyz/calorie-deficit',
     images: [
       {
         url: '/images/calculators/calorie-deficit-calculator.jpg',

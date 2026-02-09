@@ -24,6 +24,14 @@ function applySecurityAndCanonicalization(request: NextRequest): NextResponse {
   );
 
   if (canonicalHost && currentHost) {
+    // Redirect old domain (heathcheck.info) to new domain (healthcalc.xyz)
+    const oldDomains = ['heathcheck.info', 'www.heathcheck.info'];
+    if (oldDomains.includes(currentHost)) {
+      url.host = canonicalHost;
+      url.protocol = 'https:';
+      return NextResponse.redirect(url, 301);
+    }
+
     const isSameRootDomain = normalizeHost(currentHost) === normalizeHost(canonicalHost);
     if (
       isSameRootDomain &&

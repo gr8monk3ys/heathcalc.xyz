@@ -52,7 +52,7 @@ export default function ReviewSchema({
   reviews = [],
 }: ReviewSchemaProps) {
   // Base URL for absolute URLs
-  const baseUrl = 'https://www.heathcheck.info';
+  const baseUrl = 'https://www.healthcalc.xyz';
 
   // Ensure image URL is absolute
   const imageUrl = image

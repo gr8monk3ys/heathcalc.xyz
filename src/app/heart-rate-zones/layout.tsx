@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'heart rate zones calculator, training zones, max heart rate, karvonen, endurance training',
   alternates: {
-    canonical: 'https://www.heathcheck.info/heart-rate-zones',
+    canonical: 'https://www.healthcalc.xyz/heart-rate-zones',
   },
   openGraph: {
     title: 'Heart Rate Zones Calculator | HealthCheck',
     description:
       'Calculate personalized heart rate training zones using percent max or Karvonen method.',
     type: 'website',
-    url: 'https://www.heathcheck.info/heart-rate-zones',
+    url: 'https://www.healthcalc.xyz/heart-rate-zones',
     images: [
       {
         url: '/images/calculators/heart-rate-zones-calculator.jpg',

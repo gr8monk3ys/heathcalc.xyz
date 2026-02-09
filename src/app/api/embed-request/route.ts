@@ -20,6 +20,19 @@ function sanitizeField(value: unknown, maxLength: number): string {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  // CSRF protection: verify the Origin header matches the expected host.
+  // Same-origin requests from older browsers may omit the header, so only
+  // reject when Origin is present but does not match.
+  const origin = request.headers.get('origin');
+  if (origin) {
+    const host = request.headers.get('host');
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    const expectedOrigin = siteUrl || (host ? `https://${host}` : null);
+    if (!expectedOrigin || origin !== expectedOrigin) {
+      return NextResponse.json({ ok: false, error: 'Forbidden' }, { status: 403 });
+    }
+  }
+
   const { success: withinLimit } = rateLimit(request, {
     limit: 5,
     windowMs: 60_000,

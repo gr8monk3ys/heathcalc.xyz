@@ -99,9 +99,10 @@ export default function MaxHeartRateCalculator() {
         '@type': 'WebPage',
         name: 'Max Heart Rate Calculator',
         description: 'Estimate max heart rate using age-based formulas.',
-        url: 'https://www.heathcheck.info/max-heart-rate',
+        url: 'https://www.healthcalc.xyz/max-heart-rate',
       }}
       understandingSection={<MaxHeartRateInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

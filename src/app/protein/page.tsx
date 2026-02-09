@@ -281,10 +281,11 @@ export default function ProteinCalculator() {
         name: 'Protein Intake Calculator',
         description:
           'Calculate your optimal daily protein intake based on weight, activity level, age, and fitness goals. Get science-backed recommendations for muscle building, weight loss, or general health.',
-        url: 'https://www.heathcheck.info/protein',
+        url: 'https://www.healthcalc.xyz/protein',
       }}
       newsletterTitle="Get Nutrition & Fitness Tips"
       newsletterDescription="Subscribe to receive the latest protein research, nutrition strategies, and evidence-based fitness advice delivered to your inbox."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

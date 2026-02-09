@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   keywords:
     'absi calculator, a body shape index, body shape index, absi z-score, waist circumference, mortality risk, central obesity, body shape, fat distribution, health risk calculator',
   alternates: {
-    canonical: 'https://www.heathcheck.info/absi',
+    canonical: 'https://www.healthcalc.xyz/absi',
   },
   openGraph: {
     title: 'ABSI Calculator | A Body Shape Index Calculator',
     description: 'Calculate ABSI to assess body-shape risk using waist circumference and height.',
-    url: 'https://www.heathcheck.info/absi',
+    url: 'https://www.healthcalc.xyz/absi',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'website',

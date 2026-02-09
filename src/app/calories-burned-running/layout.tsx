@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Calories Burned Running Calculator | HealthCheck',
   description: 'Estimate calories burned while running based on speed and time.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/calories-burned-running',
+    canonical: 'https://www.healthcalc.xyz/calories-burned-running',
   },
   openGraph: {
     title: 'Calories Burned Running Calculator | HealthCheck',
     description: 'Estimate calories burned while running based on speed and time.',
     type: 'website',
-    url: 'https://www.heathcheck.info/calories-burned-running',
+    url: 'https://www.healthcalc.xyz/calories-burned-running',
     images: [
       {
         url: '/images/calculators/calories-burned-running-calculator.jpg',

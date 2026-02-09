@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     title: 'Understanding ABSI: Beyond BMI for Health Risk Assessment',
     description: 'Learn how ABSI works, why it beats BMI for risk, and how to use it.',
-    url: 'https://www.heathcheck.info/blog/understanding-absi',
+    url: 'https://www.healthcalc.xyz/blog/understanding-absi',
     siteName: 'HealthCheck',
     locale: 'en_US',
     type: 'article',
@@ -32,7 +32,7 @@ export const metadata = {
     images: ['/images/blog/understanding-absi.jpg'],
   },
   alternates: {
-    canonical: 'https://www.heathcheck.info/blog/understanding-absi',
+    canonical: 'https://www.healthcalc.xyz/blog/understanding-absi',
   },
 };
 

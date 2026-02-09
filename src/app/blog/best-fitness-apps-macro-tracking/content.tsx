@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       'Compare the top calorie and macro tracking apps. In-depth reviews of MyFitnessPal, Cronometer, MacroFactor, and Lose It for weight loss success.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/best-fitness-apps-macro-tracking',
+    url: 'https://www.healthcalc.xyz/blog/best-fitness-apps-macro-tracking',
     images: [
       {
         url: '/images/blog/best-fitness-apps-macro-tracking.jpg',
@@ -44,18 +44,18 @@ export default function BestFitnessAppsPage() {
     author: {
       '@type': 'Organization',
       name: 'HealthCheck',
-      url: 'https://www.heathcheck.info',
+      url: 'https://www.healthcalc.xyz',
     },
     publisher: {
       '@type': 'Organization',
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/images/og-image.jpg',
+        url: 'https://www.healthcalc.xyz/images/og-image.jpg',
       },
     },
-    mainEntityOfPage: 'https://www.heathcheck.info/blog/best-fitness-apps-macro-tracking',
-    image: ['https://www.heathcheck.info/images/blog/best-fitness-apps-macro-tracking.jpg'],
+    mainEntityOfPage: 'https://www.healthcalc.xyz/blog/best-fitness-apps-macro-tracking',
+    image: ['https://www.healthcalc.xyz/images/blog/best-fitness-apps-macro-tracking.jpg'],
   };
   const productListJsonLd = {
     '@context': 'https://schema.org',

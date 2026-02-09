@@ -172,9 +172,10 @@ export default function ArmyBodyFatCalculator() {
         '@type': 'WebPage',
         name: 'Army Body Fat Calculator',
         description: 'Estimate body fat percentage using U.S. Army circumference method.',
-        url: 'https://www.heathcheck.info/army-body-fat',
+        url: 'https://www.healthcalc.xyz/army-body-fat',
       }}
       understandingSection={<ArmyBodyFatInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

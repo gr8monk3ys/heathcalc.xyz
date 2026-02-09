@@ -9,6 +9,7 @@
 This agent is responsible for creating the following OpenGraph images:
 
 ### Calculator Images (10 required)
+
 1. BMI Calculator - `/public/images/og/bmi.png`
 2. TDEE Calculator - `/public/images/og/tdee.png`
 3. Body Fat Calculator - `/public/images/og/body-fat.png`
@@ -21,6 +22,7 @@ This agent is responsible for creating the following OpenGraph images:
 10. Unit Conversions - `/public/images/og/conversions.png`
 
 ### Blog Post Images (6 required)
+
 1. Understanding ABSI - `/public/images/blog/understanding-absi.png`
 2. Waist-to-Hip Ratio Guide - `/public/images/blog/waist-to-hip-ratio-guide.png`
 3. Understanding Body Fat Percentage - `/public/images/blog/understanding-body-fat-percentage.png`
@@ -31,23 +33,27 @@ This agent is responsible for creating the following OpenGraph images:
 ## Design Requirements
 
 ### Dimensions
+
 - **Size**: 1200x630 pixels (OpenGraph standard)
 - **Aspect Ratio**: 1.91:1
 - **Format**: PNG with optimization
 
 ### Branding
-- **Domain**: HealthCheck (note: domain is heathcheck.info)
+
+- **Domain**: HealthCheck (note: domain is healthcalc.xyz)
 - **Color Scheme**: Neumorphic design with clean, modern aesthetic
 - **Typography**: Professional, readable fonts
 - **Logo**: Include HealthCheck branding prominently
 
 ### Content Guidelines
+
 - **Title**: Calculator or blog post name clearly visible
 - **Subtitle**: Brief description or value proposition
 - **Visual Elements**: Health/fitness icons, charts, or illustrations
 - **Call to Action**: Subtle encouragement (e.g., "Calculate Your Health Metrics")
 
 ### Accessibility
+
 - High contrast for text readability
 - Clean background (avoid busy patterns)
 - Text size: Large enough to read in social media thumbnails
@@ -55,6 +61,7 @@ This agent is responsible for creating the following OpenGraph images:
 ## Workflow
 
 ### Prerequisites
+
 1. Ensure Canva MCP server is installed:
    ```bash
    claude mcp add --transport http canva https://mcp.canva.com/mcp

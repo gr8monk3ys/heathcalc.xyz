@@ -122,9 +122,10 @@ export default function HeartRateZonesCalculator() {
         '@type': 'WebPage',
         name: 'Heart Rate Zones Calculator',
         description: 'Calculate personalized training zones using percent max or Karvonen method.',
-        url: 'https://www.heathcheck.info/heart-rate-zones',
+        url: 'https://www.healthcalc.xyz/heart-rate-zones',
       }}
       understandingSection={<HeartRateZonesInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       'Compare the best supplements for muscle building, fat loss, and overall health. In-depth reviews of Optimum Nutrition, Thorne, Nordic Naturals, and more top-rated supplements.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/best-supplements-fitness-goals',
+    url: 'https://www.healthcalc.xyz/blog/best-supplements-fitness-goals',
     images: [
       {
         url: '/images/blog/best-supplements-fitness-goals.jpg',
@@ -44,18 +44,18 @@ export default function BestSupplementsFitnessGoalsPage() {
     author: {
       '@type': 'Organization',
       name: 'HealthCheck',
-      url: 'https://www.heathcheck.info',
+      url: 'https://www.healthcalc.xyz',
     },
     publisher: {
       '@type': 'Organization',
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/images/og-image.jpg',
+        url: 'https://www.healthcalc.xyz/images/og-image.jpg',
       },
     },
-    mainEntityOfPage: 'https://www.heathcheck.info/blog/best-supplements-fitness-goals',
-    image: ['https://www.heathcheck.info/images/blog/best-supplements-fitness-goals.jpg'],
+    mainEntityOfPage: 'https://www.healthcalc.xyz/blog/best-supplements-fitness-goals',
+    image: ['https://www.healthcalc.xyz/images/blog/best-supplements-fitness-goals.jpg'],
   };
   const productListJsonLd = {
     '@context': 'https://schema.org',

@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   description: 'Estimate ovulation and fertile window based on your last period and cycle length.',
   keywords: 'ovulation calculator, fertile window, cycle length, ovulation date, fertility',
   alternates: {
-    canonical: 'https://www.heathcheck.info/ovulation',
+    canonical: 'https://www.healthcalc.xyz/ovulation',
   },
   openGraph: {
     title: 'Ovulation Calculator | HealthCheck',
     description:
       'Estimate ovulation and fertile window based on your last period and cycle length.',
     type: 'website',
-    url: 'https://www.heathcheck.info/ovulation',
+    url: 'https://www.healthcalc.xyz/ovulation',
     images: [
       {
         url: '/images/calculators/ovulation-calculator.jpg',

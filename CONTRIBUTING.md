@@ -14,17 +14,20 @@ Thank you for your interest in contributing to HealthCheck! This document provid
 
 1. Fork the repository
 2. Clone your fork:
+
    ```bash
-   git clone https://github.com/YOUR_USERNAME/heathcheck.info.git
-   cd heathcheck.info
+   git clone https://github.com/YOUR_USERNAME/healthcalc.xyz.git
+   cd healthcalc.xyz
    ```
 
 3. Install dependencies:
+
    ```bash
    npm install
    ```
 
 4. Copy the environment variables template:
+
    ```bash
    cp .env.example .env.local
    ```
@@ -39,6 +42,7 @@ Thank you for your interest in contributing to HealthCheck! This document provid
 ### Branch Naming
 
 Use descriptive branch names:
+
 - `feature/add-bmi-calculator` - for new features
 - `fix/calculation-error` - for bug fixes
 - `docs/update-readme` - for documentation updates
@@ -100,6 +104,7 @@ When adding a new calculator:
 ### SEO Requirements
 
 Every new page must include:
+
 - Proper metadata (title, description, keywords)
 - OpenGraph tags for social sharing
 - Canonical URL
@@ -128,6 +133,7 @@ footer (optional)
 ```
 
 Types:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -137,6 +143,7 @@ Types:
 - `chore`: Maintenance tasks
 
 Examples:
+
 ```
 feat(bmi): add children BMI percentile calculation
 fix(tdee): correct calorie calculation for sedentary activity
@@ -147,6 +154,7 @@ refactor(api): migrate calculation logic to utils
 ## Pull Request Process
 
 1. **Update your branch** with the latest from `master`:
+
    ```bash
    git pull origin master
    ```
@@ -170,6 +178,7 @@ refactor(api): migrate calculation logic to utils
 ## Code Review Guidelines
 
 Reviewers should check:
+
 - Code follows project conventions
 - TypeScript types are properly defined
 - Calculations are accurate and referenced
@@ -180,6 +189,7 @@ Reviewers should check:
 ## Questions?
 
 If you have questions about contributing, please:
+
 - Check existing issues and discussions
 - Review the [CLAUDE.md](CLAUDE.md) for architecture details
 - Open an issue with the `question` label

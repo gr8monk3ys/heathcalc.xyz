@@ -345,11 +345,12 @@ export default function BodyFatBurnCalculator() {
         name: 'Body Fat Burn Calculator',
         description:
           'Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals through exercise.',
-        url: 'https://www.heathcheck.info/body-fat-burn',
+        url: 'https://www.healthcalc.xyz/body-fat-burn',
       }}
       understandingSection={<BodyFatBurnUnderstanding />}
       newsletterTitle="Get Fitness Tips & Updates"
       newsletterDescription="Subscribe to receive the latest health and fitness tips, calculator updates, and exclusive content to help you achieve your goals."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

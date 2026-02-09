@@ -253,10 +253,11 @@ export default function OneRepMaxCalculator() {
         name: 'One Rep Max Calculator',
         description:
           'Calculate your One Rep Max (1RM) from submaximal lifts using Epley, Brzycki, or Lombardi formulas. Get training zone recommendations and percentage charts for strength programming.',
-        url: 'https://www.heathcheck.info/one-rep-max',
+        url: 'https://www.healthcalc.xyz/one-rep-max',
       }}
       newsletterTitle="Get Strength Training Tips"
       newsletterDescription="Subscribe to receive the latest strength training insights, workout programming advice, and evidence-based fitness tips delivered to your inbox."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

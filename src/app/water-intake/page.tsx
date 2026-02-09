@@ -107,9 +107,10 @@ export default function WaterIntakeCalculator() {
         '@type': 'WebPage',
         name: 'Water Intake Calculator',
         description: 'Calculate your daily water intake based on weight and activity level.',
-        url: 'https://www.heathcheck.info/water-intake',
+        url: 'https://www.healthcalc.xyz/water-intake',
       }}
       understandingSection={<WaterIntakeInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

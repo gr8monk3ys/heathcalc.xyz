@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Calories Burned Swimming Calculator | HealthCheck',
   description: 'Estimate calories burned while swimming based on intensity and time.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/calories-burned-swimming',
+    canonical: 'https://www.healthcalc.xyz/calories-burned-swimming',
   },
   openGraph: {
     title: 'Calories Burned Swimming Calculator | HealthCheck',
     description: 'Estimate calories burned while swimming based on intensity and time.',
     type: 'website',
-    url: 'https://www.heathcheck.info/calories-burned-swimming',
+    url: 'https://www.healthcalc.xyz/calories-burned-swimming',
     images: [
       {
         url: '/images/calculators/calories-burned-swimming-calculator.jpg',

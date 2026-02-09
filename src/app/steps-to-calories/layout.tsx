@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Steps to Calories Calculator | HealthCheck',
   description: 'Estimate calories burned from steps using stride length and duration.',
   alternates: {
-    canonical: 'https://www.heathcheck.info/steps-to-calories',
+    canonical: 'https://www.healthcalc.xyz/steps-to-calories',
   },
   openGraph: {
     title: 'Steps to Calories Calculator | HealthCheck',
     description: 'Estimate calories burned from steps using stride length and duration.',
     type: 'website',
-    url: 'https://www.heathcheck.info/steps-to-calories',
+    url: 'https://www.healthcalc.xyz/steps-to-calories',
     images: [
       {
         url: '/images/calculators/steps-to-calories-calculator.jpg',

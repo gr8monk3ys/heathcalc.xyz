@@ -82,7 +82,7 @@ export default function TermsPage() {
 
       <div className="neumorph rounded-lg p-6">
         <h2 className="mb-4 text-2xl font-semibold">Contact</h2>
-        <p>Questions about these Terms: info@heathcheck.info</p>
+        <p>Questions about these Terms: info@healthcalc.xyz</p>
       </div>
     </div>
   );

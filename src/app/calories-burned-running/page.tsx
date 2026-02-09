@@ -141,9 +141,10 @@ export default function CaloriesBurnedRunningCalculator() {
         '@type': 'WebPage',
         name: 'Calories Burned Running Calculator',
         description: 'Estimate calories burned while running based on speed and time.',
-        url: 'https://www.heathcheck.info/calories-burned-running',
+        url: 'https://www.healthcalc.xyz/calories-burned-running',
       }}
       understandingSection={<CaloriesBurnedRunningInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

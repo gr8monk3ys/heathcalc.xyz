@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'ideal weight calculator, devine formula, hamwi formula, robinson formula, miller formula, healthy weight range',
   alternates: {
-    canonical: 'https://www.heathcheck.info/ideal-weight',
+    canonical: 'https://www.healthcalc.xyz/ideal-weight',
   },
   openGraph: {
     title: 'Ideal Weight Calculator | HealthCheck',
     description:
       'Estimate your ideal weight range using popular formulas like Devine, Hamwi, Robinson, and Miller.',
     type: 'website',
-    url: 'https://www.heathcheck.info/ideal-weight',
+    url: 'https://www.healthcalc.xyz/ideal-weight',
     images: [
       {
         url: '/images/calculators/ideal-weight-calculator.jpg',

@@ -48,7 +48,7 @@ export default function EmbedCalculator({
       `Notes: ${requestNotes || 'N/A'}`,
     ].join('\n');
 
-    const mailto = `mailto:info@heathcheck.info?subject=${encodeURIComponent(
+    const mailto = `mailto:info@healthcalc.xyz?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 

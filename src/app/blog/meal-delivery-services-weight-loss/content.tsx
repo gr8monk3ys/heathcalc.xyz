@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       'Compare top meal delivery services for weight loss and calorie control. Reviews of Factor, HelloFresh, Trifecta, and more calorie-smart meal plans.',
     type: 'article',
-    url: 'https://www.heathcheck.info/blog/meal-delivery-services-weight-loss',
+    url: 'https://www.healthcalc.xyz/blog/meal-delivery-services-weight-loss',
     images: [
       {
         url: '/images/blog/meal-delivery-services-weight-loss.jpg',
@@ -44,18 +44,18 @@ export default function MealDeliveryServicesPage() {
     author: {
       '@type': 'Organization',
       name: 'HealthCheck',
-      url: 'https://www.heathcheck.info',
+      url: 'https://www.healthcalc.xyz',
     },
     publisher: {
       '@type': 'Organization',
       name: 'HealthCheck',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.heathcheck.info/images/og-image.jpg',
+        url: 'https://www.healthcalc.xyz/images/og-image.jpg',
       },
     },
-    mainEntityOfPage: 'https://www.heathcheck.info/blog/meal-delivery-services-weight-loss',
-    image: ['https://www.heathcheck.info/images/blog/meal-delivery-services-weight-loss.jpg'],
+    mainEntityOfPage: 'https://www.healthcalc.xyz/blog/meal-delivery-services-weight-loss',
+    image: ['https://www.healthcalc.xyz/images/blog/meal-delivery-services-weight-loss.jpg'],
   };
   const productListJsonLd = {
     '@context': 'https://schema.org',

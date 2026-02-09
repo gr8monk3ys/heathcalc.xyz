@@ -4,503 +4,543 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Home Page -->
   <url>
-    <loc>https://www.heathcheck.info/</loc>
+    <loc>https://www.healthcalc.xyz/</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
+  <!-- Embed Page -->
+  <url>
+    <loc>https://www.healthcalc.xyz/embed</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Calculator Pages -->
   <url>
-    <loc>https://www.heathcheck.info/bmi</loc>
+    <loc>https://www.healthcalc.xyz/bmi</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/bmi-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/bmi-calculator.jpg</image:loc>
       <image:title>BMI Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/body-fat</loc>
+    <loc>https://www.healthcalc.xyz/body-fat</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/body-fat-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/body-fat-calculator.jpg</image:loc>
       <image:title>Body Fat Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/army-body-fat</loc>
+    <loc>https://www.healthcalc.xyz/army-body-fat</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/army-body-fat-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/army-body-fat-calculator.jpg</image:loc>
       <image:title>Army Body Fat Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/body-fat-burn</loc>
+    <loc>https://www.healthcalc.xyz/body-fat-burn</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/body-fat-burn-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/body-fat-burn-calculator.jpg</image:loc>
       <image:title>Body Fat Burn Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/tdee</loc>
+    <loc>https://www.healthcalc.xyz/tdee</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/tdee-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/tdee-calculator.jpg</image:loc>
       <image:title>TDEE Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calorie</loc>
+    <loc>https://www.healthcalc.xyz/calorie</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/calorie-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/calorie-calculator.jpg</image:loc>
       <image:title>Calorie Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calories-burned</loc>
+    <loc>https://www.healthcalc.xyz/calories-burned</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/calories-burned-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/calories-burned-calculator.jpg</image:loc>
       <image:title>Calories Burned Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calories-burned-walking</loc>
+    <loc>https://www.healthcalc.xyz/calories-burned-walking</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/calories-burned-walking-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/calories-burned-walking-calculator.jpg</image:loc>
       <image:title>Calories Burned Walking Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calories-burned-running</loc>
+    <loc>https://www.healthcalc.xyz/calories-burned-running</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/calories-burned-running-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/calories-burned-running-calculator.jpg</image:loc>
       <image:title>Calories Burned Running Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calories-burned-cycling</loc>
+    <loc>https://www.healthcalc.xyz/calories-burned-cycling</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/calories-burned-cycling-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/calories-burned-cycling-calculator.jpg</image:loc>
       <image:title>Calories Burned Cycling Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calories-burned-swimming</loc>
+    <loc>https://www.healthcalc.xyz/calories-burned-swimming</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/calories-burned-swimming-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/calories-burned-swimming-calculator.jpg</image:loc>
       <image:title>Calories Burned Swimming Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calorie-deficit</loc>
+    <loc>https://www.healthcalc.xyz/calorie-deficit</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/calorie-deficit-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/calorie-deficit-calculator.jpg</image:loc>
       <image:title>Calorie Deficit Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/weight-management</loc>
+    <loc>https://www.healthcalc.xyz/weight-management</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/weight-management-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/weight-management-calculator.jpg</image:loc>
       <image:title>Weight Management Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/maximum-fat-loss</loc>
+    <loc>https://www.healthcalc.xyz/maximum-fat-loss</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/maximum-fat-loss-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/maximum-fat-loss-calculator.jpg</image:loc>
       <image:title>Maximum Fat Loss Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/absi</loc>
+    <loc>https://www.healthcalc.xyz/absi</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/absi-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/absi-calculator.jpg</image:loc>
       <image:title>ABSI Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/whr</loc>
+    <loc>https://www.healthcalc.xyz/whr</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/whr-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/whr-calculator.jpg</image:loc>
       <image:title>Waist-to-Hip Ratio Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/waist-to-height-ratio</loc>
+    <loc>https://www.healthcalc.xyz/waist-to-height-ratio</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/waist-to-height-ratio-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/waist-to-height-ratio-calculator.jpg</image:loc>
       <image:title>Waist-to-Height Ratio Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/body-frame-size</loc>
+    <loc>https://www.healthcalc.xyz/body-frame-size</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/body-frame-size-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/body-frame-size-calculator.jpg</image:loc>
       <image:title>Body Frame Size Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/adjusted-body-weight</loc>
+    <loc>https://www.healthcalc.xyz/adjusted-body-weight</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/adjusted-body-weight-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/adjusted-body-weight-calculator.jpg</image:loc>
       <image:title>Adjusted Body Weight Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/conversions</loc>
+    <loc>https://www.healthcalc.xyz/conversions</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/conversions-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/conversions-calculator.jpg</image:loc>
       <image:title>Unit Converter</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/age</loc>
+    <loc>https://www.healthcalc.xyz/age</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/age-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/age-calculator.jpg</image:loc>
       <image:title>Age Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/steps-to-miles</loc>
+    <loc>https://www.healthcalc.xyz/steps-to-miles</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/steps-to-miles-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/steps-to-miles-calculator.jpg</image:loc>
       <image:title>Steps to Miles Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/steps-to-calories</loc>
+    <loc>https://www.healthcalc.xyz/steps-to-calories</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/steps-to-calories-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/steps-to-calories-calculator.jpg</image:loc>
       <image:title>Steps to Calories Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/macro</loc>
+    <loc>https://www.healthcalc.xyz/macro</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/macro-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/macro-calculator.jpg</image:loc>
       <image:title>Macro Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/carb-intake</loc>
+    <loc>https://www.healthcalc.xyz/carb-intake</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/carb-intake-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/carb-intake-calculator.jpg</image:loc>
       <image:title>Carb Intake Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/fat-intake</loc>
+    <loc>https://www.healthcalc.xyz/fat-intake</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/fat-intake-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/fat-intake-calculator.jpg</image:loc>
       <image:title>Fat Intake Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/one-rep-max</loc>
+    <loc>https://www.healthcalc.xyz/one-rep-max</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/one-rep-max-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/one-rep-max-calculator.jpg</image:loc>
       <image:title>One Rep Max Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/protein</loc>
+    <loc>https://www.healthcalc.xyz/protein</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/protein-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/protein-calculator.jpg</image:loc>
       <image:title>Protein Intake Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/ideal-weight</loc>
+    <loc>https://www.healthcalc.xyz/ideal-weight</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/ideal-weight-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/ideal-weight-calculator.jpg</image:loc>
       <image:title>Ideal Weight Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/lean-body-mass</loc>
+    <loc>https://www.healthcalc.xyz/lean-body-mass</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/lean-body-mass-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/lean-body-mass-calculator.jpg</image:loc>
       <image:title>Lean Body Mass Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/body-surface-area</loc>
+    <loc>https://www.healthcalc.xyz/body-surface-area</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/body-surface-area-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/body-surface-area-calculator.jpg</image:loc>
       <image:title>Body Surface Area Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/max-heart-rate</loc>
+    <loc>https://www.healthcalc.xyz/max-heart-rate</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/max-heart-rate-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/max-heart-rate-calculator.jpg</image:loc>
       <image:title>Max Heart Rate Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/heart-rate-zones</loc>
+    <loc>https://www.healthcalc.xyz/heart-rate-zones</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/heart-rate-zones-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/heart-rate-zones-calculator.jpg</image:loc>
       <image:title>Heart Rate Zones Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/target-heart-rate</loc>
+    <loc>https://www.healthcalc.xyz/target-heart-rate</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/target-heart-rate-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/target-heart-rate-calculator.jpg</image:loc>
       <image:title>Target Heart Rate Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/resting-heart-rate</loc>
+    <loc>https://www.healthcalc.xyz/resting-heart-rate</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/resting-heart-rate-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/resting-heart-rate-calculator.jpg</image:loc>
       <image:title>Resting Heart Rate Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/water-intake</loc>
+    <loc>https://www.healthcalc.xyz/water-intake</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/water-intake-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/water-intake-calculator.jpg</image:loc>
       <image:title>Water Intake Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/sleep</loc>
+    <loc>https://www.healthcalc.xyz/sleep</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/sleep-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/sleep-calculator.jpg</image:loc>
       <image:title>Sleep Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blood-pressure</loc>
+    <loc>https://www.healthcalc.xyz/blood-pressure</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/blood-pressure-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/blood-pressure-calculator.jpg</image:loc>
       <image:title>Blood Pressure Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/bmr</loc>
+    <loc>https://www.healthcalc.xyz/bmr</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/bmr-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/bmr-calculator.jpg</image:loc>
       <image:title>BMR Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/vo2-max</loc>
+    <loc>https://www.healthcalc.xyz/vo2-max</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/vo2-max-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/vo2-max-calculator.jpg</image:loc>
       <image:title>VO2 Max Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/running-pace</loc>
+    <loc>https://www.healthcalc.xyz/running-pace</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/running-pace-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/running-pace-calculator.jpg</image:loc>
       <image:title>Running Pace Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/pregnancy-due-date</loc>
+    <loc>https://www.healthcalc.xyz/pregnancy-due-date</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/pregnancy-due-date-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/pregnancy-due-date-calculator.jpg</image:loc>
       <image:title>Pregnancy Due Date Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/due-date-by-conception</loc>
+    <loc>https://www.healthcalc.xyz/due-date-by-conception</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/due-date-by-conception-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/due-date-by-conception-calculator.jpg</image:loc>
       <image:title>Due Date by Conception Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/pregnancy-weight-gain</loc>
+    <loc>https://www.healthcalc.xyz/pregnancy-weight-gain</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/pregnancy-weight-gain-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/pregnancy-weight-gain-calculator.jpg</image:loc>
       <image:title>Pregnancy Weight Gain Calculator</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/ovulation</loc>
+    <loc>https://www.healthcalc.xyz/ovulation</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/calculators/ovulation-calculator.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/calculators/ovulation-calculator.jpg</image:loc>
       <image:title>Ovulation Calculator</image:title>
     </image:image>
   </url>
 
+  <!-- New Calculators -->
+  <url>
+    <loc>https://www.healthcalc.xyz/ffmi</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/body-recomposition</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/intermittent-fasting</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/keto-calculator</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/caffeine-calculator</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Guide Pages -->
   <url>
-    <loc>https://www.heathcheck.info/learn</loc>
+    <loc>https://www.healthcalc.xyz/learn</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/learn/calorie-basics</loc>
+    <loc>https://www.healthcalc.xyz/learn/calorie-basics</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/learn/macro-planning</loc>
+    <loc>https://www.healthcalc.xyz/learn/macro-planning</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/learn/heart-rate-training</loc>
+    <loc>https://www.healthcalc.xyz/learn/heart-rate-training</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/learn/body-composition-guide</loc>
+    <loc>https://www.healthcalc.xyz/learn/body-composition-guide</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/learn/walking-running-energy</loc>
+    <loc>https://www.healthcalc.xyz/learn/walking-running-energy</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/learn/pregnancy-health</loc>
+    <loc>https://www.healthcalc.xyz/learn/pregnancy-health</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -508,221 +548,623 @@
 
   <!-- Blog Pages -->
   <url>
-    <loc>https://www.heathcheck.info/blog</loc>
+    <loc>https://www.healthcalc.xyz/blog</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/calorie-deficit-myths</loc>
+    <loc>https://www.healthcalc.xyz/blog/cardio-vs-weights-fat-loss</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/cardio-vs-weights-fat-loss.jpg</image:loc>
+      <image:title>Cardio vs Weights for Fat Loss: What Science Actually Says</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/calorie-deficit-myths</loc>
     <lastmod>2025-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/calorie-deficit-myths.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/calorie-deficit-myths.jpg</image:loc>
       <image:title>5 Myths About Calorie Deficits Debunked</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/tdee-explained</loc>
+    <loc>https://www.healthcalc.xyz/blog/tdee-explained</loc>
     <lastmod>2025-02-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/tdee-explained.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/tdee-explained.jpg</image:loc>
       <image:title>TDEE Explained: How Many Calories Do You Really Need?</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/measuring-body-fat</loc>
+    <loc>https://www.healthcalc.xyz/blog/measuring-body-fat</loc>
     <lastmod>2025-02-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/measuring-body-fat.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/measuring-body-fat.jpg</image:loc>
       <image:title>The Pros and Cons of Different Body Fat Measurement Methods</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/understanding-absi</loc>
+    <loc>https://www.healthcalc.xyz/blog/understanding-absi</loc>
     <lastmod>2025-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/understanding-absi.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/understanding-absi.jpg</image:loc>
       <image:title>Understanding ABSI: A Better Measure of Body Shape</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/understanding-body-fat-percentage</loc>
+    <loc>https://www.healthcalc.xyz/blog/understanding-body-fat-percentage</loc>
     <lastmod>2025-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/understanding-body-fat-percentage.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/understanding-body-fat-percentage.jpg</image:loc>
       <image:title>Understanding Body Fat Percentage: What the Numbers Really Mean</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/waist-to-hip-ratio-guide</loc>
+    <loc>https://www.healthcalc.xyz/blog/waist-to-hip-ratio-guide</loc>
     <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/waist-to-hip-ratio-guide.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/waist-to-hip-ratio-guide.jpg</image:loc>
       <image:title>Waist-to-Hip Ratio Guide: What It Means for Your Health</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/best-smart-scales-body-composition</loc>
+    <loc>https://www.healthcalc.xyz/blog/best-smart-scales-body-composition</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/best-smart-scales-body-composition.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-smart-scales-body-composition.jpg</image:loc>
       <image:title>Best Smart Scales for Body Composition Tracking in 2026</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/best-fitness-trackers-calorie-tracking</loc>
+    <loc>https://www.healthcalc.xyz/blog/best-fitness-trackers-calorie-tracking</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/best-fitness-trackers-calorie-tracking.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-fitness-trackers-calorie-tracking.jpg</image:loc>
       <image:title>Best Fitness Trackers for Calorie Tracking in 2026</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/meal-delivery-services-weight-loss</loc>
+    <loc>https://www.healthcalc.xyz/blog/meal-delivery-services-weight-loss</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/meal-delivery-services-weight-loss.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/meal-delivery-services-weight-loss.jpg</image:loc>
       <image:title>Best Meal Delivery Services for Weight Loss in 2026</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/best-fitness-apps-macro-tracking</loc>
+    <loc>https://www.healthcalc.xyz/blog/best-fitness-apps-macro-tracking</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/best-fitness-apps-macro-tracking.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-fitness-apps-macro-tracking.jpg</image:loc>
       <image:title>Best Fitness Apps for Tracking Macros and Calories in 2026</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/blog/best-kitchen-scales-portion-control</loc>
+    <loc>https://www.healthcalc.xyz/blog/best-kitchen-scales-portion-control</loc>
     <lastmod>2026-02-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://www.heathcheck.info/images/blog/best-kitchen-scales-portion-control.jpg</image:loc>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-kitchen-scales-portion-control.jpg</image:loc>
       <image:title>Best Kitchen Scales for Portion Control and Calorie Tracking in 2026</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-supplements-fitness-goals</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-supplements-fitness-goals.jpg</image:loc>
+      <image:title>Best Supplements for Fitness Goals</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-home-gym-equipment-beginners</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-home-gym-equipment-beginners.jpg</image:loc>
+      <image:title>Best Home Gym Equipment for Beginners</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-running-shoes-weight-loss</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-running-shoes-weight-loss.jpg</image:loc>
+      <image:title>Best Running Shoes for Weight Loss in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-resistance-bands-strength-training</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-resistance-bands-strength-training.jpg</image:loc>
+      <image:title>Best Resistance Bands for Strength Training in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-body-tape-measures-composition</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-body-tape-measures-composition.jpg</image:loc>
+      <image:title>Best Body Tape Measures for Tracking Composition in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-protein-bars-on-the-go</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-protein-bars-on-the-go.jpg</image:loc>
+      <image:title>Best Protein Bars for On-the-Go Nutrition in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-foam-rollers-recovery</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-foam-rollers-recovery.jpg</image:loc>
+      <image:title>Best Foam Rollers and Recovery Tools in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-yoga-mats-home-workouts</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-yoga-mats-home-workouts.jpg</image:loc>
+      <image:title>Best Yoga Mats for Home Workouts in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-adjustable-dumbbells-home-gym</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-adjustable-dumbbells-home-gym.jpg</image:loc>
+      <image:title>Best Adjustable Dumbbells for Home Gym in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-jump-ropes-cardio-weight-loss</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-jump-ropes-cardio-weight-loss.jpg</image:loc>
+      <image:title>Best Jump Ropes for Cardio and Weight Loss in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-water-bottles-hydration-tracking</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-water-bottles-hydration-tracking.jpg</image:loc>
+      <image:title>Best Water Bottles for Hydration Tracking in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-kettlebells-full-body-workouts</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-kettlebells-full-body-workouts.jpg</image:loc>
+      <image:title>Best Kettlebells for Full-Body Workouts in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-workout-headphones-gym</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-workout-headphones-gym.jpg</image:loc>
+      <image:title>Best Workout Headphones for the Gym in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-pull-up-bars-home-fitness</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-pull-up-bars-home-fitness.jpg</image:loc>
+      <image:title>Best Pull-Up Bars for Home Fitness in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-blender-bottles-protein-shakes</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-blender-bottles-protein-shakes.jpg</image:loc>
+      <image:title>Best Blender Bottles and Shaker Cups in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-heart-rate-monitors-training</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-heart-rate-monitors-training.jpg</image:loc>
+      <image:title>Best Heart Rate Monitors for Training in 2026</image:title>
+    </image:image>
+  </url>
+
+  <!-- New Affiliate Blog Posts -->
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-treadmills-home-weight-loss</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-treadmills-home-weight-loss.jpg</image:loc>
+      <image:title>Best Treadmills for Home Weight Loss in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-exercise-bikes-weight-loss</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-exercise-bikes-weight-loss.jpg</image:loc>
+      <image:title>Best Exercise Bikes for Weight Loss in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-weight-benches-home-gym</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-weight-benches-home-gym.jpg</image:loc>
+      <image:title>Best Weight Benches for Home Gym in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-creatine-supplements-muscle-gain</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-creatine-supplements-muscle-gain.jpg</image:loc>
+      <image:title>Best Creatine Supplements for Muscle Gain in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-pre-workout-supplements-energy</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-pre-workout-supplements-energy.jpg</image:loc>
+      <image:title>Best Pre-Workout Supplements for Energy in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-massage-guns-recovery</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-massage-guns-recovery.jpg</image:loc>
+      <image:title>Best Massage Guns for Muscle Recovery in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-meal-prep-containers-weight-loss</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-meal-prep-containers-weight-loss.jpg</image:loc>
+      <image:title>Best Meal Prep Containers for Weight Loss in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-workout-gloves-weightlifting</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-workout-gloves-weightlifting.jpg</image:loc>
+      <image:title>Best Workout Gloves for Weightlifting in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-ab-rollers-core-training</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-ab-rollers-core-training.jpg</image:loc>
+      <image:title>Best Ab Rollers for Core Training in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-gym-bags-workout-gear</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-gym-bags-workout-gear.jpg</image:loc>
+      <image:title>Best Gym Bags for Workout Gear in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-compression-gear-recovery</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-compression-gear-recovery.jpg</image:loc>
+      <image:title>Best Compression Gear for Recovery in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-barbell-weight-sets-home-gym</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-barbell-weight-sets-home-gym.jpg</image:loc>
+      <image:title>Best Barbell Weight Sets for Home Gym in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-fitness-trackers-kids</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-fitness-trackers-kids.jpg</image:loc>
+      <image:title>Best Fitness Trackers for Kids in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-sleep-trackers-recovery</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-sleep-trackers-recovery.jpg</image:loc>
+      <image:title>Best Sleep Trackers for Recovery in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/best-rowing-machines-full-body</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/best-rowing-machines-full-body.jpg</image:loc>
+      <image:title>Best Rowing Machines for Full-Body Workouts in 2026</image:title>
+    </image:image>
+  </url>
+
+  <!-- New Informational & Comparison Blog Posts -->
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/how-to-measure-body-fat-at-home</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/how-to-measure-body-fat-at-home.jpg</image:loc>
+      <image:title>How to Measure Body Fat at Home</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/heart-rate-zones-explained-training</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/heart-rate-zones-explained-training.jpg</image:loc>
+      <image:title>Heart Rate Zones Explained: A Guide to Training Smarter</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/counting-calories-vs-tracking-macros</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/counting-calories-vs-tracking-macros.jpg</image:loc>
+      <image:title>Counting Calories vs Tracking Macros</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/how-fast-can-you-build-muscle</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/how-fast-can-you-build-muscle.jpg</image:loc>
+      <image:title>How Fast Can You Build Muscle?</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/treadmill-vs-exercise-bike-calories</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/treadmill-vs-exercise-bike-calories.jpg</image:loc>
+      <image:title>Treadmill vs Exercise Bike: Which Burns More Calories?</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/adjustable-dumbbells-vs-barbell-home-gym</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/adjustable-dumbbells-vs-barbell-home-gym.jpg</image:loc>
+      <image:title>Adjustable Dumbbells vs Barbell for Home Gym</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/blog/smart-scale-vs-body-fat-calipers</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.healthcalc.xyz/images/blog/smart-scale-vs-body-fat-calipers.jpg</image:loc>
+      <image:title>Smart Scale vs Body Fat Calipers: Which Is More Accurate?</image:title>
     </image:image>
   </url>
 
   <!-- Informational Pages -->
   <url>
-    <loc>https://www.heathcheck.info/about</loc>
+    <loc>https://www.healthcalc.xyz/about</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators</loc>
+    <loc>https://www.healthcalc.xyz/about/editorial</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.healthcalc.xyz/calculators</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculator-widgets</loc>
+    <loc>https://www.healthcalc.xyz/calculator-widgets</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/embed-terms</loc>
+    <loc>https://www.healthcalc.xyz/embed-terms</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/weight-loss</loc>
+    <loc>https://www.healthcalc.xyz/calculators/weight-loss</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/body-composition</loc>
+    <loc>https://www.healthcalc.xyz/calculators/body-composition</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/metabolism-energy</loc>
+    <loc>https://www.healthcalc.xyz/calculators/metabolism-energy</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/nutrition</loc>
+    <loc>https://www.healthcalc.xyz/calculators/nutrition</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/performance</loc>
+    <loc>https://www.healthcalc.xyz/calculators/performance</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/wellness-recovery</loc>
+    <loc>https://www.healthcalc.xyz/calculators/wellness-recovery</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/pregnancy</loc>
+    <loc>https://www.healthcalc.xyz/calculators/pregnancy</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/health-vitals</loc>
+    <loc>https://www.healthcalc.xyz/calculators/health-vitals</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/calculators/utilities</loc>
+    <loc>https://www.healthcalc.xyz/calculators/utilities</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/contact</loc>
+    <loc>https://www.healthcalc.xyz/contact</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/privacy</loc>
+    <loc>https://www.healthcalc.xyz/privacy</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/terms</loc>
+    <loc>https://www.healthcalc.xyz/terms</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.heathcheck.info/disclaimer</loc>
+    <loc>https://www.healthcalc.xyz/disclaimer</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

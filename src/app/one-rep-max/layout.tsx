@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     '1RM calculator, one rep max, strength calculator, weightlifting calculator, Epley formula, Brzycki formula, training zones, powerlifting',
   alternates: {
-    canonical: 'https://www.heathcheck.info/one-rep-max',
+    canonical: 'https://www.healthcalc.xyz/one-rep-max',
   },
   openGraph: {
     title: 'One Rep Max Calculator | HealthCheck',
     description:
       'Calculate your one rep max (1RM) from submaximal lifts. Get training zone recommendations and percentage charts for programming your workouts.',
     type: 'website',
-    url: 'https://www.heathcheck.info/one-rep-max',
+    url: 'https://www.healthcalc.xyz/one-rep-max',
     images: [
       {
         url: '/images/calculators/one-rep-max-calculator.jpg',

@@ -141,9 +141,10 @@ export default function CaloriesBurnedCyclingCalculator() {
         '@type': 'WebPage',
         name: 'Calories Burned Cycling Calculator',
         description: 'Estimate calories burned while cycling based on speed and time.',
-        url: 'https://www.heathcheck.info/calories-burned-cycling',
+        url: 'https://www.healthcalc.xyz/calories-burned-cycling',
       }}
       understandingSection={<CaloriesBurnedCyclingInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

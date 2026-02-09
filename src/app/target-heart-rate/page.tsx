@@ -143,9 +143,10 @@ export default function TargetHeartRateCalculator() {
         '@type': 'WebPage',
         name: 'Target Heart Rate Calculator',
         description: 'Calculate target heart rate zones for cardio training.',
-        url: 'https://www.heathcheck.info/target-heart-rate',
+        url: 'https://www.healthcalc.xyz/target-heart-rate',
       }}
       understandingSection={<TargetHeartRateInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

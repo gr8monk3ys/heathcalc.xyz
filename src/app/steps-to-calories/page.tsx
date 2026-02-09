@@ -165,9 +165,10 @@ export default function StepsToCaloriesCalculator() {
         '@type': 'WebPage',
         name: 'Steps to Calories Calculator',
         description: 'Estimate calories burned from steps using stride length and duration.',
-        url: 'https://www.heathcheck.info/steps-to-calories',
+        url: 'https://www.healthcalc.xyz/steps-to-calories',
       }}
       understandingSection={<StepsToCaloriesInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

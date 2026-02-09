@@ -306,10 +306,11 @@ export default function BMICalculator() {
         name: 'BMI Calculator',
         description:
           'Calculate your Body Mass Index (BMI) and discover your healthy weight range. Supports both adults and children with WHO and CDC-approved categories.',
-        url: 'https://www.heathcheck.info/bmi',
+        url: 'https://www.healthcalc.xyz/bmi',
       }}
       understandingSection={<BMIUnderstanding />}
       newsletterDescription="Subscribe to receive the latest body composition insights, health calculators, and evidence-based wellness advice delivered to your inbox."
+      showResultsCapture={showResult}
     >
       <div className="md:col-span-1">
         <CalculatorForm

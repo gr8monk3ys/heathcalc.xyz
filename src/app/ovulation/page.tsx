@@ -106,9 +106,10 @@ export default function OvulationCalculator() {
         '@type': 'WebPage',
         name: 'Ovulation Calculator',
         description: 'Estimate your ovulation date and fertile window based on cycle length.',
-        url: 'https://www.heathcheck.info/ovulation',
+        url: 'https://www.healthcalc.xyz/ovulation',
       }}
       understandingSection={<OvulationInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

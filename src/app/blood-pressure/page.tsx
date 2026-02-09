@@ -123,9 +123,10 @@ export default function BloodPressureCalculator() {
         '@type': 'WebPage',
         name: 'Blood Pressure Calculator',
         description: 'Check your blood pressure category using systolic and diastolic readings.',
-        url: 'https://www.heathcheck.info/blood-pressure',
+        url: 'https://www.healthcalc.xyz/blood-pressure',
       }}
       understandingSection={<BloodPressureInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

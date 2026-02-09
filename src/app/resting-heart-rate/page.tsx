@@ -97,9 +97,10 @@ export default function RestingHeartRateCalculator() {
         '@type': 'WebPage',
         name: 'Resting Heart Rate Calculator',
         description: 'Evaluate your resting heart rate and fitness category.',
-        url: 'https://www.heathcheck.info/resting-heart-rate',
+        url: 'https://www.healthcalc.xyz/resting-heart-rate',
       }}
       understandingSection={<RestingHeartRateInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

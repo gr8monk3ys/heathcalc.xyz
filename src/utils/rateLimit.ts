@@ -38,11 +38,22 @@ function cleanupExpired(): void {
  * Get client IP address from the request
  */
 function getClientIp(request: NextRequest): string {
+  // Prefer request.ip which is set by the trusted reverse proxy (e.g. Vercel)
+  const ip = (request as NextRequest & { ip?: string }).ip;
+  if (ip) {
+    return ip;
+  }
+
+  // Fallback: use the rightmost (last) X-Forwarded-For value, which is the
+  // address appended by the closest trusted proxy. The leftmost entries are
+  // attacker-controlled and trivially spoofed.
   const forwarded = request.headers.get('x-forwarded-for');
   if (forwarded) {
-    return forwarded.split(',')[0].trim();
+    const parts = forwarded.split(',');
+    return parts[parts.length - 1].trim();
   }
-  return (request as NextRequest & { ip?: string }).ip ?? 'unknown';
+
+  return 'unknown';
 }
 
 /**

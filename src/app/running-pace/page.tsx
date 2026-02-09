@@ -126,9 +126,10 @@ export default function RunningPaceCalculator() {
         '@type': 'WebPage',
         name: 'Running Pace Calculator',
         description: 'Calculate your pace per mile or kilometer along with average speed.',
-        url: 'https://www.heathcheck.info/running-pace',
+        url: 'https://www.healthcalc.xyz/running-pace',
       }}
       understandingSection={<RunningPaceInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm

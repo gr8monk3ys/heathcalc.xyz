@@ -143,9 +143,10 @@ export default function LeanBodyMassCalculator() {
         '@type': 'WebPage',
         name: 'Lean Body Mass Calculator',
         description: 'Estimate lean body mass using weight, height, and sex.',
-        url: 'https://www.heathcheck.info/lean-body-mass',
+        url: 'https://www.healthcalc.xyz/lean-body-mass',
       }}
       understandingSection={<LeanBodyMassInfo />}
+      showResultsCapture={!!result}
     >
       <div className="md:col-span-1">
         <CalculatorForm
