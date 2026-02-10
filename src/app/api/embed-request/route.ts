@@ -36,17 +36,17 @@ export async function POST(request: NextRequest): Promise<NextResponse<EmbedResp
     return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
   }
 
-  const { success: withinLimit } = rateLimit(request, {
+  const rateLimitResult = rateLimit(request, {
     limit: 5,
     windowMs: 60_000,
   });
-  if (!withinLimit) {
+  if (!rateLimitResult.success) {
     return NextResponse.json(
       {
         success: false,
         error: 'Too many requests. Please try again later.',
       },
-      { status: 429 }
+      { status: 429, headers: rateLimitResult.headers }
     );
   }
 

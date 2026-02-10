@@ -43,14 +43,14 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
   }
 
-  const { success: withinLimit } = rateLimit(request);
-  if (!withinLimit) {
+  const rateLimitResult = rateLimit(request);
+  if (!rateLimitResult.success) {
     return NextResponse.json(
       {
         success: false,
         error: 'Too many requests. Please try again later.',
       },
-      { status: 429 }
+      { status: 429, headers: rateLimitResult.headers }
     );
   }
 
