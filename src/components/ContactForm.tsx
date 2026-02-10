@@ -35,7 +35,7 @@ export default function ContactForm() {
         setMessage('');
       } else {
         setStatus('error');
-        setStatusMessage(data.message || 'Something went wrong. Please try again.');
+        setStatusMessage(data.error || 'Something went wrong. Please try again.');
       }
     } catch {
       setStatus('error');

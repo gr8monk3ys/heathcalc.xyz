@@ -60,7 +60,7 @@ export default function NewsletterSignup({
 
         const result = await response.json();
         setMessage({
-          text: result.message,
+          text: result.success ? result.message : result.error,
           type: result.success ? 'success' : 'error',
         });
 

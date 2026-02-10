@@ -1,24 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { createLogger } from '@/utils/logger';
 import { rateLimit } from '@/utils/rateLimit';
+import { verifyCsrf } from '@/utils/csrf';
 
 const logger = createLogger({ component: 'ContactAPI' });
 
-interface ContactRequest {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-interface ContactResponse {
-  success: boolean;
-  message: string;
-}
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const VALID_SUBJECTS = ['question', 'feedback', 'bug', 'feature', 'other'];
+const contactSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters').max(100),
+  email: z.string().email('Please provide a valid email address'),
+  subject: z.enum(['question', 'feedback', 'bug', 'feature', 'other']),
+  message: z
+    .string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(5000, 'Message must be less than 5,000 characters'),
+});
 
 const SUBJECT_LABELS: Record<string, string> = {
   question: 'General Question',
@@ -37,64 +33,46 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#039;');
 }
 
+interface ContactSuccessResponse {
+  success: true;
+  message: string;
+}
+
+interface ContactErrorResponse {
+  success: false;
+  error: string;
+}
+
+type ContactResponse = ContactSuccessResponse | ContactErrorResponse;
+
 export async function POST(request: NextRequest): Promise<NextResponse<ContactResponse>> {
-  // CSRF protection: verify the Origin header matches the expected host.
-  const origin = request.headers.get('origin');
-  if (origin) {
-    const host = request.headers.get('host');
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const expectedOrigin = siteUrl || (host ? `https://${host}` : null);
-    if (!expectedOrigin || origin !== expectedOrigin) {
-      return NextResponse.json({ success: false, message: 'Forbidden' }, { status: 403 });
-    }
+  // CSRF protection
+  if (!verifyCsrf(request)) {
+    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
   }
 
   const { success: withinLimit } = rateLimit(request);
   if (!withinLimit) {
     return NextResponse.json(
-      { success: false, message: 'Too many requests. Please try again later.' },
+      {
+        success: false,
+        error: 'Too many requests. Please try again later.',
+      },
       { status: 429 }
     );
   }
 
   try {
-    const body = (await request.json()) as ContactRequest;
-    const { name, email, subject, message } = body;
+    const body = await request.json();
 
-    if (!name || name.trim().length < 2) {
-      return NextResponse.json(
-        { success: false, message: 'Please provide your name (at least 2 characters).' },
-        { status: 400 }
-      );
+    // Validate request body with Zod
+    const parsed = contactSchema.safeParse(body);
+    if (!parsed.success) {
+      const firstError = parsed.error.issues[0]?.message ?? 'Invalid input';
+      return NextResponse.json({ success: false, error: firstError }, { status: 400 });
     }
 
-    if (!email || !EMAIL_REGEX.test(email)) {
-      return NextResponse.json(
-        { success: false, message: 'Please provide a valid email address.' },
-        { status: 400 }
-      );
-    }
-
-    if (!subject || !VALID_SUBJECTS.includes(subject)) {
-      return NextResponse.json(
-        { success: false, message: 'Please select a valid subject.' },
-        { status: 400 }
-      );
-    }
-
-    if (!message || message.trim().length < 10) {
-      return NextResponse.json(
-        { success: false, message: 'Message must be at least 10 characters.' },
-        { status: 400 }
-      );
-    }
-
-    if (message.length > 5000) {
-      return NextResponse.json(
-        { success: false, message: 'Message must be less than 5,000 characters.' },
-        { status: 400 }
-      );
-    }
+    const { name, email, subject, message } = parsed.data;
 
     const resendApiKey = process.env.RESEND_API_KEY;
     const contactEmail = process.env.CONTACT_EMAIL || 'info@healthcalc.xyz';
@@ -130,9 +108,14 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactRe
         });
       }
 
-      logger.error('Resend email error', { responseBody: await response.text() });
+      logger.error('Resend email error', {
+        responseBody: await response.text(),
+      });
       return NextResponse.json(
-        { success: false, message: 'Failed to send message. Please try again later.' },
+        {
+          success: false,
+          error: 'Failed to send message. Please try again later.',
+        },
         { status: 500 }
       );
     }
@@ -150,7 +133,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactRe
     return NextResponse.json(
       {
         success: false,
-        message:
+        error:
           'Contact form is temporarily unavailable. Please email us directly at info@healthcalc.xyz',
       },
       { status: 503 }
@@ -160,7 +143,10 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactRe
       error: error instanceof Error ? error.message : String(error),
     });
     return NextResponse.json(
-      { success: false, message: 'An error occurred. Please try again later.' },
+      {
+        success: false,
+        error: 'An error occurred. Please try again later.',
+      },
       { status: 500 }
     );
   }

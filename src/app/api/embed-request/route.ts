@@ -1,36 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { createLogger } from '@/utils/logger';
 import { rateLimit } from '@/utils/rateLimit';
+import { verifyCsrf } from '@/utils/csrf';
 
 const logger = createLogger({ component: 'EmbedRequestAPI' });
 
 const CONVERTKIT_API_KEY = process.env.CONVERTKIT_API_KEY;
 const CONVERTKIT_FORM_ID = process.env.CONVERTKIT_FORM_ID;
 
-// Email validation regex
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const embedRequestSchema = z.object({
+  name: z.string().trim().max(100).default(''),
+  email: z.string().email('Please provide a valid email address'),
+  website: z.string().trim().max(500).default(''),
+  calculator: z.string().trim().max(100).default(''),
+  calculatorSlug: z.string().trim().max(100).default(''),
+  notes: z.string().trim().max(1000).default(''),
+});
 
-/**
- * Trim and limit a string field to a maximum length.
- * Returns an empty string for non-string / falsy values.
- */
-function sanitizeField(value: unknown, maxLength: number): string {
-  if (typeof value !== 'string') return '';
-  return value.trim().slice(0, maxLength);
+interface EmbedSuccessResponse {
+  success: true;
+  message: string;
 }
 
-export async function POST(request: NextRequest): Promise<NextResponse> {
-  // CSRF protection: verify the Origin header matches the expected host.
-  // Same-origin requests from older browsers may omit the header, so only
-  // reject when Origin is present but does not match.
-  const origin = request.headers.get('origin');
-  if (origin) {
-    const host = request.headers.get('host');
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const expectedOrigin = siteUrl || (host ? `https://${host}` : null);
-    if (!expectedOrigin || origin !== expectedOrigin) {
-      return NextResponse.json({ ok: false, error: 'Forbidden' }, { status: 403 });
-    }
+interface EmbedErrorResponse {
+  success: false;
+  error: string;
+}
+
+type EmbedResponse = EmbedSuccessResponse | EmbedErrorResponse;
+
+export async function POST(request: NextRequest): Promise<NextResponse<EmbedResponse>> {
+  // CSRF protection
+  if (!verifyCsrf(request)) {
+    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
   }
 
   const { success: withinLimit } = rateLimit(request, {
@@ -39,7 +42,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   });
   if (!withinLimit) {
     return NextResponse.json(
-      { ok: false, error: 'Too many requests. Please try again later.' },
+      {
+        success: false,
+        error: 'Too many requests. Please try again later.',
+      },
       { status: 429 }
     );
   }
@@ -47,26 +53,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const payload = await request.json();
 
-    // Sanitize all string inputs
-    const name = sanitizeField(payload?.name, 100);
-    const email = sanitizeField(payload?.email, 254);
-    const website = sanitizeField(payload?.website, 500);
-    const calculator = sanitizeField(payload?.calculator, 100);
-    const calculatorSlug = sanitizeField(payload?.calculatorSlug, 100);
-    const notes = sanitizeField(payload?.notes, 1000);
-
-    // Validate required email field
-    if (!email) {
-      return NextResponse.json({ ok: false, error: 'Email is required' }, { status: 400 });
+    // Validate request body with Zod
+    const parsed = embedRequestSchema.safeParse(payload);
+    if (!parsed.success) {
+      const firstError = parsed.error.issues[0]?.message ?? 'Invalid input';
+      return NextResponse.json({ success: false, error: firstError }, { status: 400 });
     }
 
-    // Validate email format
-    if (!EMAIL_REGEX.test(email)) {
-      return NextResponse.json(
-        { ok: false, error: 'Please provide a valid email address' },
-        { status: 400 }
-      );
-    }
+    const { name, email, website, calculator, calculatorSlug, notes } = parsed.data;
 
     if (CONVERTKIT_API_KEY && CONVERTKIT_FORM_ID) {
       const response = await fetch(
@@ -92,17 +86,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       if (!response.ok) {
         const errorBody = await response.text();
         logger.error('ConvertKit error', { responseBody: errorBody });
-        return NextResponse.json({ ok: false }, { status: 502 });
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Failed to submit request. Please try again later.',
+          },
+          { status: 502 }
+        );
       }
     } else {
       logger.warn('Missing ConvertKit config');
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({
+      success: true,
+      message: 'Embed request submitted successfully.',
+    });
   } catch (error) {
     logger.error('Embed request failed', {
       error: error instanceof Error ? error.message : String(error),
     });
-    return NextResponse.json({ ok: false }, { status: 400 });
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'An error occurred. Please try again later.',
+      },
+      { status: 400 }
+    );
   }
 }

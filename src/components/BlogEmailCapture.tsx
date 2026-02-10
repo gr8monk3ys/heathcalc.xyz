@@ -74,7 +74,7 @@ export function BlogEmailCapture({
         } else {
           setSubmitState({
             status: 'error',
-            message: result.message || 'Something went wrong. Please try again.',
+            message: result.error || 'Something went wrong. Please try again.',
           });
         }
       } catch {

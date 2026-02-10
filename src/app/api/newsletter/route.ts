@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 import { createLogger } from '@/utils/logger';
 import { rateLimit } from '@/utils/rateLimit';
+import { verifyCsrf } from '@/utils/csrf';
 
 /**
  * Newsletter subscription API endpoint
@@ -18,32 +20,27 @@ import { rateLimit } from '@/utils/rateLimit';
 
 const logger = createLogger({ component: 'NewsletterAPI' });
 
-interface SubscribeRequest {
-  email: string;
-  /** Optional source identifier for tracking where the subscription originated */
-  source?: string;
-}
+const subscribeSchema = z.object({
+  email: z.string().email('Please provide a valid email address'),
+  source: z.string().max(100).optional(),
+});
 
-interface SubscribeResponse {
-  success: boolean;
+interface SubscribeSuccessResponse {
+  success: true;
   message: string;
 }
 
-// Email validation regex
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+interface SubscribeErrorResponse {
+  success: false;
+  error: string;
+}
+
+type SubscribeResponse = SubscribeSuccessResponse | SubscribeErrorResponse;
 
 export async function POST(request: NextRequest): Promise<NextResponse<SubscribeResponse>> {
-  // CSRF protection: verify the Origin header matches the expected host.
-  // Same-origin requests from older browsers may omit the header, so only
-  // reject when Origin is present but does not match.
-  const origin = request.headers.get('origin');
-  if (origin) {
-    const host = request.headers.get('host');
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const expectedOrigin = siteUrl || (host ? `https://${host}` : null);
-    if (!expectedOrigin || origin !== expectedOrigin) {
-      return NextResponse.json({ success: false, message: 'Forbidden' }, { status: 403 });
-    }
+  // CSRF protection
+  if (!verifyCsrf(request)) {
+    return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
   }
 
   const { success: withinLimit } = rateLimit(request);
@@ -51,23 +48,23 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     return NextResponse.json(
       {
         success: false,
-        message: 'Too many requests. Please try again later.',
+        error: 'Too many requests. Please try again later.',
       },
       { status: 429 }
     );
   }
 
   try {
-    const body = (await request.json()) as SubscribeRequest;
-    const { email, source } = body;
+    const body = await request.json();
 
-    // Validate email
-    if (!email || !EMAIL_REGEX.test(email)) {
-      return NextResponse.json(
-        { success: false, message: 'Please provide a valid email address' },
-        { status: 400 }
-      );
+    // Validate request body with Zod
+    const parsed = subscribeSchema.safeParse(body);
+    if (!parsed.success) {
+      const firstError = parsed.error.issues[0]?.message ?? 'Invalid input';
+      return NextResponse.json({ success: false, error: firstError }, { status: 400 });
     }
+
+    const { email, source } = parsed.data;
 
     // Check which email provider is configured
     const mailchimpApiKey = process.env.MAILCHIMP_API_KEY;
@@ -119,7 +116,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       return NextResponse.json(
         {
           success: false,
-          message: 'Failed to subscribe. Please try again later.',
+          error: 'Failed to subscribe. Please try again later.',
         },
         { status: 500 }
       );
@@ -155,7 +152,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       return NextResponse.json(
         {
           success: false,
-          message: 'Failed to subscribe. Please try again later.',
+          error: 'Failed to subscribe. Please try again later.',
         },
         { status: 500 }
       );
@@ -189,7 +186,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       return NextResponse.json(
         {
           success: false,
-          message: 'Failed to subscribe. Please try again later.',
+          error: 'Failed to subscribe. Please try again later.',
         },
         { status: 500 }
       );
@@ -218,7 +215,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     return NextResponse.json(
       {
         success: false,
-        message:
+        error:
           'Newsletter service is temporarily unavailable. Please try again later or contact support.',
       },
       { status: 503 }
@@ -230,7 +227,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     return NextResponse.json(
       {
         success: false,
-        message: 'An error occurred. Please try again later.',
+        error: 'An error occurred. Please try again later.',
       },
       { status: 500 }
     );
