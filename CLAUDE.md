@@ -166,10 +166,6 @@ GitHub Actions workflow at `.github/workflows/ci.yml`:
 
 Body Fat Burn calculator (`/body-fat-burn`) is ~50% larger than other calculators. Consider auditing dependencies.
 
-### Type Safety
-
-4 remaining `any` types in `src/components/calculators/CalculatorForm.tsx`. These should be properly typed.
-
 ### Code Duplication
 
 Each calculator page reimplements form handling (150-260 lines). Consider extracting common form logic.
