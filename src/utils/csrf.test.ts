@@ -52,9 +52,9 @@ describe('verifyCsrf', () => {
     expect(verifyCsrf(req)).toBe(false);
   });
 
-  it('should allow request when neither Origin nor Referer is present', () => {
+  it('should reject request when neither Origin nor Referer is present', () => {
     const req = makeRequest({ host: 'localhost' });
-    expect(verifyCsrf(req)).toBe(true);
+    expect(verifyCsrf(req)).toBe(false);
   });
 
   it('should reject request with invalid Origin URL', () => {
@@ -91,9 +91,9 @@ describe('verifyCsrf', () => {
     expect(verifyCsrf(req)).toBe(false);
   });
 
-  it('should allow request when no host can be determined', () => {
+  it('should reject request when no host can be determined (fail-secure)', () => {
     delete process.env.NEXT_PUBLIC_SITE_URL;
     const req = makeRequest({});
-    expect(verifyCsrf(req)).toBe(true);
+    expect(verifyCsrf(req)).toBe(false);
   });
 });

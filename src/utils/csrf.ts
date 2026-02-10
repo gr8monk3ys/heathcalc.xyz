@@ -8,8 +8,9 @@ import { NextRequest } from 'next/server';
  * The function checks headers in order of reliability:
  * 1. Origin header (most reliable, set by browsers on cross-origin requests)
  * 2. Referer header (fallback, may contain full URL path)
- * 3. If neither is present, allow the request (same-origin requests from
- *    older browsers or non-browser clients may omit both headers)
+ * 3. If neither is present, reject the request. Modern browsers always send
+ *    at least Origin or Referer on same-origin POST requests, so missing
+ *    both headers is suspicious and likely indicates a forged request.
  */
 export function verifyCsrf(request: NextRequest): boolean {
   const origin = request.headers.get('origin');
@@ -18,7 +19,7 @@ export function verifyCsrf(request: NextRequest): boolean {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const expectedHost = siteUrl ? new URL(siteUrl).host : host;
 
-  if (!expectedHost) return true; // Can't verify without expected host
+  if (!expectedHost) return false; // Fail-secure: reject if we can't verify
 
   // Check Origin header (most reliable)
   if (origin) {
@@ -38,6 +39,7 @@ export function verifyCsrf(request: NextRequest): boolean {
     }
   }
 
-  // No Origin or Referer - allow (same-origin requests from older browsers)
-  return true;
+  // No Origin or Referer - reject. Modern browsers always send at least one
+  // of these headers on same-origin POST requests.
+  return false;
 }
