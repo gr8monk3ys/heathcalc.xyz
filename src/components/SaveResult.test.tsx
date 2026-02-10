@@ -1,0 +1,204 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import SaveResult, { SavedResultsList } from './SaveResult';
+
+// Mutable mock state that tests can override
+const mockState = {
+  saveResult: vi.fn(),
+  removeResultByData: vi.fn(),
+  isResultSaved: vi.fn().mockReturnValue(false),
+  removeResult: vi.fn(),
+  clearAllResults: vi.fn(),
+  formatDate: vi.fn((d: string) => d),
+  canSaveResults: true,
+  savedResults: [] as Array<{
+    id: string;
+    calculatorType: string;
+    calculatorName: string;
+    date: string;
+    data: Record<string, unknown>;
+  }>,
+  message: '',
+  showMessage: false,
+  showNotification: vi.fn(),
+};
+
+vi.mock('@/hooks/useSavedResultsManager', () => ({
+  useSavedResultsManager: () => mockState,
+}));
+
+describe('SaveResult', () => {
+  const defaultProps = {
+    calculatorType: 'bmi',
+    calculatorName: 'BMI Calculator',
+    data: { bmi: 22.5, category: 'Normal' },
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockState.isResultSaved.mockReturnValue(false);
+    mockState.canSaveResults = true;
+    mockState.savedResults = [];
+    mockState.message = '';
+    mockState.showMessage = false;
+  });
+
+  describe('Rendering', () => {
+    it('should render Save Result button when not saved', () => {
+      render(<SaveResult {...defaultProps} />);
+      expect(screen.getByRole('button', { name: /save result/i })).toBeInTheDocument();
+    });
+
+    it('should render Saved button when already saved', () => {
+      mockState.isResultSaved.mockReturnValue(true);
+      render(<SaveResult {...defaultProps} />);
+      expect(screen.getByRole('button', { name: /remove saved result/i })).toBeInTheDocument();
+    });
+
+    it('should apply custom className', () => {
+      const { container } = render(<SaveResult {...defaultProps} className="mt-4" />);
+      expect(container.firstChild).toHaveClass('mt-4');
+    });
+  });
+
+  describe('Interactions', () => {
+    it('should call saveResult on save button click', () => {
+      render(<SaveResult {...defaultProps} />);
+      fireEvent.click(screen.getByRole('button', { name: /save result/i }));
+      expect(mockState.saveResult).toHaveBeenCalledWith('bmi', 'BMI Calculator', {
+        bmi: 22.5,
+        category: 'Normal',
+      });
+    });
+
+    it('should call removeResultByData on saved button click', () => {
+      mockState.isResultSaved.mockReturnValue(true);
+      render(<SaveResult {...defaultProps} />);
+      fireEvent.click(screen.getByRole('button', { name: /remove saved result/i }));
+      expect(mockState.removeResultByData).toHaveBeenCalledWith('bmi', {
+        bmi: 22.5,
+        category: 'Normal',
+      });
+    });
+  });
+
+  describe('Auth state', () => {
+    it('should show "Log in to Save" when user cannot save', () => {
+      mockState.canSaveResults = false;
+      render(<SaveResult {...defaultProps} />);
+      expect(screen.getByText(/log in to save/i)).toBeInTheDocument();
+    });
+
+    it('should show sign-in hint when user cannot save', () => {
+      mockState.canSaveResults = false;
+      render(<SaveResult {...defaultProps} />);
+      expect(screen.getByText(/sign in from the top-right/i)).toBeInTheDocument();
+    });
+  });
+
+  describe('Notifications', () => {
+    it('should display message when showMessage is true', () => {
+      mockState.showMessage = true;
+      mockState.message = 'Result saved successfully';
+      render(<SaveResult {...defaultProps} />);
+      expect(screen.getByRole('alert')).toHaveTextContent('Result saved successfully');
+    });
+
+    it('should not display message when showMessage is false', () => {
+      mockState.showMessage = false;
+      render(<SaveResult {...defaultProps} />);
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
+  });
+});
+
+describe('SavedResultsList', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockState.savedResults = [];
+    mockState.canSaveResults = true;
+  });
+
+  it('should show empty state when no results', () => {
+    render(<SavedResultsList />);
+    expect(screen.getByText(/you haven't saved any calculator results yet/i)).toBeInTheDocument();
+  });
+
+  it('should render saved results', () => {
+    mockState.savedResults = [
+      {
+        id: 'bmi-123',
+        calculatorType: 'bmi',
+        calculatorName: 'BMI Calculator',
+        date: '2024-01-15T00:00:00Z',
+        data: { bmi: 22.5 },
+      },
+    ];
+
+    render(<SavedResultsList />);
+    expect(screen.getByText('BMI Calculator')).toBeInTheDocument();
+  });
+
+  it('should have Clear All button when results exist', () => {
+    mockState.savedResults = [
+      {
+        id: 'bmi-123',
+        calculatorType: 'bmi',
+        calculatorName: 'BMI Calculator',
+        date: '2024-01-15T00:00:00Z',
+        data: { bmi: 22.5 },
+      },
+    ];
+
+    render(<SavedResultsList />);
+    fireEvent.click(screen.getByText('Clear All'));
+    expect(mockState.clearAllResults).toHaveBeenCalled();
+  });
+
+  it('should call removeResult when delete button clicked', () => {
+    mockState.savedResults = [
+      {
+        id: 'bmi-123',
+        calculatorType: 'bmi',
+        calculatorName: 'BMI Calculator',
+        date: '2024-01-15T00:00:00Z',
+        data: { bmi: 22.5 },
+      },
+    ];
+
+    render(<SavedResultsList />);
+    fireEvent.click(screen.getByRole('button', { name: /delete result/i }));
+    expect(mockState.removeResult).toHaveBeenCalledWith('bmi-123');
+  });
+
+  it('should link to calculator page', () => {
+    mockState.savedResults = [
+      {
+        id: 'bmi-123',
+        calculatorType: 'bmi',
+        calculatorName: 'BMI Calculator',
+        date: '2024-01-15T00:00:00Z',
+        data: { bmi: 22.5 },
+      },
+    ];
+
+    render(<SavedResultsList />);
+    const link = screen.getByText(/go to calculator/i);
+    expect(link).toHaveAttribute('href', '/bmi');
+  });
+
+  it('should display result data keys formatted', () => {
+    mockState.savedResults = [
+      {
+        id: 'bmi-123',
+        calculatorType: 'bmi',
+        calculatorName: 'BMI Calculator',
+        date: '2024-01-15T00:00:00Z',
+        data: { bmi: 22.5 },
+      },
+    ];
+
+    render(<SavedResultsList />);
+    expect(screen.getByText('22.5')).toBeInTheDocument();
+  });
+});
