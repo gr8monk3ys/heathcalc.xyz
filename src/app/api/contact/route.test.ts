@@ -66,7 +66,7 @@ describe('POST /api/contact', () => {
     const rlMod = await import('@/utils/rateLimit');
     rateLimit = rlMod.rateLimit as unknown as ReturnType<typeof vi.fn>;
 
-    process.env.NODE_ENV = 'development';
+    vi.stubEnv('NODE_ENV', 'development');
   });
 
   it('should accept valid submission and return success', async () => {
