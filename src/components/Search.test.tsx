@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Search from './Search';
+import Search, { SearchPage } from './Search';
 
 // Mock next/navigation
 const mockPush = vi.fn();
@@ -70,70 +70,89 @@ const mockSearchIndex = {
     category: 'Reviews',
     tags: ['bmi', 'scales', 'review'],
   },
+  privacyPage: {
+    title: 'Privacy Policy',
+    description: 'How we collect and use information',
+    url: '/privacy',
+    type: 'page' as const,
+    category: 'Legal',
+    tags: ['privacy', 'policy'],
+  },
 };
+
+type SearchProps = React.ComponentProps<typeof Search>;
+
+async function renderSearch(props: SearchProps = {}) {
+  const result = render(<Search {...props} />);
+  await waitFor(() => {
+    expect(global.fetch).toHaveBeenCalledWith('/search-index.json');
+  });
+  return result;
+}
 
 describe('Search', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    window.history.pushState({}, '', '/');
     global.fetch = vi.fn().mockResolvedValue({
       json: () => Promise.resolve(mockSearchIndex),
     });
   });
 
   describe('Rendering', () => {
-    it('should render search input', () => {
-      render(<Search />);
+    it('should render search input', async () => {
+      await renderSearch();
       expect(screen.getByRole('searchbox')).toBeInTheDocument();
     });
 
-    it('should render with custom placeholder', () => {
-      render(<Search placeholder="Find a calculator..." />);
+    it('should render with custom placeholder', async () => {
+      await renderSearch({ placeholder: 'Find a calculator...' });
       expect(screen.getByPlaceholderText('Find a calculator...')).toBeInTheDocument();
     });
 
-    it('should render default placeholder', () => {
-      render(<Search />);
+    it('should render default placeholder', async () => {
+      await renderSearch();
       expect(screen.getByPlaceholderText('Search calculators, articles...')).toBeInTheDocument();
     });
 
-    it('should render search icon by default', () => {
-      const { container } = render(<Search />);
+    it('should render search icon by default', async () => {
+      const { container } = await renderSearch();
       const svg = container.querySelector('svg');
       expect(svg).toBeInTheDocument();
     });
 
-    it('should hide search icon when showIcon is false', () => {
-      const { container } = render(<Search showIcon={false} />);
+    it('should hide search icon when showIcon is false', async () => {
+      const { container } = await renderSearch({ showIcon: false });
       // The only SVGs should not include the search icon in the input area
       const searchForm = container.querySelector('form');
       const iconContainer = searchForm?.querySelector('.pointer-events-none svg');
       expect(iconContainer).toBeNull();
     });
 
-    it('should render with initial query', () => {
-      render(<Search initialQuery="bmi" />);
+    it('should render with initial query', async () => {
+      await renderSearch({ initialQuery: 'bmi' });
       expect(screen.getByRole('searchbox')).toHaveValue('bmi');
     });
 
-    it('should apply custom className', () => {
-      const { container } = render(<Search className="w-full" />);
+    it('should apply custom className', async () => {
+      const { container } = await renderSearch({ className: 'w-full' });
       expect(container.firstChild).toHaveClass('w-full');
     });
 
-    it('should have search role on form', () => {
-      render(<Search />);
+    it('should have search role on form', async () => {
+      await renderSearch();
       expect(screen.getByRole('search')).toBeInTheDocument();
     });
 
-    it('should have aria-label on input', () => {
-      render(<Search />);
+    it('should have aria-label on input', async () => {
+      await renderSearch();
       expect(screen.getByLabelText('Search')).toBeInTheDocument();
     });
   });
 
   describe('Search behavior', () => {
     it('should not show results for single character input', async () => {
-      render(<Search />);
+      await renderSearch();
       const input = screen.getByRole('searchbox');
 
       fireEvent.change(input, { target: { value: 'b' } });
@@ -144,13 +163,8 @@ describe('Search', () => {
     });
 
     it('should show results for queries >= 2 characters', async () => {
-      render(<Search />);
+      await renderSearch();
       const input = screen.getByRole('searchbox');
-
-      // Wait for search index to load
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalledWith('/search-index.json');
-      });
 
       fireEvent.change(input, { target: { value: 'bmi' } });
 
@@ -160,12 +174,8 @@ describe('Search', () => {
     });
 
     it('should clear results when input is cleared', async () => {
-      render(<Search />);
+      await renderSearch();
       const input = screen.getByRole('searchbox');
-
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalled();
-      });
 
       fireEvent.change(input, { target: { value: 'bmi' } });
       await waitFor(() => {
@@ -180,12 +190,8 @@ describe('Search', () => {
 
     it('should call onSearch callback with results', async () => {
       const onSearch = vi.fn();
-      render(<Search onSearch={onSearch} />);
+      await renderSearch({ onSearch });
       const input = screen.getByRole('searchbox');
-
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalled();
-      });
 
       fireEvent.change(input, { target: { value: 'bmi' } });
 
@@ -193,11 +199,42 @@ describe('Search', () => {
         expect(onSearch).toHaveBeenCalledWith('bmi', expect.any(Array));
       });
     });
+
+    it('should include page-type results in the dropdown', async () => {
+      await renderSearch();
+      const input = screen.getByRole('searchbox');
+
+      fireEvent.change(input, { target: { value: 'privacy' } });
+
+      await waitFor(() => {
+        expect(screen.getByText('Privacy Policy')).toBeInTheDocument();
+      });
+    });
+
+    it('should re-open results on input focus when query is still valid', async () => {
+      await renderSearch();
+      const input = screen.getByRole('searchbox');
+
+      fireEvent.change(input, { target: { value: 'bmi' } });
+      await waitFor(() => {
+        expect(screen.getByText('BMI Calculator')).toBeInTheDocument();
+      });
+
+      fireEvent.mouseDown(document.body);
+      await waitFor(() => {
+        expect(screen.queryByText('BMI Calculator')).not.toBeInTheDocument();
+      });
+
+      fireEvent.focus(input);
+      await waitFor(() => {
+        expect(screen.getByText('BMI Calculator')).toBeInTheDocument();
+      });
+    });
   });
 
   describe('Form submission', () => {
     it('should navigate to search page on submit', async () => {
-      render(<Search />);
+      await renderSearch();
       const input = screen.getByRole('searchbox');
 
       fireEvent.change(input, { target: { value: 'bmi' } });
@@ -206,8 +243,8 @@ describe('Search', () => {
       expect(mockPush).toHaveBeenCalledWith('/search?q=bmi');
     });
 
-    it('should not navigate when query is too short', () => {
-      render(<Search />);
+    it('should not navigate when query is too short', async () => {
+      await renderSearch();
       const input = screen.getByRole('searchbox');
 
       fireEvent.change(input, { target: { value: 'b' } });
@@ -216,8 +253,8 @@ describe('Search', () => {
       expect(mockPush).not.toHaveBeenCalled();
     });
 
-    it('should URL-encode the query', () => {
-      render(<Search />);
+    it('should URL-encode the query', async () => {
+      await renderSearch();
       const input = screen.getByRole('searchbox');
 
       fireEvent.change(input, { target: { value: 'body fat %' } });
@@ -229,12 +266,8 @@ describe('Search', () => {
 
   describe('Result display', () => {
     it('should show result descriptions', async () => {
-      render(<Search />);
+      await renderSearch();
       const input = screen.getByRole('searchbox');
-
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalled();
-      });
 
       fireEvent.change(input, { target: { value: 'bmi' } });
 
@@ -244,12 +277,8 @@ describe('Search', () => {
     });
 
     it('should show category badges', async () => {
-      render(<Search />);
+      await renderSearch();
       const input = screen.getByRole('searchbox');
-
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalled();
-      });
 
       fireEvent.change(input, { target: { value: 'bmi' } });
 
@@ -259,18 +288,28 @@ describe('Search', () => {
     });
 
     it('should show "View all results" link when results exist', async () => {
-      render(<Search />);
+      await renderSearch();
       const input = screen.getByRole('searchbox');
-
-      await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalled();
-      });
 
       fireEvent.change(input, { target: { value: 'bmi' } });
 
       await waitFor(() => {
         expect(screen.getByText(/view all results/i)).toBeInTheDocument();
       });
+    });
+
+    it('should navigate when a dropdown result is clicked', async () => {
+      await renderSearch();
+      const input = screen.getByRole('searchbox');
+
+      fireEvent.change(input, { target: { value: 'bmi' } });
+
+      await waitFor(() => {
+        expect(screen.getByText('BMI Calculator')).toBeInTheDocument();
+      });
+
+      fireEvent.click(screen.getByRole('button', { name: /BMI Calculator/i }));
+      expect(mockPush).toHaveBeenCalledWith('/bmi');
     });
   });
 
@@ -282,11 +321,10 @@ describe('Search', () => {
           <div data-testid="outside">Outside</div>
         </div>
       );
-      const input = screen.getByRole('searchbox');
-
       await waitFor(() => {
-        expect(global.fetch).toHaveBeenCalled();
+        expect(global.fetch).toHaveBeenCalledWith('/search-index.json');
       });
+      const input = screen.getByRole('searchbox');
 
       fireEvent.change(input, { target: { value: 'bmi' } });
       await waitFor(() => {
@@ -317,5 +355,64 @@ describe('Search', () => {
       // Should not crash
       expect(screen.getByRole('searchbox')).toBeInTheDocument();
     });
+  });
+});
+
+describe('SearchPage', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    window.history.pushState({}, '', '/');
+    global.fetch = vi.fn().mockResolvedValue({
+      json: () => Promise.resolve(mockSearchIndex),
+    });
+  });
+
+  it('renders loading state initially', async () => {
+    window.history.pushState({}, '', '/search?q=bmi');
+    render(<SearchPage />);
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith('/search-index.json');
+    });
+
+    expect(screen.getByText('Search Results')).toBeInTheDocument();
+    expect(screen.queryByText(/Found .* for "bmi"/)).not.toBeInTheDocument();
+  });
+
+  it('renders search results after entering a query', async () => {
+    window.history.pushState({}, '', '/search?q=starter');
+    render(<SearchPage />);
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith('/search-index.json');
+    });
+
+    const input = screen.getByRole('searchbox');
+    fireEvent.change(input, { target: { value: 'bmi search' } });
+
+    await waitFor(() => {
+      expect(screen.getByText(/Found .* for "bmi search"/)).toBeInTheDocument();
+    });
+
+    expect(screen.getAllByText('BMI Calculator').length).toBeGreaterThan(0);
+  });
+
+  it('renders no-results fallback with popular calculator links', async () => {
+    window.history.pushState({}, '', '/search?q=starter');
+    render(<SearchPage />);
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith('/search-index.json');
+    });
+
+    const input = screen.getByRole('searchbox');
+    fireEvent.change(input, { target: { value: 'zzzzz' } });
+
+    await waitFor(() => {
+      expect(screen.getByText('No results found for "zzzzz"')).toBeInTheDocument();
+    });
+
+    expect(screen.getByText('Popular Calculators')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'TDEE Calculator' })).toBeInTheDocument();
   });
 });

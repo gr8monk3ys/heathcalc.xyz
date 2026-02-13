@@ -426,7 +426,7 @@ export default function Search({
  * SearchPage component for displaying search results page
  */
 export function SearchPage() {
-  const [query, _setQuery] = useState(() => {
+  const [query, setQuery] = useState(() => {
     if (typeof window !== 'undefined') {
       const searchParams = new URLSearchParams(window.location.search);
       return searchParams.get('q') || '';
@@ -438,6 +438,7 @@ export function SearchPage() {
 
   // Handle search results
   const handleSearchResults = (searchQuery: string, searchResults: SearchResult[]) => {
+    setQuery(searchQuery);
     setResults(searchResults);
     setIsLoading(false);
   };
