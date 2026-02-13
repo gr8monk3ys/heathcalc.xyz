@@ -6,6 +6,11 @@ import {
   validateWaist,
   validateHip,
   validateNeck,
+  validateWrist,
+  validateHeartRate,
+  validateSystolic,
+  validateDiastolic,
+  validateCycleLength,
   validateBodyFatPercentage,
   validateCalorieGoal,
   validateSpeed,
@@ -169,6 +174,70 @@ describe('Neck Validation', () => {
   });
 });
 
+describe('Wrist Validation', () => {
+  it('should accept valid wrist measurements', () => {
+    expect(validateWrist(16, 'metric').isValid).toBe(true);
+    expect(validateWrist(6.5, 'imperial').isValid).toBe(true);
+  });
+
+  it('should reject invalid wrist values', () => {
+    expect(validateWrist('abc', 'metric').isValid).toBe(false);
+    expect(validateWrist(0, 'metric').isValid).toBe(false);
+    expect(validateWrist(5, 'metric').isValid).toBe(false);
+    expect(validateWrist(50, 'metric').isValid).toBe(false);
+  });
+});
+
+describe('Heart Rate Validation', () => {
+  it('should accept valid heart rates', () => {
+    expect(validateHeartRate(60).isValid).toBe(true);
+    expect(validateHeartRate('180').isValid).toBe(true);
+  });
+
+  it('should reject invalid heart rates', () => {
+    expect(validateHeartRate('abc').isValid).toBe(false);
+    expect(validateHeartRate(Infinity).isValid).toBe(false);
+    expect(validateHeartRate(0).isValid).toBe(false);
+    expect(validateHeartRate(20).isValid).toBe(false);
+    expect(validateHeartRate(300).isValid).toBe(false);
+  });
+
+  it('should respect custom labels in error messages', () => {
+    const result = validateHeartRate('abc', 'Resting heart rate');
+    expect(result.error).toContain('Resting heart rate');
+  });
+});
+
+describe('Blood Pressure Validation', () => {
+  it('should validate systolic values', () => {
+    expect(validateSystolic(120).isValid).toBe(true);
+    expect(validateSystolic('abc').isValid).toBe(false);
+    expect(validateSystolic(60).isValid).toBe(false);
+    expect(validateSystolic(300).isValid).toBe(false);
+  });
+
+  it('should validate diastolic values', () => {
+    expect(validateDiastolic(80).isValid).toBe(true);
+    expect(validateDiastolic('abc').isValid).toBe(false);
+    expect(validateDiastolic(30).isValid).toBe(false);
+    expect(validateDiastolic(200).isValid).toBe(false);
+  });
+});
+
+describe('Cycle Length Validation', () => {
+  it('should accept valid cycle lengths', () => {
+    expect(validateCycleLength(28).isValid).toBe(true);
+    expect(validateCycleLength('35').isValid).toBe(true);
+  });
+
+  it('should reject invalid cycle lengths', () => {
+    expect(validateCycleLength('abc').isValid).toBe(false);
+    expect(validateCycleLength(27.5).isValid).toBe(false);
+    expect(validateCycleLength(20).isValid).toBe(false);
+    expect(validateCycleLength(60).isValid).toBe(false);
+  });
+});
+
 describe('Body Fat Percentage Validation', () => {
   it('should accept valid body fat percentages', () => {
     expect(validateBodyFatPercentage(15).isValid).toBe(true);
@@ -231,6 +300,12 @@ describe('Duration Validation', () => {
   it('should accept durations up to 24 hours', () => {
     expect(validateDuration(1440).isValid).toBe(true);
   });
+
+  it('should reject fractional values below the minimum threshold', () => {
+    const result = validateDuration(0.5);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toContain('at least 1 minute');
+  });
 });
 
 describe('Frequency Validation', () => {
@@ -248,6 +323,12 @@ describe('Frequency Validation', () => {
     const result = validateFrequency(3.5);
     expect(result.isValid).toBe(false);
     expect(result.error).toContain('whole number');
+  });
+
+  it('should reject fractional values below 1', () => {
+    const result = validateFrequency(0.5);
+    expect(result.isValid).toBe(false);
+    expect(result.error).toContain('at least 1 time per week');
   });
 });
 

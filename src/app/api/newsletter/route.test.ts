@@ -61,6 +61,7 @@ describe('POST /api/newsletter', () => {
     rateLimit = rlMod.rateLimit as unknown as ReturnType<typeof vi.fn>;
 
     vi.stubEnv('NODE_ENV', 'development');
+    vi.stubEnv('SUBMISSIONS_DB_DRIVER', 'sqlite');
   });
 
   it('should accept valid email and return success', async () => {
@@ -111,5 +112,20 @@ describe('POST /api/newsletter', () => {
     expect(res.status).toBe(429);
     const data = await res.json();
     expect(data.success).toBe(false);
+  });
+
+  it('should return 503 when strict persistence mode is enabled and storage fails', async () => {
+    const dbMod = await import('@/lib/db/submissions');
+    await dbMod.resetSubmissionStoreForTests();
+
+    vi.stubEnv('SUBMISSIONS_PERSISTENCE_STRICT', 'true');
+    vi.stubEnv('SQLITE_DB_PATH', '/tmp');
+
+    const res = await POST(makeRequest({ email: 'test@example.com' }));
+    const data = await res.json();
+
+    expect(res.status).toBe(503);
+    expect(data.success).toBe(false);
+    expect(data.error).toContain('temporarily unavailable');
   });
 });

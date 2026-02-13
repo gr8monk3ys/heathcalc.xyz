@@ -32,6 +32,8 @@ describe('POST /api/embed-request', () => {
   let POST: (req: NextRequest) => Promise<Response>;
   let verifyCsrf: ReturnType<typeof vi.fn>;
   let rateLimit: ReturnType<typeof vi.fn>;
+  let saveEmbedRequestSubmission: ReturnType<typeof vi.fn>;
+  let isSubmissionPersistenceStrictModeEnabled: ReturnType<typeof vi.fn>;
 
   beforeEach(async () => {
     vi.resetModules();
@@ -49,6 +51,10 @@ describe('POST /api/embed-request', () => {
         error: vi.fn(),
       }),
     }));
+    vi.doMock('@/lib/db/submissions', () => ({
+      saveEmbedRequestSubmission: vi.fn(async () => ({ success: true, driver: 'sqlite' })),
+      isSubmissionPersistenceStrictModeEnabled: vi.fn(() => false),
+    }));
 
     const route = await import('./route');
     POST = route.POST;
@@ -58,6 +64,15 @@ describe('POST /api/embed-request', () => {
 
     const rlMod = await import('@/utils/rateLimit');
     rateLimit = rlMod.rateLimit as unknown as ReturnType<typeof vi.fn>;
+
+    const dbMod = await import('@/lib/db/submissions');
+    saveEmbedRequestSubmission = dbMod.saveEmbedRequestSubmission as unknown as ReturnType<
+      typeof vi.fn
+    >;
+    isSubmissionPersistenceStrictModeEnabled =
+      dbMod.isSubmissionPersistenceStrictModeEnabled as unknown as ReturnType<typeof vi.fn>;
+
+    vi.stubEnv('SUBMISSIONS_DB_DRIVER', 'sqlite');
   });
 
   it('should accept valid submission with all fields', async () => {
@@ -113,5 +128,48 @@ describe('POST /api/embed-request', () => {
     });
     const res = await POST(makeRequest({ email: 'jane@example.com' }));
     expect(res.status).toBe(429);
+  });
+
+  it('should return 400 for malformed json', async () => {
+    const request = new NextRequest('http://localhost/api/embed-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{invalid json',
+    });
+    const res = await POST(request);
+    const data = await res.json();
+
+    expect(res.status).toBe(400);
+    expect(data.success).toBe(false);
+    expect(data.error).toContain('Invalid request body');
+  });
+
+  it('should return 500 for unexpected internal errors', async () => {
+    saveEmbedRequestSubmission.mockImplementation(() => {
+      throw new Error('Database write failed');
+    });
+
+    const res = await POST(makeRequest({ email: 'jane@example.com' }));
+    const data = await res.json();
+
+    expect(res.status).toBe(500);
+    expect(data.success).toBe(false);
+    expect(data.error).toContain('internal error');
+  });
+
+  it('should return 503 when strict persistence mode is enabled and storage fails', async () => {
+    isSubmissionPersistenceStrictModeEnabled.mockReturnValue(true);
+    saveEmbedRequestSubmission.mockResolvedValue({
+      success: false,
+      driver: 'postgres',
+      error: 'connection timed out',
+    });
+
+    const res = await POST(makeRequest({ email: 'jane@example.com' }));
+    const data = await res.json();
+
+    expect(res.status).toBe(503);
+    expect(data.success).toBe(false);
+    expect(data.error).toContain('temporarily unavailable');
   });
 });

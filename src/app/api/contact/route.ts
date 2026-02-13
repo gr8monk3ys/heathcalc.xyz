@@ -3,6 +3,10 @@ import { z } from 'zod';
 import { createLogger } from '@/utils/logger';
 import { rateLimit } from '@/utils/rateLimit';
 import { verifyCsrf } from '@/utils/csrf';
+import {
+  isSubmissionPersistenceStrictModeEnabled,
+  saveContactSubmission,
+} from '@/lib/db/submissions';
 
 const logger = createLogger({ component: 'ContactAPI' });
 
@@ -45,6 +49,28 @@ interface ContactErrorResponse {
 
 type ContactResponse = ContactSuccessResponse | ContactErrorResponse;
 
+async function persistSubmissionOrFail(
+  payload: Parameters<typeof saveContactSubmission>[0]
+): Promise<NextResponse<ContactErrorResponse> | null> {
+  const persistence = await saveContactSubmission(payload);
+  if (persistence.success || !isSubmissionPersistenceStrictModeEnabled()) {
+    return null;
+  }
+
+  logger.error('Strict persistence mode blocked contact response', {
+    driver: persistence.driver,
+    error: persistence.error,
+  });
+
+  return NextResponse.json(
+    {
+      success: false,
+      error: 'Contact form is temporarily unavailable. Please try again later.',
+    },
+    { status: 503 }
+  );
+}
+
 export async function POST(request: NextRequest): Promise<NextResponse<ContactResponse>> {
   // CSRF protection
   if (!verifyCsrf(request)) {
@@ -74,8 +100,10 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactRe
 
     const { name, email, subject, message } = parsed.data;
 
-    const resendApiKey = process.env.RESEND_API_KEY;
-    const contactEmail = process.env.CONTACT_EMAIL || 'info@healthcalc.xyz';
+    const resendApiKey = process.env.RESEND_API_KEY?.trim();
+    const contactEmail = process.env.CONTACT_EMAIL?.trim() || 'info@healthcalc.xyz';
+    const resendFrom =
+      process.env.RESEND_FROM_EMAIL?.trim() || 'HealthCheck Contact <noreply@healthcalc.xyz>';
 
     if (resendApiKey) {
       const response = await fetch('https://api.resend.com/emails', {
@@ -85,7 +113,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactRe
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'HealthCheck Contact <noreply@healthcalc.xyz>',
+          from: resendFrom,
           to: contactEmail,
           reply_to: email,
           subject: `[HealthCheck] ${SUBJECT_LABELS[subject] || subject} from ${name.trim()}`,
@@ -102,14 +130,33 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactRe
       });
 
       if (response.ok) {
+        const strictFailureResponse = await persistSubmissionOrFail({
+          name,
+          email,
+          subject,
+          message,
+          provider: 'resend',
+          status: 'sent',
+        });
+        if (strictFailureResponse) return strictFailureResponse;
         return NextResponse.json({
           success: true,
           message: "Thank you for your message! We'll get back to you within 1-2 business days.",
         });
       }
 
+      const responseBody = await response.text();
       logger.error('Resend email error', {
-        responseBody: await response.text(),
+        responseBody,
+      });
+      await persistSubmissionOrFail({
+        name,
+        email,
+        subject,
+        message,
+        provider: 'resend',
+        status: 'failed',
+        error: responseBody,
       });
       return NextResponse.json(
         {
@@ -124,12 +171,30 @@ export async function POST(request: NextRequest): Promise<NextResponse<ContactRe
     logger.warn('Contact form submission (no email provider configured)');
 
     if (process.env.NODE_ENV === 'development') {
+      const strictFailureResponse = await persistSubmissionOrFail({
+        name,
+        email,
+        subject,
+        message,
+        provider: 'none',
+        status: 'queued',
+      });
+      if (strictFailureResponse) return strictFailureResponse;
       return NextResponse.json({
         success: true,
         message: 'Message received! (Development mode - configure RESEND_API_KEY for production)',
       });
     }
 
+    await persistSubmissionOrFail({
+      name,
+      email,
+      subject,
+      message,
+      provider: 'none',
+      status: 'unavailable',
+      error: 'No contact provider configured',
+    });
     return NextResponse.json(
       {
         success: false,

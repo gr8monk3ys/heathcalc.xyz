@@ -3,6 +3,10 @@ import { z } from 'zod';
 import { createLogger } from '@/utils/logger';
 import { rateLimit } from '@/utils/rateLimit';
 import { verifyCsrf } from '@/utils/csrf';
+import {
+  isSubmissionPersistenceStrictModeEnabled,
+  saveNewsletterSubmission,
+} from '@/lib/db/submissions';
 
 /**
  * Newsletter subscription API endpoint
@@ -36,6 +40,28 @@ interface SubscribeErrorResponse {
 }
 
 type SubscribeResponse = SubscribeSuccessResponse | SubscribeErrorResponse;
+
+async function persistSubmissionOrFail(
+  payload: Parameters<typeof saveNewsletterSubmission>[0]
+): Promise<NextResponse<SubscribeErrorResponse> | null> {
+  const persistence = await saveNewsletterSubmission(payload);
+  if (persistence.success || !isSubmissionPersistenceStrictModeEnabled()) {
+    return null;
+  }
+
+  logger.error('Strict persistence mode blocked newsletter response', {
+    driver: persistence.driver,
+    error: persistence.error,
+  });
+
+  return NextResponse.json(
+    {
+      success: false,
+      error: 'Newsletter service is temporarily unavailable. Please try again later.',
+    },
+    { status: 503 }
+  );
+}
 
 export async function POST(request: NextRequest): Promise<NextResponse<SubscribeResponse>> {
   // CSRF protection
@@ -97,6 +123,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       );
 
       if (response.ok) {
+        const strictFailureResponse = await persistSubmissionOrFail({
+          email,
+          source,
+          provider: 'mailchimp',
+          status: 'subscribed',
+        });
+        if (strictFailureResponse) return strictFailureResponse;
         return NextResponse.json({
           success: true,
           message:
@@ -106,6 +139,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
 
       const error = await response.json();
       if (error.title === 'Member Exists') {
+        const strictFailureResponse = await persistSubmissionOrFail({
+          email,
+          source,
+          provider: 'mailchimp',
+          status: 'already-subscribed',
+        });
+        if (strictFailureResponse) return strictFailureResponse;
         return NextResponse.json({
           success: true,
           message: 'You are already subscribed to our newsletter.',
@@ -113,6 +153,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       }
 
       logger.error('Mailchimp error', { error });
+      await persistSubmissionOrFail({
+        email,
+        source,
+        provider: 'mailchimp',
+        status: 'failed',
+        error: JSON.stringify(error),
+      });
       return NextResponse.json(
         {
           success: false,
@@ -139,6 +186,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       );
 
       if (response.ok) {
+        const strictFailureResponse = await persistSubmissionOrFail({
+          email,
+          source,
+          provider: 'convertkit',
+          status: 'subscribed',
+        });
+        if (strictFailureResponse) return strictFailureResponse;
         return NextResponse.json({
           success: true,
           message:
@@ -146,8 +200,16 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
         });
       }
 
+      const responseBody = await response.text();
       logger.error('ConvertKit error', {
-        responseBody: await response.text(),
+        responseBody,
+      });
+      await persistSubmissionOrFail({
+        email,
+        source,
+        provider: 'convertkit',
+        status: 'failed',
+        error: responseBody,
       });
       return NextResponse.json(
         {
@@ -176,13 +238,28 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
       );
 
       if (response.ok) {
+        const strictFailureResponse = await persistSubmissionOrFail({
+          email,
+          source,
+          provider: 'resend',
+          status: 'subscribed',
+        });
+        if (strictFailureResponse) return strictFailureResponse;
         return NextResponse.json({
           success: true,
           message: 'Thank you for subscribing! You will receive our latest updates.',
         });
       }
 
-      logger.error('Resend error', { responseBody: await response.text() });
+      const responseBody = await response.text();
+      logger.error('Resend error', { responseBody });
+      await persistSubmissionOrFail({
+        email,
+        source,
+        provider: 'resend',
+        status: 'failed',
+        error: responseBody,
+      });
       return NextResponse.json(
         {
           success: false,
@@ -200,6 +277,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
 
     // For development/demo: Store in a simple way or just acknowledge
     if (process.env.NODE_ENV === 'development') {
+      const strictFailureResponse = await persistSubmissionOrFail({
+        email,
+        source,
+        provider: 'none',
+        status: 'queued',
+      });
+      if (strictFailureResponse) return strictFailureResponse;
       return NextResponse.json({
         success: true,
         message:
@@ -211,6 +295,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     logger.warn(
       'Newsletter subscription received but no email provider configured. Please set up Mailchimp, ConvertKit, or Resend.'
     );
+    await persistSubmissionOrFail({
+      email,
+      source,
+      provider: 'none',
+      status: 'unavailable',
+      error: 'No newsletter provider configured',
+    });
 
     return NextResponse.json(
       {

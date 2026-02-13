@@ -302,6 +302,10 @@ export function validateHeartRate(rate: number | string, label = 'Heart rate'): 
     return { isValid: false, error: `${label} must be a valid number` };
   }
 
+  if (!Number.isFinite(numRate)) {
+    return { isValid: false, error: `${label} must be a valid number` };
+  }
+
   if (numRate <= 0) {
     return { isValid: false, error: `${label} must be greater than 0` };
   }
@@ -318,10 +322,6 @@ export function validateHeartRate(rate: number | string, label = 'Heart rate'): 
       isValid: false,
       error: `${label} must be less than ${VALIDATION_RANGES.heartRate.max} bpm`,
     };
-  }
-
-  if (!Number.isFinite(numRate)) {
-    return { isValid: false, error: `${label} must be a valid number` };
   }
 
   return { isValid: true };

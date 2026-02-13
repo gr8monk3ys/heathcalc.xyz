@@ -11,12 +11,19 @@ function makeRequest(headers: Record<string, string>): NextRequest {
 
 describe('verifyCsrf', () => {
   const originalEnv = process.env.NEXT_PUBLIC_SITE_URL;
+  const originalCanonicalHost = process.env.NEXT_PUBLIC_CANONICAL_HOST;
 
   afterEach(() => {
     if (originalEnv === undefined) {
       delete process.env.NEXT_PUBLIC_SITE_URL;
     } else {
       process.env.NEXT_PUBLIC_SITE_URL = originalEnv;
+    }
+
+    if (originalCanonicalHost === undefined) {
+      delete process.env.NEXT_PUBLIC_CANONICAL_HOST;
+    } else {
+      process.env.NEXT_PUBLIC_CANONICAL_HOST = originalCanonicalHost;
     }
   });
 
@@ -93,7 +100,45 @@ describe('verifyCsrf', () => {
 
   it('should reject request when no host can be determined (fail-secure)', () => {
     delete process.env.NEXT_PUBLIC_SITE_URL;
+    delete process.env.NEXT_PUBLIC_CANONICAL_HOST;
     const req = makeRequest({});
+    expect(verifyCsrf(req)).toBe(false);
+  });
+
+  it('should allow apex host when NEXT_PUBLIC_SITE_URL uses www', () => {
+    process.env.NEXT_PUBLIC_SITE_URL = 'https://www.healthcalc.xyz';
+    const req = makeRequest({
+      origin: 'https://healthcalc.xyz',
+      host: 'healthcalc.xyz',
+    });
+    expect(verifyCsrf(req)).toBe(true);
+  });
+
+  it('should allow www host when NEXT_PUBLIC_SITE_URL uses apex', () => {
+    process.env.NEXT_PUBLIC_SITE_URL = 'https://healthcalc.xyz';
+    const req = makeRequest({
+      origin: 'https://www.healthcalc.xyz',
+      host: 'www.healthcalc.xyz',
+    });
+    expect(verifyCsrf(req)).toBe(true);
+  });
+
+  it('should use NEXT_PUBLIC_CANONICAL_HOST when NEXT_PUBLIC_SITE_URL is not set', () => {
+    delete process.env.NEXT_PUBLIC_SITE_URL;
+    process.env.NEXT_PUBLIC_CANONICAL_HOST = 'healthcalc.xyz';
+    const req = makeRequest({
+      origin: 'https://www.healthcalc.xyz',
+      host: 'localhost',
+    });
+    expect(verifyCsrf(req)).toBe(true);
+  });
+
+  it('should reject unrelated subdomains even when root domain is allowed', () => {
+    process.env.NEXT_PUBLIC_SITE_URL = 'https://healthcalc.xyz';
+    const req = makeRequest({
+      origin: 'https://foo.healthcalc.xyz',
+      host: 'healthcalc.xyz',
+    });
     expect(verifyCsrf(req)).toBe(false);
   });
 });

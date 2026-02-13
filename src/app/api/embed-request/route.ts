@@ -3,6 +3,10 @@ import { z } from 'zod';
 import { createLogger } from '@/utils/logger';
 import { rateLimit } from '@/utils/rateLimit';
 import { verifyCsrf } from '@/utils/csrf';
+import {
+  isSubmissionPersistenceStrictModeEnabled,
+  saveEmbedRequestSubmission,
+} from '@/lib/db/submissions';
 
 const logger = createLogger({ component: 'EmbedRequestAPI' });
 
@@ -29,6 +33,28 @@ interface EmbedErrorResponse {
 }
 
 type EmbedResponse = EmbedSuccessResponse | EmbedErrorResponse;
+
+async function persistSubmissionOrFail(
+  payload: Parameters<typeof saveEmbedRequestSubmission>[0]
+): Promise<NextResponse<EmbedErrorResponse> | null> {
+  const persistence = await saveEmbedRequestSubmission(payload);
+  if (persistence.success || !isSubmissionPersistenceStrictModeEnabled()) {
+    return null;
+  }
+
+  logger.error('Strict persistence mode blocked embed request response', {
+    driver: persistence.driver,
+    error: persistence.error,
+  });
+
+  return NextResponse.json(
+    {
+      success: false,
+      error: 'Embed request service is temporarily unavailable. Please try again later.',
+    },
+    { status: 503 }
+  );
+}
 
 export async function POST(request: NextRequest): Promise<NextResponse<EmbedResponse>> {
   // CSRF protection
@@ -86,6 +112,17 @@ export async function POST(request: NextRequest): Promise<NextResponse<EmbedResp
       if (!response.ok) {
         const errorBody = await response.text();
         logger.error('ConvertKit error', { responseBody: errorBody });
+        await persistSubmissionOrFail({
+          name,
+          email,
+          website,
+          calculator,
+          calculatorSlug,
+          notes,
+          provider: 'convertkit',
+          status: 'failed',
+          error: errorBody,
+        });
         return NextResponse.json(
           {
             success: false,
@@ -94,8 +131,31 @@ export async function POST(request: NextRequest): Promise<NextResponse<EmbedResp
           { status: 502 }
         );
       }
+
+      const strictFailureResponse = await persistSubmissionOrFail({
+        name,
+        email,
+        website,
+        calculator,
+        calculatorSlug,
+        notes,
+        provider: 'convertkit',
+        status: 'submitted',
+      });
+      if (strictFailureResponse) return strictFailureResponse;
     } else {
       logger.warn('Missing ConvertKit config');
+      const strictFailureResponse = await persistSubmissionOrFail({
+        name,
+        email,
+        website,
+        calculator,
+        calculatorSlug,
+        notes,
+        provider: 'none',
+        status: 'queued',
+      });
+      if (strictFailureResponse) return strictFailureResponse;
     }
 
     return NextResponse.json({
@@ -106,12 +166,23 @@ export async function POST(request: NextRequest): Promise<NextResponse<EmbedResp
     logger.error('Embed request failed', {
       error: error instanceof Error ? error.message : String(error),
     });
+
+    if (error instanceof SyntaxError) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid request body. Please provide valid JSON.',
+        },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
       {
         success: false,
-        error: 'An error occurred. Please try again later.',
+        error: 'An internal error occurred. Please try again later.',
       },
-      { status: 400 }
+      { status: 500 }
     );
   }
 }
