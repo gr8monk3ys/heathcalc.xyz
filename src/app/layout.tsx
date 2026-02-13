@@ -19,11 +19,15 @@ import AutoPageTranslator from '@/components/AutoPageTranslator';
 import SkipToMainLink from '@/components/SkipToMainLink';
 import { LocaleProvider } from '@/context/LocaleContext';
 import { getPublicSiteUrl } from '@/lib/site';
-import { Manrope, Space_Grotesk } from 'next/font/google';
+import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 
 const siteUrl = getPublicSiteUrl();
-const bodyFont = Manrope({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
-const headingFont = Space_Grotesk({
+const bodyFont = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-body',
+});
+const headingFont = Sora({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-heading',

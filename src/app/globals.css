@@ -29,55 +29,67 @@
 }
 
 :root {
-  --font-body: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
-  --font-heading: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
-  --background: #f0f2f5;
-  --foreground: #333;
-  --primary: #ffffff;
-  --primary-dark: #e5e7eb;
-  --accent: #4f46e5;
-  --accent-light: #6366f1;
-  --accent-dark: #4338ca;
+  --font-body: 'Plus Jakarta Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+  --font-heading: 'Sora', 'Avenir Next', 'Segoe UI', sans-serif;
+  --background: #ececff;
+  --foreground: #171938;
+  --primary: #f8f8ff;
+  --primary-dark: #e8e9fb;
+  --accent: #5359e4;
+  --accent-light: #6d74ff;
+  --accent-dark: #3a3fbf;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --info: #3b82f6;
-  --neumorph-shadow-1: rgba(255, 255, 255, 0.9);
-  --neumorph-shadow-2: rgba(0, 0, 0, 0.1);
-  --focus-ring: rgba(79, 70, 229, 0.35);
+  --info: #4f7bff;
+  --neumorph-shadow-1: rgba(255, 255, 255, 0.85);
+  --neumorph-shadow-2: rgba(52, 56, 140, 0.15);
+  --focus-ring: rgba(83, 89, 228, 0.33);
+  --glass-stroke: rgba(255, 255, 255, 0.64);
+  --glass-fill: rgba(249, 250, 255, 0.7);
+  --glass-fill-strong: rgba(241, 243, 255, 0.86);
+  --surface-muted: rgba(95, 99, 167, 0.08);
 }
 
 /* Dark mode variables */
 .dark {
-  --background: #121212;
-  --foreground: #e5e7eb;
-  --primary: #1f2937;
-  --primary-dark: #111827;
-  --accent: #6366f1;
-  --accent-light: #818cf8;
-  --accent-dark: #4f46e5;
+  --background: #12152f;
+  --foreground: #ecedff;
+  --primary: #181c3d;
+  --primary-dark: #141733;
+  --accent: #8a8fff;
+  --accent-light: #a0a4ff;
+  --accent-dark: #646ad9;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --info: #3b82f6;
-  --neumorph-shadow-1: rgba(31, 41, 55, 0.9);
-  --neumorph-shadow-2: rgba(0, 0, 0, 0.5);
+  --info: #6da0ff;
+  --neumorph-shadow-1: rgba(33, 37, 76, 0.95);
+  --neumorph-shadow-2: rgba(5, 7, 21, 0.7);
+  --focus-ring: rgba(146, 150, 255, 0.4);
+  --glass-stroke: rgba(167, 176, 255, 0.17);
+  --glass-fill: rgba(24, 28, 61, 0.72);
+  --glass-fill-strong: rgba(20, 23, 51, 0.88);
+  --surface-muted: rgba(167, 176, 255, 0.1);
 }
 
 .dark body {
   background-image:
-    radial-gradient(circle at 10% 0%, rgba(99, 102, 241, 0.2), transparent 42%),
-    radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.14), transparent 45%);
+    radial-gradient(circle at 10% 2%, rgba(116, 124, 255, 0.24), transparent 45%),
+    radial-gradient(circle at 84% 14%, rgba(89, 105, 232, 0.2), transparent 42%),
+    radial-gradient(circle at 62% 90%, rgba(28, 35, 92, 0.58), transparent 52%);
 }
 
 body {
   background-color: var(--background);
   background-image:
-    radial-gradient(circle at 10% 0%, rgba(99, 102, 241, 0.14), transparent 38%),
-    radial-gradient(circle at 90% 20%, rgba(59, 130, 246, 0.08), transparent 42%);
+    radial-gradient(circle at 15% 5%, rgba(128, 136, 255, 0.24), transparent 42%),
+    radial-gradient(circle at 85% 10%, rgba(182, 188, 255, 0.28), transparent 45%),
+    radial-gradient(circle at 60% 95%, rgba(132, 150, 255, 0.15), transparent 54%);
   color: var(--foreground);
   font-family: var(--font-body);
   line-height: 1.6;
+  letter-spacing: -0.002em;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -94,7 +106,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
   line-height: 1.2;
   text-wrap: balance;
 }
@@ -109,7 +121,7 @@ html {
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.18);
+  background: rgba(109, 116, 255, 0.22);
 }
 
 :where(button, [role='button'], input, select, textarea):focus-visible {
@@ -125,9 +137,10 @@ html {
 .ui-select,
 .ui-textarea {
   width: 100%;
-  border: 1px solid rgba(148, 163, 184, 0.45);
+  border: 1px solid rgba(168, 176, 255, 0.34);
   border-radius: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.82);
+  background-color: var(--glass-fill);
+  backdrop-filter: blur(8px);
   color: var(--foreground);
   transition:
     border-color 0.2s ease,
@@ -147,7 +160,7 @@ html {
 
 .ui-input::placeholder,
 .ui-textarea::placeholder {
-  color: rgba(100, 116, 139, 0.9);
+  color: rgba(89, 95, 162, 0.92);
 }
 
 .ui-input:disabled,
@@ -160,8 +173,8 @@ html {
 .dark .ui-input,
 .dark .ui-select,
 .dark .ui-textarea {
-  border-color: rgba(99, 102, 241, 0.3);
-  background-color: rgba(17, 24, 39, 0.62);
+  border-color: rgba(144, 150, 255, 0.28);
+  background-color: var(--glass-fill);
 }
 
 .dark .ui-input::placeholder,
@@ -178,10 +191,12 @@ html {
   padding: 0.625rem 1rem;
   color: #fff;
   font-weight: 600;
-  background: linear-gradient(135deg, var(--accent-light), var(--accent-dark));
+  background:
+    radial-gradient(circle at 30% 15%, rgba(255, 255, 255, 0.36), transparent 38%),
+    linear-gradient(135deg, var(--accent-light), var(--accent-dark));
   box-shadow:
-    8px 8px 20px rgba(15, 23, 42, 0.18),
-    -4px -4px 12px rgba(255, 255, 255, 0.38);
+    14px 12px 28px rgba(55, 62, 158, 0.26),
+    -6px -6px 18px rgba(255, 255, 255, 0.42);
   transition:
     transform 0.2s ease,
     filter 0.2s ease,
@@ -195,8 +210,8 @@ html {
 
 .dark .ui-btn-primary {
   box-shadow:
-    8px 8px 20px rgba(0, 0, 0, 0.35),
-    -4px -4px 12px rgba(99, 102, 241, 0.12);
+    12px 12px 24px rgba(1, 3, 18, 0.45),
+    -6px -6px 16px rgba(138, 143, 255, 0.15);
 }
 
 .ui-btn-soft {
@@ -208,10 +223,12 @@ html {
   padding: 0.5rem 1rem;
   font-weight: 600;
   color: var(--accent);
-  background-color: var(--primary);
+  background-color: var(--glass-fill-strong);
+  border: 1px solid var(--glass-stroke);
+  backdrop-filter: blur(8px);
   box-shadow:
-    5px 5px 10px var(--neumorph-shadow-2),
-    -5px -5px 10px var(--neumorph-shadow-1);
+    8px 8px 18px var(--neumorph-shadow-2),
+    -8px -8px 18px var(--neumorph-shadow-1);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -219,9 +236,7 @@ html {
 
 .ui-btn-soft:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow:
-    inset 5px 5px 10px var(--neumorph-shadow-2),
-    inset -5px -5px 10px var(--neumorph-shadow-1);
+  border-color: rgba(121, 127, 240, 0.35);
 }
 
 .ui-btn-primary:disabled,
@@ -250,6 +265,33 @@ html {
   transform: translateY(0);
 }
 
+.glass-panel {
+  background-color: var(--glass-fill);
+  border: 1px solid var(--glass-stroke);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    16px 18px 38px var(--neumorph-shadow-2),
+    -12px -10px 26px var(--neumorph-shadow-1);
+}
+
+.glass-panel-strong {
+  background-color: var(--glass-fill-strong);
+  border: 1px solid var(--glass-stroke);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    16px 20px 40px var(--neumorph-shadow-2),
+    -14px -12px 30px var(--neumorph-shadow-1);
+}
+
+.elevated-pill {
+  border: 1px solid rgba(130, 138, 246, 0.22);
+  background-color: var(--glass-fill-strong);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    10px 12px 24px rgba(75, 83, 184, 0.16),
+    -6px -6px 14px rgba(255, 255, 255, 0.32);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -266,52 +308,58 @@ html {
 
 /* Neumorph component styles - no @apply for custom classes in Tailwind v4 */
 .neumorph {
-  background-color: var(--primary);
+  background-color: var(--glass-fill-strong);
+  border: 1px solid var(--glass-stroke);
   border-radius: var(--radius-neumorph);
+  backdrop-filter: blur(10px);
   box-shadow:
-    5px 5px 10px var(--neumorph-shadow-2),
-    -5px -5px 10px var(--neumorph-shadow-1);
+    10px 12px 26px var(--neumorph-shadow-2),
+    -8px -8px 20px var(--neumorph-shadow-1);
 }
 
 .neumorph-inset {
-  background-color: var(--primary);
+  background-color: var(--surface-muted);
+  border: 1px solid rgba(149, 158, 255, 0.18);
   border-radius: var(--radius-neumorph);
   box-shadow:
-    inset 5px 5px 10px var(--neumorph-shadow-2),
-    inset -5px -5px 10px var(--neumorph-shadow-1);
+    inset 5px 5px 10px rgba(93, 101, 187, 0.15),
+    inset -5px -5px 10px rgba(255, 255, 255, 0.42);
 }
 
 .neumorph-flat {
-  background-color: var(--primary);
+  background-color: var(--glass-fill);
+  border: 1px solid var(--glass-stroke);
   border-radius: var(--radius-neumorph);
   box-shadow:
-    2px 2px 5px var(--neumorph-shadow-2),
-    -2px -2px 5px var(--neumorph-shadow-1);
+    4px 4px 10px var(--neumorph-shadow-2),
+    -4px -4px 10px var(--neumorph-shadow-1);
 }
 
 .neumorph-btn {
-  background-color: var(--primary);
+  background-color: var(--glass-fill-strong);
+  border: 1px solid var(--glass-stroke);
   border-radius: var(--radius-neumorph);
+  backdrop-filter: blur(8px);
   box-shadow:
-    5px 5px 10px var(--neumorph-shadow-2),
-    -5px -5px 10px var(--neumorph-shadow-1);
+    6px 8px 16px var(--neumorph-shadow-2),
+    -6px -6px 14px var(--neumorph-shadow-1);
   padding: 0.5rem 1rem;
   transition: all 0.2s ease;
 }
 
 .neumorph-btn:hover,
 .neumorph-btn:active {
-  box-shadow:
-    inset 5px 5px 10px var(--neumorph-shadow-2),
-    inset -5px -5px 10px var(--neumorph-shadow-1);
+  border-color: rgba(121, 127, 240, 0.35);
 }
 
 .neumorph-card {
-  background-color: var(--primary);
+  background-color: var(--glass-fill-strong);
+  border: 1px solid var(--glass-stroke);
   border-radius: var(--radius-neumorph);
+  backdrop-filter: blur(10px);
   box-shadow:
-    5px 5px 10px var(--neumorph-shadow-2),
-    -5px -5px 10px var(--neumorph-shadow-1);
+    10px 12px 26px var(--neumorph-shadow-2),
+    -8px -8px 20px var(--neumorph-shadow-1);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }

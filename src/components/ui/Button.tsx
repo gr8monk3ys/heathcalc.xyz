@@ -15,18 +15,18 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseClasses =
-    'neumorph-btn font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 transition-all duration-200';
+    'font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 transition-all duration-200';
 
   const variantClasses = {
-    primary: 'text-accent',
-    secondary: 'text-gray-700',
-    outline: 'border border-accent text-accent',
+    primary: 'ui-btn-primary text-white',
+    secondary: 'ui-btn-soft text-accent',
+    outline: 'elevated-pill border border-accent/20 text-accent',
   };
 
   const sizeClasses = {
-    sm: 'text-sm px-3 py-1',
+    sm: 'px-3 py-1 text-sm',
     md: 'px-4 py-2',
-    lg: 'text-lg px-6 py-3',
+    lg: 'px-6 py-3 text-lg',
   };
 
   const widthClass = fullWidth ? 'w-full' : '';
