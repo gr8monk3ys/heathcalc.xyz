@@ -31,6 +31,7 @@ HealthCheck is a comprehensive health and fitness calculator web application bui
   - Progressive Web App (PWA) capabilities
   - SEO optimized with metadata
   - Accessibility focused
+  - Multi-language support (`en`, `es`, `fr`, `de`, `pt`, `zh`) with locale routing
 
 ## Tech Stack
 
@@ -149,6 +150,14 @@ In addition to the standard Next.js scripts, this project includes several helpf
 - Clerk is enabled only when both `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` are set.
 - In production (`NODE_ENV=production`), test keys (`pk_test_*`, `sk_test_*`) are automatically rejected.
 - If Clerk is misconfigured in production, sign-in/up routes show a safe unavailable state instead of loading with invalid keys.
+
+### Multilingual Support
+
+- Supported locales: `en` (default), `es`, `fr`, `de`, `pt`, `zh`.
+- Localized routes work with path prefixes such as `/es/bmi`, `/fr/blog`, `/de/calculators`.
+- Locale preference is persisted in a first-party cookie (`hc_locale`) and applied automatically across the site.
+- Non-localized paths redirect to the saved locale (for example, users on Spanish stay on `/es/...` routes).
+- A global language switcher is available in the site header for desktop and mobile navigation.
 
 ### Affiliate Link Hardening
 

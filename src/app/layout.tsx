@@ -15,6 +15,9 @@ import PWAInit from '@/components/PWAInit';
 import { ClerkProvider } from '@clerk/nextjs';
 import { clerkEnabled } from '@/utils/auth';
 import { CookieConsentProvider } from '@/components/CookieConsent';
+import AutoPageTranslator from '@/components/AutoPageTranslator';
+import SkipToMainLink from '@/components/SkipToMainLink';
+import { LocaleProvider } from '@/context/LocaleContext';
 import { getPublicSiteUrl } from '@/lib/site';
 import { Manrope, Space_Grotesk } from 'next/font/google';
 
@@ -28,17 +31,22 @@ const headingFont = Space_Grotesk({
 
 function LayoutProviders({ children }: { children: ReactNode }): React.JSX.Element {
   const inner = (
-    <DarkModeProvider>
-      <UnitSystemProvider>
-        <PreferencesProvider>
-          <AuthProvider>
-            <SavedResultsProvider>
-              <CookieConsentProvider>{children}</CookieConsentProvider>
-            </SavedResultsProvider>
-          </AuthProvider>
-        </PreferencesProvider>
-      </UnitSystemProvider>
-    </DarkModeProvider>
+    <LocaleProvider>
+      <DarkModeProvider>
+        <UnitSystemProvider>
+          <PreferencesProvider>
+            <AuthProvider>
+              <SavedResultsProvider>
+                <CookieConsentProvider>
+                  <AutoPageTranslator />
+                  {children}
+                </CookieConsentProvider>
+              </SavedResultsProvider>
+            </AuthProvider>
+          </PreferencesProvider>
+        </UnitSystemProvider>
+      </DarkModeProvider>
+    </LocaleProvider>
   );
 
   if (clerkEnabled) {
@@ -110,7 +118,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Core Web Vitals optimizations */}
         <link rel="preconnect" href={siteUrl} />
@@ -140,10 +148,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             CookieConsentProvider after the user grants consent. */}
       </head>
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
         <LayoutProviders>
+          <SkipToMainLink />
           <div className="min-h-screen flex flex-col">
             <Header />
             <main id="main-content" className="flex-grow container mx-auto px-4 py-8">

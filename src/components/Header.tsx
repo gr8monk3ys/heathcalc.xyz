@@ -5,21 +5,26 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import UnitToggle from '@/components/ui/UnitToggle';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePreferences } from '@/context/PreferencesContext';
+import { useLocale } from '@/context/LocaleContext';
 import AuthControls from '@/components/AuthControls';
-
-const quickLinks = [
-  { name: 'Calculators', path: '/calculators' },
-  { name: 'Blog', path: '/blog' },
-  { name: 'Learn', path: '/learn' },
-  { name: 'Saved', path: '/saved-results' },
-];
+import { stripLocaleFromPathname } from '@/i18n/config';
 
 export default function Header(): React.JSX.Element {
   const pathname = usePathname();
   const { preferences } = usePreferences();
+  const { localizePath, t } = useLocale();
   const { darkMode } = preferences;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const normalizedPathname = stripLocaleFromPathname(pathname);
+
+  const quickLinks = [
+    { name: t('header.quick.calculators'), path: '/calculators' },
+    { name: t('header.quick.blog'), path: '/blog' },
+    { name: t('header.quick.learn'), path: '/learn' },
+    { name: t('header.quick.saved'), path: '/saved-results' },
+  ];
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -32,19 +37,21 @@ export default function Header(): React.JSX.Element {
     >
       <div className="container mx-auto flex items-center justify-between gap-4 px-4">
         <Link
-          href="/"
-          className="text-2xl font-bold text-accent transition-transform duration-300 hover:scale-[1.02]"
+          href={localizePath('/')}
+          className="notranslate text-2xl font-bold text-accent transition-transform duration-300 hover:scale-[1.02]"
         >
           HealthCheck
         </Link>
 
-        <nav aria-label="Primary quick links" className="hidden lg:flex items-center gap-2">
+        <nav aria-label={t('header.quickLinksAria')} className="hidden lg:flex items-center gap-2">
           {quickLinks.map(link => (
             <Link
               key={link.path}
-              href={link.path}
+              href={localizePath(link.path)}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
-                pathname === link.path ? 'bg-accent text-white shadow-lg' : 'hover:bg-accent/10'
+                normalizedPathname === link.path
+                  ? 'bg-accent text-white shadow-lg'
+                  : 'hover:bg-accent/10'
               }`}
             >
               {link.name}
@@ -53,6 +60,9 @@ export default function Header(): React.JSX.Element {
         </nav>
 
         <div className="flex items-center space-x-3">
+          <div className="hidden md:block">
+            <LanguageSwitcher />
+          </div>
           <DarkModeToggle />
           <UnitToggle />
           <div className="hidden lg:block">
@@ -64,7 +74,7 @@ export default function Header(): React.JSX.Element {
             className={`lg:hidden p-2 rounded-lg transition-colors ${
               darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'
             }`}
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? (
@@ -104,16 +114,19 @@ export default function Header(): React.JSX.Element {
 
       {mobileMenuOpen && (
         <nav
-          aria-label="Mobile navigation"
+          aria-label={t('header.mobileNavAria')}
           className={`lg:hidden border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}
         >
           <div className="container mx-auto px-4 py-4 space-y-2">
+            <div className="py-1">
+              <LanguageSwitcher />
+            </div>
             {quickLinks.map(link => (
               <Link
                 key={link.path}
-                href={link.path}
+                href={localizePath(link.path)}
                 className={`block rounded-lg px-4 py-3 text-sm font-medium transition-all ${
-                  pathname === link.path
+                  normalizedPathname === link.path
                     ? 'bg-accent text-white'
                     : darkMode
                       ? 'hover:bg-gray-800'

@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import StructuredData, { createBreadcrumbSchema } from './StructuredData';
 import { toAbsoluteUrl } from '@/lib/site';
+import { useLocale } from '@/context/LocaleContext';
+import { stripLocaleFromPathname } from '@/i18n/config';
 
 interface BreadcrumbItem {
   name: string;
@@ -28,6 +30,7 @@ export default function Breadcrumb({
   className = '',
 }: BreadcrumbProps) {
   const pathname = usePathname();
+  const { localizePath } = useLocale();
 
   // Generate breadcrumb items based on the current path
   const generateBreadcrumbItems = (): BreadcrumbItem[] => {
@@ -37,7 +40,8 @@ export default function Breadcrumb({
     }
 
     // Otherwise, generate from the pathname
-    const pathSegments = pathname.split('/').filter(Boolean);
+    const normalizedPathname = stripLocaleFromPathname(pathname);
+    const pathSegments = normalizedPathname.split('/').filter(Boolean);
 
     // Start with home
     const items: BreadcrumbItem[] = [{ name: homeLabel, path: '/' }];
@@ -64,7 +68,7 @@ export default function Breadcrumb({
   // Create schema items for structured data
   const schemaItems = breadcrumbItems.map(item => ({
     name: item.name,
-    url: toAbsoluteUrl(item.path),
+    url: toAbsoluteUrl(localizePath(item.path)),
   }));
 
   return (
@@ -84,7 +88,7 @@ export default function Breadcrumb({
                   {item.name}
                 </span>
               ) : (
-                <Link href={item.path} className="text-accent hover:underline">
+                <Link href={localizePath(item.path)} className="text-accent hover:underline">
                   {item.name}
                 </Link>
               )}

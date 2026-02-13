@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 import { CALCULATOR_CATALOG, CALCULATOR_HUBS } from '@/constants/calculatorCatalog';
+import { defaultLocale, supportedLocales } from '@/i18n/config';
 
 const BASE_URL = 'https://www.healthcalc.xyz';
 
@@ -212,5 +213,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...calculatorPages, ...hubPages, ...blogPages];
+  const baseEntries = [...staticPages, ...calculatorPages, ...hubPages, ...blogPages];
+  const localizedLocales = supportedLocales.filter(locale => locale !== defaultLocale);
+
+  const localizedEntries: MetadataRoute.Sitemap = baseEntries.flatMap(entry => {
+    const localized = localizedLocales.map(locale => {
+      const path = new URL(entry.url).pathname;
+      const localizedPath = path === '/' ? `/${locale}` : `/${locale}${path}`;
+      return {
+        ...entry,
+        url: `${BASE_URL}${localizedPath}`,
+        priority: typeof entry.priority === 'number' ? Math.max(0.1, entry.priority - 0.1) : 0.5,
+      };
+    });
+
+    return [entry, ...localized];
+  });
+
+  return localizedEntries;
 }
