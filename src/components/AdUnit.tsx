@@ -92,7 +92,8 @@ export default function AdUnit({
         return { display: 'block', width: '160px', height: '600px' };
       case 'auto':
       default:
-        return { display: 'block' };
+        // Reserve some space to reduce CLS while AdSense picks a responsive size.
+        return { display: 'block', width: fullWidth ? '100%' : undefined, minHeight: '100px' };
     }
   };
 
