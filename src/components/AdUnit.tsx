@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { createLogger } from '@/utils/logger';
 import { getAdSensePublisherId } from '@/lib/adsense';
+import { useCookieConsent } from '@/components/CookieConsent';
 
 const logger = createLogger({ component: 'AdUnit' });
 
@@ -57,6 +58,7 @@ export default function AdUnit({
   className = '',
   testMode = false,
 }: AdUnitProps) {
+  const { advertising } = useCookieConsent();
   const adRef = useRef<HTMLModElement>(null);
   const isAdLoaded = useRef(false);
 
@@ -64,6 +66,7 @@ export default function AdUnit({
     // Only run on client side and in production
     if (typeof window === 'undefined') return;
     if (testMode) return;
+    if (!advertising) return;
     if (isAdLoaded.current) return;
 
     try {
@@ -76,7 +79,7 @@ export default function AdUnit({
     } catch (error) {
       logger.logError('AdSense error', error);
     }
-  }, [testMode]);
+  }, [advertising, testMode]);
 
   // Get ad dimensions based on format
   const getAdStyle = (): React.CSSProperties => {
@@ -117,6 +120,10 @@ export default function AdUnit({
         </div>
       </div>
     );
+  }
+
+  if (!advertising) {
+    return null;
   }
 
   return (

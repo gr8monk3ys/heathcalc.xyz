@@ -18,10 +18,12 @@ import { CookieConsentProvider } from '@/components/CookieConsent';
 import AutoPageTranslator from '@/components/AutoPageTranslator';
 import SkipToMainLink from '@/components/SkipToMainLink';
 import { LocaleProvider } from '@/context/LocaleContext';
+import { getAdSenseScriptSrc } from '@/lib/adsense';
 import { getPublicSiteUrl } from '@/lib/site';
 import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 
 const siteUrl = getPublicSiteUrl();
+const adSenseScriptSrc = getAdSenseScriptSrc();
 const bodyFont = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
@@ -148,8 +150,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           ]}
         />
 
-        {/* AdSense and Analytics scripts are now loaded dynamically by
-            CookieConsentProvider after the user grants consent. */}
+        {/* Keep AdSense loader visible in page source for crawler verification.
+            Ad rendering remains gated by cookie consent in AdUnit. */}
+        <script async src={adSenseScriptSrc} crossOrigin="anonymous" data-hc-adsense="1" />
       </head>
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
         <LayoutProviders>
