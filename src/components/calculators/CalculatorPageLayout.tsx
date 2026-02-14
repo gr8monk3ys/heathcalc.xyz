@@ -18,6 +18,8 @@ import RelatedGuides from '@/components/RelatedGuides';
 import Accordion from '@/components/ui/Accordion';
 import { ResultsEmailCapture } from '@/components/ResultsEmailCapture';
 import { toAbsoluteUrl } from '@/lib/site';
+import { ResultsShareBar, ResultsShareProvider } from '@/components/ResultsShare';
+import { useLocale } from '@/context/LocaleContext';
 
 // Dynamic imports for below-the-fold components (performance optimization)
 const FAQSection = dynamic(() => import('@/components/FAQSection'), {
@@ -157,138 +159,152 @@ export function CalculatorPageLayout({
 }: CalculatorPageLayoutProps): React.ReactElement {
   const socialTitle = shareTitle || title;
   const socialDescription = shareDescription || description;
+  const { localizePath } = useLocale();
   const searchParams = useSearchParams();
   const isEmbed = searchParams.get('embed') === '1';
 
   if (isEmbed) {
     return (
       <ErrorBoundary>
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <h1 className="text-2xl font-bold mb-2">{title}</h1>
-          <p className="text-sm text-gray-600 mb-6">{description}</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">{children}</div>
-          <div className="mt-4 text-xs text-gray-500">
-            Powered by{' '}
-            <Link href={`/${calculatorSlug}`} className="text-accent hover:underline">
-              HealthCheck
-            </Link>
+        <ResultsShareProvider>
+          <div className="max-w-4xl mx-auto px-4 py-6">
+            <h1 className="text-2xl font-bold mb-2">{title}</h1>
+            <p className="text-sm text-gray-600 mb-6">{description}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">{children}</div>
+            <div className="mt-4 text-xs text-gray-500">
+              Powered by{' '}
+              <Link
+                href={localizePath(`/${calculatorSlug}`)}
+                className="text-accent hover:underline"
+              >
+                HealthCheck
+              </Link>
+            </div>
           </div>
-        </div>
+        </ResultsShareProvider>
       </ErrorBoundary>
     );
   }
 
   return (
     <ErrorBoundary>
-      <div className="max-w-4xl mx-auto">
-        <Breadcrumb />
+      <ResultsShareProvider>
+        <div className="max-w-4xl mx-auto">
+          <Breadcrumb />
 
-        <h1 className="text-3xl font-bold mb-2">{title}</h1>
-        <p className="text-gray-600 mb-6">{description}</p>
+          <h1 className="text-3xl font-bold mb-2">{title}</h1>
+          <p className="text-gray-600 mb-6">{description}</p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
 
-        {showResultsCapture && (
-          <ResultsEmailCapture
-            source={`calculator-${calculatorSlug}`}
-            className="mb-8 animate-fade-in"
-          />
-        )}
+          {showResultsCapture && <div id="results" className="sr-only" aria-hidden="true" />}
 
-        <AdBlock slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_RESULT} format="rectangle" />
+          {showResultsCapture && (
+            <ResultsShareBar calculatorSlug={calculatorSlug} title={socialTitle} className="mb-8" />
+          )}
 
-        <div className="mb-6">
-          <SocialShare
-            url={`/${calculatorSlug}`}
-            title={socialTitle}
-            description={socialDescription}
-            hashtags={shareHashtags}
-          />
-        </div>
+          {showResultsCapture && (
+            <ResultsEmailCapture
+              source={`calculator-${calculatorSlug}`}
+              className="mb-8 animate-fade-in"
+            />
+          )}
 
-        <Accordion title="Embed This Calculator" defaultOpen={false}>
-          <EmbedCalculator calculatorSlug={calculatorSlug} title={title} />
-        </Accordion>
+          <AdBlock slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_RESULT} format="rectangle" />
 
-        <RelatedCalculators currentSlug={calculatorSlug} />
+          <div className="mb-6">
+            <SocialShare
+              url={localizePath(`/${calculatorSlug}`)}
+              title={socialTitle}
+              description={socialDescription}
+              hashtags={shareHashtags}
+            />
+          </div>
 
-        <RelatedGuides />
+          <Accordion title="Embed This Calculator" defaultOpen={false}>
+            <EmbedCalculator calculatorSlug={calculatorSlug} title={title} />
+          </Accordion>
 
-        <Suspense
-          fallback={
-            <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-1/3 mb-6" />
-              <div className="space-y-4">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="h-12 bg-gray-200 rounded" />
-                ))}
+          <RelatedCalculators currentSlug={calculatorSlug} />
+
+          <RelatedGuides />
+
+          <Suspense
+            fallback={
+              <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
+                <div className="h-8 bg-gray-200 rounded w-1/3 mb-6" />
+                <div className="space-y-4">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="h-12 bg-gray-200 rounded" />
+                  ))}
+                </div>
               </div>
-            </div>
-          }
-        >
-          <FAQSection
-            faqs={faqs}
-            title={
-              faqTitle || `Frequently Asked Questions About ${title.replace(' Calculator', '')}`
             }
-            className="mb-8"
-          />
-        </Suspense>
+          >
+            <FAQSection
+              faqs={faqs}
+              title={
+                faqTitle || `Frequently Asked Questions About ${title.replace(' Calculator', '')}`
+              }
+              className="mb-8"
+            />
+          </Suspense>
 
-        {understandingSection}
+          {understandingSection}
 
-        <Suspense
-          fallback={
-            <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-1/4 mb-6" />
-              <div className="space-y-6">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="p-4 rounded-lg neumorph">
-                    <div className="h-4 bg-gray-200 rounded w-1/4 mb-2" />
-                    <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
-                    <div className="h-4 bg-gray-200 rounded w-full mb-2" />
-                    <div className="h-3 bg-gray-200 rounded w-1/3" />
-                  </div>
-                ))}
+          <Suspense
+            fallback={
+              <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
+                <div className="h-8 bg-gray-200 rounded w-1/4 mb-6" />
+                <div className="space-y-6">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="p-4 rounded-lg neumorph">
+                      <div className="h-4 bg-gray-200 rounded w-1/4 mb-2" />
+                      <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
+                      <div className="h-4 bg-gray-200 rounded w-full mb-2" />
+                      <div className="h-3 bg-gray-200 rounded w-1/3" />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          }
-        >
-          <RelatedArticles
-            currentSlug=""
-            articles={relatedArticles}
-            title="Related Articles"
-            className="my-8"
-          />
-        </Suspense>
+            }
+          >
+            <RelatedArticles
+              currentSlug=""
+              articles={relatedArticles}
+              title="Related Articles"
+              className="my-8"
+            />
+          </Suspense>
 
-        <Suspense
-          fallback={
-            <div className="neumorph p-6 rounded-lg animate-pulse">
-              <div className="h-6 bg-gray-200 rounded w-1/2 mb-2" />
-              <div className="h-4 bg-gray-200 rounded w-3/4 mb-4" />
-              <div className="h-10 bg-gray-200 rounded mb-4" />
-              <div className="h-10 bg-gray-200 rounded" />
-            </div>
-          }
-        >
-          <NewsletterSignup
-            title={newsletterTitle}
-            description={newsletterDescription}
-            className="my-8"
-          />
-        </Suspense>
+          <Suspense
+            fallback={
+              <div className="neumorph p-6 rounded-lg animate-pulse">
+                <div className="h-6 bg-gray-200 rounded w-1/2 mb-2" />
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4" />
+                <div className="h-10 bg-gray-200 rounded mb-4" />
+                <div className="h-10 bg-gray-200 rounded" />
+              </div>
+            }
+          >
+            <NewsletterSignup
+              title={newsletterTitle}
+              description={newsletterDescription}
+              className="my-8"
+            />
+          </Suspense>
 
-        <StructuredData data={structuredData} />
-        <StructuredData
-          data={createCalculatorSchema({
-            name: title,
-            description,
-            url: toAbsoluteUrl(`/${calculatorSlug}`),
-          })}
-        />
-        <StructuredData data={createFAQSchema(faqs)} />
-      </div>
+          <StructuredData data={structuredData} />
+          <StructuredData
+            data={createCalculatorSchema({
+              name: title,
+              description,
+              url: toAbsoluteUrl(localizePath(`/${calculatorSlug}`)),
+            })}
+          />
+          <StructuredData data={createFAQSchema(faqs)} />
+        </div>
+      </ResultsShareProvider>
     </ErrorBoundary>
   );
 }

@@ -265,6 +265,57 @@ html {
   transform: translateY(0);
 }
 
+/* Results share (image export) */
+.hc-share-target {
+  position: relative;
+}
+
+.hc-share-target[data-hc-capturing='1']::before {
+  content: 'HealthCheck';
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: rgba(15, 23, 42, 0.92);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.dark .hc-share-target[data-hc-capturing='1']::before {
+  color: rgba(226, 232, 240, 0.92);
+  background: rgba(15, 23, 42, 0.55);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.hc-share-target[data-hc-capturing='1']::after {
+  content: 'healthcalc.xyz';
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(51, 65, 85, 0.86);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.dark .hc-share-target[data-hc-capturing='1']::after {
+  color: rgba(203, 213, 225, 0.85);
+  background: rgba(15, 23, 42, 0.55);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
 .glass-panel {
   background-color: var(--glass-fill);
   border: 1px solid var(--glass-stroke);
