@@ -316,6 +316,11 @@ html {
   border-color: rgba(148, 163, 184, 0.2);
 }
 
+/* Media framing helpers */
+.hc-aspect-og {
+  aspect-ratio: 1200 / 630;
+}
+
 .glass-panel {
   background-color: var(--glass-fill);
   border: 1px solid var(--glass-stroke);

@@ -31,17 +31,20 @@ function PostCard({
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group block neumorph rounded-lg overflow-hidden transition-all hover:shadow-neumorph-inset h-full"
+      className="group block glass-panel-strong rounded-3xl overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 h-full"
     >
-      <div className="overflow-hidden bg-gray-100">
+      <div className="relative hc-aspect-og overflow-hidden bg-slate-100/70 dark:bg-slate-900/40">
         <Image
           src={post.image}
           alt={post.title}
-          width={1200}
-          height={630}
+          fill
           sizes={large ? '(max-width: 768px) 100vw, 560px' : '(max-width: 768px) 100vw, 448px'}
           priority={priority}
-          className={`w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03] ${large ? 'h-56 md:h-72' : 'h-44'}`}
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent opacity-90"
+          aria-hidden="true"
         />
       </div>
       <div className="p-5">
@@ -51,8 +54,10 @@ function PostCard({
         <h3 className={`font-bold mb-1.5 leading-snug ${large ? 'text-xl' : 'text-lg'}`}>
           {post.title}
         </h3>
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{post.description}</p>
-        <div className="flex items-center text-xs text-gray-500">
+        <p className="text-slate-600 dark:text-slate-300 text-sm mb-3 line-clamp-2">
+          {post.description}
+        </p>
+        <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
           <span>{post.date}</span>
           <span className="mx-1.5" aria-hidden="true">
             &middot;
@@ -105,7 +110,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
     <>
       {/* Search */}
       <div className="mb-6">
-        <div className="neumorph rounded-lg flex items-center px-4 py-3">
+        <div className="glass-panel rounded-2xl flex items-center px-4 py-3">
           <svg
             className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0"
             fill="none"
@@ -125,7 +130,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
             placeholder="Search articles..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full bg-transparent outline-none text-sm placeholder-gray-400"
+            className="w-full bg-transparent outline-none text-sm placeholder-slate-400 dark:placeholder-slate-500"
             aria-label="Search articles"
           />
           {searchQuery && (
@@ -157,7 +162,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
               activeCategory === 'All'
                 ? 'bg-accent text-white shadow-lg'
-                : 'neumorph hover:shadow-neumorph-inset'
+                : 'elevated-pill hover:-translate-y-0.5'
             }`}
           >
             All ({posts.length})
@@ -170,7 +175,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
                 activeCategory === category
                   ? 'bg-accent text-white shadow-lg'
-                  : 'neumorph hover:shadow-neumorph-inset'
+                  : 'elevated-pill hover:-translate-y-0.5'
               }`}
             >
               {category} ({count})
@@ -198,7 +203,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
       )}
 
       {/* Results Count */}
-      <p className="text-sm text-gray-500 mb-4">
+      <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
         Showing {mainPosts.length} of {posts.length} articles
         {searchQuery.trim() && (
           <span>
@@ -217,7 +222,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
           ))}
         </div>
       ) : (
-        <div className="neumorph p-8 rounded-lg text-center">
+        <div className="glass-panel rounded-3xl p-8 text-center">
           <svg
             className="w-12 h-12 mx-auto text-gray-300 mb-3"
             fill="none"
@@ -232,8 +237,8 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
               d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="text-gray-600 font-medium mb-1">No articles found</p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-slate-700 dark:text-slate-200 font-medium mb-1">No articles found</p>
+          <p className="text-slate-500 dark:text-slate-400 text-sm">
             Try adjusting your search or selecting a different category.
           </p>
           <button
