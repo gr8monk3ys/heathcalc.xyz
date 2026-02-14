@@ -166,7 +166,7 @@ function ProductCard({ product }: ProductCardProps) {
       href={product.url}
       target="_blank"
       rel="noopener noreferrer sponsored"
-      className="block neumorph p-4 transition-all duration-300 hover:shadow-neumorph-inset focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+      className="glass-panel-strong block rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
       aria-label={`View ${product.name} - ${product.price || 'Check price'}`}
     >
       <div className="flex items-start gap-3">
@@ -201,7 +201,7 @@ function GuideCard({ title, description, href, category }: GuideCardProps) {
   return (
     <Link
       href={href}
-      className="block border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white/70 dark:bg-gray-900/50 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+      className="glass-panel block rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
     >
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent">
@@ -251,7 +251,7 @@ export default function AffiliateLinks({
 
   return (
     <section
-      className={`neumorph p-6 rounded-lg ${className}`}
+      className={`glass-panel rounded-3xl p-7 md:p-8 ${className}`}
       aria-labelledby="affiliate-products-heading"
     >
       <h3 id="affiliate-products-heading" className="text-xl font-bold mb-4">
@@ -288,7 +288,7 @@ export default function AffiliateLinks({
       </div>
 
       {showDisclosure && (
-        <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-6 pt-4 border-t border-slate-200/70 dark:border-slate-700/60">
           <p className="text-xs text-gray-500 dark:text-gray-500 italic">
             {AFFILIATE_DISCLOSURE.short}
           </p>

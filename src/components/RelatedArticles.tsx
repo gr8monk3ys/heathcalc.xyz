@@ -42,7 +42,7 @@ export default function RelatedArticles({
   }
 
   return (
-    <div className={`neumorph p-6 rounded-lg my-8 ${className}`}>
+    <div className={`glass-panel rounded-3xl p-7 md:p-8 my-8 ${className}`}>
       <h2 className="text-2xl font-bold mb-6">{title}</h2>
 
       <div className="space-y-6">
@@ -50,14 +50,14 @@ export default function RelatedArticles({
           <Link
             key={article.slug}
             href={`/blog/${article.slug}`}
-            className="block hover:shadow-neumorph-inset transition-all p-4 rounded-lg neumorph"
+            className="glass-panel-strong block rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5"
           >
             <span className="inline-block bg-accent/10 text-accent text-xs px-2 py-1 rounded-full mb-2">
               {article.category}
             </span>
             <h3 className="font-bold mb-2">{article.title}</h3>
-            <p className="text-sm text-gray-600 mb-2">{article.description}</p>
-            <div className="flex items-center text-xs text-gray-500">
+            <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">{article.description}</p>
+            <div className="flex items-center text-xs text-slate-500 dark:text-slate-400">
               <span>{article.date}</span>
               <span className="mx-2">•</span>
               <span>{article.readTime}</span>

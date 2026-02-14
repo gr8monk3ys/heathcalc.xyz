@@ -98,7 +98,7 @@ export default function TableOfContents({
   }
 
   return (
-    <div className={`neumorph p-6 rounded-lg my-6 ${className}`}>
+    <div className={`glass-panel rounded-3xl p-7 md:p-8 my-6 ${className}`}>
       <h2 className="text-xl font-bold mb-4">{title}</h2>
 
       <nav aria-label="Table of contents">
@@ -110,7 +110,9 @@ export default function TableOfContents({
                 <a
                   href={`#${item.id}`}
                   className={`block py-1 hover:text-accent transition-colors ${
-                    activeId === item.id ? 'text-accent font-medium' : 'text-gray-600'
+                    activeId === item.id
+                      ? 'text-accent font-medium'
+                      : 'text-slate-600 dark:text-slate-300'
                   }`}
                   onClick={e => {
                     e.preventDefault();

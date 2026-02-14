@@ -27,10 +27,12 @@ export default function RelatedCalculatorLinks({
           <Link
             key={calculator.slug}
             href={`/calculator/${calculator.slug}`}
-            className="neumorph p-4 rounded-lg hover:shadow-md transition-shadow"
+            className="glass-panel-strong rounded-2xl p-5 transition-transform duration-200 hover:-translate-y-0.5"
           >
             <h3 className="text-lg font-semibold text-accent">{calculator.title}</h3>
-            <p className="text-sm text-gray-600 mt-1">{calculator.description}</p>
+            <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">
+              {calculator.description}
+            </p>
             <span className="text-sm text-accent mt-3 inline-block">Try calculator →</span>
           </Link>
         ))}

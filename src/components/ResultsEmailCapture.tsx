@@ -98,7 +98,7 @@ export function ResultsEmailCapture({
   if (submitState.status === 'success') {
     return (
       <div
-        className={`neumorph rounded-lg p-6 ${className}`}
+        className={`glass-panel-strong rounded-3xl p-7 md:p-8 ${className}`}
         ref={successRef}
         tabIndex={-1}
         role="status"
@@ -120,8 +120,10 @@ export function ResultsEmailCapture({
             </svg>
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-white">You are all set</h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{submitState.message}</p>
+            <h3 className="font-semibold text-lg text-slate-900 dark:text-white">
+              You are all set
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300 text-sm mt-1">{submitState.message}</p>
           </div>
         </div>
       </div>
@@ -129,12 +131,12 @@ export function ResultsEmailCapture({
   }
 
   return (
-    <div className={`neumorph rounded-lg p-6 ${className}`}>
-      <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-1">{headline}</h3>
-      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{description}</p>
+    <div className={`glass-panel rounded-3xl p-7 md:p-8 ${className}`}>
+      <h3 className="font-semibold text-lg text-slate-900 dark:text-white mb-1">{headline}</h3>
+      <p className="text-slate-600 dark:text-slate-300 text-sm mb-4">{description}</p>
 
       {/* Value proposition bullets */}
-      <ul className="space-y-2 mb-5 text-sm text-gray-700 dark:text-gray-300">
+      <ul className="space-y-2 mb-5 text-sm text-slate-700 dark:text-slate-200/90">
         <li className="flex items-center gap-2">
           <svg
             className="w-4 h-4 text-accent flex-shrink-0"
@@ -191,7 +193,7 @@ export function ResultsEmailCapture({
               value={email}
               onChange={e => setEmail(e.target.value)}
               disabled={submitState.status === 'loading'}
-              className="w-full px-4 py-2.5 rounded-lg neumorph-inset focus:outline-none focus:ring-2 focus:ring-accent text-sm disabled:opacity-60"
+              className="ui-input text-sm disabled:opacity-60"
               aria-required="true"
               aria-invalid={submitState.status === 'error' ? true : undefined}
               aria-describedby={
@@ -205,7 +207,7 @@ export function ResultsEmailCapture({
           <button
             type="submit"
             disabled={submitState.status === 'loading'}
-            className="px-6 py-2.5 bg-accent text-white font-medium rounded-lg text-sm transition-colors hover:bg-accent/90 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap"
+            className="ui-btn-primary text-sm whitespace-nowrap"
           >
             {submitState.status === 'loading' ? (
               <span className="flex items-center justify-center gap-2">
@@ -252,7 +254,7 @@ export function ResultsEmailCapture({
       {/* Privacy notice */}
       <p
         id="results-email-capture-privacy"
-        className="text-xs text-gray-500 dark:text-gray-400 mt-3"
+        className="text-xs text-slate-500 dark:text-slate-400 mt-3"
       >
         No spam. Unsubscribe anytime.
       </p>
