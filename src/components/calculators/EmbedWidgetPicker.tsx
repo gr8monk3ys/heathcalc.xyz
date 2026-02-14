@@ -85,11 +85,11 @@ export default function EmbedWidgetPicker() {
   };
 
   return (
-    <section className="neumorph p-6 rounded-lg">
+    <section className="glass-panel-strong rounded-3xl p-7 md:p-8">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold">Embed HealthCheck Calculators</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-slate-600 dark:text-slate-300">
             Choose a calculator, copy the embed code, and keep the attribution link included.
           </p>
         </div>
@@ -150,7 +150,7 @@ export default function EmbedWidgetPicker() {
           <label className="block text-sm font-medium mb-1" htmlFor="embed-preview">
             Live Preview
           </label>
-          <div className="neumorph p-3 rounded-lg bg-white/70 dark:bg-gray-900/40">
+          <div className="glass-panel rounded-2xl p-4">
             <iframe
               id="embed-preview"
               src={toAbsoluteUrl(`/${selectedSlug}?embed=1`)}
@@ -164,7 +164,7 @@ export default function EmbedWidgetPicker() {
         </div>
       </div>
 
-      <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6">
+      <div className="mt-7 border-t border-slate-200/70 dark:border-slate-700/60 pt-7">
         <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-3">
           Request Embed Approval
         </h3>
