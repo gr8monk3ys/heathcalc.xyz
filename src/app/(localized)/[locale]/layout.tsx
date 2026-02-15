@@ -19,6 +19,7 @@ import {
   localeToOpenGraphLocale,
   type SupportedLocale,
 } from '@/i18n/config';
+import { isLocaleIndexable } from '@/i18n/indexing';
 import { notFound, redirect } from 'next/navigation';
 
 const siteUrl = getPublicSiteUrl();
@@ -54,6 +55,8 @@ export async function generateMetadata({ params }: LocalizedLayoutProps): Promis
   if (!locale || locale === defaultLocale) {
     return {};
   }
+
+  const indexable = isLocaleIndexable(locale);
 
   return {
     title: 'HealthCheck - Health and Fitness Calculators',
@@ -93,17 +96,26 @@ export async function generateMetadata({ params }: LocalizedLayoutProps): Promis
         'Your go-to resource for health and fitness calculators. Calculate body fat, BMI, calorie needs, and more.',
       images: ['/images/og-image.jpg'],
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
+    robots: indexable
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          },
+        }
+      : {
+          index: false,
+          follow: true,
+          googleBot: {
+            index: false,
+            follow: true,
+          },
+        },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     },
