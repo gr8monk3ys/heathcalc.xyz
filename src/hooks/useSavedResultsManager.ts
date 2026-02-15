@@ -5,6 +5,7 @@
 import { useSavedResults } from '@/context/SavedResultsContext';
 import { useState } from 'react';
 import { createLogger } from '@/utils/logger';
+import { computeSavedResultKey } from '@/utils/savedResultsKey';
 
 const logger = createLogger({ component: 'useSavedResultsManager' });
 
@@ -26,27 +27,6 @@ export function useSavedResultsManager() {
   const [showMessage, setShowMessage] = useState<boolean>(false);
 
   /**
-   * Generate a unique ID for a result
-   * @param type Calculator type
-   * @param data Result data
-   * @returns Unique ID string
-   */
-  function generateResultId(type: string, data: Record<string, unknown>): string {
-    // Create a string representation of the data
-    const dataString = JSON.stringify(data);
-
-    // Simple hash function
-    let hash = 0;
-    for (let i = 0; i < dataString.length; i++) {
-      const char = dataString.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-
-    return `${type}-${hash}`;
-  }
-
-  /**
    * Save a calculator result
    * @param calculatorType Type of calculator (e.g., 'bmi', 'tdee')
    * @param calculatorName Human-readable name of calculator
@@ -60,7 +40,7 @@ export function useSavedResultsManager() {
   ): boolean {
     try {
       // Check if already saved
-      const resultId = generateResultId(calculatorType, data);
+      const resultId = computeSavedResultKey(calculatorType, data);
       if (isResultSaved(resultId)) {
         showNotification('This result is already saved');
         return false;
@@ -104,7 +84,7 @@ export function useSavedResultsManager() {
    */
   function removeResultByData(calculatorType: string, data: Record<string, unknown>): boolean {
     try {
-      const resultId = generateResultId(calculatorType, data);
+      const resultId = computeSavedResultKey(calculatorType, data);
       if (!isResultSaved(resultId)) {
         return false;
       }
@@ -126,7 +106,7 @@ export function useSavedResultsManager() {
    * @returns True if the result is saved
    */
   function isResultSavedByData(calculatorType: string, data: Record<string, unknown>): boolean {
-    const resultId = generateResultId(calculatorType, data);
+    const resultId = computeSavedResultKey(calculatorType, data);
     return isResultSaved(resultId);
   }
 

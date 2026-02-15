@@ -33,7 +33,8 @@ export default function TermsPage() {
         <p className="mb-3">
           We offer account creation to save calculator results. Authentication is managed by Clerk,
           a secure third-party provider. Saved calculator results may be stored locally in your
-          browser.
+          browser and, when you are signed in, synced to our database so you can access them across
+          devices.
         </p>
         <p>
           You are responsible for safeguarding access to your account and for the activity
