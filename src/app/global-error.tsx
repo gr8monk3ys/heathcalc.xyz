@@ -2,14 +2,15 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
+import * as Sentry from '@sentry/nextjs';
 import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ component: 'GlobalError', level: 'critical' });
 
 /**
- * Global error boundary for app-level errors
- * This catches errors that occur in the root layout
- * Must define its own <html> and <body> tags
+ * Root global error boundary (App Router).
+ *
+ * Important: must define its own <html> and <body> tags.
  * @see https://nextjs.org/docs/app/api-reference/file-conventions/error#global-errortsx
  */
 export default function GlobalError({
@@ -20,10 +21,10 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     logger.logError('Critical global error occurred', error, {
       digest: error.digest,
     });
+    Sentry.captureException(error);
   }, [error]);
 
   return (
