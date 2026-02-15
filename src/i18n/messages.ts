@@ -84,7 +84,26 @@ export type MessageKey =
   | 'savedResults.page.subtitle'
   | 'savedResults.page.signedOut.title'
   | 'savedResults.page.signedOut.body'
-  | 'savedResults.page.signedOut.cta';
+  | 'savedResults.page.signedOut.cta'
+  | 'contactForm.success.title'
+  | 'contactForm.success.button'
+  | 'contactForm.label.name'
+  | 'contactForm.label.email'
+  | 'contactForm.label.subject'
+  | 'contactForm.label.message'
+  | 'contactForm.placeholder.name'
+  | 'contactForm.placeholder.email'
+  | 'contactForm.placeholder.message'
+  | 'contactForm.subject.placeholder'
+  | 'contactForm.subject.question'
+  | 'contactForm.subject.feedback'
+  | 'contactForm.subject.bug'
+  | 'contactForm.subject.feature'
+  | 'contactForm.subject.other'
+  | 'contactForm.error.generic'
+  | 'contactForm.error.network'
+  | 'contactForm.button.sending'
+  | 'contactForm.button.send';
 
 const MESSAGES: Record<SupportedLocale, Record<MessageKey, string>> = {
   en: {
@@ -181,6 +200,25 @@ const MESSAGES: Record<SupportedLocale, Record<MessageKey, string>> = {
     'savedResults.page.signedOut.body':
       "Use the Sign In button in the header to sign in or create an account. You'll be able to save results and access them later.",
     'savedResults.page.signedOut.cta': 'Go back home',
+    'contactForm.success.title': 'Message Sent!',
+    'contactForm.success.button': 'Send another message',
+    'contactForm.label.name': 'Name',
+    'contactForm.label.email': 'Email',
+    'contactForm.label.subject': 'Subject',
+    'contactForm.label.message': 'Message',
+    'contactForm.placeholder.name': 'Your name',
+    'contactForm.placeholder.email': 'your.email@example.com',
+    'contactForm.placeholder.message': 'Your message here...',
+    'contactForm.subject.placeholder': 'Select a subject',
+    'contactForm.subject.question': 'General Question',
+    'contactForm.subject.feedback': 'Feedback',
+    'contactForm.subject.bug': 'Report a Bug',
+    'contactForm.subject.feature': 'Feature Request',
+    'contactForm.subject.other': 'Other',
+    'contactForm.error.generic': 'Something went wrong. Please try again.',
+    'contactForm.error.network': 'Network error. Please check your connection and try again.',
+    'contactForm.button.sending': 'Sending...',
+    'contactForm.button.send': 'Send Message',
   },
   es: {
     'layout.skipToMain': 'Saltar al contenido principal',
@@ -277,6 +315,25 @@ const MESSAGES: Record<SupportedLocale, Record<MessageKey, string>> = {
     'savedResults.page.signedOut.body':
       'Usa el botón Iniciar sesión en el encabezado para iniciar sesión o crear una cuenta. Podrás guardar resultados y acceder a ellos más tarde.',
     'savedResults.page.signedOut.cta': 'Volver al inicio',
+    'contactForm.success.title': '¡Mensaje enviado!',
+    'contactForm.success.button': 'Enviar otro mensaje',
+    'contactForm.label.name': 'Nombre',
+    'contactForm.label.email': 'Correo electrónico',
+    'contactForm.label.subject': 'Asunto',
+    'contactForm.label.message': 'Mensaje',
+    'contactForm.placeholder.name': 'Tu nombre',
+    'contactForm.placeholder.email': 'tu.correo@ejemplo.com',
+    'contactForm.placeholder.message': 'Escribe tu mensaje aquí...',
+    'contactForm.subject.placeholder': 'Selecciona un asunto',
+    'contactForm.subject.question': 'Consulta general',
+    'contactForm.subject.feedback': 'Comentarios',
+    'contactForm.subject.bug': 'Reportar un error',
+    'contactForm.subject.feature': 'Solicitud de función',
+    'contactForm.subject.other': 'Otro',
+    'contactForm.error.generic': 'Algo salió mal. Inténtalo de nuevo.',
+    'contactForm.error.network': 'Error de red. Comprueba tu conexión e inténtalo de nuevo.',
+    'contactForm.button.sending': 'Enviando...',
+    'contactForm.button.send': 'Enviar mensaje',
   },
   fr: {
     'layout.skipToMain': 'Aller au contenu principal',
@@ -375,6 +432,25 @@ const MESSAGES: Record<SupportedLocale, Record<MessageKey, string>> = {
     'savedResults.page.signedOut.body':
       'Utilisez le bouton Se connecter dans l’en-tête pour vous connecter ou créer un compte. Vous pourrez enregistrer vos résultats et y accéder plus tard.',
     'savedResults.page.signedOut.cta': 'Retour à l’accueil',
+    'contactForm.success.title': 'Message envoyé !',
+    'contactForm.success.button': 'Envoyer un autre message',
+    'contactForm.label.name': 'Nom',
+    'contactForm.label.email': 'E-mail',
+    'contactForm.label.subject': 'Objet',
+    'contactForm.label.message': 'Message',
+    'contactForm.placeholder.name': 'Votre nom',
+    'contactForm.placeholder.email': 'votre.email@exemple.com',
+    'contactForm.placeholder.message': 'Votre message...',
+    'contactForm.subject.placeholder': 'Choisissez un sujet',
+    'contactForm.subject.question': 'Question générale',
+    'contactForm.subject.feedback': 'Avis',
+    'contactForm.subject.bug': 'Signaler un bug',
+    'contactForm.subject.feature': 'Demande de fonctionnalité',
+    'contactForm.subject.other': 'Autre',
+    'contactForm.error.generic': 'Une erreur est survenue. Veuillez réessayer.',
+    'contactForm.error.network': 'Erreur réseau. Vérifiez votre connexion et réessayez.',
+    'contactForm.button.sending': 'Envoi…',
+    'contactForm.button.send': 'Envoyer le message',
   },
   de: {
     'layout.skipToMain': 'Zum Hauptinhalt springen',
@@ -472,6 +548,26 @@ const MESSAGES: Record<SupportedLocale, Record<MessageKey, string>> = {
     'savedResults.page.signedOut.body':
       'Verwenden Sie die Schaltfläche Anmelden im Header, um sich anzumelden oder ein Konto zu erstellen. Dann können Sie Ergebnisse speichern und später darauf zugreifen.',
     'savedResults.page.signedOut.cta': 'Zur Startseite',
+    'contactForm.success.title': 'Nachricht gesendet!',
+    'contactForm.success.button': 'Weitere Nachricht senden',
+    'contactForm.label.name': 'Name',
+    'contactForm.label.email': 'E-Mail',
+    'contactForm.label.subject': 'Betreff',
+    'contactForm.label.message': 'Nachricht',
+    'contactForm.placeholder.name': 'Ihr Name',
+    'contactForm.placeholder.email': 'ihre.email@beispiel.de',
+    'contactForm.placeholder.message': 'Ihre Nachricht...',
+    'contactForm.subject.placeholder': 'Betreff auswählen',
+    'contactForm.subject.question': 'Allgemeine Frage',
+    'contactForm.subject.feedback': 'Feedback',
+    'contactForm.subject.bug': 'Fehler melden',
+    'contactForm.subject.feature': 'Funktionswunsch',
+    'contactForm.subject.other': 'Sonstiges',
+    'contactForm.error.generic': 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
+    'contactForm.error.network':
+      'Netzwerkfehler. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.',
+    'contactForm.button.sending': 'Wird gesendet…',
+    'contactForm.button.send': 'Nachricht senden',
   },
   pt: {
     'layout.skipToMain': 'Pular para o conteudo principal',
@@ -567,6 +663,25 @@ const MESSAGES: Record<SupportedLocale, Record<MessageKey, string>> = {
     'savedResults.page.signedOut.body':
       'Use o botão Entrar no cabeçalho para entrar ou criar uma conta. Assim, você poderá salvar resultados e acessá-los depois.',
     'savedResults.page.signedOut.cta': 'Voltar para o início',
+    'contactForm.success.title': 'Mensagem enviada!',
+    'contactForm.success.button': 'Enviar outra mensagem',
+    'contactForm.label.name': 'Nome',
+    'contactForm.label.email': 'E-mail',
+    'contactForm.label.subject': 'Assunto',
+    'contactForm.label.message': 'Mensagem',
+    'contactForm.placeholder.name': 'Seu nome',
+    'contactForm.placeholder.email': 'seu.email@exemplo.com',
+    'contactForm.placeholder.message': 'Sua mensagem...',
+    'contactForm.subject.placeholder': 'Selecione um assunto',
+    'contactForm.subject.question': 'Pergunta geral',
+    'contactForm.subject.feedback': 'Feedback',
+    'contactForm.subject.bug': 'Reportar um bug',
+    'contactForm.subject.feature': 'Solicitação de recurso',
+    'contactForm.subject.other': 'Outro',
+    'contactForm.error.generic': 'Algo deu errado. Tente novamente.',
+    'contactForm.error.network': 'Erro de rede. Verifique sua conexão e tente novamente.',
+    'contactForm.button.sending': 'Enviando...',
+    'contactForm.button.send': 'Enviar mensagem',
   },
   zh: {
     'layout.skipToMain': '跳转到主要内容',
@@ -658,6 +773,25 @@ const MESSAGES: Record<SupportedLocale, Record<MessageKey, string>> = {
     'savedResults.page.signedOut.body':
       '使用页眉中的登录按钮登录或创建账户。之后你就可以保存结果并在以后访问它们。',
     'savedResults.page.signedOut.cta': '返回首页',
+    'contactForm.success.title': '消息已发送！',
+    'contactForm.success.button': '再发一条消息',
+    'contactForm.label.name': '姓名',
+    'contactForm.label.email': '邮箱',
+    'contactForm.label.subject': '主题',
+    'contactForm.label.message': '内容',
+    'contactForm.placeholder.name': '你的姓名',
+    'contactForm.placeholder.email': 'your.email@example.com',
+    'contactForm.placeholder.message': '在这里输入你的消息...',
+    'contactForm.subject.placeholder': '请选择主题',
+    'contactForm.subject.question': '一般问题',
+    'contactForm.subject.feedback': '反馈',
+    'contactForm.subject.bug': '报告错误',
+    'contactForm.subject.feature': '功能请求',
+    'contactForm.subject.other': '其他',
+    'contactForm.error.generic': '出现问题。请重试。',
+    'contactForm.error.network': '网络错误。请检查连接后重试。',
+    'contactForm.button.sending': '发送中...',
+    'contactForm.button.send': '发送消息',
   },
 };
 

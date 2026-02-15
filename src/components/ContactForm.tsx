@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, FormEvent } from 'react';
+import { useLocale } from '@/context/LocaleContext';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 export default function ContactForm() {
+  const { t } = useLocale();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
@@ -35,11 +37,11 @@ export default function ContactForm() {
         setMessage('');
       } else {
         setStatus('error');
-        setStatusMessage(data.error || 'Something went wrong. Please try again.');
+        setStatusMessage(data.error || t('contactForm.error.generic'));
       }
     } catch {
       setStatus('error');
-      setStatusMessage('Network error. Please check your connection and try again.');
+      setStatusMessage(t('contactForm.error.network'));
     }
   }
 
@@ -59,12 +61,12 @@ export default function ContactForm() {
             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <h3 className="text-xl font-semibold mb-2">Message Sent!</h3>
+        <h3 className="text-xl font-semibold mb-2">{t('contactForm.success.title')}</h3>
         <p className="text-gray-600 mb-4" role="status" aria-live="polite">
           {statusMessage}
         </p>
         <button type="button" onClick={() => setStatus('idle')} className="ui-btn-soft text-sm">
-          Send another message
+          {t('contactForm.success.button')}
         </button>
       </div>
     );
@@ -74,7 +76,7 @@ export default function ContactForm() {
     <form className="space-y-4" onSubmit={handleSubmit} aria-busy={status === 'submitting'}>
       <div>
         <label htmlFor="name" className="block text-sm font-medium mb-1">
-          Name
+          {t('contactForm.label.name')}
         </label>
         <input
           type="text"
@@ -83,7 +85,7 @@ export default function ContactForm() {
           value={name}
           onChange={e => setName(e.target.value)}
           className="ui-input w-full p-3 focus:outline-none focus:ring-2 focus:ring-accent"
-          placeholder="Your name"
+          placeholder={t('contactForm.placeholder.name')}
           autoComplete="name"
           required
           minLength={2}
@@ -93,7 +95,7 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="email" className="block text-sm font-medium mb-1">
-          Email
+          {t('contactForm.label.email')}
         </label>
         <input
           type="email"
@@ -102,7 +104,7 @@ export default function ContactForm() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           className="ui-input w-full p-3 focus:outline-none focus:ring-2 focus:ring-accent"
-          placeholder="your.email@example.com"
+          placeholder={t('contactForm.placeholder.email')}
           autoComplete="email"
           inputMode="email"
           enterKeyHint="next"
@@ -112,7 +114,7 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="subject" className="block text-sm font-medium mb-1">
-          Subject
+          {t('contactForm.label.subject')}
         </label>
         <select
           id="subject"
@@ -122,18 +124,18 @@ export default function ContactForm() {
           className="ui-select w-full p-3 focus:outline-none focus:ring-2 focus:ring-accent"
           required
         >
-          <option value="">Select a subject</option>
-          <option value="question">General Question</option>
-          <option value="feedback">Feedback</option>
-          <option value="bug">Report a Bug</option>
-          <option value="feature">Feature Request</option>
-          <option value="other">Other</option>
+          <option value="">{t('contactForm.subject.placeholder')}</option>
+          <option value="question">{t('contactForm.subject.question')}</option>
+          <option value="feedback">{t('contactForm.subject.feedback')}</option>
+          <option value="bug">{t('contactForm.subject.bug')}</option>
+          <option value="feature">{t('contactForm.subject.feature')}</option>
+          <option value="other">{t('contactForm.subject.other')}</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium mb-1">
-          Message
+          {t('contactForm.label.message')}
         </label>
         <textarea
           id="message"
@@ -142,7 +144,7 @@ export default function ContactForm() {
           value={message}
           onChange={e => setMessage(e.target.value)}
           className="ui-textarea w-full p-3 focus:outline-none focus:ring-2 focus:ring-accent"
-          placeholder="Your message here..."
+          placeholder={t('contactForm.placeholder.message')}
           autoComplete="off"
           enterKeyHint="send"
           required
@@ -162,7 +164,7 @@ export default function ContactForm() {
         disabled={status === 'submitting'}
         className="ui-btn-primary w-full py-3 px-4"
       >
-        {status === 'submitting' ? 'Sending...' : 'Send Message'}
+        {status === 'submitting' ? t('contactForm.button.sending') : t('contactForm.button.send')}
       </button>
     </form>
   );
