@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     'health blog, fitness blog, weight loss articles, body fat, nutrition, TDEE, calorie deficit, body composition',
 };
 
-interface BlogPost {
+export interface BlogPost {
   title: string;
   description: string;
   slug: string;
@@ -22,7 +22,7 @@ interface BlogPost {
   featured?: boolean;
 }
 
-const blogPosts: BlogPost[] = [
+export const BLOG_POSTS: BlogPost[] = [
   {
     title: 'Best Smart Scales for Body Composition Tracking in 2026',
     description:
@@ -526,7 +526,7 @@ export default function BlogPage() {
         Explore evidence-based articles on weight management, body composition, nutrition, and
         fitness to help you make informed decisions about your health.
       </p>
-      <BlogIndexClient posts={blogPosts} />
+      <BlogIndexClient posts={BLOG_POSTS} />
 
       <div className="mt-12 neumorph p-6 rounded-lg">
         <h2 className="text-xl font-bold mb-4">Looking for Our Calculators?</h2>

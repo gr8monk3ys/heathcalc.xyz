@@ -3,6 +3,114 @@
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useLocale } from '@/context/LocaleContext';
+import type { SupportedLocale } from '@/i18n/config';
+
+type BlogStrings = {
+  searchPlaceholder: string;
+  searchAria: string;
+  clearSearchAria: string;
+  allLabel: string;
+  featuredSectionAria: string;
+  featuredTitle: string;
+  resultsCount: (shown: number, total: number) => string;
+  resultsForPrefix: string;
+  emptyTitle: string;
+  emptyBody: string;
+  clearAllFilters: string;
+};
+
+function getBlogStrings(locale: SupportedLocale): BlogStrings {
+  switch (locale) {
+    case 'es':
+      return {
+        searchPlaceholder: 'Buscar artículos...',
+        searchAria: 'Buscar artículos',
+        clearSearchAria: 'Borrar búsqueda',
+        allLabel: 'Todas',
+        featuredSectionAria: 'Artículos destacados',
+        featuredTitle: 'Artículos destacados',
+        resultsCount: (shown, total) => `Mostrando ${shown} de ${total} artículos`,
+        resultsForPrefix: 'para',
+        emptyTitle: 'No se encontraron artículos',
+        emptyBody: 'Prueba ajustando tu búsqueda o seleccionando otra categoría.',
+        clearAllFilters: 'Limpiar filtros',
+      };
+    case 'fr':
+      return {
+        searchPlaceholder: 'Rechercher des articles...',
+        searchAria: 'Rechercher des articles',
+        clearSearchAria: 'Effacer la recherche',
+        allLabel: 'Tous',
+        featuredSectionAria: 'Articles à la une',
+        featuredTitle: 'Articles à la une',
+        resultsCount: (shown, total) => `Affichage de ${shown} sur ${total} articles`,
+        resultsForPrefix: 'pour',
+        emptyTitle: 'Aucun article trouvé',
+        emptyBody: 'Essayez de modifier votre recherche ou de choisir une autre catégorie.',
+        clearAllFilters: 'Réinitialiser les filtres',
+      };
+    case 'de':
+      return {
+        searchPlaceholder: 'Artikel suchen...',
+        searchAria: 'Artikel suchen',
+        clearSearchAria: 'Suche löschen',
+        allLabel: 'Alle',
+        featuredSectionAria: 'Empfohlene Artikel',
+        featuredTitle: 'Empfohlene Artikel',
+        resultsCount: (shown, total) => `Zeige ${shown} von ${total} Artikeln`,
+        resultsForPrefix: 'für',
+        emptyTitle: 'Keine Artikel gefunden',
+        emptyBody: 'Versuchen Sie eine andere Suche oder wählen Sie eine andere Kategorie.',
+        clearAllFilters: 'Alle Filter zurücksetzen',
+      };
+    case 'pt':
+      return {
+        searchPlaceholder: 'Buscar artigos...',
+        searchAria: 'Buscar artigos',
+        clearSearchAria: 'Limpar busca',
+        allLabel: 'Todos',
+        featuredSectionAria: 'Artigos em destaque',
+        featuredTitle: 'Artigos em destaque',
+        resultsCount: (shown, total) => `Mostrando ${shown} de ${total} artigos`,
+        resultsForPrefix: 'para',
+        emptyTitle: 'Nenhum artigo encontrado',
+        emptyBody: 'Tente ajustar a busca ou selecionar outra categoria.',
+        clearAllFilters: 'Limpar filtros',
+      };
+    case 'zh':
+      return {
+        searchPlaceholder: '搜索文章...',
+        searchAria: '搜索文章',
+        clearSearchAria: '清除搜索',
+        allLabel: '全部',
+        featuredSectionAria: '精选文章',
+        featuredTitle: '精选文章',
+        resultsCount: (shown, total) => `显示 ${shown}/${total} 篇文章`,
+        resultsForPrefix: '关于',
+        emptyTitle: '未找到文章',
+        emptyBody: '请调整搜索关键词或选择其他分类。',
+        clearAllFilters: '清除筛选',
+      };
+    case 'en':
+    default:
+      return {
+        searchPlaceholder: 'Search articles...',
+        searchAria: 'Search articles',
+        clearSearchAria: 'Clear search',
+        allLabel: 'All',
+        featuredSectionAria: 'Featured articles',
+        featuredTitle: 'Featured Articles',
+        resultsCount: (shown, total) => `Showing ${shown} of ${total} articles`,
+        resultsForPrefix: 'for',
+        emptyTitle: 'No articles found',
+        emptyBody: 'Try adjusting your search or selecting a different category.',
+        clearAllFilters: 'Clear all filters',
+      };
+  }
+}
+
+const ALL_CATEGORY = 'All';
 
 interface BlogPost {
   title: string;
@@ -28,9 +136,11 @@ function PostCard({
   priority?: boolean;
   large?: boolean;
 }): React.ReactElement {
+  const { localizePath } = useLocale();
+
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={localizePath(`/blog/${post.slug}`)}
       className="group block glass-panel-strong rounded-3xl overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 h-full"
     >
       <div className="relative hc-aspect-og overflow-hidden bg-slate-100/70 dark:bg-slate-900/40">
@@ -70,8 +180,10 @@ function PostCard({
 }
 
 export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.ReactElement {
+  const { locale } = useLocale();
+  const strings = getBlogStrings(locale);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState(ALL_CATEGORY);
 
   const categories = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -88,7 +200,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
   const filteredPosts = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     return posts.filter(post => {
-      const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
+      const matchesCategory = activeCategory === ALL_CATEGORY || post.category === activeCategory;
       const matchesSearch =
         !query ||
         post.title.toLowerCase().includes(query) ||
@@ -98,7 +210,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
     });
   }, [posts, activeCategory, searchQuery]);
 
-  const showFeatured = activeCategory === 'All' && !searchQuery.trim();
+  const showFeatured = activeCategory === ALL_CATEGORY && !searchQuery.trim();
 
   const mainPosts = useMemo(() => {
     if (!showFeatured) return filteredPosts;
@@ -127,18 +239,18 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
           </svg>
           <input
             type="text"
-            placeholder="Search articles..."
+            placeholder={strings.searchPlaceholder}
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className="w-full bg-transparent outline-none text-sm placeholder-slate-400 dark:placeholder-slate-500"
-            aria-label="Search articles"
+            aria-label={strings.searchAria}
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery('')}
               className="ml-2 text-gray-400 hover:text-gray-600"
-              aria-label="Clear search"
+              aria-label={strings.clearSearchAria}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -158,14 +270,14 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
         <div className="flex gap-2 min-w-max pb-1">
           <button
             type="button"
-            onClick={() => setActiveCategory('All')}
+            onClick={() => setActiveCategory(ALL_CATEGORY)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
-              activeCategory === 'All'
+              activeCategory === ALL_CATEGORY
                 ? 'bg-accent text-white shadow-lg'
                 : 'elevated-pill hover:-translate-y-0.5'
             }`}
           >
-            All ({posts.length})
+            {strings.allLabel} ({posts.length})
           </button>
           {categories.map(([category, count]) => (
             <button
@@ -186,8 +298,8 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
 
       {/* Featured Section */}
       {showFeatured && featuredPosts.length >= 3 && (
-        <section className="mb-10" aria-label="Featured articles">
-          <h2 className="text-lg font-bold mb-4 text-accent">Featured Articles</h2>
+        <section className="mb-10" aria-label={strings.featuredSectionAria}>
+          <h2 className="text-lg font-bold mb-4 text-accent">{strings.featuredTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="md:row-span-2">
               <PostCard post={featuredPosts[0]} priority large />
@@ -204,11 +316,12 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
 
       {/* Results Count */}
       <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-        Showing {mainPosts.length} of {posts.length} articles
+        {strings.resultsCount(mainPosts.length, posts.length)}
         {searchQuery.trim() && (
           <span>
             {' '}
-            for &ldquo;<span className="font-medium text-gray-700">{searchQuery.trim()}</span>
+            {strings.resultsForPrefix} &ldquo;
+            <span className="font-medium text-gray-700">{searchQuery.trim()}</span>
             &rdquo;
           </span>
         )}
@@ -237,19 +350,19 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
               d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          <p className="text-slate-700 dark:text-slate-200 font-medium mb-1">No articles found</p>
-          <p className="text-slate-500 dark:text-slate-400 text-sm">
-            Try adjusting your search or selecting a different category.
+          <p className="text-slate-700 dark:text-slate-200 font-medium mb-1">
+            {strings.emptyTitle}
           </p>
+          <p className="text-slate-500 dark:text-slate-400 text-sm">{strings.emptyBody}</p>
           <button
             type="button"
             onClick={() => {
               setSearchQuery('');
-              setActiveCategory('All');
+              setActiveCategory(ALL_CATEGORY);
             }}
             className="mt-4 text-accent text-sm font-medium hover:underline"
           >
-            Clear all filters
+            {strings.clearAllFilters}
           </button>
         </div>
       )}
