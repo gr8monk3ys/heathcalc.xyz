@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Calories Burned Calculator | HealthCheck',
   description: 'Estimate calories burned from workouts using weight, duration, and activity.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/calories-burned',
+    canonical: './',
   },
   openGraph: {
     title: 'Calories Burned Calculator | HealthCheck',
     description: 'Estimate calories burned from workouts using weight, duration, and activity.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/calories-burned',
+    url: './',
     images: [
       {
         url: '/images/calculators/calories-burned-calculator.jpg',

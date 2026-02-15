@@ -13,9 +13,8 @@ export const metadata = {
     title: 'Waist-to-Hip Ratio: A Complete Guide to Understanding Your Body Shape',
     description:
       'Measure waist-to-hip ratio, interpret your body shape, and understand health risk.',
-    url: 'https://www.healthcalc.xyz/blog/waist-to-hip-ratio-guide',
+    url: './',
     siteName: 'HealthCheck',
-    locale: 'en_US',
     type: 'article',
     images: [
       {
@@ -34,7 +33,7 @@ export const metadata = {
     images: ['/images/blog/waist-to-hip-ratio-guide.jpg'],
   },
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/blog/waist-to-hip-ratio-guide',
+    canonical: './',
   },
 };
 

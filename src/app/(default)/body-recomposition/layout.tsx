@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     title: 'Body Recomposition Calculator | Lose Fat & Build Muscle',
     description:
       'Calculate your calorie cycling and macro targets for body recomposition. Science-based approach to lose fat and build muscle simultaneously.',
-    url: 'https://www.healthcalc.xyz/body-recomposition',
+    url: './',
     type: 'website',
     images: [
       {
-        url: 'https://www.healthcalc.xyz/images/og-body-recomposition.png',
+        url: './',
         width: 1200,
         height: 630,
         alt: 'Body Recomposition Calculator',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     images: ['https://www.healthcalc.xyz/images/og-body-recomposition.png'],
   },
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/body-recomposition',
+    canonical: './',
   },
 };
 

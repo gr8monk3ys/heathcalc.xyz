@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Calorie Calculator | HealthCheck',
   description: 'Find your daily calories for maintenance, fat loss, or muscle gain in minutes.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/calorie',
+    canonical: './',
   },
   openGraph: {
     title: 'Calorie Calculator | HealthCheck',
     description: 'Find your daily calories for maintenance, fat loss, or muscle gain in minutes.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/calorie',
+    url: './',
     images: [
       {
         url: '/images/calculators/calorie-calculator.jpg',

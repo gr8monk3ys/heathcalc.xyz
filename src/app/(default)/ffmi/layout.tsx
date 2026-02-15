@@ -8,15 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'ffmi calculator, fat-free mass index, muscle mass calculator, natural limit, bodybuilding calculator, lean mass index, adjusted ffmi, natural potential, muscle development, steroid detection',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/ffmi',
+    canonical: './',
   },
   openGraph: {
     title: 'FFMI Calculator | Fat-Free Mass Index Calculator',
     description:
       'Calculate your Fat-Free Mass Index (FFMI) to assess muscle mass development and natural muscular potential. Includes adjusted FFMI and natural limit analysis.',
-    url: 'https://www.healthcalc.xyz/ffmi',
+    url: './',
     siteName: 'HealthCheck',
-    locale: 'en_US',
     type: 'website',
     images: [
       {

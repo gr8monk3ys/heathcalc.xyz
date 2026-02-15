@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Calories Burned Cycling Calculator | HealthCheck',
   description: 'Estimate calories burned while cycling based on speed and time.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/calories-burned-cycling',
+    canonical: './',
   },
   openGraph: {
     title: 'Calories Burned Cycling Calculator | HealthCheck',
     description: 'Estimate calories burned while cycling based on speed and time.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/calories-burned-cycling',
+    url: './',
     images: [
       {
         url: '/images/calculators/calories-burned-cycling-calculator.jpg',

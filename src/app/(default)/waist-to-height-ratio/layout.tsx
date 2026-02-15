@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Waist-to-Height Ratio Calculator | HealthCheck',
   description: 'Calculate your waist-to-height ratio to assess body shape and health risk.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/waist-to-height-ratio',
+    canonical: './',
   },
   openGraph: {
     title: 'Waist-to-Height Ratio Calculator | HealthCheck',
     description: 'Calculate your waist-to-height ratio to assess body shape and health risk.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/waist-to-height-ratio',
+    url: './',
     images: [
       {
         url: '/images/calculators/waist-to-height-ratio-calculator.jpg',

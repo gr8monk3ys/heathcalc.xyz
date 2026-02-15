@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'weight management calculator, weight loss planner, weight gain planner, goal weight calculator, calorie planning',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/weight-management',
+    canonical: './',
   },
   openGraph: {
     title: 'Weight Management Planner | HealthCheck',
     description:
       'Plan weight loss or gain with a target date and personalized daily calorie targets.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/weight-management',
+    url: './',
     images: [
       {
         url: '/images/calculators/weight-management-calculator.jpg',

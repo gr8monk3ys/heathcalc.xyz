@@ -7,14 +7,14 @@ export const metadata: Metadata = {
     'Calculate BMI instantly with metric or imperial inputs and see your healthy weight range.',
   keywords: 'BMI calculator, body mass index, healthy weight, weight calculator, BMI chart',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/bmi',
+    canonical: './',
   },
   openGraph: {
     title: 'BMI Calculator | HealthCheck',
     description:
       'Calculate BMI instantly with metric or imperial inputs and see your healthy weight range.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/bmi',
+    url: './',
     images: [
       {
         url: '/images/calculators/bmi-calculator.jpg',

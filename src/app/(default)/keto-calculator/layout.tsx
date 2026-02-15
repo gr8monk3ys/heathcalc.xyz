@@ -21,9 +21,8 @@ export const metadata: Metadata = {
     title: 'Keto Macro Calculator | Personalized Ketogenic Diet Plan',
     description:
       'Calculate your personalized keto macros for fat, protein, and carbs. Choose from standard, targeted, or cyclical keto based on your goals and activity level.',
-    url: 'https://www.healthcalc.xyz/keto-calculator',
+    url: './',
     siteName: 'HealthCheck',
-    locale: 'en_US',
     type: 'website',
   },
   twitter: {

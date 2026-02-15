@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description: 'Estimate VO2 max using the Rockport 1-mile walk test formula.',
   keywords: 'VO2 max calculator, rockport walk test, cardio fitness, oxygen uptake, fitness test',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/vo2-max',
+    canonical: './',
   },
   openGraph: {
     title: 'VO2 Max Calculator | HealthCheck',
     description: 'Estimate VO2 max using the Rockport 1-mile walk test formula.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/vo2-max',
+    url: './',
     images: [
       {
         url: '/images/calculators/vo2-max-calculator.jpg',

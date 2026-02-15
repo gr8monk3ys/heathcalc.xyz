@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Adjusted Body Weight Calculator | HealthCheck',
   description: 'Estimate adjusted body weight using height and current weight.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/adjusted-body-weight',
+    canonical: './',
   },
   openGraph: {
     title: 'Adjusted Body Weight Calculator | HealthCheck',
     description: 'Estimate adjusted body weight using height and current weight.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/adjusted-body-weight',
+    url: './',
     images: [
       {
         url: '/images/calculators/adjusted-body-weight-calculator.jpg',

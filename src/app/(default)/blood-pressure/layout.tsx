@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'blood pressure calculator, systolic, diastolic, hypertension, elevated blood pressure, blood pressure categories',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/blood-pressure',
+    canonical: './',
   },
   openGraph: {
     title: 'Blood Pressure Calculator | HealthCheck',
     description:
       'Check your blood pressure category using systolic and diastolic readings. Understand normal, elevated, and hypertension ranges.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/blood-pressure',
+    url: './',
     images: [
       {
         url: '/images/calculators/blood-pressure-calculator.jpg',

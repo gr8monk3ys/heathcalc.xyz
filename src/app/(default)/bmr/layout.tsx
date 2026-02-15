@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'BMR calculator, basal metabolic rate, Mifflin-St Jeor, Katch-McArdle, calories at rest',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/bmr',
+    canonical: './',
   },
   openGraph: {
     title: 'BMR Calculator | HealthCheck',
     description:
       'Calculate your basal metabolic rate using popular formulas like Mifflin-St Jeor and Katch-McArdle.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/bmr',
+    url: './',
     images: [
       {
         url: '/images/calculators/bmr-calculator.jpg',

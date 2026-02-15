@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'caffeine calculator, daily caffeine intake, safe caffeine limit, pre-workout caffeine, coffee caffeine, caffeine metabolism, caffeine sensitivity',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/caffeine-calculator',
+    canonical: './',
   },
   openGraph: {
     title: 'Caffeine Intake Calculator | HealthCheck',
     description:
       'Calculate your daily caffeine intake, check safe limits, and get personalized pre-workout dose recommendations based on your body weight and sensitivity.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/caffeine-calculator',
+    url: './',
     images: [
       {
         url: '/images/calculators/caffeine-calculator.jpg',

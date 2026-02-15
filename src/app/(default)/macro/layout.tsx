@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'macro calculator, macronutrient calculator, protein calculator, carbs calculator, fat calculator, IIFYM calculator, diet calculator, nutrition calculator, fitness macros',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/macro',
+    canonical: './',
   },
   openGraph: {
     title: 'Macro Calculator | Calculate Daily Protein, Carbs & Fat | HealthCheck',
     description:
       'Calculate your optimal daily macronutrient intake for weight loss, maintenance, or muscle gain. Get personalized protein, carbs, and fat targets based on your goals.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/macro',
+    url: './',
     images: [
       {
         url: '/images/calculators/macro-calculator.jpg',

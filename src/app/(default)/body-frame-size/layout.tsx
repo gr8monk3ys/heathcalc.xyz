@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Body Frame Size Calculator | HealthCheck',
   description: 'Determine body frame size using height and wrist circumference.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/body-frame-size',
+    canonical: './',
   },
   openGraph: {
     title: 'Body Frame Size Calculator | HealthCheck',
     description: 'Determine body frame size using height and wrist circumference.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/body-frame-size',
+    url: './',
     images: [
       {
         url: '/images/calculators/body-frame-size-calculator.jpg',

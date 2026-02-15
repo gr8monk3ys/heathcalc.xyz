@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Steps to Miles Calculator | HealthCheck',
   description: 'Convert daily steps into miles or kilometers.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/steps-to-miles',
+    canonical: './',
   },
   openGraph: {
     title: 'Steps to Miles Calculator | HealthCheck',
     description: 'Convert daily steps into miles or kilometers.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/steps-to-miles',
+    url: './',
     images: [
       {
         url: '/images/calculators/steps-to-miles-calculator.jpg',

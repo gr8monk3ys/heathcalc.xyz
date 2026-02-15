@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description: 'Calculate your running pace per mile or kilometer plus average speed.',
   keywords: 'running pace calculator, pace per mile, pace per km, running speed, race pace',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/running-pace',
+    canonical: './',
   },
   openGraph: {
     title: 'Running Pace Calculator | HealthCheck',
     description: 'Calculate your running pace per mile or kilometer plus average speed.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/running-pace',
+    url: './',
     images: [
       {
         url: '/images/calculators/running-pace-calculator.jpg',

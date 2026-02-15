@@ -34,12 +34,12 @@ export async function generateMetadata({ params }: CalculatorDetailPageProps): P
     title: `${calculator.title} | HealthCheck`,
     description: calculator.detail?.intro || calculator.description,
     alternates: {
-      canonical: `https://www.healthcalc.xyz/calculator/${calculator.slug}`,
+      canonical: './',
     },
     openGraph: {
       title: `${calculator.title} | HealthCheck`,
       description: calculator.detail?.intro || calculator.description,
-      url: `https://www.healthcalc.xyz/calculator/${calculator.slug}`,
+      url: './',
       images: [
         {
           url: calculator.image,

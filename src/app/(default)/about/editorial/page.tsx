@@ -8,15 +8,14 @@ export const metadata: Metadata = {
   description:
     'Learn how HealthCheck researches, develops, and reviews health calculator tools and content. Our editorial process ensures accuracy and trustworthiness.',
   alternates: {
-    canonical: '/about/editorial',
+    canonical: './',
   },
   openGraph: {
     title: 'Editorial Process | HealthCheck',
     description:
       'Learn how HealthCheck researches, develops, and reviews health calculator tools and content.',
-    url: 'https://www.healthcalc.xyz/about/editorial',
+    url: './',
     siteName: 'HealthCheck',
-    locale: 'en_US',
     type: 'website',
   },
 };

@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description: 'Find ideal bedtimes or wake times based on 90-minute sleep cycles.',
   keywords: 'sleep calculator, sleep cycles, bedtime calculator, wake time calculator',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/sleep',
+    canonical: './',
   },
   openGraph: {
     title: 'Sleep Calculator | HealthCheck',
     description: 'Find ideal bedtimes or wake times based on 90-minute sleep cycles.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/sleep',
+    url: './',
     images: [
       {
         url: '/images/calculators/sleep-calculator.jpg',

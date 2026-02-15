@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Carb Intake Calculator | HealthCheck',
   description: 'Calculate daily carbohydrate intake from calories or targets.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/carb-intake',
+    canonical: './',
   },
   openGraph: {
     title: 'Carb Intake Calculator | HealthCheck',
     description: 'Calculate daily carbohydrate intake from calories or targets.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/carb-intake',
+    url: './',
     images: [
       {
         url: '/images/calculators/carb-intake-calculator.jpg',

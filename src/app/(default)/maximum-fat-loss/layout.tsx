@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   keywords:
     'maximum fat loss calculator, optimal calorie deficit, fat loss calculator, muscle preservation, cutting calculator',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/maximum-fat-loss',
+    canonical: './',
   },
   openGraph: {
     title: 'Maximum Fat Loss Calculator | HealthCheck',
     description: 'Calculate optimal cutting calories to maximize fat loss while preserving muscle.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/maximum-fat-loss',
+    url: './',
     images: [
       {
         url: '/images/calculators/maximum-fat-loss-calculator.jpg',

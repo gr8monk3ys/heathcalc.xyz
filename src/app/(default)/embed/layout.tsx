@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'embed calculator, free health calculator widget, BMI calculator embed, TDEE widget, website calculator, iframe health tools',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/embed',
+    canonical: './',
   },
   openGraph: {
     title: 'Embed Free Health Calculators on Your Website | HealthCheck',
     description:
       'Add free, accurate health calculators to your website. Embed BMI, TDEE, Body Fat, and Calorie Deficit calculators with a simple iframe code snippet.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/embed',
+    url: './',
   },
   twitter: {
     card: 'summary_large_image',

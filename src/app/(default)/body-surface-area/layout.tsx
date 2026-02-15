@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Body Surface Area Calculator | HealthCheck',
   description: 'Calculate body surface area using height and weight.',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/body-surface-area',
+    canonical: './',
   },
   openGraph: {
     title: 'Body Surface Area Calculator | HealthCheck',
     description: 'Calculate body surface area using height and weight.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/body-surface-area',
+    url: './',
     images: [
       {
         url: '/images/calculators/body-surface-area-calculator.jpg',

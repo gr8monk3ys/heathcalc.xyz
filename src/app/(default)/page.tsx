@@ -9,15 +9,14 @@ export const metadata = {
   keywords:
     'body fat calculator, BMI calculator, TDEE calculator, calorie deficit calculator, weight loss calculator, fitness calculators, health calculators, waist-to-hip ratio, ABSI calculator',
   alternates: {
-    canonical: '/',
+    canonical: './',
   },
   openGraph: {
     title: 'HealthCheck - Free Body Fat, BMI, TDEE Calculators',
     description:
       'Free, accurate calculators for body fat percentage, BMI, TDEE, calorie deficit, and more. Evidence-based tools to help you achieve your health goals.',
-    url: 'https://www.healthcalc.xyz/',
+    url: './',
     siteName: 'HealthCheck',
-    locale: 'en_US',
     type: 'website',
   },
 };

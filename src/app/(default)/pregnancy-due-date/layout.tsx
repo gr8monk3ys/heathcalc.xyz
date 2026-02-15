@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'pregnancy due date calculator, due date, last menstrual period, conception date, gestational age',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/pregnancy-due-date',
+    canonical: './',
   },
   openGraph: {
     title: 'Pregnancy Due Date Calculator | HealthCheck',
     description:
       'Estimate your pregnancy due date based on last menstrual period or conception date.',
     type: 'website',
-    url: 'https://www.healthcalc.xyz/pregnancy-due-date',
+    url: './',
     images: [
       {
         url: '/images/calculators/pregnancy-due-date-calculator.jpg',

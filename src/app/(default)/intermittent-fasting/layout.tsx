@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: 'Intermittent Fasting Calculator | Personalized IF Schedule',
     description:
       'Calculate your optimal intermittent fasting schedule. Get personalized eating windows, meal timing, and nutrition targets for 16:8, 18:6, OMAD, and other IF protocols.',
-    url: 'https://www.healthcalc.xyz/intermittent-fasting',
+    url: './',
     type: 'website',
     images: [
       {
-        url: 'https://www.healthcalc.xyz/og-intermittent-fasting.png',
+        url: './',
         width: 1200,
         height: 630,
         alt: 'Intermittent Fasting Calculator',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ['https://www.healthcalc.xyz/og-intermittent-fasting.png'],
   },
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/intermittent-fasting',
+    canonical: './',
   },
 };
 

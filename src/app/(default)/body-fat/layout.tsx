@@ -8,15 +8,14 @@ export const metadata: Metadata = {
   keywords:
     'body fat calculator, body fat percentage, navy method, body composition, fat mass, lean mass, body fat measurement, healthy body fat, body fat categories, fitness calculator',
   alternates: {
-    canonical: 'https://www.healthcalc.xyz/body-fat',
+    canonical: './',
   },
   openGraph: {
     title: 'Body Fat Calculator | Calculate Your Body Fat Percentage',
     description:
       'Estimate body fat percentage with Navy, BMI, or manual inputs and see fat vs lean mass.',
-    url: 'https://www.healthcalc.xyz/body-fat',
+    url: './',
     siteName: 'HealthCheck',
-    locale: 'en_US',
     type: 'website',
     images: [
       {
