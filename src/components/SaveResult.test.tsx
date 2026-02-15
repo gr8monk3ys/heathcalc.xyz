@@ -2,6 +2,47 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SaveResult, { SavedResultsList } from './SaveResult';
 
+vi.mock('@/context/LocaleContext', () => ({
+  useLocale: () => ({
+    locale: 'en',
+    setLocale: vi.fn(),
+    localizePath: (path: string) => path,
+    t: (key: string) => {
+      const messages: Record<string, string> = {
+        'savedResults.button.saved': 'Saved',
+        'savedResults.button.save': 'Save Result',
+        'savedResults.button.loginToSave': 'Log in to Save',
+        'savedResults.helper.loginInstruction':
+          'Sign in from the top-right account button to save and sync results on this browser.',
+        'savedResults.confirm.clearAll': 'Are you sure you want to clear all saved results?',
+        'savedResults.list.emptyTitle': 'Saved Results',
+        'savedResults.list.emptyBody': "You haven't saved any calculator results yet.",
+        'savedResults.list.title': 'Saved Results',
+        'savedResults.list.clearAll': 'Clear All',
+        'savedResults.list.deleteAria': 'Delete result',
+        'savedResults.list.goToCalculator': 'Go to calculator',
+      };
+      return messages[key] ?? key;
+    },
+  }),
+}));
+
+vi.mock('next/link', () => ({
+  default: ({
+    children,
+    href,
+    className,
+  }: {
+    children: React.ReactNode;
+    href: string;
+    className?: string;
+  }) => (
+    <a href={href} className={className}>
+      {children}
+    </a>
+  ),
+}));
+
 // Mutable mock state that tests can override
 const mockState = {
   saveResult: vi.fn(),
@@ -52,7 +93,7 @@ describe('SaveResult', () => {
     it('should render Saved button when already saved', () => {
       mockState.isResultSaved.mockReturnValue(true);
       render(<SaveResult {...defaultProps} />);
-      expect(screen.getByRole('button', { name: /remove saved result/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /delete result/i })).toBeInTheDocument();
     });
 
     it('should apply custom className', () => {
@@ -74,7 +115,7 @@ describe('SaveResult', () => {
     it('should call removeResultByData on saved button click', () => {
       mockState.isResultSaved.mockReturnValue(true);
       render(<SaveResult {...defaultProps} />);
-      fireEvent.click(screen.getByRole('button', { name: /remove saved result/i }));
+      fireEvent.click(screen.getByRole('button', { name: /delete result/i }));
       expect(mockState.removeResultByData).toHaveBeenCalledWith('bmi', {
         bmi: 22.5,
         category: 'Normal',

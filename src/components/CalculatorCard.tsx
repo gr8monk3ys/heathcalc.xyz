@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useLocale } from '@/context/LocaleContext';
 
 interface CalculatorCardProps {
   title: string;
@@ -19,8 +20,9 @@ interface CalculatorCardProps {
  * @returns A card component with a link to the calculator
  */
 function CalculatorCard({ title, description, path, icon }: CalculatorCardProps) {
+  const { localizePath, t } = useLocale();
   return (
-    <Link href={path} className="group block h-full">
+    <Link href={localizePath(path)} className="group block h-full">
       <div className="glass-panel-strong h-full rounded-3xl p-6 transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-accent/40 group-hover:shadow-[0_18px_35px_rgba(66,72,182,0.28)] dark:group-hover:shadow-[0_20px_38px_rgba(3,5,22,0.55)]">
         <div className="flex items-start mb-4">
           <div className="mr-4 rounded-2xl bg-gradient-to-br from-accent/20 via-accent/12 to-transparent p-2.5 text-accent transition-transform duration-300 group-hover:scale-110">
@@ -29,7 +31,9 @@ function CalculatorCard({ title, description, path, icon }: CalculatorCardProps)
           <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
         </div>
         <p className="mb-4 text-slate-700 dark:text-slate-300">{description}</p>
-        <div className="font-medium text-accent">Use Calculator →</div>
+        <div className="font-medium text-accent">
+          {t('calculatorCard.cta')} <span aria-hidden="true">→</span>
+        </div>
       </div>
     </Link>
   );

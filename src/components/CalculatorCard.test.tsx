@@ -7,6 +7,20 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CalculatorCard, { MemoizedCalculatorCard } from './CalculatorCard';
 
+vi.mock('@/context/LocaleContext', () => ({
+  useLocale: () => ({
+    locale: 'en',
+    setLocale: vi.fn(),
+    localizePath: (path: string) => path,
+    t: (key: string) => {
+      const messages: Record<string, string> = {
+        'calculatorCard.cta': 'Use Calculator',
+      };
+      return messages[key] ?? key;
+    },
+  }),
+}));
+
 // Mock next/link to avoid router context issues
 vi.mock('next/link', () => ({
   default: ({
@@ -63,7 +77,8 @@ describe('CalculatorCard', () => {
     it('should render "Use Calculator" call to action', () => {
       render(<CalculatorCard {...defaultProps} />);
 
-      expect(screen.getByText('Use Calculator →')).toBeInTheDocument();
+      expect(screen.getByText(/use calculator/i)).toBeInTheDocument();
+      expect(screen.getByText('→')).toBeInTheDocument();
     });
 
     it('should apply glass panel styling class', () => {

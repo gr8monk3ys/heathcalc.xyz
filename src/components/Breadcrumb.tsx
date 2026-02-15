@@ -24,19 +24,19 @@ interface BreadcrumbProps {
  * Automatically generates breadcrumbs based on the current path
  * Can be customized with specific items if needed
  */
-export default function Breadcrumb({
-  customItems,
-  homeLabel = 'Home',
-  className = '',
-}: BreadcrumbProps) {
+export default function Breadcrumb({ customItems, homeLabel, className = '' }: BreadcrumbProps) {
   const pathname = usePathname();
-  const { localizePath } = useLocale();
+  const { localizePath, t } = useLocale();
+  const resolvedHomeLabel = homeLabel ?? t('breadcrumb.home');
 
   // Generate breadcrumb items based on the current path
   const generateBreadcrumbItems = (): BreadcrumbItem[] => {
     // If custom items are provided, use those
     if (customItems) {
-      return [{ name: homeLabel, path: '/' }, ...customItems];
+      const first = customItems[0];
+      const hasHome =
+        first && typeof first.path === 'string' && (first.path === '/' || first.path === '');
+      return hasHome ? customItems : [{ name: resolvedHomeLabel, path: '/' }, ...customItems];
     }
 
     // Otherwise, generate from the pathname
@@ -44,7 +44,7 @@ export default function Breadcrumb({
     const pathSegments = normalizedPathname.split('/').filter(Boolean);
 
     // Start with home
-    const items: BreadcrumbItem[] = [{ name: homeLabel, path: '/' }];
+    const items: BreadcrumbItem[] = [{ name: resolvedHomeLabel, path: '/' }];
 
     // Add each path segment
     let currentPath = '';
@@ -73,7 +73,7 @@ export default function Breadcrumb({
 
   return (
     <>
-      <nav aria-label="Breadcrumb" className={`text-sm mb-4 ${className}`}>
+      <nav aria-label={t('breadcrumb.aria')} className={`text-sm mb-4 ${className}`}>
         <ol className="flex flex-wrap items-center space-x-1">
           {breadcrumbItems.map((item, index) => (
             <li key={item.path} className="flex items-center">

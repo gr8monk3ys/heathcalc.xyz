@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { clerkEnabled } from '@/utils/auth';
+import { useLocale } from '@/context/LocaleContext';
 
 /**
  * Dynamically loaded Clerk auth controls - client-side only to avoid SSG issues.
@@ -21,19 +22,20 @@ const ClerkAuthControls = clerkEnabled
   : null;
 
 function FallbackAuthControls(): React.JSX.Element {
+  const { t } = useLocale();
   return (
     <div className="flex items-center gap-2">
       <Link
         href="/sign-in"
         className="elevated-pill rounded-full px-4 py-2 text-sm font-semibold text-accent transition-all hover:-translate-y-0.5"
       >
-        Log in
+        {t('auth.login')}
       </Link>
       <Link
         href="/sign-up"
         className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-accent/30 transition-all hover:-translate-y-0.5 hover:bg-accent-dark"
       >
-        Sign up
+        {t('auth.signup')}
       </Link>
     </div>
   );

@@ -18,9 +18,9 @@ interface NewsletterSignupProps {
  * Helps with user engagement and building an audience
  */
 export default function NewsletterSignup({
-  title = 'Subscribe to Our Newsletter',
-  description = 'Get the latest health and fitness tips, calculator updates, and exclusive content delivered to your inbox.',
-  buttonText = 'Subscribe',
+  title,
+  description,
+  buttonText,
   className = '',
   onSubmit,
 }: NewsletterSignupProps) {
@@ -28,14 +28,17 @@ export default function NewsletterSignup({
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const { trackEvent } = useFunnelTracking();
-  const { localizePath } = useLocale();
+  const { localizePath, t } = useLocale();
+  const resolvedTitle = title ?? t('newsletter.title');
+  const resolvedDescription = description ?? t('newsletter.description');
+  const resolvedButtonText = buttonText ?? t('newsletter.button');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Basic email validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setMessage({ text: 'Please enter a valid email address', type: 'error' });
+      setMessage({ text: t('newsletter.validation.invalidEmail'), type: 'error' });
       return;
     }
 
@@ -83,7 +86,7 @@ export default function NewsletterSignup({
       }
     } catch {
       setMessage({
-        text: 'An error occurred. Please try again later.',
+        text: t('newsletter.error.generic'),
         type: 'error',
       });
     } finally {
@@ -93,18 +96,18 @@ export default function NewsletterSignup({
 
   return (
     <div className={`neumorph p-6 rounded-lg ${className}`}>
-      <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p className="text-gray-600 dark:text-gray-400 mb-4">{description}</p>
+      <h2 className="text-xl font-bold mb-2">{resolvedTitle}</h2>
+      <p className="text-gray-600 dark:text-gray-400 mb-4">{resolvedDescription}</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="sr-only">
-            Email address
+            {t('newsletter.emailPlaceholder')}
           </label>
           <input
             id="email"
             type="email"
-            placeholder="Your email address"
+            placeholder={t('newsletter.emailPlaceholder')}
             value={email}
             onChange={e => setEmail(e.target.value)}
             className="ui-input w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
@@ -127,7 +130,7 @@ export default function NewsletterSignup({
           disabled={loading}
           aria-busy={loading}
         >
-          {loading ? 'Subscribing...' : buttonText}
+          {loading ? t('newsletter.status.loading') : resolvedButtonText}
         </button>
       </form>
 
@@ -146,15 +149,15 @@ export default function NewsletterSignup({
       )}
 
       <p id="newsletter-privacy-note" className="text-xs text-gray-500 dark:text-gray-400 mt-4">
-        By subscribing, you agree to our{' '}
+        {t('newsletter.privacy.prefix')}{' '}
         <Link href={localizePath('/privacy')} className="text-accent hover:underline">
-          Privacy Policy
+          {t('newsletter.privacy.privacyPolicy')}
         </Link>{' '}
-        and{' '}
+        {t('newsletter.privacy.and')}{' '}
         <Link href={localizePath('/terms')} className="text-accent hover:underline">
-          Terms of Service
+          {t('newsletter.privacy.terms')}
         </Link>
-        . We'll never share your email with anyone else.
+        {t('newsletter.privacy.suffix')}
       </p>
     </div>
   );

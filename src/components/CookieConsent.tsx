@@ -10,6 +10,7 @@ import React, {
 } from 'react';
 import { usePreferences } from '@/context/PreferencesContext';
 import { getAdSensePublisherId, getAdSenseScriptSrc } from '@/lib/adsense';
+import { useLocale } from '@/context/LocaleContext';
 
 /* -------------------------------------------------------------------------- */
 /*  Types                                                                     */
@@ -271,6 +272,7 @@ function CookieConsentBanner({
   initialAnalytics: boolean;
   initialAdvertising: boolean;
 }): React.JSX.Element {
+  const { t } = useLocale();
   const [expanded, setExpanded] = useState(false);
   const [analyticsChecked, setAnalyticsChecked] = useState(initialAnalytics);
   const [advertisingChecked, setAdvertisingChecked] = useState(initialAdvertising);
@@ -279,18 +281,14 @@ function CookieConsentBanner({
     <div
       role="dialog"
       aria-modal="false"
-      aria-label="Cookie consent"
+      aria-label={t('cookie.banner.aria')}
       className="fixed inset-x-0 bottom-0 z-[9999] p-4 animate-slide-in-up"
     >
       <div className="neumorph mx-auto max-w-3xl p-6">
         {/* Main message */}
         <div className="mb-4">
-          <h2 className="text-base font-bold mb-1">We value your privacy</h2>
-          <p className="text-sm opacity-80 leading-relaxed">
-            We use cookies to improve your experience, analyse site traffic, and serve personalised
-            ads. Essential cookies are always active. You can choose which optional cookies to allow
-            below.
-          </p>
+          <h2 className="text-base font-bold mb-1">{t('cookie.banner.title')}</h2>
+          <p className="text-sm opacity-80 leading-relaxed">{t('cookie.banner.body')}</p>
         </div>
 
         {/* Expandable preferences panel */}
@@ -301,8 +299,8 @@ function CookieConsentBanner({
               checked={true}
               disabled={true}
               onChange={() => {}}
-              label="Essential"
-              description="Required for the site to function. Cannot be disabled."
+              label={t('cookie.option.essential.label')}
+              description={t('cookie.option.essential.desc')}
             />
 
             <div className="border-t border-current/10" />
@@ -311,8 +309,8 @@ function CookieConsentBanner({
               id="cookie-analytics"
               checked={analyticsChecked}
               onChange={setAnalyticsChecked}
-              label="Analytics"
-              description="Help us understand how visitors interact with the site via Google Analytics."
+              label={t('cookie.option.analytics.label')}
+              description={t('cookie.option.analytics.desc')}
             />
 
             <div className="border-t border-current/10" />
@@ -321,8 +319,8 @@ function CookieConsentBanner({
               id="cookie-advertising"
               checked={advertisingChecked}
               onChange={setAdvertisingChecked}
-              label="Advertising"
-              description="Allow personalised ads through Google AdSense (TCF 2.2 compliant)."
+              label={t('cookie.option.advertising.label')}
+              description={t('cookie.option.advertising.desc')}
             />
           </div>
         )}
@@ -337,7 +335,7 @@ function CookieConsentBanner({
                        hover:opacity-90 focus-visible:ring-2 focus-visible:ring-accent
                        focus-visible:ring-offset-2 transition-opacity order-1"
           >
-            Accept All
+            {t('cookie.action.acceptAll')}
           </button>
 
           {expanded ? (
@@ -348,7 +346,7 @@ function CookieConsentBanner({
                          focus-visible:ring-2 focus-visible:ring-accent
                          focus-visible:ring-offset-2 order-2"
             >
-              Save Preferences
+              {t('cookie.action.savePreferences')}
             </button>
           ) : (
             <button
@@ -358,7 +356,7 @@ function CookieConsentBanner({
                          focus-visible:ring-2 focus-visible:ring-accent
                          focus-visible:ring-offset-2 order-2"
             >
-              Manage Preferences
+              {t('cookie.action.managePreferences')}
             </button>
           )}
 
@@ -371,15 +369,12 @@ function CookieConsentBanner({
                        focus-visible:ring-offset-2 transition-opacity order-3
                        sm:ml-auto"
           >
-            Reject Non-Essential
+            {t('cookie.action.rejectNonEssential')}
           </button>
         </div>
 
         {/* TCF 2.2 compliance note */}
-        <p className="mt-3 text-[11px] opacity-50 leading-snug">
-          This consent mechanism is compliant with IAB Transparency and Consent Framework (TCF)
-          v2.2. You can change your preferences at any time from the footer.
-        </p>
+        <p className="mt-3 text-[11px] opacity-50 leading-snug">{t('cookie.note.tcf')}</p>
       </div>
     </div>
   );

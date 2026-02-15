@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { useSavedResultsManager } from '@/hooks/useSavedResultsManager';
+import Link from 'next/link';
+import { useLocale } from '@/context/LocaleContext';
 
 interface SaveResultProps {
   calculatorType: string;
@@ -23,6 +25,7 @@ export default function SaveResult({
   // Rule: Move localStorage logic to dedicated hooks/utilities
   const { saveResult, removeResultByData, isResultSaved, canSaveResults, message, showMessage } =
     useSavedResultsManager();
+  const { t } = useLocale();
 
   // Check if this result is already saved
   const isSaved = isResultSaved(calculatorType, data);
@@ -42,28 +45,30 @@ export default function SaveResult({
       {isSaved ? (
         <button
           onClick={handleRemoveResult}
-          className="flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors"
-          aria-label="Remove saved result"
+          type="button"
+          className="neumorph-btn flex items-center gap-2 px-4 py-2 text-sm font-semibold text-accent transition-all hover:-translate-y-0.5"
+          aria-label={t('savedResults.list.deleteAria')}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-2"
+            className="h-5 w-5"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
             <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 10h-2v2h2v-2zm-2-8h8v2h-8v-2zm10 0h2v2h-2v-2zm2 8h-2v2h2v-2zm-2-4h-8v2h8v-2zm-10 0h-2v2h2v-2zm10 8h-8v2h8v-2zm-10 0h-2v2h2v-2z" />
           </svg>
-          Saved
+          {t('savedResults.button.saved')}
         </button>
       ) : (
         <button
           onClick={handleSaveResult}
-          className="flex items-center px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors disabled:cursor-not-allowed disabled:bg-gray-400"
-          aria-label="Save result"
+          type="button"
+          className="neumorph-btn flex items-center gap-2 bg-accent px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-accent/25 transition-all hover:-translate-y-0.5 hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-70"
+          aria-label={t('savedResults.button.save')}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 mr-2"
+            className="h-5 w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -75,14 +80,12 @@ export default function SaveResult({
               d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
             />
           </svg>
-          {canSaveResults ? 'Save Result' : 'Log in to Save'}
+          {canSaveResults ? t('savedResults.button.save') : t('savedResults.button.loginToSave')}
         </button>
       )}
 
       {!canSaveResults && (
-        <p className="mt-2 text-xs text-gray-600">
-          Sign in from the top-right account button to save and sync results on this browser.
-        </p>
+        <p className="mt-2 text-xs text-gray-600">{t('savedResults.helper.loginInstruction')}</p>
       )}
 
       {showMessage && (
@@ -100,12 +103,13 @@ export default function SaveResult({
 export function SavedResultsList({ className = '' }: { className?: string }) {
   // Rule: Move localStorage logic to dedicated hooks/utilities
   const { savedResults, clearAllResults, removeResult, formatDate } = useSavedResultsManager();
+  const { localizePath, t } = useLocale();
 
   if (savedResults.length === 0) {
     return (
       <div className={`neumorph p-6 rounded-lg ${className}`}>
-        <h2 className="text-xl font-bold mb-4">Saved Results</h2>
-        <p>You haven't saved any calculator results yet.</p>
+        <h2 className="text-xl font-bold mb-4">{t('savedResults.list.emptyTitle')}</h2>
+        <p>{t('savedResults.list.emptyBody')}</p>
       </div>
     );
   }
@@ -113,9 +117,12 @@ export function SavedResultsList({ className = '' }: { className?: string }) {
   return (
     <div className={`neumorph p-6 rounded-lg ${className}`}>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">Saved Results</h2>
-        <button onClick={clearAllResults} className="text-sm text-red-600 hover:text-red-800">
-          Clear All
+        <h2 className="text-xl font-bold">{t('savedResults.list.title')}</h2>
+        <button
+          onClick={clearAllResults}
+          className="text-sm font-semibold text-danger hover:opacity-90"
+        >
+          {t('savedResults.list.clearAll')}
         </button>
       </div>
 
@@ -130,7 +137,7 @@ export function SavedResultsList({ className = '' }: { className?: string }) {
               <button
                 onClick={() => removeResult(result.id)}
                 className="text-gray-400 hover:text-red-600"
-                aria-label="Delete result"
+                aria-label={t('savedResults.list.deleteAria')}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -166,9 +173,12 @@ export function SavedResultsList({ className = '' }: { className?: string }) {
             </div>
 
             <div className="mt-3">
-              <a href={`/${result.calculatorType}`} className="text-accent text-sm hover:underline">
-                Go to calculator →
-              </a>
+              <Link
+                href={localizePath(`/${result.calculatorType}`)}
+                className="text-accent text-sm font-medium hover:underline"
+              >
+                {t('savedResults.list.goToCalculator')} <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         ))}

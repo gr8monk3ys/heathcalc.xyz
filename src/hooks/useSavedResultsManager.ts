@@ -6,6 +6,8 @@ import { useSavedResults } from '@/context/SavedResultsContext';
 import { useState } from 'react';
 import { createLogger } from '@/utils/logger';
 import { computeSavedResultKey } from '@/utils/savedResultsKey';
+import { useLocale } from '@/context/LocaleContext';
+import { localeToHtmlLang } from '@/i18n/config';
 
 const logger = createLogger({ component: 'useSavedResultsManager' });
 
@@ -22,6 +24,7 @@ export function useSavedResultsManager() {
     isResultSaved,
     canSaveResults,
   } = useSavedResults();
+  const { locale, t } = useLocale();
 
   const [message, setMessage] = useState<string>('');
   const [showMessage, setShowMessage] = useState<boolean>(false);
@@ -42,22 +45,22 @@ export function useSavedResultsManager() {
       // Check if already saved
       const resultId = computeSavedResultKey(calculatorType, data);
       if (isResultSaved(resultId)) {
-        showNotification('This result is already saved');
+        showNotification(t('savedResults.toast.alreadySaved'));
         return false;
       }
 
       // Save to context (which handles localStorage)
       const didSave = saveResultToContext(calculatorType, calculatorName, data);
       if (!didSave) {
-        showNotification('Sign in required to save results');
+        showNotification(t('savedResults.toast.loginRequired'));
         return false;
       }
 
-      showNotification('Result saved successfully');
+      showNotification(t('savedResults.toast.saved'));
       return true;
     } catch (error) {
       logger.logError('Error saving result', error);
-      showNotification('Error saving result');
+      showNotification(t('savedResults.toast.saveError'));
       return false;
     }
   }
@@ -69,10 +72,10 @@ export function useSavedResultsManager() {
   function removeResult(id: string): void {
     try {
       removeResultFromContext(id);
-      showNotification('Result removed');
+      showNotification(t('savedResults.toast.removed'));
     } catch (error) {
       logger.logError('Error removing result', error);
-      showNotification('Error removing result');
+      showNotification(t('savedResults.toast.removeError'));
     }
   }
 
@@ -90,11 +93,11 @@ export function useSavedResultsManager() {
       }
 
       removeResultFromContext(resultId);
-      showNotification('Result removed');
+      showNotification(t('savedResults.toast.removed'));
       return true;
     } catch (error) {
       logger.logError('Error removing result', error);
-      showNotification('Error removing result');
+      showNotification(t('savedResults.toast.removeError'));
       return false;
     }
   }
@@ -115,9 +118,9 @@ export function useSavedResultsManager() {
    * @returns True if cleared successfully
    */
   function clearAllResultsWithConfirmation(): boolean {
-    if (window.confirm('Are you sure you want to clear all saved results?')) {
+    if (window.confirm(t('savedResults.confirm.clearAll'))) {
       clearAllResults();
-      showNotification('All results cleared');
+      showNotification(t('savedResults.toast.cleared'));
       return true;
     }
     return false;
@@ -130,11 +133,15 @@ export function useSavedResultsManager() {
    */
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+    try {
+      return new Intl.DateTimeFormat(localeToHtmlLang[locale], {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }).format(date);
+    } catch {
+      return date.toISOString().slice(0, 10);
+    }
   }
 
   /**
