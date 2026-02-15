@@ -167,6 +167,7 @@ export function createHeightField(heightState: HeightState, error?: string, labe
   return {
     name: 'height',
     label,
+    labelKey: 'form.label.height' as const,
     type: 'number' as const,
     value: heightState.value,
     onChange: heightState.setValue,
@@ -185,6 +186,7 @@ export function createWeightField(weightState: WeightState, error?: string, labe
   return {
     name: 'weight',
     label,
+    labelKey: 'form.label.weight' as const,
     type: 'number' as const,
     value: weightState.value,
     onChange: weightState.setValue,

@@ -4,6 +4,7 @@ import React, { memo, useState } from 'react';
 import { MedicalDisclaimer } from '@/components/MedicalDisclaimer';
 import { EmbedCodeGenerator } from '@/components/EmbedCodeGenerator';
 import { useLocale } from '@/context/LocaleContext';
+import type { MessageKey } from '@/i18n/messages';
 
 // Discriminated union for type-safe form fields
 type NumberFieldValue = number | '';
@@ -11,12 +12,14 @@ type NumberFieldValue = number | '';
 interface BaseFormField {
   name: string;
   label: string;
+  labelKey?: MessageKey;
   error?: string;
 }
 
 interface NumberFormField extends BaseFormField {
   type: 'number';
   placeholder?: string;
+  placeholderKey?: MessageKey;
   value: NumberFieldValue;
   /**
    * onChange handler that receives the new value.
@@ -115,12 +118,17 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
   const resolvedResetButtonText = resetButtonText ?? t('calculatorForm.reset');
   const isEmbeddable = calculatorSlug && EMBEDDABLE_SLUGS.has(calculatorSlug);
   const renderField = (field: FormField) => {
+    const resolvedLabel = field.labelKey ? t(field.labelKey) : field.label;
+
     switch (field.type) {
-      case 'number':
+      case 'number': {
+        const resolvedPlaceholder = field.placeholderKey
+          ? t(field.placeholderKey)
+          : field.placeholder;
         return (
           <div key={field.name}>
             <label htmlFor={field.name} className="block text-sm font-medium mb-1">
-              {field.label}
+              {resolvedLabel}
             </label>
             {field.unitToggle ? (
               <div className="flex">
@@ -134,7 +142,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                   className={`w-full p-3 neumorph-inset rounded-l-lg focus:outline-none focus:ring-2 focus:ring-accent ${
                     field.error ? 'border border-red-500' : ''
                   }`}
-                  placeholder={field.placeholder}
+                  placeholder={resolvedPlaceholder}
                   step={field.step || '0.1'}
                   min={field.min}
                   max={field.max}
@@ -146,7 +154,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                   onClick={field.unitToggle}
                   className="px-4 neumorph rounded-r-lg hover:shadow-neumorph-inset transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                   aria-label={formatTemplate(t('calculatorForm.unitToggleAriaTemplate'), {
-                    field: field.label,
+                    field: resolvedLabel,
                     unit: field.unit ?? '',
                   })}
                 >
@@ -164,7 +172,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
                 className={`w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent ${
                   field.error ? 'border border-red-500' : ''
                 }`}
-                placeholder={field.placeholder}
+                placeholder={resolvedPlaceholder}
                 step={field.step || '0.1'}
                 min={field.min}
                 max={field.max}
@@ -184,11 +192,12 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
             )}
           </div>
         );
+      }
 
       case 'radio':
         return (
           <div key={field.name}>
-            <label className="block text-sm font-medium mb-1">{field.label}</label>
+            <label className="block text-sm font-medium mb-1">{resolvedLabel}</label>
             <div className="flex space-x-4">
               {field.options?.map(option => (
                 <label key={option.value} className="flex items-center">
@@ -210,7 +219,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
         return (
           <div key={field.name}>
             <label htmlFor={field.name} className="block text-sm font-medium mb-1">
-              {field.label}
+              {resolvedLabel}
             </label>
             <select
               id={field.name}
@@ -236,7 +245,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
         return (
           <div key={field.name}>
             <label htmlFor={field.name} className="block text-sm font-medium mb-1">
-              {field.label}
+              {resolvedLabel}
             </label>
             <input
               type="date"
@@ -268,7 +277,7 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
         return (
           <div key={field.name}>
             <label htmlFor={field.name} className="block text-sm font-medium mb-1">
-              {field.label}
+              {resolvedLabel}
             </label>
             <input
               type="time"
