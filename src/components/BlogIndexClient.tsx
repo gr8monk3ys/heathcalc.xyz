@@ -1,10 +1,15 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
 import type { SupportedLocale } from '@/i18n/config';
+import {
+  getCategoryType,
+  getCategoryBadgeLabel,
+  getCategorySortPriority,
+} from '@/constants/blogCategories';
 
 type BlogStrings = {
   searchPlaceholder: string;
@@ -18,6 +23,8 @@ type BlogStrings = {
   emptyTitle: string;
   emptyBody: string;
   clearAllFilters: string;
+  guidesTitle: string;
+  reviewsTitle: string;
 };
 
 function getBlogStrings(locale: SupportedLocale): BlogStrings {
@@ -35,6 +42,8 @@ function getBlogStrings(locale: SupportedLocale): BlogStrings {
         emptyTitle: 'No se encontraron artículos',
         emptyBody: 'Prueba ajustando tu búsqueda o seleccionando otra categoría.',
         clearAllFilters: 'Limpiar filtros',
+        guidesTitle: 'Guías e Investigación',
+        reviewsTitle: 'Reseñas de Productos',
       };
     case 'fr':
       return {
@@ -49,6 +58,8 @@ function getBlogStrings(locale: SupportedLocale): BlogStrings {
         emptyTitle: 'Aucun article trouvé',
         emptyBody: 'Essayez de modifier votre recherche ou de choisir une autre catégorie.',
         clearAllFilters: 'Réinitialiser les filtres',
+        guidesTitle: 'Guides et Recherche',
+        reviewsTitle: 'Avis sur les Produits',
       };
     case 'de':
       return {
@@ -63,6 +74,8 @@ function getBlogStrings(locale: SupportedLocale): BlogStrings {
         emptyTitle: 'Keine Artikel gefunden',
         emptyBody: 'Versuchen Sie eine andere Suche oder wählen Sie eine andere Kategorie.',
         clearAllFilters: 'Alle Filter zurücksetzen',
+        guidesTitle: 'Ratgeber und Forschung',
+        reviewsTitle: 'Produktbewertungen',
       };
     case 'pt':
       return {
@@ -77,6 +90,8 @@ function getBlogStrings(locale: SupportedLocale): BlogStrings {
         emptyTitle: 'Nenhum artigo encontrado',
         emptyBody: 'Tente ajustar a busca ou selecionar outra categoria.',
         clearAllFilters: 'Limpar filtros',
+        guidesTitle: 'Guias e Pesquisa',
+        reviewsTitle: 'Avaliações de Produtos',
       };
     case 'zh':
       return {
@@ -91,6 +106,8 @@ function getBlogStrings(locale: SupportedLocale): BlogStrings {
         emptyTitle: '未找到文章',
         emptyBody: '请调整搜索关键词或选择其他分类。',
         clearAllFilters: '清除筛选',
+        guidesTitle: '指南与研究',
+        reviewsTitle: '产品评测',
       };
     case 'en':
     default:
@@ -106,6 +123,8 @@ function getBlogStrings(locale: SupportedLocale): BlogStrings {
         emptyTitle: 'No articles found',
         emptyBody: 'Try adjusting your search or selecting a different category.',
         clearAllFilters: 'Clear all filters',
+        guidesTitle: 'Guides & Research',
+        reviewsTitle: 'Product Reviews',
       };
   }
 }
@@ -127,6 +146,12 @@ interface BlogIndexClientProps {
   posts: BlogPost[];
 }
 
+const TYPE_BADGE_STYLES: Record<string, string> = {
+  Guide: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+  Review: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  Comparison: 'bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400',
+};
+
 function PostCard({
   post,
   priority = false,
@@ -137,6 +162,9 @@ function PostCard({
   large?: boolean;
 }): React.ReactElement {
   const { localizePath } = useLocale();
+  const postType = getCategoryType(post.category);
+  const badgeLabel = getCategoryBadgeLabel(postType);
+  const badgeStyle = TYPE_BADGE_STYLES[badgeLabel] || TYPE_BADGE_STYLES.Guide;
 
   return (
     <Link
@@ -158,9 +186,16 @@ function PostCard({
         />
       </div>
       <div className="p-5">
-        <span className="inline-block bg-accent/10 text-accent text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2">
-          {post.category}
-        </span>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-block bg-accent/10 text-accent text-xs font-semibold px-2.5 py-0.5 rounded-full">
+            {post.category}
+          </span>
+          <span
+            className={`inline-block text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${badgeStyle}`}
+          >
+            {badgeLabel}
+          </span>
+        </div>
         <h3 className={`font-bold mb-1.5 leading-snug ${large ? 'text-xl' : 'text-lg'}`}>
           {post.title}
         </h3>
@@ -182,15 +217,41 @@ function PostCard({
 export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.ReactElement {
   const { locale } = useLocale();
   const strings = getBlogStrings(locale);
+  const [inputValue, setInputValue] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState(ALL_CATEGORY);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const handleSearchChange = (value: string): void => {
+    setInputValue(value);
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    debounceRef.current = setTimeout(() => {
+      setSearchQuery(value);
+    }, 300);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, []);
+
+  // Sort categories: educational first, then comparisons, then reviews
   const categories = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const post of posts) {
       counts[post.category] = (counts[post.category] || 0) + 1;
     }
-    return Object.entries(counts).sort(([a], [b]) => a.localeCompare(b));
+    return Object.entries(counts).sort(([a], [b]) => {
+      const priorityA = getCategorySortPriority(a);
+      const priorityB = getCategorySortPriority(b);
+      if (priorityA !== priorityB) return priorityA - priorityB;
+      return a.localeCompare(b);
+    });
   }, [posts]);
 
   const featuredPosts = useMemo(() => {
@@ -210,13 +271,33 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
     });
   }, [posts, activeCategory, searchQuery]);
 
-  const showFeatured = activeCategory === ALL_CATEGORY && !searchQuery.trim();
+  const showFeatured = activeCategory === ALL_CATEGORY && !searchQuery.trim() && !inputValue.trim();
 
   const mainPosts = useMemo(() => {
     if (!showFeatured) return filteredPosts;
     const featuredSlugs = new Set(featuredPosts.map(p => p.slug));
     return filteredPosts.filter(p => !featuredSlugs.has(p.slug));
   }, [filteredPosts, featuredPosts, showFeatured]);
+
+  // Split posts into guides (educational) and reviews/comparisons for sectioned view
+  const showSectioned =
+    activeCategory === ALL_CATEGORY && !searchQuery.trim() && !inputValue.trim();
+
+  const { guidePosts, reviewPosts } = useMemo(() => {
+    const guides: BlogPost[] = [];
+    const reviews: BlogPost[] = [];
+    const featuredSlugs = new Set(featuredPosts.map(p => p.slug));
+    for (const post of mainPosts) {
+      if (showFeatured && featuredSlugs.has(post.slug)) continue;
+      const type = getCategoryType(post.category);
+      if (type === 'educational') {
+        guides.push(post);
+      } else {
+        reviews.push(post);
+      }
+    }
+    return { guidePosts: guides, reviewPosts: reviews };
+  }, [mainPosts, featuredPosts, showFeatured]);
 
   return (
     <>
@@ -240,15 +321,21 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
           <input
             type="text"
             placeholder={strings.searchPlaceholder}
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
+            value={inputValue}
+            onChange={e => handleSearchChange(e.target.value)}
             className="w-full bg-transparent outline-none text-sm placeholder-slate-400 dark:placeholder-slate-500"
             aria-label={strings.searchAria}
           />
-          {searchQuery && (
+          {inputValue && (
             <button
               type="button"
-              onClick={() => setSearchQuery('')}
+              onClick={() => {
+                setInputValue('');
+                setSearchQuery('');
+                if (debounceRef.current) {
+                  clearTimeout(debounceRef.current);
+                }
+              }}
               className="ml-2 text-gray-400 hover:text-gray-600"
               aria-label={strings.clearSearchAria}
             >
@@ -317,23 +404,83 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
       {/* Results Count */}
       <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
         {strings.resultsCount(mainPosts.length, posts.length)}
-        {searchQuery.trim() && (
+        {inputValue.trim() && (
           <span>
             {' '}
             {strings.resultsForPrefix} &ldquo;
-            <span className="font-medium text-gray-700">{searchQuery.trim()}</span>
+            <span className="font-medium text-gray-700">{inputValue.trim()}</span>
             &rdquo;
           </span>
         )}
       </p>
 
-      {/* Post Grid */}
+      {/* Post Grid - sectioned when showing all, flat when filtered */}
       {mainPosts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {mainPosts.map(post => (
-            <PostCard key={post.slug} post={post} />
-          ))}
-        </div>
+        showSectioned ? (
+          <>
+            {/* Guides & Research section */}
+            {guidePosts.length > 0 && (
+              <section className="mb-10" aria-label={strings.guidesTitle}>
+                <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <svg
+                    className="w-5 h-5 text-emerald-600 dark:text-emerald-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    />
+                  </svg>
+                  {strings.guidesTitle}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {guidePosts.map(post => (
+                    <PostCard key={post.slug} post={post} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Product Reviews section */}
+            {reviewPosts.length > 0 && (
+              <section aria-label={strings.reviewsTitle}>
+                <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <svg
+                    className="w-5 h-5 text-amber-600 dark:text-amber-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                    />
+                  </svg>
+                  {strings.reviewsTitle}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {reviewPosts.map(post => (
+                    <PostCard key={post.slug} post={post} />
+                  ))}
+                </div>
+              </section>
+            )}
+          </>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {mainPosts.map(post => (
+              <PostCard key={post.slug} post={post} />
+            ))}
+          </div>
+        )
       ) : (
         <div className="glass-panel rounded-3xl p-8 text-center">
           <svg
@@ -357,8 +504,12 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
           <button
             type="button"
             onClick={() => {
+              setInputValue('');
               setSearchQuery('');
               setActiveCategory(ALL_CATEGORY);
+              if (debounceRef.current) {
+                clearTimeout(debounceRef.current);
+              }
             }}
             className="mt-4 text-accent text-sm font-medium hover:underline"
           >

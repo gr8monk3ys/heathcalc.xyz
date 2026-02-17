@@ -46,6 +46,116 @@ export default function EditorialProcessPage(): React.JSX.Element {
         </p>
       </div>
 
+      {/* Methodology at a Glance */}
+      <div id="methodology" className="neumorph p-6 mb-8 rounded-lg">
+        <h2 className="text-2xl font-semibold mb-4">Our Methodology at a Glance</h2>
+        <p className="mb-4">
+          Every calculator on HealthCheck is built on a specific, published formula chosen for its
+          accuracy and clinical acceptance. Here is a quick reference of which formula powers each
+          major tool:
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left">
+            <thead className="text-xs uppercase text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
+              <tr>
+                <th className="py-3 pr-4">Calculator</th>
+                <th className="py-3 pr-4">Primary Formula</th>
+                <th className="py-3">Source</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+              <tr>
+                <td className="py-2.5 pr-4 font-medium">BMI</td>
+                <td className="py-2.5 pr-4">WHO Classification + CDC Growth Charts</td>
+                <td className="py-2.5 text-gray-600 dark:text-gray-400">WHO, 2000 / CDC</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 pr-4 font-medium">TDEE / BMR</td>
+                <td className="py-2.5 pr-4">
+                  Mifflin-St Jeor (default), Harris-Benedict, Katch-McArdle
+                </td>
+                <td className="py-2.5 text-gray-600 dark:text-gray-400">Am J Clin Nutr, 1990</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 pr-4 font-medium">Body Fat</td>
+                <td className="py-2.5 pr-4">U.S. Navy Method + BMI-based estimation</td>
+                <td className="py-2.5 text-gray-600 dark:text-gray-400">
+                  Hodgdon &amp; Beckett, 1984
+                </td>
+              </tr>
+              <tr>
+                <td className="py-2.5 pr-4 font-medium">Calorie Deficit</td>
+                <td className="py-2.5 pr-4">Mifflin-St Jeor BMR with activity multipliers</td>
+                <td className="py-2.5 text-gray-600 dark:text-gray-400">Am J Clin Nutr, 1990</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 pr-4 font-medium">Heart Rate Zones</td>
+                <td className="py-2.5 pr-4">220-age method + Karvonen formula</td>
+                <td className="py-2.5 text-gray-600 dark:text-gray-400">ACSM Guidelines, 2021</td>
+              </tr>
+              <tr>
+                <td className="py-2.5 pr-4 font-medium">ABSI</td>
+                <td className="py-2.5 pr-4">A Body Shape Index</td>
+                <td className="py-2.5 text-gray-600 dark:text-gray-400">
+                  Krakauer &amp; Krakauer, 2012
+                </td>
+              </tr>
+              <tr>
+                <td className="py-2.5 pr-4 font-medium">Waist-to-Hip Ratio</td>
+                <td className="py-2.5 pr-4">WHO waist-to-hip ratio classification</td>
+                <td className="py-2.5 text-gray-600 dark:text-gray-400">WHO, 2008</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+          When more than one formula is available for a calculation, we present them all and explain
+          the trade-offs so you can make an informed choice. Detailed descriptions of each formula
+          appear further down this page.
+        </p>
+      </div>
+
+      {/* How We Review Content */}
+      <div id="review-process" className="neumorph p-6 mb-8 rounded-lg">
+        <h2 className="text-2xl font-semibold mb-4">How We Review Content</h2>
+        <p className="mb-4">
+          Content review at HealthCheck is not a one-time event. It is a continuous cycle that
+          ensures our tools and articles stay accurate as science progresses. Our review process
+          covers three distinct areas:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div className="border-l-4 border-green-500 pl-4">
+            <h3 className="font-semibold text-sm">Calculator Accuracy</h3>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              Every calculator is tested against published reference values. Our automated test
+              suite runs 1,300+ tests across all calculators to catch regressions and edge cases.
+            </p>
+          </div>
+          <div className="border-l-4 border-blue-500 pl-4">
+            <h3 className="font-semibold text-sm">Educational Content</h3>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              Blog posts and calculator explanations are checked against current clinical
+              guidelines. We update articles when new research changes established recommendations.
+            </p>
+          </div>
+          <div className="border-l-4 border-purple-500 pl-4">
+            <h3 className="font-semibold text-sm">Product Reviews</h3>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              Product recommendations are updated when items are discontinued, pricing changes
+              materially, or a significantly better option enters the market.
+            </p>
+          </div>
+        </div>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Each piece of reviewed content shows a &quot;Last reviewed&quot; date. If you believe
+          something needs updating, please{' '}
+          <Link href="/contact" className="text-accent hover:underline">
+            let us know
+          </Link>
+          .
+        </p>
+      </div>
+
       {/* Research Process */}
       <div className="neumorph p-6 mb-8 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">How We Research Content</h2>
@@ -284,9 +394,9 @@ export default function EditorialProcessPage(): React.JSX.Element {
         </ul>
       </div>
 
-      {/* Limitations */}
-      <div className="neumorph p-6 mb-8 rounded-lg">
-        <h2 className="text-2xl font-semibold mb-4">Limitations of Online Calculators</h2>
+      {/* Limitations & Disclaimers */}
+      <div id="limitations" className="neumorph p-6 mb-8 rounded-lg">
+        <h2 className="text-2xl font-semibold mb-4">Limitations &amp; Disclaimers</h2>
         <p className="mb-4">
           We are honest about what our tools can and cannot do. Online health calculators are useful
           screening and educational tools, but they have inherent limitations:
