@@ -1,9 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BodyFatResult } from '@/types/bodyFat';
 import { Gender, WeightUnit } from '@/types/common';
 import { BODY_FAT_CATEGORIES } from '@/constants/bodyFat';
+import NextSteps from '@/components/calculators/NextSteps';
+import ReviewedBy from '@/components/ReviewedBy';
+import { EDITORIAL_TEAM } from '@/constants/reviewers';
 
 interface BodyFatResultDisplayProps {
   result: BodyFatResult;
@@ -12,12 +15,98 @@ interface BodyFatResultDisplayProps {
   method: string;
 }
 
+function getBodyFatNextSteps(
+  bodyFatPercentage: number,
+  healthyRange: { min: number; max: number }
+): {
+  insight: string;
+  steps: { label: string; description: string; href: string; highlight?: boolean }[];
+} {
+  const isBelow = bodyFatPercentage < healthyRange.min;
+  const isAbove = bodyFatPercentage > healthyRange.max;
+
+  if (isBelow) {
+    return {
+      insight: `At ${bodyFatPercentage.toFixed(1)}% body fat, you are below the recommended range. If you are an athlete this may be expected during competition, but it is worth monitoring your health closely.`,
+      steps: [
+        {
+          label: 'FFMI Calculator',
+          description: 'Evaluate your muscular development relative to your frame',
+          href: '/ffmi',
+          highlight: true,
+        },
+        {
+          label: 'TDEE Calculator',
+          description: 'Make sure you are eating enough to support your activity',
+          href: '/tdee',
+        },
+        {
+          label: 'Macro Calculator',
+          description: 'Dial in your nutrition for performance and recovery',
+          href: '/macro',
+        },
+      ],
+    };
+  }
+
+  if (isAbove) {
+    return {
+      insight: `At ${bodyFatPercentage.toFixed(1)}% body fat, you are above the recommended range. A combination of calorie management and resistance training is the most effective approach.`,
+      steps: [
+        {
+          label: 'Body Recomposition',
+          description: 'Lose fat and build muscle at the same time',
+          href: '/body-recomposition',
+          highlight: true,
+        },
+        {
+          label: 'TDEE Calculator',
+          description: 'Find your daily calorie needs to plan a deficit',
+          href: '/tdee',
+        },
+        {
+          label: 'Calorie Deficit Calculator',
+          description: 'Create a sustainable fat loss plan',
+          href: '/calorie-deficit',
+        },
+      ],
+    };
+  }
+
+  return {
+    insight: `At ${bodyFatPercentage.toFixed(1)}% body fat, you are within the healthy range. These tools can help you fine-tune your fitness and nutrition.`,
+    steps: [
+      {
+        label: 'FFMI Calculator',
+        description: 'Check your muscular development relative to your height',
+        href: '/ffmi',
+        highlight: true,
+      },
+      {
+        label: 'Body Recomposition',
+        description: 'Optimize your body composition by trading fat for muscle',
+        href: '/body-recomposition',
+      },
+      {
+        label: 'TDEE Calculator',
+        description: 'Calculate your daily calorie needs',
+        href: '/tdee',
+      },
+    ],
+  };
+}
+
 const BodyFatResultDisplay: React.FC<BodyFatResultDisplayProps> = ({
   result,
   gender,
   weightUnit,
   method,
 }) => {
+  const nextStepsData = useMemo(
+    () => getBodyFatNextSteps(result.bodyFatPercentage, result.healthyRange),
+    [result.bodyFatPercentage, result.healthyRange]
+  );
+
   // Get the appropriate gauge segments based on gender
   const getGaugePosition = () => {
     // Calculate position on the gauge (0-100%)
@@ -123,6 +212,10 @@ const BodyFatResultDisplay: React.FC<BodyFatResultDisplayProps> = ({
           weighing performed by healthcare professionals.
         </p>
       </div>
+
+      <NextSteps insight={nextStepsData.insight} steps={nextStepsData.steps} />
+
+      <ReviewedBy reviewer={EDITORIAL_TEAM} lastReviewed="2026-02-01" />
     </div>
   );
 };

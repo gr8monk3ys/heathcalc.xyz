@@ -7,6 +7,9 @@ import Card from '@/components/ui/Card';
 import ResultCard from '@/components/ui/ResultCard';
 import { CalorieDeficitResult } from '@/types/calorieDeficit';
 import { formatTargetDate, getDeficitSafetyMessage } from '@/app/api/calorieDeficit';
+import NextSteps from '@/components/calculators/NextSteps';
+import ReviewedBy from '@/components/ReviewedBy';
+import { EDITORIAL_TEAM } from '@/constants/reviewers';
 
 interface CalorieDeficitResultDisplayProps {
   result: CalorieDeficitResult;
@@ -249,6 +252,30 @@ export default function CalorieDeficitResultDisplay({
           </li>
         </ul>
       </Card>
+
+      <NextSteps
+        insight={`With a daily target of ${result.dailyCalorieTarget} calories and a ${result.dailyDeficit}-calorie deficit, you are on track to reach your goal in about ${result.estimatedWeeks} weeks. These tools will help you execute your plan.`}
+        steps={[
+          {
+            label: 'Macro Calculator',
+            description: 'Split your calorie target into protein, carbs, and fat',
+            href: '/macro',
+            highlight: true,
+          },
+          {
+            label: 'Maximum Fat Loss',
+            description: 'Check that your deficit is safe for your body composition',
+            href: '/maximum-fat-loss',
+          },
+          {
+            label: 'Weight Management',
+            description: 'Track your progress and adjust your plan over time',
+            href: '/weight-management',
+          },
+        ]}
+      />
+
+      <ReviewedBy reviewer={EDITORIAL_TEAM} lastReviewed="2026-02-01" />
     </div>
   );
 }

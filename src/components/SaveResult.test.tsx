@@ -196,7 +196,7 @@ describe('SavedResultsList', () => {
     expect(mockState.clearAllResults).toHaveBeenCalled();
   });
 
-  it('should call removeResult when delete button clicked', () => {
+  it('should call removeResult when delete button clicked in expanded group', () => {
     mockState.savedResults = [
       {
         id: 'bmi-123',
@@ -208,11 +208,14 @@ describe('SavedResultsList', () => {
     ];
 
     render(<SavedResultsList />);
-    fireEvent.click(screen.getByRole('button', { name: /delete result/i }));
+    // Expand the group first
+    fireEvent.click(screen.getByText('BMI Calculator'));
+    const deleteBtn = screen.getByRole('button', { name: /delete result/i });
+    fireEvent.click(deleteBtn);
     expect(mockState.removeResult).toHaveBeenCalledWith('bmi-123');
   });
 
-  it('should link to calculator page', () => {
+  it('should show group section with result count', () => {
     mockState.savedResults = [
       {
         id: 'bmi-123',
@@ -224,11 +227,11 @@ describe('SavedResultsList', () => {
     ];
 
     render(<SavedResultsList />);
-    const link = screen.getByText(/go to calculator/i);
-    expect(link).toHaveAttribute('href', '/bmi');
+    expect(screen.getByText('BMI Calculator')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
   });
 
-  it('should display result data keys formatted', () => {
+  it('should display result data when group is expanded', () => {
     mockState.savedResults = [
       {
         id: 'bmi-123',
@@ -240,6 +243,8 @@ describe('SavedResultsList', () => {
     ];
 
     render(<SavedResultsList />);
+    // Expand the group
+    fireEvent.click(screen.getByText('BMI Calculator'));
     expect(screen.getByText('22.5')).toBeInTheDocument();
   });
 });

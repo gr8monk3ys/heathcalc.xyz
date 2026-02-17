@@ -1,5 +1,8 @@
 import React from 'react';
 import type { HeartRateZonesResult } from '@/types/heartRateZones';
+import NextSteps from '@/components/calculators/NextSteps';
+import ReviewedBy from '@/components/ReviewedBy';
+import { EDITORIAL_TEAM } from '@/constants/reviewers';
 
 interface HeartRateZonesResultProps {
   result: HeartRateZonesResult | null;
@@ -45,6 +48,30 @@ export default function HeartRateZonesResult({ result }: HeartRateZonesResultPro
           </tbody>
         </table>
       </div>
+
+      <NextSteps
+        insight={`Your max heart rate of ${result.maxHeartRate} bpm gives you ${result.zones.length} training zones to work with. Use these tools to build a complete training plan.`}
+        steps={[
+          {
+            label: 'VO2 Max Calculator',
+            description: 'Estimate your cardiovascular fitness level',
+            href: '/vo2-max',
+            highlight: true,
+          },
+          {
+            label: 'Calories Burned Running',
+            description: 'See how many calories you burn at different paces',
+            href: '/calories-burned-running',
+          },
+          {
+            label: 'Running Pace Calculator',
+            description: 'Find the right pace for each heart rate zone',
+            href: '/running-pace',
+          },
+        ]}
+      />
+
+      <ReviewedBy reviewer={EDITORIAL_TEAM} lastReviewed="2026-02-01" />
     </div>
   );
 }

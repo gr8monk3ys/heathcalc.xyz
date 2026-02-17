@@ -52,6 +52,10 @@ const MacroResult: React.FC<MacroResultProps> = ({ result }) => {
     <div
       id="macro-result"
       className="neumorph p-6 rounded-lg transition-all duration-500 transform animate-fade-in"
+      tabIndex={-1}
+      aria-live="polite"
+      role="region"
+      aria-label="Your Macro Results"
     >
       <h2 className="text-xl font-semibold mb-4">Your Macro Results</h2>
 

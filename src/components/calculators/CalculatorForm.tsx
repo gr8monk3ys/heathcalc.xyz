@@ -197,8 +197,14 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
       case 'radio':
         return (
           <div key={field.name}>
-            <label className="block text-sm font-medium mb-1">{resolvedLabel}</label>
-            <div className="flex space-x-4">
+            <div id={`${field.name}-group-label`} className="block text-sm font-medium mb-1">
+              {resolvedLabel}
+            </div>
+            <div
+              className="flex space-x-4"
+              role="radiogroup"
+              aria-labelledby={`${field.name}-group-label`}
+            >
               {field.options?.map(option => (
                 <label key={option.value} className="flex items-center">
                   <input
@@ -225,7 +231,19 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
               id={field.name}
               value={field.value}
               onChange={e => field.onChange(e.target.value)}
-              className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+              className={`w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent ${
+                field.error ? 'border border-red-500' : ''
+              }`}
+              aria-invalid={field.error ? true : undefined}
+              aria-describedby={
+                [
+                  field.options?.find(o => o.value === field.value)?.description &&
+                    `${field.name}-description`,
+                  field.error && `${field.name}-error`,
+                ]
+                  .filter(Boolean)
+                  .join(' ') || undefined
+              }
             >
               {field.options?.map(option => (
                 <option key={option.value} value={option.value}>
@@ -234,8 +252,21 @@ const CalculatorForm: React.FC<CalculatorFormProps> = memo(function CalculatorFo
               ))}
             </select>
             {field.options?.find(option => option.value === field.value)?.description && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <p
+                id={`${field.name}-description`}
+                className="text-sm text-gray-500 dark:text-gray-400 mt-1"
+              >
                 {field.options.find(option => option.value === field.value)?.description}
+              </p>
+            )}
+            {field.error && (
+              <p
+                id={`${field.name}-error`}
+                role="alert"
+                aria-live="polite"
+                className="text-red-500 dark:text-red-400 text-sm mt-1"
+              >
+                {field.error}
               </p>
             )}
           </div>

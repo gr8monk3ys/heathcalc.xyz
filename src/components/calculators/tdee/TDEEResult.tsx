@@ -1,6 +1,9 @@
 'use client';
 
 import React from 'react';
+import NextSteps from '@/components/calculators/NextSteps';
+import ReviewedBy from '@/components/ReviewedBy';
+import { EDITORIAL_TEAM } from '@/constants/reviewers';
 
 interface TDEEResultProps {
   result: {
@@ -24,6 +27,10 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
     <div
       id="tdee-result"
       className="neumorph p-6 rounded-lg transition-all duration-500 transform animate-fade-in"
+      tabIndex={-1}
+      aria-live="polite"
+      role="region"
+      aria-label="Your TDEE Results"
     >
       <h2 className="text-xl font-semibold mb-4">Your TDEE Results</h2>
 
@@ -191,6 +198,30 @@ const TDEEResult: React.FC<TDEEResultProps> = ({ result }) => {
           your true maintenance calories.
         </p>
       </div>
+
+      <NextSteps
+        insight={`Your TDEE of ${result.tdee} calories per day is the starting point for any nutrition plan. Use the tools below to turn this number into action.`}
+        steps={[
+          {
+            label: 'Calorie Deficit Calculator',
+            description: 'Plan your weight loss based on your TDEE',
+            href: '/calorie-deficit',
+            highlight: true,
+          },
+          {
+            label: 'Macro Calculator',
+            description: 'Break down your calories into protein, carbs, and fat',
+            href: '/macro',
+          },
+          {
+            label: 'Weight Management',
+            description: 'Set weight goals and track your progress over time',
+            href: '/weight-management',
+          },
+        ]}
+      />
+
+      <ReviewedBy reviewer={EDITORIAL_TEAM} lastReviewed="2026-02-01" />
     </div>
   );
 };

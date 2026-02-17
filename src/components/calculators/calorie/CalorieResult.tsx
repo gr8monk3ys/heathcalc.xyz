@@ -19,6 +19,10 @@ export default function CalorieResult({ result }: CalorieResultProps) {
     <div
       id="calorie-result"
       className="neumorph p-6 rounded-lg transition-all duration-500 transform animate-fade-in"
+      tabIndex={-1}
+      aria-live="polite"
+      role="region"
+      aria-label="Daily Calorie Targets"
     >
       <h2 className="text-xl font-semibold mb-4">Daily Calorie Targets</h2>
 

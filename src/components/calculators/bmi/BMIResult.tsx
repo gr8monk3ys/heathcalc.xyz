@@ -1,8 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BMIResult } from '@/types/bmi';
 import type { BMIPageCopy } from '@/i18n/pages/bmi';
+import NextSteps from '@/components/calculators/NextSteps';
+import ReviewedBy from '@/components/ReviewedBy';
+import { EDITORIAL_TEAM } from '@/constants/reviewers';
 
 interface BMIResultDisplayProps {
   result: BMIResult;
@@ -52,6 +55,128 @@ function formatTemplate(template: string, vars: Record<string, string | number>)
   return output;
 }
 
+function getBMINextSteps(
+  bmi: number,
+  isChild: boolean
+): {
+  insight: string;
+  steps: { label: string; description: string; href: string; highlight?: boolean }[];
+} {
+  if (isChild) {
+    return {
+      insight:
+        "BMI percentiles for children are interpreted differently than adult BMI. Talk to your pediatrician about your child's growth pattern.",
+      steps: [
+        {
+          label: 'Calorie Calculator',
+          description: 'Estimate daily calorie needs for growth and activity',
+          href: '/calorie',
+          highlight: true,
+        },
+        {
+          label: 'Macro Calculator',
+          description: 'Find the right balance of protein, carbs, and fat',
+          href: '/macro',
+        },
+      ],
+    };
+  }
+
+  if (bmi < 18.5) {
+    return {
+      insight: `Your BMI of ${bmi.toFixed(1)} falls in the underweight category. Building a calorie surplus with balanced nutrition can help you reach a healthier weight.`,
+      steps: [
+        {
+          label: 'Calorie Calculator',
+          description: 'Find out how many calories you need to gain weight safely',
+          href: '/calorie',
+          highlight: true,
+        },
+        {
+          label: 'Macro Calculator',
+          description: 'Get a protein, carb, and fat breakdown for weight gain',
+          href: '/macro',
+        },
+        {
+          label: 'TDEE Calculator',
+          description: 'Understand your total daily energy expenditure',
+          href: '/tdee',
+        },
+      ],
+    };
+  }
+
+  if (bmi < 25) {
+    return {
+      insight: `Your BMI of ${bmi.toFixed(1)} is in the normal range. Staying active and eating well will help you maintain this healthy weight.`,
+      steps: [
+        {
+          label: 'TDEE Calculator',
+          description: 'Know your maintenance calories to stay on track',
+          href: '/tdee',
+          highlight: true,
+        },
+        {
+          label: 'Body Fat Calculator',
+          description: 'Get a more detailed picture of your body composition',
+          href: '/body-fat',
+        },
+        {
+          label: 'Macro Calculator',
+          description: 'Optimize your nutrition for energy and performance',
+          href: '/macro',
+        },
+      ],
+    };
+  }
+
+  if (bmi < 30) {
+    return {
+      insight: `Your BMI of ${bmi.toFixed(1)} puts you in the overweight category. A moderate calorie deficit combined with regular exercise is an effective path forward.`,
+      steps: [
+        {
+          label: 'Calorie Deficit Calculator',
+          description: 'Build a sustainable plan to lose weight',
+          href: '/calorie-deficit',
+          highlight: true,
+        },
+        {
+          label: 'TDEE Calculator',
+          description: 'Calculate how many calories you burn each day',
+          href: '/tdee',
+        },
+        {
+          label: 'Weight Management',
+          description: 'Set realistic weight goals and timelines',
+          href: '/weight-management',
+        },
+      ],
+    };
+  }
+
+  return {
+    insight: `Your BMI of ${bmi.toFixed(1)} is in the obese category. Working with a healthcare provider alongside tracking your nutrition can make a real difference.`,
+    steps: [
+      {
+        label: 'Calorie Deficit Calculator',
+        description: 'Create a safe, gradual weight loss plan',
+        href: '/calorie-deficit',
+        highlight: true,
+      },
+      {
+        label: 'Maximum Fat Loss Calculator',
+        description: 'Find the fastest safe rate of weight loss for your body',
+        href: '/maximum-fat-loss',
+      },
+      {
+        label: 'Weight Management',
+        description: 'Plan long-term weight goals with realistic timelines',
+        href: '/weight-management',
+      },
+    ],
+  };
+}
+
 const BMIResultDisplay: React.FC<BMIResultDisplayProps> = ({
   result,
   isChild,
@@ -60,10 +185,16 @@ const BMIResultDisplay: React.FC<BMIResultDisplayProps> = ({
 }) => {
   const content = copy ?? FALLBACK_COPY;
 
+  const nextStepsData = useMemo(() => getBMINextSteps(result.bmi, isChild), [result.bmi, isChild]);
+
   return (
     <div
       id="bmi-result"
       className="neumorph p-6 rounded-lg transition-all duration-500 transform animate-fade-in"
+      tabIndex={-1}
+      aria-live="polite"
+      role="region"
+      aria-label={content.title}
     >
       <h2 className="text-xl font-semibold mb-4">{content.title}</h2>
 
@@ -152,6 +283,10 @@ const BMIResultDisplay: React.FC<BMIResultDisplayProps> = ({
         </p>
         <p className="text-sm text-gray-600">{content.note}</p>
       </div>
+
+      <NextSteps insight={nextStepsData.insight} steps={nextStepsData.steps} />
+
+      <ReviewedBy reviewer={EDITORIAL_TEAM} lastReviewed="2026-02-01" />
     </div>
   );
 };
