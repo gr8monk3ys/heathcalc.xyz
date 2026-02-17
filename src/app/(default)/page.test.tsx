@@ -35,14 +35,14 @@ describe('Home Page', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: /Smarter health calculators with a cleaner, faster experience/i,
+        name: /54\+ free health calculators/i,
       })
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Browse calculators' })).toHaveAttribute(
       'href',
       '/calculators'
     );
-    expect(screen.getByRole('link', { name: 'Read the blog' })).toHaveAttribute('href', '/blog');
+    expect(screen.getByRole('link', { name: /Read the guides/i })).toHaveAttribute('href', '/blog');
     expect(
       screen.getByRole('link', { name: /Search calculators, guides, and blog posts/i })
     ).toHaveAttribute('href', '/search');
@@ -57,16 +57,22 @@ describe('Home Page', () => {
       'href',
       '/body-fat'
     );
-    expect(screen.getByRole('link', { name: 'Heart Rate Zones' })).toHaveAttribute(
-      'href',
-      '/heart-rate-zones'
-    );
+    expect(screen.getByRole('link', { name: 'BMI Calculator' })).toHaveAttribute('href', '/bmi');
     expect(
       screen.getByRole('link', { name: /5 Myths About Calorie Deficits Debunked/i })
     ).toHaveAttribute('href', '/blog/calorie-deficit-myths');
-    expect(screen.getByRole('link', { name: 'Explore all blog articles' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Explore all guides and articles/i })).toHaveAttribute(
       'href',
       '/blog'
     );
+  });
+
+  it('renders trust signals and Why HealthCheck section', () => {
+    const { container } = render(<Home />);
+
+    expect(container.textContent).toContain('54+ Calculators');
+    expect(container.textContent).toContain('Evidence-Based Formulas');
+    expect(container.textContent).toContain('100% Free');
+    expect(screen.getByRole('heading', { name: /Why HealthCheck/i })).toBeInTheDocument();
   });
 });
