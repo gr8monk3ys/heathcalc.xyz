@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Best Kettlebells for Full-Body Workouts in 2026 | HealthCheck Blog',
@@ -90,16 +91,10 @@ export default function BestKettlebellsFullBodyWorkoutsPage() {
     ],
   };
 
-  const jsonLdScript = JSON.stringify(jsonLd);
-  const productListJsonLdScript = JSON.stringify(productListJsonLd);
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript }} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: productListJsonLdScript }}
-      />
+      <StructuredData data={jsonLd} />
+      <StructuredData data={productListJsonLd} />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">

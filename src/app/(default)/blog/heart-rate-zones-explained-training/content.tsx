@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import AdBlock from '@/components/AdBlock';
 import RelatedCalculatorLinks from '@/components/RelatedCalculatorLinks';
 import RelatedGuides from '@/components/RelatedGuides';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Heart Rate Zones Explained: How to Train Smarter | HealthCheck Blog',
@@ -61,10 +62,7 @@ export default function HeartRateZonesExplainedPage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <StructuredData data={jsonLd} />
 
       <div className="mb-8">
         <span className="inline-block bg-accent/10 text-accent text-sm px-3 py-1 rounded-full">

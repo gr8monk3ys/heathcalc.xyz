@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from '@/context/LocaleContext';
+import StructuredData from '@/components/StructuredData';
 
 interface BlogPostMeta {
   slug: string;
@@ -46,10 +47,7 @@ export default function CountingCaloriesVsTrackingMacrosContent() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <StructuredData data={jsonLd} />
       <article className="max-w-4xl mx-auto px-4 py-12">
         <div className="neumorph-inset rounded-2xl p-8 mb-8">
           <div className="mb-6">

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title:
@@ -59,11 +60,9 @@ export default function AdjustableDumbbellsVsBarbellContent() {
     image: ['https://www.healthcalc.xyz/images/blog/adjustable-dumbbells-vs-barbell-home-gym.jpg'],
   };
 
-  const structuredData = JSON.stringify(jsonLd);
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
+      <StructuredData data={jsonLd} />
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <span className="inline-block bg-accent/10 text-accent text-sm px-3 py-1 rounded-full">

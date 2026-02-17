@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Best Yoga Mats for Home Workouts in 2026 | HealthCheck Blog',
@@ -84,16 +85,10 @@ export default function BestYogaMatsHomeWorkoutsPage() {
     ],
   };
 
-  const jsonLdString = JSON.stringify(jsonLd);
-  const productListJsonLdString = JSON.stringify(productListJsonLd);
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString }} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: productListJsonLdString }}
-      />
+      <StructuredData data={jsonLd} />
+      <StructuredData data={productListJsonLd} />
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <span className="inline-block bg-accent/10 text-accent text-sm px-3 py-1 rounded-full">

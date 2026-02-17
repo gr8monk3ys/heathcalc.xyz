@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Best Weight Benches for Home Gym in 2026 | HealthCheck Blog',
@@ -91,13 +92,10 @@ export default function BestWeightBenchesHomeGymPage() {
     ],
   };
 
-  const structuredData = JSON.stringify(jsonLd);
-  const productListData = JSON.stringify(productListJsonLd);
-
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: productListData }} />
+      <StructuredData data={jsonLd} />
+      <StructuredData data={productListJsonLd} />
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <span className="inline-block bg-accent/10 text-accent text-sm px-3 py-1 rounded-full">

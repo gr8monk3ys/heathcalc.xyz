@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'Cardio vs Weights for Fat Loss: What Science Actually Says | HealthCheck',
@@ -64,11 +64,7 @@ const structuredData = {
 export default function CardioVsWeightsFatLossContent() {
   return (
     <article className="max-w-4xl mx-auto px-4 py-12">
-      <Script
-        id="structured-data"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={structuredData} />
 
       <header className="mb-8">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">

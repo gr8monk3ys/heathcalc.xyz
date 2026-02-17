@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import AdBlock from '@/components/AdBlock';
 import RelatedCalculatorLinks from '@/components/RelatedCalculatorLinks';
 import RelatedGuides from '@/components/RelatedGuides';
+import StructuredData from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   title: 'How Fast Can You Build Muscle? Realistic Expectations | HealthCheck Blog',
@@ -62,10 +63,7 @@ export default function HowFastCanYouBuildMusclePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
+      <StructuredData data={articleSchema} />
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <span className="inline-block bg-accent/10 text-accent text-sm px-3 py-1 rounded-full">
