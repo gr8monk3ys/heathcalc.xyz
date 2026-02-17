@@ -13,7 +13,9 @@ import {
 const saveSchema = z.object({
   calculatorType: z.string().min(1).max(80),
   calculatorName: z.string().min(1).max(140),
-  data: z.record(z.string(), z.unknown()),
+  data: z.record(z.string(), z.unknown()).refine(d => JSON.stringify(d).length <= 10240, {
+    message: 'Data payload must not exceed 10 KB',
+  }),
 });
 
 type ApiSavedResult = {

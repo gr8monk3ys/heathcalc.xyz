@@ -1,5 +1,5 @@
 /**
- * @vitest-environment jsdom
+ * @vitest-environment node
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -31,20 +31,8 @@ describe('GET /api/health', () => {
     const body = await response.json();
 
     expect(response.status).toBe(200);
-    expect(body.ok).toBe(true);
-    expect(body.environment).toBe('production');
-    expect(body.checks.newsletterProviderConfigured).toBe(true);
-    expect(body.checks.contactProviderConfigured).toBe(true);
-    expect(body.checks.persistenceDatabaseConfigured).toBe(true);
-    expect(body.checks.persistenceStrictModeEnabled).toBe(true);
-    expect(body.checks.clerkConfigurationValid).toBe(true);
-    expect(body.warnings).toEqual(
-      expect.arrayContaining([
-        'Google Analytics is not configured.',
-        'Sentry browser DSN is not configured.',
-        'AdSense slots are not configured.',
-      ])
-    );
+    expect(body.status).toBe('ok');
+    expect(body.timestamp).toBeDefined();
   });
 
   it('returns 503 when newsletter/contact providers are not configured', async () => {
@@ -65,9 +53,7 @@ describe('GET /api/health', () => {
     const body = await response.json();
 
     expect(response.status).toBe(503);
-    expect(body.ok).toBe(false);
-    expect(body.checks.newsletterProviderConfigured).toBe(false);
-    expect(body.checks.contactProviderConfigured).toBe(false);
+    expect(body.status).toBe('degraded');
   });
 
   it('returns 503 when Clerk production keys are misconfigured', async () => {
@@ -86,8 +72,6 @@ describe('GET /api/health', () => {
     const body = await response.json();
 
     expect(response.status).toBe(503);
-    expect(body.ok).toBe(false);
-    expect(body.checks.clerkProductionKeysValid).toBe(false);
-    expect(body.checks.clerkConfigurationValid).toBe(false);
+    expect(body.status).toBe('degraded');
   });
 });

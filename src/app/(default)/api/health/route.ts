@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { getPublicSiteUrl, getPublicSiteHost } from '@/lib/site';
 import { isSubmissionPersistenceStrictModeEnabled } from '@/lib/db/submissions';
 import { getClerkEnvState } from '@/utils/auth';
 
@@ -19,14 +18,6 @@ interface HealthChecks {
   clerkSecretKeyConfigured: boolean;
   clerkProductionKeysValid: boolean;
   clerkConfigurationValid: boolean;
-}
-
-interface HealthResponse {
-  ok: boolean;
-  timestamp: string;
-  environment: string;
-  checks: HealthChecks;
-  warnings: string[];
 }
 
 function has(value: string | undefined): boolean {
@@ -111,24 +102,18 @@ function isHealthy(checks: HealthChecks): boolean {
   );
 }
 
-export async function GET(): Promise<NextResponse<HealthResponse>> {
+export async function GET(): Promise<NextResponse> {
   const checks = createHealthChecks();
   const warnings = createWarnings(checks);
   const ok = isHealthy(checks);
-  const payload: HealthResponse = {
-    ok,
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'unknown',
-    checks,
-    warnings,
-  };
 
-  return NextResponse.json(payload, {
-    status: ok ? 200 : 503,
-    headers: {
-      'Cache-Control': 'no-store',
-      'X-Health-Host': getPublicSiteHost(),
-      'X-Health-Site-Url': getPublicSiteUrl(),
-    },
-  });
+  // Log detailed health state for internal monitoring; never expose to caller.
+  if (warnings.length > 0 || !ok) {
+    console.warn('[health]', { ok, checks, warnings });
+  }
+
+  return NextResponse.json(
+    { status: ok ? 'ok' : 'degraded', timestamp: new Date().toISOString() },
+    { status: ok ? 200 : 503, headers: { 'Cache-Control': 'no-store' } }
+  );
 }

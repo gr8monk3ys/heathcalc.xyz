@@ -36,6 +36,9 @@ export async function DELETE(request: NextRequest, { params }: Props): Promise<N
   if (!id) {
     return NextResponse.json({ success: false, error: 'Missing id' }, { status: 400 });
   }
+  if (id.length > 100 || !/^[a-zA-Z0-9_-]+$/.test(id)) {
+    return NextResponse.json({ success: false, error: 'Invalid id format' }, { status: 400 });
+  }
 
   const deleted = await deleteSavedResult(userId, id);
   return NextResponse.json({ success: true, deleted }, { status: 200 });
