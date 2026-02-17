@@ -295,6 +295,99 @@ const BLOG_POSTS: Record<string, React.ComponentType<Record<string, never>>> = {
       loading: () => <BlogLoadingFallback />,
     }
   ),
+  // GLP-1 Niche Hub
+  'complete-guide-glp1-weight-loss': dynamic(
+    () => import('@/app/blog/complete-guide-glp1-weight-loss/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'glp1-side-effects-what-to-expect': dynamic(
+    () => import('@/app/blog/glp1-side-effects-what-to-expect/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'ozempic-vs-wegovy-vs-mounjaro-comparison': dynamic(
+    () => import('@/app/blog/ozempic-vs-wegovy-vs-mounjaro-comparison/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  // ACFT Niche Hub
+  'complete-acft-guide': dynamic(() => import('@/app/blog/complete-acft-guide/content'), {
+    loading: () => <BlogLoadingFallback />,
+  }),
+  'acft-training-plan-event-breakdown': dynamic(
+    () => import('@/app/blog/acft-training-plan-event-breakdown/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'acft-scoring-standards-what-you-need': dynamic(
+    () => import('@/app/blog/acft-scoring-standards-what-you-need/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  // Educational Deep Guides
+  'science-of-tdee-energy-expenditure': dynamic(
+    () => import('@/app/blog/science-of-tdee-energy-expenditure/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'body-composition-beyond-bmi': dynamic(
+    () => import('@/app/blog/body-composition-beyond-bmi/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'evidence-based-weight-loss-guide': dynamic(
+    () => import('@/app/blog/evidence-based-weight-loss-guide/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'complete-guide-to-macronutrients': dynamic(
+    () => import('@/app/blog/complete-guide-to-macronutrients/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'heart-rate-training-science': dynamic(
+    () => import('@/app/blog/heart-rate-training-science/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'sleep-recovery-science': dynamic(() => import('@/app/blog/sleep-recovery-science/content'), {
+    loading: () => <BlogLoadingFallback />,
+  }),
+  'hydration-science-how-much-water': dynamic(
+    () => import('@/app/blog/hydration-science-how-much-water/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'calorie-counting-does-it-work': dynamic(
+    () => import('@/app/blog/calorie-counting-does-it-work/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'pregnancy-nutrition-guide': dynamic(
+    () => import('@/app/blog/pregnancy-nutrition-guide/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
+  'metabolic-adaptation-plateaus': dynamic(
+    () => import('@/app/blog/metabolic-adaptation-plateaus/content'),
+    {
+      loading: () => <BlogLoadingFallback />,
+    }
+  ),
 };
 
 const AFFILIATE_BLOG_SLUGS = new Set([

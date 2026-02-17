@@ -665,4 +665,202 @@ export const BLOG_METADATA: Record<string, Metadata> = {
     'Compare the best sleep trackers for monitoring recovery, HRV, sleep stages, and sleep quality. Reviews of Oura Ring, Whoop, Fitbit Sense 2, Garmin Venu 3, and Amazfit GTR 4.',
     'Best Sleep Trackers for Recovery in 2026'
   ),
+
+  // ─── GLP-1 Niche Hub ──────────────────────────────────────────────
+
+  'complete-guide-glp1-weight-loss': blogMeta(
+    'complete-guide-glp1-weight-loss',
+    'The Complete Guide to GLP-1 Medications for Weight Loss | HealthCheck',
+    'Everything you need to know about GLP-1 receptor agonists: how they work, clinical trial results, side effects, costs, and what to expect.',
+    'GLP-1 weight loss, semaglutide, tirzepatide, Ozempic, Wegovy, Mounjaro, GLP-1 receptor agonist, weight loss medication, obesity treatment',
+    'The Complete Guide to GLP-1 Medications for Weight Loss',
+    'Everything you need to know about GLP-1 receptor agonists for weight loss, from clinical trial data to real-world expectations.',
+    'The Complete Guide to GLP-1 Medications for Weight Loss',
+    'Everything you need to know about GLP-1 receptor agonists for weight loss.',
+    'GLP-1 Medications for Weight Loss Guide'
+  ),
+
+  'glp1-side-effects-what-to-expect': blogMeta(
+    'glp1-side-effects-what-to-expect',
+    'GLP-1 Side Effects: What to Expect and How to Manage Them | HealthCheck',
+    'A detailed look at GLP-1 medication side effects from clinical trials, including GI issues, muscle loss, Ozempic face, and practical management strategies.',
+    'GLP-1 side effects, Ozempic side effects, semaglutide nausea, Ozempic face, GLP-1 muscle loss, tirzepatide side effects, Wegovy side effects, Mounjaro side effects',
+    'GLP-1 Side Effects: What to Expect and How to Manage Them',
+    'A detailed look at GLP-1 medication side effects from clinical trials, with practical management strategies.',
+    'GLP-1 Side Effects: What to Expect and How to Manage Them',
+    'Clinical trial data on GLP-1 side effects with practical management strategies.',
+    'GLP-1 Side Effects Guide'
+  ),
+
+  'ozempic-vs-wegovy-vs-mounjaro-comparison': blogMeta(
+    'ozempic-vs-wegovy-vs-mounjaro-comparison',
+    'Ozempic vs Wegovy vs Mounjaro: A Head-to-Head Comparison | HealthCheck',
+    'Compare semaglutide and tirzepatide medications for weight loss with clinical trial data, cost analysis, and practical guidance.',
+    'Ozempic vs Wegovy, Ozempic vs Mounjaro, semaglutide vs tirzepatide, weight loss medication comparison, GLP-1 comparison, Wegovy vs Mounjaro',
+    'Ozempic vs Wegovy vs Mounjaro: A Head-to-Head Comparison',
+    'Compare semaglutide and tirzepatide medications for weight loss with clinical trial data and cost analysis.',
+    'Ozempic vs Wegovy vs Mounjaro: A Head-to-Head Comparison',
+    'Compare semaglutide and tirzepatide medications for weight loss.',
+    'Ozempic vs Wegovy vs Mounjaro Comparison'
+  ),
+
+  // ─── ACFT Niche Hub ────────────────────────────────────────────────
+
+  'complete-acft-guide': blogMeta(
+    'complete-acft-guide',
+    'The Complete Guide to the Army Combat Fitness Test (ACFT) | HealthCheck',
+    'Everything you need to know about the ACFT: all 6 events detailed with scoring tables, form cues, and training strategies.',
+    'ACFT guide, Army Combat Fitness Test, ACFT events, ACFT scoring, deadlift, standing power throw, hand release push-ups, sprint drag carry, leg tuck, two mile run',
+    'The Complete Guide to the Army Combat Fitness Test (ACFT)',
+    'Everything you need to know about the ACFT: all 6 events, scoring, form cues, and training strategies.',
+    'The Complete Guide to the Army Combat Fitness Test (ACFT)',
+    'Everything you need to know about the ACFT.',
+    'Army Combat Fitness Test Complete Guide'
+  ),
+
+  'acft-training-plan-event-breakdown': blogMeta(
+    'acft-training-plan-event-breakdown',
+    'ACFT Training Plan: Event-by-Event Breakdown | HealthCheck',
+    'Targeted training programs for each ACFT event with periodization, workout programming, and progression strategies.',
+    'ACFT training plan, ACFT workout, ACFT deadlift training, sprint drag carry training, hand release push-ups, ACFT preparation, Army fitness training',
+    'ACFT Training Plan: Event-by-Event Breakdown',
+    'Targeted training programs for each ACFT event with periodization and workout programming.',
+    'ACFT Training Plan: Event-by-Event Breakdown',
+    'Targeted training programs for each ACFT event.',
+    'ACFT Training Plan Event Breakdown'
+  ),
+
+  'acft-scoring-standards-what-you-need': blogMeta(
+    'acft-scoring-standards-what-you-need',
+    'ACFT Scoring Standards: What You Need to Know | HealthCheck',
+    'Complete ACFT scoring tables by gender and age group, promotion point implications, common mistakes, and test day strategy.',
+    'ACFT scoring, ACFT standards, ACFT score chart, ACFT age groups, ACFT promotion points, Army fitness standards, ACFT minimum score',
+    'ACFT Scoring Standards: What You Need to Know',
+    'Complete ACFT scoring tables by gender and age group, promotion points, and test day strategy.',
+    'ACFT Scoring Standards: What You Need to Know',
+    'Complete ACFT scoring tables and test day strategy.',
+    'ACFT Scoring Standards Guide'
+  ),
+
+  // ─── Educational Deep Guides ───────────────────────────────────────
+
+  'science-of-tdee-energy-expenditure': blogMeta(
+    'science-of-tdee-energy-expenditure',
+    'The Science of TDEE: Understanding Energy Expenditure | HealthCheck',
+    'A deep dive into Total Daily Energy Expenditure covering the four components of metabolism, formula accuracy, and practical methods for finding your number.',
+    'TDEE science, energy expenditure, BMR, NEAT, thermic effect of food, exercise activity thermogenesis, Mifflin-St Jeor, metabolic adaptation',
+    'The Science of TDEE: Understanding Energy Expenditure',
+    'A deep dive into TDEE covering the four components of metabolism and practical methods for finding your number.',
+    'The Science of TDEE: Understanding Energy Expenditure',
+    'A deep dive into TDEE and energy expenditure science.',
+    'Science of TDEE Energy Expenditure'
+  ),
+
+  'body-composition-beyond-bmi': blogMeta(
+    'body-composition-beyond-bmi',
+    'Body Composition Beyond BMI: What Actually Matters | HealthCheck',
+    'Why BMI fails many people and which body composition metrics actually predict health outcomes, from waist-to-height ratio to ABSI.',
+    'body composition, BMI limitations, waist-to-height ratio, ABSI, normal weight obesity, body fat percentage, WHR, DEXA scan, body composition analysis',
+    'Body Composition Beyond BMI: What Actually Matters',
+    'Why BMI fails many people and which body composition metrics actually predict health outcomes.',
+    'Body Composition Beyond BMI: What Actually Matters',
+    'Why BMI fails many people and what metrics actually matter.',
+    'Body Composition Beyond BMI'
+  ),
+
+  'evidence-based-weight-loss-guide': blogMeta(
+    'evidence-based-weight-loss-guide',
+    'Evidence-Based Weight Loss: What the Research Actually Shows | HealthCheck',
+    'A research-backed guide to sustainable weight loss covering energy balance, metabolic adaptation, protein needs, exercise, and behavioral strategies.',
+    'evidence-based weight loss, sustainable weight loss, energy balance, metabolic adaptation, protein for weight loss, National Weight Control Registry',
+    'Evidence-Based Weight Loss: What the Research Actually Shows',
+    'A research-backed guide to sustainable weight loss covering energy balance, protein, exercise, and behavioral strategies.',
+    'Evidence-Based Weight Loss: What the Research Actually Shows',
+    'A research-backed guide to sustainable weight loss.',
+    'Evidence-Based Weight Loss Guide'
+  ),
+
+  'complete-guide-to-macronutrients': blogMeta(
+    'complete-guide-to-macronutrients',
+    'The Complete Guide to Macronutrients | HealthCheck',
+    'Everything you need to know about protein, carbs, and fat from the research, with practical macro-setting frameworks for different goals.',
+    'macronutrients, protein intake, carbohydrates, dietary fat, macro tracking, macro ratios, protein for muscle, carbs for performance, fat minimum intake',
+    'The Complete Guide to Macronutrients',
+    'Everything you need to know about protein, carbs, and fat with practical macro-setting frameworks.',
+    'The Complete Guide to Macronutrients',
+    'Everything you need to know about protein, carbs, and fat.',
+    'Complete Guide to Macronutrients'
+  ),
+
+  'heart-rate-training-science': blogMeta(
+    'heart-rate-training-science',
+    'Heart Rate Training: The Science Behind the Zones | HealthCheck',
+    'The physiology of heart rate zones, why 220-minus-age is wrong, and how to use polarized training for better results.',
+    'heart rate training, heart rate zones, zone 2 training, polarized training, 220 minus age, Tanaka formula, HRV, VO2 max, aerobic threshold',
+    'Heart Rate Training: The Science Behind the Zones',
+    'The physiology of heart rate zones, why 220-minus-age is wrong, and how to use polarized training.',
+    'Heart Rate Training: The Science Behind the Zones',
+    'The physiology of heart rate zones and polarized training.',
+    'Heart Rate Training Science'
+  ),
+
+  'sleep-recovery-science': blogMeta(
+    'sleep-recovery-science',
+    'Sleep and Recovery: What the Science Says | HealthCheck',
+    'How sleep affects body composition, athletic performance, and health, with evidence-based strategies for better recovery.',
+    'sleep and recovery, sleep for weight loss, sleep and muscle growth, sleep deprivation, sleep hygiene, circadian rhythm, melatonin, sleep stages',
+    'Sleep and Recovery: What the Science Says',
+    'How sleep affects body composition, athletic performance, and health with evidence-based strategies.',
+    'Sleep and Recovery: What the Science Says',
+    'How sleep affects body composition and performance.',
+    'Sleep and Recovery Science'
+  ),
+
+  'hydration-science-how-much-water': blogMeta(
+    'hydration-science-how-much-water',
+    'Hydration Science: How Much Water Do You Actually Need? | HealthCheck',
+    'The truth about hydration needs, debunking the 8-glasses myth, and practical strategies for staying properly hydrated.',
+    'hydration science, how much water, 8 glasses myth, water intake, dehydration, hyponatremia, urine color, electrolytes, hydration for exercise',
+    'Hydration Science: How Much Water Do You Actually Need?',
+    'The truth about hydration needs, debunking the 8-glasses myth, and practical hydration strategies.',
+    'Hydration Science: How Much Water Do You Actually Need?',
+    'The truth about hydration needs and the 8-glasses myth.',
+    'Hydration Science Guide'
+  ),
+
+  'calorie-counting-does-it-work': blogMeta(
+    'calorie-counting-does-it-work',
+    'Calorie Counting: Does It Actually Work? | HealthCheck',
+    'An honest look at calorie counting from the research: accuracy issues, psychological effects, food label errors, and who it works best for.',
+    'calorie counting, does calorie counting work, food label accuracy, calorie tracking, food journal weight loss, calorie counting eating disorders',
+    'Calorie Counting: Does It Actually Work?',
+    'An honest look at calorie counting: accuracy issues, psychological effects, and who it works best for.',
+    'Calorie Counting: Does It Actually Work?',
+    'An honest look at calorie counting from the research.',
+    'Calorie Counting Guide'
+  ),
+
+  'pregnancy-nutrition-guide': blogMeta(
+    'pregnancy-nutrition-guide',
+    'Pregnancy Nutrition: A Trimester-by-Trimester Guide | HealthCheck',
+    'Evidence-based nutrition guidance for each trimester covering calorie needs, weight gain, key nutrients, supplementation, and exercise safety.',
+    'pregnancy nutrition, prenatal nutrition, trimester nutrition, pregnancy weight gain, folate pregnancy, prenatal vitamins, exercise during pregnancy, gestational diabetes',
+    'Pregnancy Nutrition: A Trimester-by-Trimester Guide',
+    'Evidence-based nutrition guidance for each trimester covering calorie needs, weight gain, and key nutrients.',
+    'Pregnancy Nutrition: A Trimester-by-Trimester Guide',
+    'Evidence-based nutrition guidance for each trimester.',
+    'Pregnancy Nutrition Guide'
+  ),
+
+  'metabolic-adaptation-plateaus': blogMeta(
+    'metabolic-adaptation-plateaus',
+    'Metabolic Adaptation and Weight Loss Plateaus | HealthCheck',
+    'Why your metabolism fights back during dieting, what the Biggest Loser study revealed, and evidence-based strategies for breaking through plateaus.',
+    'metabolic adaptation, weight loss plateau, adaptive thermogenesis, Biggest Loser study, diet breaks, MATADOR study, reverse dieting, NEAT suppression',
+    'Metabolic Adaptation and Weight Loss Plateaus',
+    'Why your metabolism fights back during dieting and evidence-based strategies for breaking through plateaus.',
+    'Metabolic Adaptation and Weight Loss Plateaus',
+    'Why your metabolism fights back during dieting.',
+    'Metabolic Adaptation and Weight Loss Plateaus'
+  ),
 };

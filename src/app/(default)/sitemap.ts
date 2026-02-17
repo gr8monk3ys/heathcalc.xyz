@@ -1,8 +1,6 @@
 import type { MetadataRoute } from 'next';
 
 import { CALCULATOR_CATALOG, CALCULATOR_HUBS } from '@/constants/calculatorCatalog';
-import { defaultLocale, localeToHtmlLang, supportedLocales } from '@/i18n/config';
-import { getIndexableLocales } from '@/i18n/indexing';
 
 const BASE_URL = 'https://www.healthcalc.xyz';
 
@@ -214,31 +212,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const baseEntries = [...staticPages, ...calculatorPages, ...hubPages, ...blogPages];
-  const indexableLocales = getIndexableLocales().filter(locale =>
-    supportedLocales.includes(locale)
-  );
-  const localizedLocales = indexableLocales.filter(locale => locale !== defaultLocale);
+  // Only English URLs for now. Non-English locale routes redirect to English
+  // via middleware (302), so there is nothing to index for other locales.
+  // Each entry gets a self-referencing hreflang=en + x-default pointing at
+  // the same English URL so search engines know this is the canonical version.
+  // TODO: Re-enable hreflang alternates when translations are complete
+  const allEntries = [...staticPages, ...calculatorPages, ...hubPages, ...blogPages];
 
-  const hrefLangAlternates: MetadataRoute.Sitemap = baseEntries.map(entry => {
-    const entryPath = new URL(entry.url).pathname;
-    const languages: Record<string, string> = {
-      'x-default': entry.url,
-      [localeToHtmlLang[defaultLocale]]: entry.url,
-    };
-
-    for (const locale of localizedLocales) {
-      const localizedPath = entryPath === '/' ? `/${locale}` : `/${locale}${entryPath}`;
-      languages[localeToHtmlLang[locale]] = `${BASE_URL}${localizedPath}`;
-    }
-
-    return {
-      ...entry,
-      alternates: {
-        languages,
+  return allEntries.map(entry => ({
+    ...entry,
+    alternates: {
+      languages: {
+        en: entry.url,
+        'x-default': entry.url,
       },
-    };
-  });
-
-  return hrefLangAlternates;
+    },
+  }));
 }
