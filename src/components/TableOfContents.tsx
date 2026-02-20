@@ -114,8 +114,7 @@ export default function TableOfContents({
                       ? 'text-accent font-medium'
                       : 'text-slate-600 dark:text-slate-300'
                   }`}
-                  onClick={e => {
-                    e.preventDefault();
+                  onClick={() => {
                     document.getElementById(item.id)?.scrollIntoView({
                       behavior: 'smooth',
                     });

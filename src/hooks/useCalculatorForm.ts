@@ -3,11 +3,107 @@ import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ component: 'useCalculatorForm' });
 
+// ---------------------------------------------------------------------------
+// Simple focused hook — field state lives in the calling page
+// ---------------------------------------------------------------------------
+
+interface UseCalculatorFormOptions<TResult> {
+  calculate: () => TResult;
+  validate: () => Record<string, string>;
+}
+
+interface UseCalculatorFormReturn<TResult> {
+  result: TResult | null;
+  showResult: boolean;
+  calculationError: string | null;
+  errors: Record<string, string>;
+  setErrors: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleReset: (resetFields?: () => void) => void;
+}
+
+/**
+ * Lightweight hook that centralises the error/result/submission boilerplate
+ * shared by every calculator page.
+ *
+ * Field state (age, height, weight, …) remains in the calling component.
+ * The `calculate` and `validate` arguments are closures over that state.
+ *
+ * @example
+ * const { result, showResult, calculationError, errors, setErrors,
+ *         handleSubmit, handleReset } = useCalculatorForm<MyResult>({
+ *   validate: () => {
+ *     const errs: Record<string, string> = {}
+ *     if (!age) errs.age = 'Age is required'
+ *     return errs
+ *   },
+ *   calculate: () => myCalculator({ age, weight }),
+ * })
+ */
+export function useCalculatorForm<TResult>(
+  options: UseCalculatorFormOptions<TResult>
+): UseCalculatorFormReturn<TResult> {
+  const [result, setResult] = useState<TResult | null>(null);
+  const [showResult, setShowResult] = useState<boolean>(false);
+  const [calculationError, setCalculationError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      setCalculationError(null);
+
+      const newErrors = options.validate();
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+
+      setErrors({});
+
+      try {
+        const calculationResult = options.calculate();
+        setResult(calculationResult);
+        setShowResult(true);
+      } catch (error) {
+        logger.logError('Error during calculation', error);
+        setCalculationError('An error occurred. Please check your inputs.');
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [options.calculate, options.validate]
+  );
+
+  const handleReset = useCallback((resetFields?: () => void) => {
+    setResult(null);
+    setShowResult(false);
+    setErrors({});
+    setCalculationError(null);
+    resetFields?.();
+  }, []);
+
+  return {
+    result,
+    showResult,
+    calculationError,
+    errors,
+    setErrors,
+    handleSubmit,
+    handleReset,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Full-featured hook — manages field values internally
+// (kept for calculators that prefer a single-hook approach)
+// ---------------------------------------------------------------------------
+
 interface FormErrors {
   [key: string]: string | undefined;
 }
 
-interface UseCalculatorFormOptions<T, R> {
+interface UseCalculatorFormWithStateOptions<T, R> {
   initialValues: T;
   validate?: (values: T) => FormErrors;
   calculate: (values: T) => R;
@@ -15,7 +111,7 @@ interface UseCalculatorFormOptions<T, R> {
   calculatorName?: string;
 }
 
-interface UseCalculatorFormReturn<T, R> {
+interface UseCalculatorFormWithStateReturn<T, R> {
   values: T;
   errors: FormErrors;
   result: R | null;
@@ -33,39 +129,18 @@ interface UseCalculatorFormReturn<T, R> {
 }
 
 /**
- * Custom hook for managing calculator form state and logic
- * Reduces boilerplate in calculator pages by centralizing:
- * - Form values state
- * - Error state
- * - Result state
- * - Validation
- * - Calculation with error handling
- * - Scroll to result
+ * Full-featured calculator form hook that also manages field values internally.
  *
- * @example
- * const {
- *   values,
- *   errors,
- *   result,
- *   showResult,
- *   handleChange,
- *   handleSubmit,
- *   resetForm
- * } = useCalculatorForm({
- *   initialValues: { age: '', weight: '', height: '' },
- *   validate: (values) => validateBMIInputs(values),
- *   calculate: (values) => calculateBMI(values),
- *   resultElementId: 'bmi-result',
- *   calculatorName: 'BMI'
- * });
+ * Prefer `useCalculatorForm` (above) when the page already manages its own
+ * field state via `useHeight`, `useWeight`, or individual `useState` calls.
  */
-export function useCalculatorForm<T extends Record<string, unknown>, R>({
+export function useCalculatorFormWithState<T extends Record<string, unknown>, R>({
   initialValues,
   validate,
   calculate,
   resultElementId,
   calculatorName = 'Calculator',
-}: UseCalculatorFormOptions<T, R>): UseCalculatorFormReturn<T, R> {
+}: UseCalculatorFormWithStateOptions<T, R>): UseCalculatorFormWithStateReturn<T, R> {
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [result, setResult] = useState<R | null>(null);
@@ -223,98 +298,5 @@ export function useCalculatorForm<T extends Record<string, unknown>, R>({
     setValues,
     setErrors,
     setFieldValue,
-  };
-}
-
-// Also export the old API as default for backward compatibility
-export default function useCalculatorFormLegacy<T>(initialValues: T) {
-  const [values, setValues] = useState<T>(initialValues);
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isCalculated, setIsCalculated] = useState(false);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement;
-    const parsedValue = type === 'number' ? (value === '' ? '' : Number(value)) : value;
-
-    setValues({
-      ...values,
-      [name]: parsedValue,
-    });
-
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: '',
-      });
-    }
-
-    if (isCalculated) {
-      setIsCalculated(false);
-    }
-  };
-
-  const handleRadioChange = (name: string, value: string | number) => {
-    setValues({
-      ...values,
-      [name]: value,
-    });
-
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: '',
-      });
-    }
-
-    if (isCalculated) {
-      setIsCalculated(false);
-    }
-  };
-
-  const handleSliderChange = (name: string, value: number) => {
-    setValues({
-      ...values,
-      [name]: value,
-    });
-
-    if (isCalculated) {
-      setIsCalculated(false);
-    }
-  };
-
-  const handleSubmit = (
-    e: FormEvent<HTMLFormElement>,
-    validateForm?: (values: T) => FormErrors
-  ) => {
-    e.preventDefault();
-
-    if (validateForm) {
-      const validationErrors = validateForm(values);
-      setErrors(validationErrors);
-
-      if (Object.keys(validationErrors).length > 0) {
-        return;
-      }
-    }
-
-    setIsCalculated(true);
-  };
-
-  const resetForm = () => {
-    setValues(initialValues);
-    setErrors({});
-    setIsCalculated(false);
-  };
-
-  return {
-    values,
-    errors,
-    isCalculated,
-    handleChange,
-    handleRadioChange,
-    handleSliderChange,
-    handleSubmit,
-    resetForm,
-    setValues,
   };
 }

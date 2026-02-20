@@ -151,7 +151,7 @@ export default function IFResult({ result, weightUnit }: IFResultProps) {
           <div className="flex flex-wrap gap-2">
             {result.mealTimes.map((time, index) => (
               <span
-                key={index}
+                key={time}
                 className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-full text-sm font-medium"
               >
                 Meal {index + 1}: {formatTime12Hour(time)}
@@ -258,8 +258,8 @@ export default function IFResult({ result, weightUnit }: IFResultProps) {
           Protocol Benefits
         </h3>
         <ul className="space-y-2">
-          {result.benefits.map((benefit, index) => (
-            <li key={index} className="flex items-start">
+          {result.benefits.map(benefit => (
+            <li key={benefit} className="flex items-start">
               <svg
                 className="w-5 h-5 text-green-500 dark:text-green-400 mr-2 flex-shrink-0 mt-0.5"
                 fill="currentColor"
@@ -283,8 +283,8 @@ export default function IFResult({ result, weightUnit }: IFResultProps) {
           Tips for Success
         </h3>
         <ul className="space-y-2">
-          {result.tips.map((tip, index) => (
-            <li key={index} className="flex items-start">
+          {result.tips.map(tip => (
+            <li key={tip} className="flex items-start">
               <svg
                 className="w-5 h-5 text-blue-500 dark:text-blue-400 mr-2 flex-shrink-0 mt-0.5"
                 fill="currentColor"

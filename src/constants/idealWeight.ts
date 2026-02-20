@@ -1,6 +1,6 @@
 export type IdealWeightFormulaId = 'devine' | 'hamwi' | 'robinson' | 'miller';
 
-export interface IdealWeightFormulaDefinition {
+interface IdealWeightFormulaDefinition {
   id: IdealWeightFormulaId;
   label: string;
   maleBase: number;

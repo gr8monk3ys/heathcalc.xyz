@@ -5,6 +5,5 @@
 
 export {
   calculateMaximumFatLoss,
-  getBodyFatCategory,
   formatBodyFatWithContext,
 } from '@/utils/calculators/maximumFatLoss';

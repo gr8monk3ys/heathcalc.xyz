@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useId, useMemo, useState } from 'react';
 import type { SavedResult } from '@/context/SavedResultsContext';
 import MiniChart from '@/components/ui/MiniChart';
 
@@ -79,6 +79,7 @@ export default function ResultComparison({
   calculatorType: _calculatorType,
   onClose,
 }: ResultComparisonProps): React.JSX.Element {
+  const idPrefix = useId();
   const sorted = useMemo(
     () => [...results].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()),
     [results]
@@ -134,8 +135,14 @@ export default function ResultComparison({
       {/* Selectors */}
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <label className="block text-xs font-medium opacity-60 mb-1">Earlier result</label>
+          <label
+            htmlFor={`${idPrefix}-earlier-result`}
+            className="block text-xs font-medium opacity-60 mb-1"
+          >
+            Earlier result
+          </label>
           <select
+            id={`${idPrefix}-earlier-result`}
             value={leftIndex}
             onChange={e => setLeftIndex(Number(e.target.value))}
             className="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm"
@@ -148,8 +155,14 @@ export default function ResultComparison({
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium opacity-60 mb-1">Later result</label>
+          <label
+            htmlFor={`${idPrefix}-later-result`}
+            className="block text-xs font-medium opacity-60 mb-1"
+          >
+            Later result
+          </label>
           <select
+            id={`${idPrefix}-later-result`}
             value={rightIndex}
             onChange={e => setRightIndex(Number(e.target.value))}
             className="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent px-3 py-2 text-sm"

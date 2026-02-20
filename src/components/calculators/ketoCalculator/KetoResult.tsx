@@ -110,8 +110,8 @@ export default function KetoResultDisplay({ result, ketoType }: KetoResultDispla
                 Important Notes
               </h3>
               <ul className="space-y-1 text-sm text-blue-700 dark:text-blue-300">
-                {result.warnings.map((warning, index) => (
-                  <li key={index}>• {warning}</li>
+                {result.warnings.map(warning => (
+                  <li key={warning}>• {warning}</li>
                 ))}
               </ul>
             </div>
@@ -169,8 +169,8 @@ export default function KetoResultDisplay({ result, ketoType }: KetoResultDispla
           <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
             <h4 className="font-semibold text-green-700 dark:text-green-300 mb-2">Healthy Fats</h4>
             <ul className="text-xs space-y-1 text-gray-700 dark:text-gray-300">
-              {KETO_FOOD_EXAMPLES.fats.map((food, index) => (
-                <li key={index}>• {food}</li>
+              {KETO_FOOD_EXAMPLES.fats.map(food => (
+                <li key={food}>• {food}</li>
               ))}
             </ul>
           </div>
@@ -179,8 +179,8 @@ export default function KetoResultDisplay({ result, ketoType }: KetoResultDispla
               Quality Proteins
             </h4>
             <ul className="text-xs space-y-1 text-gray-700 dark:text-gray-300">
-              {KETO_FOOD_EXAMPLES.proteins.map((food, index) => (
-                <li key={index}>• {food}</li>
+              {KETO_FOOD_EXAMPLES.proteins.map(food => (
+                <li key={food}>• {food}</li>
               ))}
             </ul>
           </div>
@@ -189,8 +189,8 @@ export default function KetoResultDisplay({ result, ketoType }: KetoResultDispla
               Low-Carb Veggies
             </h4>
             <ul className="text-xs space-y-1 text-gray-700 dark:text-gray-300">
-              {KETO_FOOD_EXAMPLES.carbs.map((food, index) => (
-                <li key={index}>• {food}</li>
+              {KETO_FOOD_EXAMPLES.carbs.map(food => (
+                <li key={food}>• {food}</li>
               ))}
             </ul>
           </div>

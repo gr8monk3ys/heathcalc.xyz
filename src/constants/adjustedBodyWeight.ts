@@ -1,1 +1,0 @@
-export const ADJUSTEDBODYWEIGHT_PLACEHOLDER = true;

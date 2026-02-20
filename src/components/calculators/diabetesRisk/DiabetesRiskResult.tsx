@@ -68,8 +68,8 @@ export default function DiabetesRiskResultDisplay({ result }: DiabetesRiskResult
           <h3 className="font-medium mb-2">Risk Factors Identified</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-2">
-              {result.riskFactors.map((factor, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm">
+              {result.riskFactors.map(factor => (
+                <li key={factor} className="flex items-start gap-2 text-sm">
                   <span className="text-red-500 mt-0.5 flex-shrink-0">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path
@@ -93,8 +93,8 @@ export default function DiabetesRiskResultDisplay({ result }: DiabetesRiskResult
           <h3 className="font-medium mb-2">Protective Factors</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-2">
-              {result.protectiveFactors.map((factor, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm">
+              {result.protectiveFactors.map(factor => (
+                <li key={factor} className="flex items-start gap-2 text-sm">
                   <span className="text-green-500 mt-0.5 flex-shrink-0">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path
@@ -118,8 +118,8 @@ export default function DiabetesRiskResultDisplay({ result }: DiabetesRiskResult
           <h3 className="font-medium mb-2">Recommendations</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-2">
-              {result.recommendations.map((rec, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm">
+              {result.recommendations.map(rec => (
+                <li key={rec} className="flex items-start gap-2 text-sm">
                   <span className="text-accent mt-0.5 flex-shrink-0">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path

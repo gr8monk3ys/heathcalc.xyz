@@ -153,7 +153,10 @@ const SubstanceImpactResultDisplay: React.FC<SubstanceImpactResultDisplayProps> 
           <div className="neumorph-inset p-4 rounded-lg">
             <div className="relative">
               {result.healthRecoveryTimeline.map((milestone, index) => (
-                <div key={index} className="flex gap-4 mb-4 last:mb-0">
+                <div
+                  key={`${milestone.timeframe}-${milestone.benefit}`}
+                  className="flex gap-4 mb-4 last:mb-0"
+                >
                   <div className="flex flex-col items-center">
                     <div className="w-3 h-3 rounded-full bg-green-500 flex-shrink-0 mt-1" />
                     {index < result.healthRecoveryTimeline.length - 1 && (
@@ -177,8 +180,8 @@ const SubstanceImpactResultDisplay: React.FC<SubstanceImpactResultDisplayProps> 
           <h3 className="font-medium mb-3">Recommendations</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-2">
-              {result.recommendations.map((rec, index) => (
-                <li key={index} className="flex gap-2 text-sm">
+              {result.recommendations.map(rec => (
+                <li key={rec} className="flex gap-2 text-sm">
                   <span className="text-blue-500 flex-shrink-0 mt-0.5">&#x2022;</span>
                   <span>{rec}</span>
                 </li>

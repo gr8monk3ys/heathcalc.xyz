@@ -203,9 +203,7 @@ function getEmbedWidgetStrings(locale: SupportedLocale): EmbedWidgetStrings {
   }
 }
 
-export default function EmbedWidgetPicker() {
-  const { locale, localizePath } = useLocale();
-  const strings = getEmbedWidgetStrings(locale);
+function useEmbedWidgetPickerState() {
   const [selectedSlug, setSelectedSlug] = useState(CALCULATOR_CATALOG[0]?.slug ?? 'bmi');
   const [height, setHeight] = useState(DEFAULT_HEIGHT);
   const [copied, setCopied] = useState(false);
@@ -217,6 +215,51 @@ export default function EmbedWidgetPicker() {
   const [requestStatus, setRequestStatus] = useState<'idle' | 'sending' | 'success' | 'error'>(
     'idle'
   );
+
+  return {
+    selectedSlug,
+    setSelectedSlug,
+    height,
+    setHeight,
+    copied,
+    setCopied,
+    requestName,
+    setRequestName,
+    requestEmail,
+    setRequestEmail,
+    requestSite,
+    setRequestSite,
+    requestNotes,
+    setRequestNotes,
+    websiteConfirm,
+    setWebsiteConfirm,
+    requestStatus,
+    setRequestStatus,
+  };
+}
+export default function EmbedWidgetPicker() {
+  const { locale, localizePath } = useLocale();
+  const strings = getEmbedWidgetStrings(locale);
+  const {
+    selectedSlug,
+    setSelectedSlug,
+    height,
+    setHeight,
+    copied,
+    setCopied,
+    requestName,
+    setRequestName,
+    requestEmail,
+    setRequestEmail,
+    requestSite,
+    setRequestSite,
+    requestNotes,
+    setRequestNotes,
+    websiteConfirm,
+    setWebsiteConfirm,
+    requestStatus,
+    setRequestStatus,
+  } = useEmbedWidgetPickerState();
 
   const selectedCalculator = useMemo(
     () => CALCULATOR_CATALOG.find(item => item.slug === selectedSlug),

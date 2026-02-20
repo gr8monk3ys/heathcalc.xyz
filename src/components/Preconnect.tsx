@@ -3,6 +3,13 @@
 import React from 'react';
 import Head from 'next/head';
 
+const EMPTY_DOMAINS: string[] = [];
+const DEFAULT_PRECONNECT_DOMAINS = [
+  'https://www.google-analytics.com',
+  'https://fonts.googleapis.com',
+  'https://fonts.gstatic.com',
+];
+
 interface PreconnectProps {
   domains?: string[];
 }
@@ -12,16 +19,9 @@ interface PreconnectProps {
  * Improves performance by reducing connection setup time
  * Helps with Core Web Vitals (LCP, FID, CLS)
  */
-export default function Preconnect({ domains = [] }: PreconnectProps) {
-  // Default domains to preconnect to
-  const defaultDomains = [
-    'https://www.google-analytics.com',
-    'https://fonts.googleapis.com',
-    'https://fonts.gstatic.com',
-  ];
-
+export default function Preconnect({ domains = EMPTY_DOMAINS }: PreconnectProps) {
   // Combine default and custom domains, removing duplicates
-  const allDomains = Array.from(new Set([...defaultDomains, ...domains]));
+  const allDomains = Array.from(new Set([...DEFAULT_PRECONNECT_DOMAINS, ...domains]));
 
   return (
     <Head>

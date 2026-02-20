@@ -5,14 +5,45 @@ import { useLocale } from '@/context/LocaleContext';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
-export default function ContactForm() {
-  const { t } = useLocale();
+function useContactFormState() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<FormStatus>('idle');
   const [statusMessage, setStatusMessage] = useState('');
+
+  return {
+    name,
+    setName,
+    email,
+    setEmail,
+    subject,
+    setSubject,
+    message,
+    setMessage,
+    status,
+    setStatus,
+    statusMessage,
+    setStatusMessage,
+  };
+}
+export default function ContactForm() {
+  const { t } = useLocale();
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    subject,
+    setSubject,
+    message,
+    setMessage,
+    status,
+    setStatus,
+    statusMessage,
+    setStatusMessage,
+  } = useContactFormState();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();

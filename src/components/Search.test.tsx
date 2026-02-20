@@ -377,7 +377,7 @@ describe('SearchPage', () => {
     });
   });
 
-  it('renders loading state initially', async () => {
+  it('renders initial query results once the index is loaded', async () => {
     window.history.pushState({}, '', '/search?q=bmi');
     render(<SearchPage />);
 
@@ -386,7 +386,9 @@ describe('SearchPage', () => {
     });
 
     expect(screen.getByText('Search Results')).toBeInTheDocument();
-    expect(screen.queryByText(/Found .* for "bmi"/)).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/Found .* for "bmi"/)).toBeInTheDocument();
+    });
   });
 
   it('renders search results after entering a query', async () => {

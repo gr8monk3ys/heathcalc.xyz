@@ -16,7 +16,7 @@ export function getPublicSiteUrl(): string {
   return normalizeSiteUrl(configured) ?? DEFAULT_PUBLIC_SITE_URL;
 }
 
-export function getPublicSiteHost(): string {
+function _getPublicSiteHost(): string {
   return new URL(getPublicSiteUrl()).host;
 }
 

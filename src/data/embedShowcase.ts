@@ -1,11 +1,11 @@
-export interface EmbedShowcaseItem {
+interface EmbedShowcaseItem {
   name: string;
   url: string;
   calculator: string;
   note: string;
 }
 
-export interface EmbedPartnerLogo {
+interface EmbedPartnerLogo {
   name: string;
   logo: string;
 }

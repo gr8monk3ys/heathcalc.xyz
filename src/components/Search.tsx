@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createLogger } from '@/utils/logger';
@@ -195,6 +195,12 @@ interface SearchResult {
   score: number;
 }
 
+interface SearchUiState {
+  results: SearchResult[];
+  isLoading: boolean;
+  showResults: boolean;
+}
+
 interface SearchIndex {
   [key: string]: {
     title: string;
@@ -207,12 +213,79 @@ interface SearchIndex {
   };
 }
 
+async function loadSearchIndexData(): Promise<SearchIndex> {
+  try {
+    const response = await fetch('/search-index.json');
+    const data = (await response.json()) as SearchIndex;
+    return data;
+  } catch (error) {
+    logger.logError('Error loading search index', error);
+    return {};
+  }
+}
+
+function getSearchResultTypeIcon(type: string) {
+  switch (type) {
+    case 'calculator':
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+          />
+        </svg>
+      );
+    case 'article':
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+          />
+        </svg>
+      );
+    default:
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+          />
+        </svg>
+      );
+  }
+}
+
 interface SearchProps {
   placeholder?: string;
   maxResults?: number;
   className?: string;
   showIcon?: boolean;
-  autoFocus?: boolean;
+  shouldAutoFocus?: boolean;
   onSearch?: (query: string, results: SearchResult[]) => void;
   initialQuery?: string; // Initial query value
 }
@@ -226,7 +299,7 @@ export default function Search({
   maxResults = 10,
   className = '',
   showIcon = true,
-  autoFocus = false,
+  shouldAutoFocus = false,
   onSearch,
   initialQuery = '',
 }: SearchProps) {
@@ -234,38 +307,46 @@ export default function Search({
   const { locale, localizePath } = useLocale();
   const strings = getSearchStrings(locale);
   const resolvedPlaceholder = placeholder ?? strings.inputPlaceholder;
-  const [query, setQuery] = useState(initialQuery);
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+  const initialQueryRef = useRef(initialQuery);
+  const [query, setQuery] = useState(initialQueryRef.current);
+  const [searchUi, setSearchUi] = useState<SearchUiState>({
+    results: [],
+    isLoading: false,
+    showResults: false,
+  });
+  const { results, isLoading, showResults } = searchUi;
   const [searchIndex, setSearchIndex] = useState<SearchIndex | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const onSearchRef = useRef(onSearch);
+
+  useEffect(() => {
+    onSearchRef.current = onSearch;
+  }, [onSearch]);
 
   // Load search index
   useEffect(() => {
-    const loadSearchIndex = async () => {
-      try {
-        // In a real implementation, this would be a proper search index
-        // For now, we'll use a static JSON file
-        const response = await fetch('/search-index.json');
-        const data = await response.json();
-        setSearchIndex(data);
-      } catch (error) {
-        logger.logError('Error loading search index', error);
-        // Fallback to empty index
-        setSearchIndex({});
+    let mounted = true;
+    void loadSearchIndexData().then(data => {
+      if (!mounted) {
+        return;
       }
-    };
+      setSearchIndex(data);
+    });
 
-    loadSearchIndex();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   // Handle click outside to close results
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowResults(false);
+        setSearchUi(prevState => ({
+          ...prevState,
+          showResults: false,
+        }));
       }
     };
 
@@ -277,131 +358,150 @@ export default function Search({
 
   // Auto-focus input if specified
   useEffect(() => {
-    if (autoFocus && inputRef.current) {
+    if (shouldAutoFocus && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [autoFocus]);
+  }, [shouldAutoFocus]);
 
   // Handle search
-  const handleSearch = (searchQuery: string) => {
-    if (!searchIndex || searchQuery.trim().length < 2) {
-      setResults([]);
-      setShowResults(false);
+  const handleSearch = useCallback(
+    (searchQuery: string) => {
+      if (!searchIndex) {
+        return;
+      }
+
+      setSearchUi(prevState => ({
+        ...prevState,
+        isLoading: true,
+      }));
+
+      // Split query into terms
+      const terms = searchQuery.toLowerCase().trim().split(/\s+/);
+
+      // Search through index
+      const searchResults: SearchResult[] = Object.values(searchIndex)
+        .map(item => {
+          // Calculate score based on matches in title, description, content, tags
+          let score = 0;
+
+          // Title matches (highest weight)
+          terms.forEach(term => {
+            if (item.title.toLowerCase().includes(term)) {
+              score += 10;
+              // Exact title match or starts with term
+              if (
+                item.title.toLowerCase() === term ||
+                item.title.toLowerCase().startsWith(`${term} `)
+              ) {
+                score += 15;
+              }
+            }
+          });
+
+          // Description matches
+          terms.forEach(term => {
+            if (item.description.toLowerCase().includes(term)) {
+              score += 5;
+            }
+          });
+
+          // Content matches
+          if (item.content) {
+            terms.forEach(term => {
+              const contentMatches = (
+                item.content?.toLowerCase().match(new RegExp(term, 'g')) || []
+              ).length;
+              score += contentMatches * 0.5; // Lower weight for content matches
+            });
+          }
+
+          // Tag matches
+          if (item.tags) {
+            terms.forEach(term => {
+              item.tags?.forEach(tag => {
+                if (tag.toLowerCase().includes(term)) {
+                  score += 8;
+                  // Exact tag match
+                  if (tag.toLowerCase() === term) {
+                    score += 5;
+                  }
+                }
+              });
+            });
+          }
+
+          // Category matches
+          if (item.category) {
+            terms.forEach(term => {
+              if (item.category?.toLowerCase().includes(term)) {
+                score += 7;
+              }
+            });
+          }
+
+          // URL matches (for direct page searches)
+          terms.forEach(term => {
+            if (item.url.toLowerCase().includes(term)) {
+              score += 3;
+            }
+          });
+          // Type-specific boosts
+          if (item.type === 'calculator') {
+            score *= 1.2; // Boost calculators
+          }
+
+          return {
+            title: item.title,
+            description: item.description,
+            url: item.url,
+            type: item.type,
+            category: item.category,
+            tags: item.tags,
+            score,
+          };
+        })
+        .filter(item => item.score > 0) // Only include items with matches
+        .sort((a, b) => b.score - a.score) // Sort by score (descending)
+        .slice(0, maxResults); // Limit results
+
+      setSearchUi({
+        results: searchResults,
+        showResults: true,
+        isLoading: false,
+      });
+      onSearchRef.current?.(searchQuery, searchResults);
+    },
+    [maxResults, searchIndex]
+  );
+
+  useEffect(() => {
+    const trimmedQuery = query.trim();
+
+    if (trimmedQuery.length < 2) {
+      setSearchUi({
+        results: [],
+        showResults: false,
+        isLoading: false,
+      });
+      onSearchRef.current?.(query, []);
       return;
     }
 
-    setIsLoading(true);
-
-    // Split query into terms
-    const terms = searchQuery.toLowerCase().trim().split(/\s+/);
-
-    // Search through index
-    const searchResults: SearchResult[] = Object.values(searchIndex)
-      .map(item => {
-        // Calculate score based on matches in title, description, content, tags
-        let score = 0;
-
-        // Title matches (highest weight)
-        terms.forEach(term => {
-          if (item.title.toLowerCase().includes(term)) {
-            score += 10;
-            // Exact title match or starts with term
-            if (
-              item.title.toLowerCase() === term ||
-              item.title.toLowerCase().startsWith(`${term} `)
-            ) {
-              score += 15;
-            }
-          }
-        });
-
-        // Description matches
-        terms.forEach(term => {
-          if (item.description.toLowerCase().includes(term)) {
-            score += 5;
-          }
-        });
-
-        // Content matches
-        if (item.content) {
-          terms.forEach(term => {
-            const contentMatches = (item.content?.toLowerCase().match(new RegExp(term, 'g')) || [])
-              .length;
-            score += contentMatches * 0.5; // Lower weight for content matches
-          });
-        }
-
-        // Tag matches
-        if (item.tags) {
-          terms.forEach(term => {
-            item.tags?.forEach(tag => {
-              if (tag.toLowerCase().includes(term)) {
-                score += 8;
-                // Exact tag match
-                if (tag.toLowerCase() === term) {
-                  score += 5;
-                }
-              }
-            });
-          });
-        }
-
-        // Category matches
-        if (item.category) {
-          terms.forEach(term => {
-            if (item.category?.toLowerCase().includes(term)) {
-              score += 7;
-            }
-          });
-        }
-
-        // URL matches (for direct page searches)
-        terms.forEach(term => {
-          if (item.url.toLowerCase().includes(term)) {
-            score += 3;
-          }
-        });
-
-        // Type-specific boosts
-        if (item.type === 'calculator') {
-          score *= 1.2; // Boost calculators
-        }
-
-        return {
-          title: item.title,
-          description: item.description,
-          url: item.url,
-          type: item.type,
-          category: item.category,
-          tags: item.tags,
-          score,
-        };
-      })
-      .filter(item => item.score > 0) // Only include items with matches
-      .sort((a, b) => b.score - a.score) // Sort by score (descending)
-      .slice(0, maxResults); // Limit results
-
-    setResults(searchResults);
-    setShowResults(true);
-    setIsLoading(false);
-
-    // Call onSearch callback if provided
-    if (onSearch) {
-      onSearch(searchQuery, searchResults);
+    if (!searchIndex) {
+      setSearchUi(prevState => ({
+        ...prevState,
+        isLoading: true,
+      }));
+      return;
     }
-  };
+
+    handleSearch(query);
+  }, [handleSearch, query, searchIndex]);
 
   // Handle input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-
-    if (value.trim().length >= 2) {
-      handleSearch(value);
-    } else {
-      setResults([]);
-      setShowResults(false);
-    }
   };
 
   // Handle form submission
@@ -411,74 +511,99 @@ export default function Search({
     if (query.trim().length >= 2) {
       // Navigate to search results page
       router.push(`${localizePath('/search')}?q=${encodeURIComponent(query)}`);
-      setShowResults(false);
+      setSearchUi(prevState => ({
+        ...prevState,
+        showResults: false,
+      }));
     }
   };
 
   // Handle result click
   const handleResultClick = (url: string) => {
-    setShowResults(false);
+    setSearchUi(prevState => ({
+      ...prevState,
+      showResults: false,
+    }));
     const localizedUrl = url.startsWith('/') ? localizePath(url) : url;
     router.push(localizedUrl);
   };
 
-  // Get icon for result type
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'calculator':
-        return (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-            />
-          </svg>
-        );
-      case 'article':
-        return (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-            />
-          </svg>
-        );
-      default:
-        return (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
-        );
+  const handleInputFocus = useCallback(() => {
+    if (query.trim().length < 2) {
+      return;
     }
-  };
+    setSearchUi(prevState => ({
+      ...prevState,
+      showResults: true,
+    }));
+  }, [query]);
 
+  const handleViewAllResultsClick = useCallback(() => {
+    setSearchUi(prevState => ({
+      ...prevState,
+      showResults: false,
+    }));
+  }, []);
+
+  return (
+    <SearchAutocompleteView
+      className={className}
+      searchRef={searchRef}
+      handleSubmit={handleSubmit}
+      showIcon={showIcon}
+      inputRef={inputRef}
+      resolvedPlaceholder={resolvedPlaceholder}
+      query={query}
+      handleInputChange={handleInputChange}
+      onInputFocus={handleInputFocus}
+      strings={strings}
+      isLoading={isLoading}
+      showResults={showResults}
+      results={results}
+      handleResultClick={handleResultClick}
+      localizePath={localizePath}
+      onViewAllResultsClick={handleViewAllResultsClick}
+    />
+  );
+}
+
+interface SearchAutocompleteViewProps {
+  className: string;
+  searchRef: React.RefObject<HTMLDivElement | null>;
+  handleSubmit: (e: React.FormEvent) => void;
+  showIcon: boolean;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  resolvedPlaceholder: string;
+  query: string;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onInputFocus: () => void;
+  strings: SearchStrings;
+  isLoading: boolean;
+  showResults: boolean;
+  results: SearchResult[];
+  handleResultClick: (url: string) => void;
+  localizePath: (path: string) => string;
+  onViewAllResultsClick: () => void;
+}
+
+function SearchAutocompleteView({
+  className,
+  searchRef,
+  handleSubmit,
+  showIcon,
+  inputRef,
+  resolvedPlaceholder,
+  query,
+  handleInputChange,
+  onInputFocus,
+  strings,
+  isLoading,
+  showResults,
+  results,
+  handleResultClick,
+  localizePath,
+  onViewAllResultsClick,
+}: SearchAutocompleteViewProps) {
   return (
     <div className={`relative ${className}`} ref={searchRef}>
       <form onSubmit={handleSubmit} role="search">
@@ -509,7 +634,7 @@ export default function Search({
             placeholder={resolvedPlaceholder}
             value={query}
             onChange={handleInputChange}
-            onFocus={() => query.trim().length >= 2 && setShowResults(true)}
+            onFocus={onInputFocus}
             aria-label={strings.ariaLabel}
             autoComplete="off"
           />
@@ -546,14 +671,14 @@ export default function Search({
           <div className="max-h-60 overflow-y-auto py-2">
             {results.length > 0 ? (
               <ul className="divide-y divide-gray-100">
-                {results.map((result, index) => (
-                  <li key={index}>
+                {results.map(result => (
+                  <li key={`${result.type}-${result.url}`}>
                     <button
                       className="flex w-full items-start px-4 py-2 text-left hover:bg-gray-50"
                       onClick={() => handleResultClick(result.url)}
                     >
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500 mr-3">
-                        {getTypeIcon(result.type)}
+                        {getSearchResultTypeIcon(result.type)}
                       </span>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900 truncate">{result.title}</p>
@@ -578,7 +703,7 @@ export default function Search({
               <Link
                 href={`${localizePath('/search')}?q=${encodeURIComponent(query)}`}
                 className="text-xs font-medium text-accent hover:text-accent-dark"
-                onClick={() => setShowResults(false)}
+                onClick={onViewAllResultsClick}
               >
                 {strings.dropdownViewAllResults}
                 <svg
@@ -621,11 +746,11 @@ export function SearchPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Handle search results
-  const handleSearchResults = (searchQuery: string, searchResults: SearchResult[]) => {
+  const handleSearchResults = useCallback((searchQuery: string, searchResults: SearchResult[]) => {
     setQuery(searchQuery);
     setResults(searchResults);
     setIsLoading(false);
-  };
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -634,7 +759,7 @@ export function SearchPage() {
       <div className="mb-8">
         <Search
           maxResults={100}
-          autoFocus={true}
+          shouldAutoFocus={true}
           onSearch={handleSearchResults}
           initialQuery={query}
         />
@@ -671,8 +796,8 @@ export function SearchPage() {
 
           {results.length > 0 ? (
             <ul className="space-y-6">
-              {results.map((result, index) => (
-                <li key={index} className="neumorph p-4 rounded-lg">
+              {results.map(result => (
+                <li key={`${result.type}-${result.url}`} className="neumorph p-4 rounded-lg">
                   <Link
                     href={result.url.startsWith('/') ? localizePath(result.url) : result.url}
                     className="block hover:no-underline"

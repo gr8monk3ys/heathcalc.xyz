@@ -1,14 +1,11 @@
 import type { SupportedLocale } from '@/i18n/config';
 
-export type LocalizedCalculatorHub = {
+type LocalizedCalculatorHub = {
   title: string;
   description: string;
 };
 
-export const CALCULATOR_HUB_COPY: Record<
-  SupportedLocale,
-  Record<string, LocalizedCalculatorHub>
-> = {
+const CALCULATOR_HUB_COPY: Record<SupportedLocale, Record<string, LocalizedCalculatorHub>> = {
   en: {
     'weight-loss': {
       title: 'Weight Loss & Management',

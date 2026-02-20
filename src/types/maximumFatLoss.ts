@@ -44,13 +44,13 @@ export interface MaximumFatLossResult {
 }
 
 // Constants based on research
-export const MAX_FAT_OXIDATION_RATE = {
+const _MAX_FAT_OXIDATION_RATE = {
   conservative: 22, // kcal per lb of body fat per day (Alpert 2005)
   moderate: 26.5, // kcal per lb of body fat per day (average)
   aggressive: 31, // kcal per lb of body fat per day (upper limit)
 };
 
-export const SAFE_BODY_FAT_MINIMUMS = {
+const _SAFE_BODY_FAT_MINIMUMS = {
   male: 5, // Minimum safe body fat % for males
   female: 12, // Minimum safe body fat % for females
 };

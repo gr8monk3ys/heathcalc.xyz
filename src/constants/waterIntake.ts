@@ -1,6 +1,6 @@
 export type WaterIntakeActivity = 'low' | 'moderate' | 'high';
 
-export interface WaterIntakeActivityOption {
+interface WaterIntakeActivityOption {
   value: WaterIntakeActivity;
   label: string;
   description: string;

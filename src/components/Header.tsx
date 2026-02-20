@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
@@ -16,7 +16,8 @@ export default function Header(): React.JSX.Element {
   const { preferences } = usePreferences();
   const { localizePath, t } = useLocale();
   const { darkMode } = preferences;
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openMenuPathname, setOpenMenuPathname] = useState<string | null>(null);
+  const mobileMenuOpen = openMenuPathname === pathname;
   const normalizedPathname = stripLocaleFromPathname(pathname);
 
   const quickLinks = [
@@ -25,11 +26,6 @@ export default function Header(): React.JSX.Element {
     { name: t('header.quick.learn'), path: '/learn' },
     { name: t('header.quick.saved'), path: '/saved-results' },
   ];
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-40 px-3 pt-3 md:px-4 md:pt-4">
@@ -70,14 +66,16 @@ export default function Header(): React.JSX.Element {
               <LanguageSwitcher />
             </div>
             <DarkModeToggle />
-            <UnitToggle />
+            <UnitToggle className="hidden sm:flex" />
             <div className="hidden lg:block">
               <AuthControls />
             </div>
             <button
               type="button"
-              onClick={() => setMobileMenuOpen(prev => !prev)}
-              className="lg:hidden elevated-pill p-2 transition-all hover:-translate-y-0.5"
+              onClick={() => {
+                setOpenMenuPathname(prev => (prev === pathname ? null : pathname));
+              }}
+              className="relative z-20 lg:hidden elevated-pill p-2 transition-all hover:-translate-y-0.5"
               aria-label={mobileMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
               aria-expanded={mobileMenuOpen}
             >
@@ -125,10 +123,16 @@ export default function Header(): React.JSX.Element {
             <div className="py-1">
               <LanguageSwitcher />
             </div>
+            <div className="py-1 sm:hidden">
+              <UnitToggle />
+            </div>
             {quickLinks.map(link => (
               <Link
                 key={link.path}
                 href={localizePath(link.path)}
+                onClick={() => {
+                  setOpenMenuPathname(null);
+                }}
                 aria-current={normalizedPathname === link.path ? 'page' : undefined}
                 className={`block rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
                   normalizedPathname === link.path

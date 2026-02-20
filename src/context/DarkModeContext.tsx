@@ -16,7 +16,7 @@ interface DarkModePreferences {
 }
 
 // Context type for dark mode
-export interface DarkModeContextType {
+interface DarkModeContextType {
   darkMode: boolean;
   setDarkMode: (enabled: boolean) => void;
   toggleDarkMode: () => void;

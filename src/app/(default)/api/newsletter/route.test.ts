@@ -32,11 +32,12 @@ describe('POST /api/newsletter', () => {
   let POST: (req: NextRequest) => Promise<Response>;
   let verifyCsrf: ReturnType<typeof vi.fn>;
   let rateLimit: ReturnType<typeof vi.fn>;
+  let saveNewsletterSubmission: ReturnType<typeof vi.fn>;
+  let isSubmissionPersistenceStrictModeEnabled: ReturnType<typeof vi.fn>;
 
   beforeEach(async () => {
     vi.resetModules();
 
-    // Re-apply mocks after reset
     vi.doMock('@/utils/csrf', () => ({
       verifyCsrf: vi.fn(() => true),
     }));
@@ -50,6 +51,10 @@ describe('POST /api/newsletter', () => {
         error: vi.fn(),
       }),
     }));
+    vi.doMock('@/lib/db/submissions', () => ({
+      saveNewsletterSubmission: vi.fn(async () => ({ success: true, driver: 'sqlite' })),
+      isSubmissionPersistenceStrictModeEnabled: vi.fn(() => false),
+    }));
 
     const route = await import('./route');
     POST = route.POST;
@@ -60,8 +65,14 @@ describe('POST /api/newsletter', () => {
     const rlMod = await import('@/utils/rateLimit');
     rateLimit = rlMod.rateLimit as unknown as ReturnType<typeof vi.fn>;
 
+    const dbMod = await import('@/lib/db/submissions');
+    saveNewsletterSubmission = dbMod.saveNewsletterSubmission as unknown as ReturnType<
+      typeof vi.fn
+    >;
+    isSubmissionPersistenceStrictModeEnabled =
+      dbMod.isSubmissionPersistenceStrictModeEnabled as unknown as ReturnType<typeof vi.fn>;
+
     vi.stubEnv('NODE_ENV', 'development');
-    vi.stubEnv('SUBMISSIONS_DB_DRIVER', 'sqlite');
   });
 
   it('should accept valid email and return success', async () => {
@@ -115,11 +126,12 @@ describe('POST /api/newsletter', () => {
   });
 
   it('should return 503 when strict persistence mode is enabled and storage fails', async () => {
-    const dbMod = await import('@/lib/db/submissions');
-    await dbMod.resetSubmissionStoreForTests();
-
-    vi.stubEnv('SUBMISSIONS_PERSISTENCE_STRICT', 'true');
-    vi.stubEnv('SQLITE_DB_PATH', '/tmp');
+    isSubmissionPersistenceStrictModeEnabled.mockReturnValue(true);
+    saveNewsletterSubmission.mockResolvedValue({
+      success: false,
+      driver: 'sqlite',
+      error: 'write failed',
+    });
 
     const res = await POST(makeRequest({ email: 'test@example.com' }));
     const data = await res.json();

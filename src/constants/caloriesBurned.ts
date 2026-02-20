@@ -1,4 +1,4 @@
-export interface CaloriesBurnedActivity {
+interface CaloriesBurnedActivity {
   value: string;
   label: string;
   met: number;

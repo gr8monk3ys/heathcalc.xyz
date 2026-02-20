@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useUnitPreferences } from '@/hooks/useUnitPreferences';
 import { UnitSystem } from '@/types/common';
 
@@ -14,35 +14,11 @@ interface UnitToggleProps {
  */
 export default function UnitToggle({ className = '' }: UnitToggleProps): React.JSX.Element {
   const { unitSystem, setUnitSystem } = useUnitPreferences();
-  const [mounted, setMounted] = useState(false);
-
-  // Only render after hydration to avoid mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleUnitSystem = (): void => {
     const newSystem: UnitSystem = unitSystem === 'metric' ? 'imperial' : 'metric';
     setUnitSystem(newSystem);
   };
-
-  // Show a placeholder during SSR/hydration to avoid mismatch
-  if (!mounted) {
-    return (
-      <div className={`flex items-center ${className}`}>
-        <span className="mr-2 text-sm font-medium text-slate-600 dark:text-slate-300">Units:</span>
-        <button
-          className="elevated-pill flex items-center rounded-full px-3 py-1 text-sm"
-          aria-label="Toggle units"
-          disabled
-        >
-          <span className="text-gray-500">Metric</span>
-          <span className="mx-2 text-gray-400">|</span>
-          <span className="text-gray-500">Imperial</span>
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div className={`flex items-center ${className}`}>
@@ -80,27 +56,10 @@ export default function UnitToggle({ className = '' }: UnitToggleProps): React.J
  */
 export function HeightUnitToggle({ className = '' }: UnitToggleProps): React.JSX.Element {
   const { heightUnit, setHeightUnit } = useUnitPreferences();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleHeightUnit = (): void => {
     setHeightUnit(heightUnit === 'cm' ? 'ft' : 'cm');
   };
-
-  if (!mounted) {
-    return (
-      <button
-        className={`elevated-pill rounded-full px-3 py-1 text-sm ${className}`}
-        aria-label="Toggle height unit"
-        disabled
-      >
-        cm
-      </button>
-    );
-  }
 
   return (
     <button
@@ -119,27 +78,10 @@ export function HeightUnitToggle({ className = '' }: UnitToggleProps): React.JSX
  */
 export function WeightUnitToggle({ className = '' }: UnitToggleProps): React.JSX.Element {
   const { weightUnit, setWeightUnit } = useUnitPreferences();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleWeightUnit = (): void => {
     setWeightUnit(weightUnit === 'kg' ? 'lb' : 'kg');
   };
-
-  if (!mounted) {
-    return (
-      <button
-        className={`elevated-pill rounded-full px-3 py-1 text-sm ${className}`}
-        aria-label="Toggle weight unit"
-        disabled
-      >
-        kg
-      </button>
-    );
-  }
 
   return (
     <button
@@ -158,27 +100,10 @@ export function WeightUnitToggle({ className = '' }: UnitToggleProps): React.JSX
  */
 export function EnergyUnitToggle({ className = '' }: UnitToggleProps): React.JSX.Element {
   const { energyUnit, setEnergyUnit } = useUnitPreferences();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleEnergyUnit = (): void => {
     setEnergyUnit(energyUnit === 'kcal' ? 'kj' : 'kcal');
   };
-
-  if (!mounted) {
-    return (
-      <button
-        className={`elevated-pill rounded-full px-3 py-1 text-sm ${className}`}
-        aria-label="Toggle energy unit"
-        disabled
-      >
-        kcal
-      </button>
-    );
-  }
 
   return (
     <button

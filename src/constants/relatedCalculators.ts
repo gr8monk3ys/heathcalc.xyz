@@ -1,4 +1,4 @@
-export interface RelatedCalculator {
+interface RelatedCalculator {
   slug: string;
   title: string;
   description: string;

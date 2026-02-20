@@ -99,7 +99,7 @@ export const PERCENTAGE_CHART_TEMPLATE: Omit<PercentageChartEntry, 'weight'>[] =
 /**
  * Default values for the 1RM calculator
  */
-export const DEFAULT_ONE_REP_MAX_VALUES = {
+const _DEFAULT_ONE_REP_MAX_VALUES = {
   weight: 100,
   weightKg: 100,
   weightLb: 225,
@@ -110,7 +110,7 @@ export const DEFAULT_ONE_REP_MAX_VALUES = {
 /**
  * Validation ranges for 1RM inputs
  */
-export const ONE_REP_MAX_VALIDATION = {
+const _ONE_REP_MAX_VALIDATION = {
   weight: {
     kg: { min: 1, max: 500 },
     lb: { min: 2, max: 1100 },
@@ -121,7 +121,7 @@ export const ONE_REP_MAX_VALIDATION = {
 /**
  * Color palette for the percentage chart visualization
  */
-export const PERCENTAGE_CHART_COLORS = {
+const PERCENTAGE_CHART_COLORS = {
   high: '#EF4444', // 90-100% - red (maximal strength)
   medium: '#F59E0B', // 70-89% - amber (hypertrophy/strength)
   low: '#10B981', // below 70% - green (endurance)

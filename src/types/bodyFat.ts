@@ -42,7 +42,7 @@ export interface BodyFatResult {
 /**
  * Form data for body fat calculation
  */
-export interface BodyFatFormData {
+interface _BodyFatFormData {
   gender: Gender;
   age: number;
   height: number;

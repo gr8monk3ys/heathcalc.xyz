@@ -55,18 +55,52 @@ async function getAuthenticatedUserId(): Promise<string | null> {
 }
 
 /**
- * Resolve the owner key for saved results. When Supabase auth is
- * available and the user is signed in, use their user ID. Otherwise
- * fall back to the anonymous static key for backwards compatibility.
+ * Cookie name used to store the anonymous session UUID. HttpOnly so JS
+ * cannot read or tamper with it, scoped per-browser to prevent data leakage
+ * between different anonymous visitors.
  */
-const ANONYMOUS_USER_ID = 'anonymous';
+const ANON_COOKIE_NAME = '_hc_anon';
 
-async function resolveUserId(): Promise<string> {
-  const authenticatedId = await getAuthenticatedUserId();
-  return authenticatedId ?? ANONYMOUS_USER_ID;
+/**
+ * Reads the anonymous session cookie and returns a namespaced user ID.
+ * If no valid cookie exists, generates a new UUID. The caller is responsible
+ * for setting the cookie on the response when isNew is true.
+ */
+function getAnonymousSession(request: NextRequest): { userId: string; isNew: boolean } {
+  const existing = request.cookies.get(ANON_COOKIE_NAME)?.value;
+  if (existing && /^[0-9a-f-]{36}$/.test(existing)) {
+    return { userId: `anon_${existing}`, isNew: false };
+  }
+  const newId = crypto.randomUUID();
+  return { userId: `anon_${newId}`, isNew: true };
 }
 
-export async function GET(): Promise<NextResponse> {
+function setAnonCookie(response: NextResponse, userId: string): void {
+  const uuid = userId.slice('anon_'.length);
+  response.cookies.set(ANON_COOKIE_NAME, uuid, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 365,
+    path: '/',
+  });
+}
+
+/**
+ * Resolve the owner key for saved results. When Supabase auth is available
+ * and the user is signed in, use their user ID. Otherwise use a per-browser
+ * anonymous session ID derived from a cookie so each visitor's data is
+ * isolated from other anonymous visitors.
+ */
+async function resolveUserId(request: NextRequest): Promise<{ userId: string; isNew: boolean }> {
+  const authenticatedId = await getAuthenticatedUserId();
+  if (authenticatedId) {
+    return { userId: authenticatedId, isNew: false };
+  }
+  return getAnonymousSession(request);
+}
+
+export async function GET(request: NextRequest): Promise<NextResponse> {
   if (!isSavedResultsPostgresConfigured()) {
     return NextResponse.json(
       { success: false, error: 'Saved results database is not configured.' },
@@ -74,7 +108,7 @@ export async function GET(): Promise<NextResponse> {
     );
   }
 
-  const userId = await resolveUserId();
+  const { userId, isNew } = await resolveUserId(request);
   const rows = await listSavedResults(userId, 30);
   const results: ApiSavedResult[] = rows.map(row => ({
     id: row.resultKey,
@@ -84,7 +118,9 @@ export async function GET(): Promise<NextResponse> {
     data: row.data,
   }));
 
-  return NextResponse.json({ success: true, results }, { status: 200 });
+  const response = NextResponse.json({ success: true, results }, { status: 200 });
+  if (isNew) setAnonCookie(response, userId);
+  return response;
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -106,9 +142,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ success: false, error: message }, { status: 400 });
   }
 
-  const userId = await resolveUserId();
+  const { userId, isNew } = await resolveUserId(request);
   const saved = await upsertSavedResult(userId, parsed.data);
-  return NextResponse.json({ success: true, result: toApiResult(saved) }, { status: 200 });
+  const response = NextResponse.json(
+    { success: true, result: toApiResult(saved) },
+    { status: 200 }
+  );
+  if (isNew) setAnonCookie(response, userId);
+  return response;
 }
 
 export async function DELETE(request: NextRequest): Promise<NextResponse> {
@@ -123,7 +164,9 @@ export async function DELETE(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const userId = await resolveUserId();
+  const { userId, isNew } = await resolveUserId(request);
   const deleted = await clearSavedResults(userId);
-  return NextResponse.json({ success: true, deleted }, { status: 200 });
+  const response = NextResponse.json({ success: true, deleted }, { status: 200 });
+  if (isNew) setAnonCookie(response, userId);
+  return response;
 }

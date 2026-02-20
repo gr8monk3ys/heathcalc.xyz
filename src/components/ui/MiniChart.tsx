@@ -163,7 +163,7 @@ export default function MiniChart({
         {showDots &&
           points.map((p, i) => (
             <circle
-              key={i}
+              key={`${p.date}-${p.value}-${p.x}`}
               cx={p.x}
               cy={p.y}
               r={hoveredIndex === i ? 4.5 : 3}
@@ -180,9 +180,9 @@ export default function MiniChart({
 
         {/* X-axis date labels */}
         {points.length <= 8
-          ? points.map((p, i) => (
+          ? points.map(p => (
               <text
-                key={i}
+                key={`label-${p.date}-${p.x}`}
                 x={p.x}
                 y={height - 4}
                 textAnchor="middle"
@@ -195,7 +195,7 @@ export default function MiniChart({
             ))
           : [0, Math.floor(points.length / 2), points.length - 1].map(i => (
               <text
-                key={i}
+                key={`summary-label-${points[i].date}-${points[i].x}`}
                 x={points[i].x}
                 y={height - 4}
                 textAnchor="middle"

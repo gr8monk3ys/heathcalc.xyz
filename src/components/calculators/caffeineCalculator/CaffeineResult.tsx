@@ -74,8 +74,11 @@ const CaffeineResultDisplay: React.FC<CaffeineResultDisplayProps> = ({ result })
         <div className="mb-6">
           <h3 className="font-medium mb-3">Caffeine Sources Breakdown</h3>
           <div className="neumorph-inset p-4 rounded-lg space-y-3">
-            {result.sourceBreakdown.map((source, index) => (
-              <div key={index} className="flex justify-between items-center">
+            {result.sourceBreakdown.map(source => (
+              <div
+                key={`${source.source}-${source.servings}-${source.caffeineMg}`}
+                className="flex justify-between items-center"
+              >
                 <div className="flex-1">
                   <p className="font-medium">{source.source}</p>
                   <p className="text-xs text-gray-600">{source.servings} serving(s)</p>

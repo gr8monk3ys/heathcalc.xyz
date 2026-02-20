@@ -79,8 +79,8 @@ export default function BodyShapeResultDisplay({ result }: BodyShapeResultDispla
           Health Implications
         </p>
         <ul className="space-y-1">
-          {result.healthImplications.map((item, index) => (
-            <li key={index} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
+          {result.healthImplications.map(item => (
+            <li key={item} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
               <span className="text-accent mr-2 mt-0.5" aria-hidden="true">
                 *
               </span>
@@ -96,8 +96,8 @@ export default function BodyShapeResultDisplay({ result }: BodyShapeResultDispla
           Exercise Recommendations
         </p>
         <ul className="space-y-1">
-          {result.exerciseRecommendations.map((item, index) => (
-            <li key={index} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
+          {result.exerciseRecommendations.map(item => (
+            <li key={item} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
               <span className="text-accent mr-2 mt-0.5" aria-hidden="true">
                 *
               </span>
@@ -111,8 +111,8 @@ export default function BodyShapeResultDisplay({ result }: BodyShapeResultDispla
       <div className="neumorph-inset p-5 rounded-lg">
         <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Nutrition Tips</p>
         <ul className="space-y-1">
-          {result.nutritionTips.map((item, index) => (
-            <li key={index} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
+          {result.nutritionTips.map(item => (
+            <li key={item} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
               <span className="text-accent mr-2 mt-0.5" aria-hidden="true">
                 *
               </span>

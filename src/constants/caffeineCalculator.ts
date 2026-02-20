@@ -66,7 +66,7 @@ export const SENSITIVITY_DESCRIPTIONS: Record<SensitivityLevel, string> = {
 /**
  * Default form values
  */
-export const DEFAULT_CAFFEINE_VALUES = {
+const _DEFAULT_CAFFEINE_VALUES = {
   weight: 70,
   weightUnit: 'kg' as const,
   sources: [{ source: 'coffee' as CaffeineSource, servings: 2 }],
@@ -77,7 +77,7 @@ export const DEFAULT_CAFFEINE_VALUES = {
 /**
  * Validation ranges for caffeine calculator
  */
-export const CAFFEINE_VALIDATION = {
+const _CAFFEINE_VALIDATION = {
   servings: { min: 0, max: 20 },
   maxSources: 8,
 };

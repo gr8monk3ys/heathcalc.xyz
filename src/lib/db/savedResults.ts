@@ -4,7 +4,7 @@ import { computeSavedResultKey } from '@/utils/savedResultsKey';
 
 const logger = createLogger({ component: 'SavedResultsStore' });
 
-export interface SavedResultRow {
+interface SavedResultRow {
   resultKey: string;
   calculatorType: string;
   calculatorName: string;
@@ -177,7 +177,7 @@ export async function clearSavedResults(userId: string): Promise<number> {
   return res.rowCount ?? 0;
 }
 
-export async function resetSavedResultsStoreForTests(): Promise<void> {
+async function _resetSavedResultsStoreForTests(): Promise<void> {
   if (pool) {
     await pool.end();
     pool = null;

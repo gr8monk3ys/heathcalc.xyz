@@ -1,1 +1,0 @@
-export const BODYSURFACEAREA_PLACEHOLDER = true;

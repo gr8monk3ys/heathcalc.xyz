@@ -3,10 +3,15 @@
  * Prevents garbage input and ensures data integrity
  */
 
-export interface ValidationResult {
-  isValid: boolean;
-  error?: string;
-}
+export type ValidationResult =
+  | {
+      isValid: true;
+      error?: undefined;
+    }
+  | {
+      isValid: false;
+      error: string;
+    };
 
 /**
  * Realistic ranges for health metrics

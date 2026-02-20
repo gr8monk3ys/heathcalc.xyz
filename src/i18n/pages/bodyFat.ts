@@ -2,7 +2,7 @@ import 'server-only';
 
 import type { SupportedLocale } from '@/i18n/config';
 
-export type BodyFatMetaCopy = {
+type BodyFatMetaCopy = {
   title: string;
   description: string;
   keywords: string;

@@ -144,8 +144,8 @@ const ACFTResultDisplay: React.FC<ACFTResultDisplayProps> = ({ result }) => {
           <h3 className="font-medium mb-2">Strengths</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-1">
-              {result.strengths.map((strength, index) => (
-                <li key={index} className="flex items-start text-sm">
+              {result.strengths.map(strength => (
+                <li key={strength} className="flex items-start text-sm">
                   <span className="text-green-500 mr-2 mt-0.5 flex-shrink-0">&#10003;</span>
                   <span>{strength}</span>
                 </li>
@@ -161,8 +161,8 @@ const ACFTResultDisplay: React.FC<ACFTResultDisplayProps> = ({ result }) => {
           <h3 className="font-medium mb-2">Weaknesses</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-1">
-              {result.weaknesses.map((weakness, index) => (
-                <li key={index} className="flex items-start text-sm">
+              {result.weaknesses.map(weakness => (
+                <li key={weakness} className="flex items-start text-sm">
                   <span className="text-red-500 mr-2 mt-0.5 flex-shrink-0">&#10007;</span>
                   <span>{weakness}</span>
                 </li>
@@ -178,8 +178,8 @@ const ACFTResultDisplay: React.FC<ACFTResultDisplayProps> = ({ result }) => {
           <h3 className="font-medium mb-2">Training Recommendations</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-2">
-              {result.recommendations.map((rec, index) => (
-                <li key={index} className="text-sm">
+              {result.recommendations.map(rec => (
+                <li key={rec} className="text-sm">
                   {rec}
                 </li>
               ))}

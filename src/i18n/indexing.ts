@@ -9,7 +9,7 @@ let cached: SupportedLocale[] | null = null;
  *
  * Configure via `I18N_INDEXABLE_LOCALES` (comma-separated). Defaults to `en`.
  */
-export function getIndexableLocales(): SupportedLocale[] {
+function getIndexableLocales(): SupportedLocale[] {
   if (cached) return cached;
 
   const raw = (process.env.I18N_INDEXABLE_LOCALES ?? '').trim();

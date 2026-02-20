@@ -8,7 +8,7 @@
  * - Consistent log format
  */
 
-export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
+type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
 interface LogMeta {
   [key: string]: unknown;
@@ -166,8 +166,6 @@ export function createLogger(defaultMeta: LogMeta = {}) {
 
 // Default logger instance
 const logger = createLogger();
-
-export default logger;
 
 // Convenience exports for direct usage
 export const { debug, info, warn, error, logError } = logger;

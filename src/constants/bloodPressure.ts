@@ -1,6 +1,6 @@
 export type BloodPressureCategoryId = 'normal' | 'elevated' | 'stage1' | 'stage2' | 'crisis';
 
-export interface BloodPressureCategory {
+interface BloodPressureCategory {
   id: BloodPressureCategoryId;
   label: string;
   range: string;

@@ -83,8 +83,8 @@ export default function CalorieDeficitResultDisplay({
                 Important Considerations
               </h3>
               <ul className="space-y-1 text-sm text-yellow-700 dark:text-yellow-300">
-                {result.warnings.map((warning, index) => (
-                  <li key={index}>• {warning}</li>
+                {result.warnings.map(warning => (
+                  <li key={warning}>• {warning}</li>
                 ))}
               </ul>
             </div>
@@ -171,13 +171,13 @@ export default function CalorieDeficitResultDisplay({
           <div className="relative h-64">
             <svg className="w-full h-full" viewBox="0 0 600 250">
               {/* Grid lines */}
-              {[0, 1, 2, 3, 4].map(i => (
+              {[50, 90, 130, 170, 210].map(lineY => (
                 <line
-                  key={`grid-${i}`}
+                  key={`grid-${lineY}`}
                   x1="50"
-                  y1={50 + i * 40}
+                  y1={lineY}
                   x2="580"
-                  y2={50 + i * 40}
+                  y2={lineY}
                   stroke="currentColor"
                   strokeOpacity="0.1"
                   className="text-gray-400"

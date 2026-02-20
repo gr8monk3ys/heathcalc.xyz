@@ -1,6 +1,6 @@
 // Common types used across multiple calculators
 
-export interface CalculationResult {
+interface _CalculationResult {
   value: number;
   unit?: string;
   category?: string;
@@ -9,11 +9,11 @@ export interface CalculationResult {
   status?: 'success' | 'warning' | 'danger' | 'info';
 }
 
-export interface FormError {
+interface _FormError {
   [key: string]: string;
 }
 
-export interface GaugeSegment {
+interface _GaugeSegment {
   value: number;
   color: string;
   label: string;
@@ -30,7 +30,7 @@ export type ActivityLevel =
   | 'very_active'
   | 'extremely_active';
 
-export interface ActivityFactor {
+interface _ActivityFactor {
   value: number;
   label: string;
   description: string;
@@ -65,7 +65,7 @@ export type TemperatureUnit = 'c' | 'f';
 
 export type EnergyUnit = 'kcal' | 'kj';
 
-export interface MenuItem {
+interface _MenuItem {
   name: string;
   path: string;
   description: string;

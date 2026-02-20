@@ -1,1 +1,0 @@
-export const CALORIESBURNEDRUNNING_PLACEHOLDER = true;

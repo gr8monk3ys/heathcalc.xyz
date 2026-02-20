@@ -1,11 +1,11 @@
-export const DEFAULT_ADSENSE_PUBLISHER_ID = 'ca-pub-4505962980988232';
+const DEFAULT_ADSENSE_PUBLISHER_ID = 'ca-pub-4505962980988232';
 const ADSENSE_PUBLISHER_ID_PATTERN = /^ca-pub-\d{16}$/;
 
 function normalizePublisherId(value: string | undefined): string {
   return value?.trim() ?? '';
 }
 
-export function isValidAdSensePublisherId(value: string | undefined): boolean {
+function isValidAdSensePublisherId(value: string | undefined): boolean {
   return ADSENSE_PUBLISHER_ID_PATTERN.test(normalizePublisherId(value));
 }
 

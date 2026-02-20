@@ -264,5 +264,3 @@ export function ResultsEmailCapture({
     </div>
   );
 }
-
-export default ResultsEmailCapture;

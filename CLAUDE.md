@@ -4,168 +4,181 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-HealthCheck is a Next.js 16 health calculator application with 44+ fully functional calculators and 40+ blog posts. Built with TypeScript, React 19, and TailwindCSS.
-
-**Calculator Categories:** Body Composition (11), Weight Management (4), Metabolism & Energy (3), Nutrition & Macros (4), Performance & Training (12), Wellness & Recovery (2), Pregnancy & Fertility (4), Health & Vitals (2), Utilities (3), plus 5 new specialty calculators (FFMI, Body Recomposition, Intermittent Fasting, Keto Macros, Caffeine Intake)
+HealthCheck is a Next.js 16 health calculator application with 52 calculators and 66+ blog posts. Built with TypeScript, React 19, and TailwindCSS v4.
 
 ## Development Commands
 
-This project uses **Bun** as the package manager and runtime for faster installs and execution.
+This project uses **Bun** as the package manager. Install with `bun install` (lockfile: `bun.lock`). Bun may not be on PATH in sandboxed shells — use `export PATH="$HOME/.bun/bin:$PATH"` if commands are not found.
 
 ```bash
 # Development
 bun run dev                    # Start dev server at localhost:3000
 bun run build                  # Build for production
-bun run start                  # Start production server
+bun run start                  # Start production server (requires build first)
 
-# Testing (uses Vitest with jsdom environment)
-bun run test                   # Run all tests (859 tests across 18 files)
-bun run test -- --run          # Run tests once (CI mode)
-bun run test:watch             # Watch mode
-bun run test:coverage          # Run with coverage report
-bun run test -- src/utils/calculators/bmi.test.ts  # Run single test file
+# Unit tests (Vitest, jsdom environment)
+bun run test                   # Run all 1712 unit tests across 89 files
+bun run test -- --run          # Run once (CI mode, no watch)
+bun run test -- src/utils/calculators/bmi.test.ts  # Run single file
 
-# Code Quality
-bun run lint                   # ESLint check
+# E2E tests (Playwright, separate from Vitest)
+bun run test:e2e               # Run all 84 E2E tests (requires no server running)
+npx playwright install chromium  # Install browser binary (first time only)
+
+# Code quality
+bun run lint                   # ESLint
 bun run lint:fix               # Auto-fix lint errors
-bun run format                 # Format with Prettier
-bun run format:check           # Check formatting
-bun run type-check             # TypeScript type check
-bun run validate               # Run all checks + tests
-
-# Maintenance
-bun run clean                  # Remove .next, out, cache
+bun run format                 # Prettier write
+bun run type-check             # TypeScript check
+bun run validate               # All checks + tests
 ```
-
-Note: Install dependencies with `bun install`. The lockfile is `bun.lock`.
 
 ## Architecture
 
-### File-Based Routing (Next.js App Router)
+### Route Groups
 
-- **Calculator routes:** `src/app/[calculator-name]/page.tsx` (client components with `'use client'`)
-- **Metadata:** All calculators use `layout.tsx` with exported `metadata` object
-- **API routes:** `src/app/api/` re-export from `src/utils/calculators/` (no business logic here)
+All user-facing routes live under two route groups in `src/app/`:
 
-### Calculation Logic (Primary Location)
+- `(default)/` — English routes. All calculator pages, blog, static pages.
+- `(localized)/[locale]/` — Locale-prefixed mirrors (e.g. `/es/bmi`). These pages re-export from their `(default)` counterparts; translation is incomplete and non-English paths redirect to English via middleware.
 
-All calculation logic lives in `src/utils/calculators/`:
+Calculator pages are client components (`'use client'`), all others are server components.
 
-- `bmi.ts` - BMI with adult/child support
-- `tdee.ts` - Multiple formulas (Mifflin-St Jeor, Harris-Benedict, Katch-McArdle), also exports shared `calculateBMR()` and `calculateTDEE()` used by other calculators
-- `bodyFat.ts` - Navy method & BMI method
-- `bodyFatBurn.ts` - Activity-based calorie burn
-- `absi.ts` - ABSI and waist-to-height ratio
-- `whr.ts` - Waist-to-hip ratio
-- `calorieDeficit.ts`, `weightManagement.ts`, `maximumFatLoss.ts` - Import BMR/TDEE from `tdee.ts`
-- Each has a corresponding `.test.ts` file
+### Calculator Registry
+
+`src/constants/calculatorCatalog.ts` is the **single source of truth** for all 52 calculators. It exports:
+
+- `CALCULATOR_CATALOG` — full list with slug, title, description, category, hub assignment
+- `CALCULATOR_HUBS` — the 10 category hub pages
+
+The dynamic sitemap (`src/app/(default)/sitemap.ts`) generates `/sitemap.xml` from this catalog automatically. Do **not** maintain a static `public/sitemap.xml`.
+
+### Adding a New Calculator
+
+1. Add an entry to `CALCULATOR_CATALOG` in `src/constants/calculatorCatalog.ts`
+2. Create route folder `src/app/(default)/[slug]/` with `page.tsx` + `layout.tsx`
+3. Add types in `src/types/[name].ts`
+4. Add calculation logic + tests in `src/utils/calculators/[name].ts` + `[name].test.ts`
+5. Add constants in `src/constants/[name].ts`
+6. Create components in `src/components/calculators/[name]/`
+7. Add API re-export in `src/app/(default)/api/[name]/route.ts`
+8. Add the slug to `e2e/calculators-all.spec.ts` (`CALCULATOR_SLUGS` array)
+
+The sitemap updates automatically from step 1.
+
+### Calculation Logic
+
+All calculation logic lives in `src/utils/calculators/`. Key shared exports from `tdee.ts`:
+
+- `calculateBMR()` and `calculateTDEE()` — imported by `calorieDeficit.ts`, `weightManagement.ts`, `maximumFatLoss.ts`, and others. Don't re-implement these.
 
 ### Input Validation
 
-Use `src/utils/validation.ts` for all input validation:
+Always use `src/utils/validation.ts`:
 
 - `validateAge()`, `validateHeight()`, `validateWeight()`, `validateWaist()`, etc.
-- All validators return `{ isValid: boolean, error?: string, sanitized?: number }`
-- `VALIDATION_RANGES` contains min/max values
+- All return `{ isValid: boolean, error?: string, sanitized?: number }`
+- `VALIDATION_RANGES` has the min/max bounds.
 
 ### Unit Conversions
 
-Single source of truth: `src/utils/conversions.ts`
+Single source of truth: `src/utils/conversions.ts`. Do not add conversion logic elsewhere.
 
-- `heightFtInToCm()`, `heightCmToFtIn()`, `weightLbToKg()`, `weightKgToLb()`
-- `convertHeight()`, `convertWeight()`, `convertTemperature()`, `convertLength()`
-- Do NOT add conversion logic elsewhere
+### Shared Calculator Hooks
+
+`src/hooks/` contains shared logic used across calculator pages:
+
+- `useCalculatorForm` — primary hook for form state, validation, submission, reset
+- `useCalculatorUnits` — metric/imperial toggle tied to `PreferencesContext`
+- `useFormWithValidation` — lower-level hook for form field validation
+- `useSavedResultsManager` — handles saving/loading results via Supabase or localStorage
+- `useLocalStorage` — typed localStorage access
 
 ### State Management
 
-Two React Contexts in `src/app/layout.tsx`:
+Two React Contexts in `src/app/(default)/layout.tsx`:
 
-- `PreferencesContext` - User preferences (units, dark mode) persisted to localStorage
-- `SavedResultsContext` - Calculator result history
+- `PreferencesContext` — units (metric/imperial), dark mode, persisted to localStorage
+- `SavedResultsContext` — calculator result history, syncs to Supabase when authenticated
+
+### Database Layer
+
+`src/lib/db/` contains two modules that support a **dual-backend** pattern (PostgreSQL via `pg` or SQLite for local dev):
+
+- `submissions.ts` — newsletter, contact, embed-request form submissions with retention sweeps
+- `savedResults.ts` — user saved calculator results (`user_saved_results` table, JSONB data column)
+
+Connection strings: `SUBMISSIONS_POSTGRES_URL`, `SAVED_RESULTS_POSTGRES_URL`, `DATABASE_URL`. Driver selection via `SUBMISSIONS_DB_DRIVER` env var.
+
+### Auth
+
+Supabase auth with magic link (email OTP). `src/lib/supabase/` contains client helpers. Row Level Security is enabled on saved results — users can only read/write their own rows.
+
+### Blog System
+
+Blog posts live in `src/app/(default)/blog/[slug]/`. Adding a post requires updating **4 places**:
+
+1. `src/app/(default)/blog/page.tsx` — `blogPosts` array (index listing)
+2. `src/app/(default)/blog/[slug]/page.tsx` — `BLOG_POSTS` map + `AFFILIATE_BLOG_SLUGS` set
+3. `src/constants/affiliates.ts` — for affiliate posts: products, guides, link mappings
+4. `src/constants/blogMetadata.ts` — SEO metadata map (consumed by `blog/[slug]/layout.tsx`)
+
+Blog images: `/public/images/blog/[slug].jpg` at 1200×630px.
+Amazon affiliate tag: `gr8monk3ys-20`. Link format: `https://www.amazon.com/dp/ASIN?tag=gr8monk3ys-20`
 
 ### Component Organization
 
 ```
 src/components/
-├── ui/                         # Reusable primitives (buttons, cards, inputs)
-├── calculators/                # Calculator-specific components
-│   ├── bmi/                    # BMIResult, BMIUnderstanding, etc.
-│   ├── tdee/
-│   └── ...
-├── Header.tsx, Footer.tsx      # Layout components
-└── ErrorBoundary.tsx           # Error handling (use withErrorBoundary HOC)
+├── ui/                     # Reusable primitives (buttons, cards, inputs)
+├── calculators/            # Per-calculator result and display components
+├── ReviewedBy.tsx          # Editorial reviewer byline
+├── MethodologyBadge.tsx    # Methodology source badge
+└── ErrorBoundary.tsx       # HOC: withErrorBoundary
 ```
 
-### Types
+### SEO
 
-- Calculator form data and results: `src/types/[calculator-name].ts`
-- Common types (Gender, ActivityLevel): `src/types/common.ts`
+- Per-page metadata in `layout.tsx`. Blog SEO centralized in `src/constants/blogMetadata.ts`.
+- Structured data: `GlobalStructuredData` component (Schema.org JSON-LD)
+- Dynamic XML sitemap: `src/app/(default)/sitemap.ts` (serves `/sitemap.xml`)
+- HTML sitemap page does **not** exist — the `sitemap.ts` metadata route owns `/sitemap`
 
-## Key Patterns
+### Middleware
 
-### Adding a New Calculator
+`src/middleware.ts` — trailing slash removal, www → non-www redirects (301), locale detection and routing.
 
-1. Create route folder: `src/app/[calculator-name]/`
-2. Add `page.tsx` (client component) and `metadata.ts`
-3. Create types in `src/types/[calculator-name].ts`
-4. Add calculation logic in `src/utils/calculators/[calculator-name].ts`
-5. **Add tests** in `src/utils/calculators/[calculator-name].test.ts`
-6. Add constants in `src/constants/[calculator-name].ts`
-7. Create components in `src/components/calculators/[calculator-name]/`
-8. Add API re-export in `src/app/api/[calculator-name].ts`
-9. Update `public/sitemap.xml`
+### CI/CD
 
-### Testing Pattern
+`.github/workflows/ci.yml` runs a single `quality-checks` job: format → lint → type-check → unit tests → build → server start → smoke checks → E2E tests. Playwright report uploaded as artifact on failure. Lighthouse runs on PRs only. Security audit runs in parallel.
 
-Tests use Vitest with jsdom environment:
+## Testing
+
+### Unit tests (Vitest)
 
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { calculateBMI } from './bmi';
 
 describe('BMI Calculation', () => {
-  it('should calculate BMI correctly', () => {
-    const result = calculateBMI({ weight: 70, height: 175 });
-    expect(result.bmi).toBeCloseTo(22.86, 2);
+  it('calculates correctly', () => {
+    expect(calculateBMI({ weight: 70, height: 175 }).bmi).toBeCloseTo(22.86, 2);
   });
 });
 ```
 
-## Infrastructure
+Vitest config: `vitest.config.mjs`. Excludes `e2e/` (Playwright files must not be picked up by Vitest). Zod v4 requires `server.deps.inline: ['zod']` — already configured.
 
-### SEO
+### E2E tests (Playwright)
 
-- Metadata in `metadata.ts` or `layout.tsx` for each page
-- Structured data via `GlobalStructuredData` component (Schema.org JSON-LD)
-- Sitemap at `public/sitemap.xml`
+- `e2e/calculators-all.spec.ts` — smoke test for all 52 calculator slugs (h1 visible, no 404/500)
+- `e2e/bmi.spec.ts`, `tdee.spec.ts`, `body-fat.spec.ts` — full interaction tests
+- `e2e/navigation.spec.ts`, `calculators.spec.ts` — page-level smoke tests
 
-### Middleware
-
-`src/middleware.ts` handles URL canonicalization, trailing slash removal, www redirects (301)
-
-### PWA
-
-Service worker in `public/sw.js`, manifest at `public/manifest.json`, auto-registered via `PWAInit` component
-
-### Styling
-
-TailwindCSS with neumorphic design tokens in `tailwind.config.js`. Import alias `@/*` maps to `src/*`.
-
-### CI/CD
-
-GitHub Actions workflow at `.github/workflows/ci.yml`:
-
-- Runs on Node 18.x and 20.x
-- format:check → lint → type-check → tests → build
-- Lighthouse performance checks on PRs
-- Security audit
+**Selector discipline**: Playwright `getByLabel`/`getByRole` do **substring matching** by default. Always use `{ exact: true }` for short common words (`'Age'`, `'Male'`, `'Calculate'`) — "Language" contains "age", "Female" contains "male", FAQ buttons contain "calculate".
 
 ## Known Issues
 
-### Bundle Size
-
-Body Fat Burn calculator (`/body-fat-burn`) is ~50% larger than other calculators. Consider auditing dependencies.
-
 ### Code Duplication
 
-Each calculator page reimplements form handling (150-260 lines). Consider extracting common form logic.
+Calculator pages still reimplement some form handling. `useCalculatorForm` in `src/hooks/` was introduced to address this but not all calculators have been migrated.

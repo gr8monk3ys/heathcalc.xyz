@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useId, ReactNode } from 'react';
+import React, { useState, useId, ReactNode, useRef } from 'react';
 
 interface AccordionProps {
   title: string;
@@ -9,7 +9,8 @@ interface AccordionProps {
 }
 
 export default function Accordion({ title, children, defaultOpen = false }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const initialOpenRef = useRef(defaultOpen);
+  const [isOpen, setIsOpen] = useState(initialOpenRef.current);
   const id = useId();
   const buttonId = `${id}-accordion-button`;
   const panelId = `${id}-accordion-panel`;

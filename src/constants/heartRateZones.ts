@@ -1,6 +1,6 @@
 export type HeartRateZoneId = 'zone1' | 'zone2' | 'zone3' | 'zone4' | 'zone5';
 
-export interface HeartRateZoneDefinition {
+interface HeartRateZoneDefinition {
   id: HeartRateZoneId;
   label: string;
   minPercent: number;

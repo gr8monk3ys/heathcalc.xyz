@@ -12,7 +12,7 @@ export const EDITORIAL_TEAM: Reviewer = {
 };
 
 // Placeholder for when a real advisor is added
-export const PLACEHOLDER_REVIEWER: Reviewer = {
+const _PLACEHOLDER_REVIEWER: Reviewer = {
   name: 'HealthCheck Editorial Team',
   credentials: '',
   title: 'Evidence-Based Review',

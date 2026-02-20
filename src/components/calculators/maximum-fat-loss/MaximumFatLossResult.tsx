@@ -72,8 +72,8 @@ export default function MaximumFatLossResultDisplay({
                 Important Notes
               </h3>
               <ul className="space-y-1 text-sm text-yellow-700 dark:text-yellow-300">
-                {result.warnings.map((warning, index) => (
-                  <li key={index}>• {warning}</li>
+                {result.warnings.map(warning => (
+                  <li key={warning}>• {warning}</li>
                 ))}
               </ul>
             </div>
@@ -176,8 +176,8 @@ export default function MaximumFatLossResultDisplay({
                 </tr>
               </thead>
               <tbody>
-                {result.projections.map((proj, idx) => (
-                  <tr key={idx} className="border-b border-gray-100 dark:border-gray-800">
+                {result.projections.map(proj => (
+                  <tr key={proj.weeks} className="border-b border-gray-100 dark:border-gray-800">
                     <td className="py-2">{proj.weeks}</td>
                     <td className="text-right py-2">
                       {weightUnit === 'kg'

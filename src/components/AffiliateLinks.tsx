@@ -111,12 +111,17 @@ function StarRating({ rating }: { rating: number }) {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+  const fullStarKeys = Array.from({ length: fullStars }, (_, starIndex) => `full-${starIndex + 1}`);
+  const emptyStarKeys = Array.from(
+    { length: emptyStars },
+    (_, starIndex) => `empty-${starIndex + 1}`
+  );
 
   return (
     <div className="flex items-center gap-0.5" aria-label={`Rating: ${rating} out of 5 stars`}>
-      {[...Array(fullStars)].map((_, i) => (
+      {fullStarKeys.map(starKey => (
         <svg
-          key={`full-${i}`}
+          key={starKey}
           className="w-4 h-4 text-warning"
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -144,9 +149,9 @@ function StarRating({ rating }: { rating: number }) {
           />
         </svg>
       )}
-      {[...Array(emptyStars)].map((_, i) => (
+      {emptyStarKeys.map(starKey => (
         <svg
-          key={`empty-${i}`}
+          key={starKey}
           className="w-4 h-4 text-gray-300 dark:text-gray-600"
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -321,16 +326,3 @@ export default function AffiliateLinks({
     </section>
   );
 }
-
-/**
- * Memoized version of AffiliateLinks for performance optimization
- */
-export const MemoizedAffiliateLinks = React.memo(AffiliateLinks, (prevProps, nextProps) => {
-  return (
-    prevProps.calculatorType === nextProps.calculatorType &&
-    prevProps.maxProducts === nextProps.maxProducts &&
-    prevProps.showDisclosure === nextProps.showDisclosure &&
-    prevProps.title === nextProps.title &&
-    prevProps.className === nextProps.className
-  );
-});

@@ -5,6 +5,7 @@ import { useDynamicImport } from '@/hooks/useDynamicImport';
 import { createLogger } from '@/utils/logger';
 
 const logger = createLogger({ component: 'DynamicComponent' });
+const EMPTY_COMPONENT_PROPS: Record<string, unknown> = {};
 
 interface DynamicComponentProps {
   importFn: () => Promise<{ default: React.ComponentType<Record<string, unknown>> }>;
@@ -35,7 +36,7 @@ interface DynamicComponentProps {
  *   loadOnVisible={true}
  * />
  */
-export default function DynamicComponent({
+export function DynamicComponent({
   importFn,
   loading = <div className="animate-pulse h-32 w-full bg-gray-100 rounded-lg"></div>,
   fallback = (
@@ -45,7 +46,7 @@ export default function DynamicComponent({
   ),
   loadOnMount = true,
   loadOnVisible = true,
-  props = {},
+  props = EMPTY_COMPONENT_PROPS,
 }: DynamicComponentProps) {
   const { Component, isLoading, error, ref } = useDynamicImport(importFn, {
     loadOnMount,

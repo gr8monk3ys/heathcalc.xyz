@@ -1,19 +1,12 @@
 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-  useCallback,
-} from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { useLocalStorage, LocalStorageError } from '@/hooks/useLocalStorage';
 import { useDarkMode } from './DarkModeContext';
 import { useUnitSystem } from './UnitSystemContext';
 
 // Define the types for our preferences (kept for backward compatibility)
-export interface UserPreferences {
+interface UserPreferences {
   darkMode: boolean;
   unitSystem: 'metric' | 'imperial';
   heightUnit: 'cm' | 'ft';
@@ -79,10 +72,6 @@ function PreferencesProviderInner({ children }: { children: ReactNode }) {
       onError: handleStorageError,
     });
 
-  // Initialize additional preferences from localStorage
-  const [additionalPrefs, setAdditionalPrefs] =
-    useState<AdditionalPreferences>(storedAdditionalPrefs);
-
   // Dismiss storage error notification
   const dismissStorageError = useCallback(() => {
     setDisplayedError(null);
@@ -90,31 +79,32 @@ function PreferencesProviderInner({ children }: { children: ReactNode }) {
     unitSystemContext.dismissStorageError();
   }, [darkModeContext, unitSystemContext]);
 
-  // Update localStorage when additional preferences change
-  useEffect(() => {
-    setStoredAdditionalPrefs(additionalPrefs);
-  }, [additionalPrefs, setStoredAdditionalPrefs]);
-
   // Additional preference setters
-  const setSaveHistory = useCallback((enabled: boolean) => {
-    setAdditionalPrefs(prev => ({ ...prev, saveHistory: enabled }));
-  }, []);
+  const setSaveHistory = useCallback(
+    (enabled: boolean) => {
+      setStoredAdditionalPrefs(prev => ({ ...prev, saveHistory: enabled }));
+    },
+    [setStoredAdditionalPrefs]
+  );
 
-  const setNotificationsEnabled = useCallback((enabled: boolean) => {
-    setAdditionalPrefs(prev => ({ ...prev, notificationsEnabled: enabled }));
+  const setNotificationsEnabled = useCallback(
+    (enabled: boolean) => {
+      setStoredAdditionalPrefs(prev => ({ ...prev, notificationsEnabled: enabled }));
 
-    // Request notification permission if enabled
-    if (enabled && typeof window !== 'undefined' && 'Notification' in window) {
-      Notification.requestPermission();
-    }
-  }, []);
+      // Request notification permission if enabled
+      if (enabled && typeof window !== 'undefined' && 'Notification' in window) {
+        Notification.requestPermission();
+      }
+    },
+    [setStoredAdditionalPrefs]
+  );
 
   // Reset all preferences to defaults
   const resetPreferences = useCallback(() => {
     darkModeContext.setDarkMode(false);
     unitSystemContext.setUnitSystem('metric');
-    setAdditionalPrefs(defaultAdditionalPreferences);
-  }, [darkModeContext, unitSystemContext]);
+    setStoredAdditionalPrefs(defaultAdditionalPreferences);
+  }, [darkModeContext, setStoredAdditionalPrefs, unitSystemContext]);
 
   // Build the combined preferences object for backward compatibility
   const preferences: UserPreferences = {
@@ -123,8 +113,8 @@ function PreferencesProviderInner({ children }: { children: ReactNode }) {
     heightUnit: unitSystemContext.heightUnit,
     weightUnit: unitSystemContext.weightUnit,
     energyUnit: unitSystemContext.energyUnit,
-    saveHistory: additionalPrefs.saveHistory,
-    notificationsEnabled: additionalPrefs.notificationsEnabled,
+    saveHistory: storedAdditionalPrefs.saveHistory,
+    notificationsEnabled: storedAdditionalPrefs.notificationsEnabled,
   };
 
   // Combine storage errors from all contexts
@@ -218,9 +208,3 @@ export function usePreferences(): PreferencesContextType {
 
   return context;
 }
-
-// Re-export the split context hooks for direct access
-export { useDarkMode } from './DarkModeContext';
-export { useUnitSystem } from './UnitSystemContext';
-export type { DarkModeContextType } from './DarkModeContext';
-export type { UnitSystemContextType } from './UnitSystemContext';

@@ -11,7 +11,7 @@ import React, {
 import { getSupabaseBrowserClient, isSupabaseEnabled } from '@/lib/supabase/client';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
 
-export interface AuthUser {
+interface AuthUser {
   id: string;
   email: string;
   name: string;
@@ -48,8 +48,14 @@ interface AuthProviderProps {
  */
 export function AuthProvider({ children }: AuthProviderProps): React.JSX.Element {
   const enabled = isSupabaseEnabled();
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [isLoading, setIsLoading] = useState(enabled);
+  const [authState, setAuthState] = useState<{
+    user: AuthUser | null;
+    isLoading: boolean;
+  }>({
+    user: null,
+    isLoading: enabled,
+  });
+  const { user, isLoading } = authState;
 
   useEffect(() => {
     if (!enabled) return;
@@ -59,22 +65,20 @@ export function AuthProvider({ children }: AuthProviderProps): React.JSX.Element
 
     // Get the initial session.
     supabase.auth.getUser().then(({ data }) => {
-      if (data.user) {
-        setUser(mapSupabaseUser(data.user));
-      }
-      setIsLoading(false);
+      setAuthState({
+        user: data.user ? mapSupabaseUser(data.user) : null,
+        isLoading: false,
+      });
     });
 
     // Listen for auth state changes (sign in, sign out, token refresh).
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        setUser(mapSupabaseUser(session.user));
-      } else {
-        setUser(null);
-      }
-      setIsLoading(false);
+      setAuthState({
+        user: session?.user ? mapSupabaseUser(session.user) : null,
+        isLoading: false,
+      });
     });
 
     return () => {
@@ -115,7 +119,7 @@ export function AuthProvider({ children }: AuthProviderProps): React.JSX.Element
     if (supabase) {
       await supabase.auth.signOut();
     }
-    setUser(null);
+    setAuthState(prevState => ({ ...prevState, user: null }));
   }, []);
 
   const value: AuthContextState = {
@@ -129,8 +133,6 @@ export function AuthProvider({ children }: AuthProviderProps): React.JSX.Element
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
-
-export { AuthContext };
 
 export function useAuth(): AuthContextState {
   const context = useContext(AuthContext);

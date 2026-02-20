@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo } from 'react';
 import { toPng } from 'html-to-image';
 import { useLocale } from '@/context/LocaleContext';
 import { createLogger } from '@/utils/logger';
@@ -46,28 +46,6 @@ function useResultsShare(): ResultsShareContextValue {
     throw new Error('useResultsShare must be used within a ResultsShareProvider');
   }
   return context;
-}
-
-export function ShareableResults({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}): React.JSX.Element {
-  const context = useContext(ResultsShareContext);
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    context?.registerTarget(ref.current);
-    return () => context?.registerTarget(null);
-  }, [context]);
-
-  return (
-    <div ref={ref} className={`hc-share-target ${className}`}>
-      {children}
-    </div>
-  );
 }
 
 function downloadDataUrl(dataUrl: string, filename: string): void {

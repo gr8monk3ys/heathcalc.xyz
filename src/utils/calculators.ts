@@ -4,18 +4,15 @@
  */
 
 import {
-  heightFtInToCm as heightFtInToCmBase,
-  heightCmToFtIn as heightCmToFtInBase,
+  heightFtInToCm as _heightFtInToCmBase,
+  heightCmToFtIn as _heightCmToFtInBase,
   weightLbToKg as weightLbToKgBase,
   weightKgToLb as weightKgToLbBase,
   formatNumber as formatNumberBase,
 } from '@/utils/conversions';
 
 // Re-export conversion functions from conversions.ts
-export { heightFtInToCmBase as heightFtInToCm };
-export { heightCmToFtInBase as heightCmToFtIn };
-export { weightLbToKgBase as weightLbToKg };
-export { weightKgToLbBase as weightKgToLb };
+
 export { formatNumberBase as formatNumber };
 
 /**

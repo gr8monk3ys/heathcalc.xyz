@@ -200,5 +200,3 @@ export function BlogEmailCapture({
     </div>
   );
 }
-
-export default BlogEmailCapture;

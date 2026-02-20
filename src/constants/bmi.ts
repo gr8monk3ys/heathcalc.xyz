@@ -49,7 +49,7 @@ export const BMI_PERCENTILE_CATEGORIES: BMIPercentileCategory[] = [
 ];
 
 // BMI gauge segments for visualization
-export const BMI_GAUGE_SEGMENTS = [
+const _BMI_GAUGE_SEGMENTS = [
   { value: 18.5, color: '#3B82F6', label: 'Underweight' }, // blue
   { value: 25, color: '#10B981', label: 'Normal' }, // green
   { value: 30, color: '#F59E0B', label: 'Overweight' }, // yellow
@@ -57,7 +57,7 @@ export const BMI_GAUGE_SEGMENTS = [
 ];
 
 // Default values for BMI calculator
-export const DEFAULT_BMI_VALUES = {
+const _DEFAULT_BMI_VALUES = {
   adult: {
     male: {
       heightCm: 175,

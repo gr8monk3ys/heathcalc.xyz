@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import { buildEmbedCode } from '@/utils/embed';
 
 interface EmbedCalculatorProps {
@@ -10,17 +10,53 @@ interface EmbedCalculatorProps {
   className?: string;
 }
 
+interface EmbedRequestState {
+  copied: boolean;
+  requestName: string;
+  requestEmail: string;
+  requestSite: string;
+  requestNotes: string;
+}
+
+type RequestField = 'requestName' | 'requestEmail' | 'requestSite' | 'requestNotes';
+
+type EmbedRequestAction =
+  | { type: 'setCopied'; value: boolean }
+  | { type: 'setField'; field: RequestField; value: string };
+
+const initialEmbedRequestState: EmbedRequestState = {
+  copied: false,
+  requestName: '',
+  requestEmail: '',
+  requestSite: '',
+  requestNotes: '',
+};
+
+function embedRequestReducer(
+  state: EmbedRequestState,
+  action: EmbedRequestAction
+): EmbedRequestState {
+  switch (action.type) {
+    case 'setCopied':
+      return { ...state, copied: action.value };
+    case 'setField':
+      return { ...state, [action.field]: action.value };
+    default:
+      return state;
+  }
+}
+
 export default function EmbedCalculator({
   calculatorSlug,
   title,
   height = 680,
   className = '',
 }: EmbedCalculatorProps) {
-  const [copied, setCopied] = useState(false);
-  const [requestName, setRequestName] = useState('');
-  const [requestEmail, setRequestEmail] = useState('');
-  const [requestSite, setRequestSite] = useState('');
-  const [requestNotes, setRequestNotes] = useState('');
+  const [requestState, dispatchRequestState] = useReducer(
+    embedRequestReducer,
+    initialEmbedRequestState
+  );
+  const { copied, requestName, requestEmail, requestSite, requestNotes } = requestState;
 
   const iframeCode = useMemo(() => {
     return buildEmbedCode({ slug: calculatorSlug, title, height });
@@ -29,10 +65,10 @@ export default function EmbedCalculator({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(iframeCode);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
+      dispatchRequestState({ type: 'setCopied', value: true });
+      window.setTimeout(() => dispatchRequestState({ type: 'setCopied', value: false }), 1800);
     } catch {
-      setCopied(false);
+      dispatchRequestState({ type: 'setCopied', value: false });
     }
   };
 
@@ -71,10 +107,14 @@ export default function EmbedCalculator({
       </div>
 
       <div>
-        <label className="block text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">
+        <label
+          htmlFor={`${calculatorSlug}-embed-code`}
+          className="block text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2"
+        >
           Embed Code
         </label>
         <textarea
+          id={`${calculatorSlug}-embed-code`}
           readOnly
           className="w-full h-32 p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/40 text-xs font-mono"
           value={iframeCode}
@@ -99,7 +139,13 @@ export default function EmbedCalculator({
               className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               placeholder="Your name"
               value={requestName}
-              onChange={event => setRequestName(event.target.value)}
+              onChange={event =>
+                dispatchRequestState({
+                  type: 'setField',
+                  field: 'requestName',
+                  value: event.target.value,
+                })
+              }
               required
             />
           </div>
@@ -113,7 +159,13 @@ export default function EmbedCalculator({
               className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               placeholder="you@example.com"
               value={requestEmail}
-              onChange={event => setRequestEmail(event.target.value)}
+              onChange={event =>
+                dispatchRequestState({
+                  type: 'setField',
+                  field: 'requestEmail',
+                  value: event.target.value,
+                })
+              }
               required
             />
           </div>
@@ -127,7 +179,13 @@ export default function EmbedCalculator({
               className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               placeholder="https://example.com"
               value={requestSite}
-              onChange={event => setRequestSite(event.target.value)}
+              onChange={event =>
+                dispatchRequestState({
+                  type: 'setField',
+                  field: 'requestSite',
+                  value: event.target.value,
+                })
+              }
               required
             />
           </div>
@@ -141,7 +199,13 @@ export default function EmbedCalculator({
               className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               placeholder="Tell us how you plan to use the embed."
               value={requestNotes}
-              onChange={event => setRequestNotes(event.target.value)}
+              onChange={event =>
+                dispatchRequestState({
+                  type: 'setField',
+                  field: 'requestNotes',
+                  value: event.target.value,
+                })
+              }
             />
           </div>
           <div className="md:col-span-2 flex flex-col md:flex-row md:items-center md:justify-between gap-3">

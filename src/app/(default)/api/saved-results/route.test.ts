@@ -71,7 +71,7 @@ async function loadRoute(options?: { postgresConfigured?: boolean; csrfOk?: bool
 describe('GET /api/saved-results', () => {
   it('should return 503 when Postgres is not configured', async () => {
     const { GET } = await loadRoute({ postgresConfigured: false });
-    const res = await GET();
+    const res = await GET(makeRequest('GET'));
     expect(res.status).toBe(503);
   });
 
@@ -87,7 +87,7 @@ describe('GET /api/saved-results', () => {
       },
     ]);
 
-    const res = await GET();
+    const res = await GET(makeRequest('GET'));
     const json = await res.json();
 
     expect(res.status).toBe(200);

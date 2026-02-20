@@ -1,11 +1,11 @@
 import '../globals.css';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GlobalStructuredData from '@/components/GlobalStructuredData';
 import Preconnect from '@/components/Preconnect';
 import React, { ReactNode } from 'react';
-import PWAInit from '@/components/PWAInit';
 import SkipToMainLink from '@/components/SkipToMainLink';
 import { getAdSenseScriptSrc } from '@/lib/adsense';
 import { getPublicSiteUrl } from '@/lib/site';
@@ -116,7 +116,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         {/* Keep AdSense loader visible in page source for crawler verification.
             Ad rendering remains gated by cookie consent in AdUnit. */}
-        <script async src={adSenseScriptSrc} crossOrigin="anonymous" data-hc-adsense="1" />
+        <Script
+          id="adsense-loader-default"
+          strategy="afterInteractive"
+          src={adSenseScriptSrc}
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${bodyFont.variable} ${headingFont.variable}`}>
         <LayoutProviders>
@@ -131,9 +136,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
           {/* Analytics component for tracking */}
           <VercelAnalyticsGate />
-
-          {/* PWA initialization and service worker registration */}
-          <PWAInit />
 
           {/* Global structured data for organization and website */}
           <GlobalStructuredData />

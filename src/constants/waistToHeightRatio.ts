@@ -1,1 +1,0 @@
-export const WAISTTOHEIGHTRATIO_PLACEHOLDER = true;

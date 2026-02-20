@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useReducer } from 'react';
 import dynamic from 'next/dynamic';
 import { createLogger } from '@/utils/logger';
 import {
@@ -82,24 +82,82 @@ function localizeBmiCategory(category: string, copy: BMIPageCopy): string {
   return category;
 }
 
-export default function BMICalculatorClient({ copy }: { copy: BMIPageCopy }) {
-  const { localizePath } = useLocale();
-
-  const [age, setAge] = useState<number | ''>('');
-  const [gender, setGender] = useState<Gender>('male');
-  const height = useHeight();
-  const weight = useWeight();
-  const [isChild, setIsChild] = useState<boolean>(false);
-
-  const [errors, setErrors] = useState<{
+interface BMICalculatorState {
+  age: number | '';
+  gender: Gender;
+  isChild: boolean;
+  errors: {
     age?: string;
     height?: string;
     weight?: string;
-  }>({});
+  };
+  result: BMIResult | null;
+  showResult: boolean;
+  calculationError: string | null;
+}
 
-  const [result, setResult] = useState<BMIResult | null>(null);
-  const [showResult, setShowResult] = useState<boolean>(false);
-  const [calculationError, setCalculationError] = useState<string | null>(null);
+type BMICalculatorAction =
+  | { type: 'patch'; patch: Partial<BMICalculatorState> }
+  | { type: 'reset' };
+
+const initialBMICalculatorState: BMICalculatorState = {
+  age: '',
+  gender: 'male',
+  isChild: false,
+  errors: {},
+  result: null,
+  showResult: false,
+  calculationError: null,
+};
+
+function bmiCalculatorReducer(
+  state: BMICalculatorState,
+  action: BMICalculatorAction
+): BMICalculatorState {
+  switch (action.type) {
+    case 'patch':
+      return { ...state, ...action.patch };
+    case 'reset':
+      return initialBMICalculatorState;
+    default:
+      return state;
+  }
+}
+
+export default function BMICalculatorClient({ copy }: { copy: BMIPageCopy }) {
+  const { localizePath } = useLocale();
+  const [state, dispatchState] = useReducer(bmiCalculatorReducer, initialBMICalculatorState);
+  const { age, gender, isChild, errors, result, showResult, calculationError } = state;
+  const height = useHeight();
+  const weight = useWeight();
+
+  const setAge = useCallback((value: number | '') => {
+    dispatchState({ type: 'patch', patch: { age: value } });
+  }, []);
+
+  const setGender = useCallback((value: Gender) => {
+    dispatchState({ type: 'patch', patch: { gender: value } });
+  }, []);
+
+  const setIsChild = useCallback((value: boolean) => {
+    dispatchState({ type: 'patch', patch: { isChild: value } });
+  }, []);
+
+  const setErrors = useCallback((value: BMICalculatorState['errors']) => {
+    dispatchState({ type: 'patch', patch: { errors: value } });
+  }, []);
+
+  const setResult = useCallback((value: BMIResult | null) => {
+    dispatchState({ type: 'patch', patch: { result: value } });
+  }, []);
+
+  const setShowResult = useCallback((value: boolean) => {
+    dispatchState({ type: 'patch', patch: { showResult: value } });
+  }, []);
+
+  const setCalculationError = useCallback((value: string | null) => {
+    dispatchState({ type: 'patch', patch: { calculationError: value } });
+  }, []);
 
   const relatedArticles =
     copy.relatedArticles.length > 0 ? copy.relatedArticles : FALLBACK_RELATED_ARTICLES;
@@ -223,47 +281,51 @@ export default function BMICalculatorClient({ copy }: { copy: BMIPageCopy }) {
         }
       }
     },
-    [age, copy.form.calculationErrorGeneric, copy.form.errors, gender, height, weight]
+    [
+      age,
+      copy.form.calculationErrorGeneric,
+      copy.form.errors,
+      gender,
+      height,
+      setCalculationError,
+      setErrors,
+      setIsChild,
+      setResult,
+      setShowResult,
+      weight,
+    ]
   );
 
-  const handleReset = useCallback(() => {
-    setAge('');
-    setGender('male');
+  const handleReset = () => {
+    dispatchState({ type: 'reset' });
     height.setValue('');
     weight.setValue('');
-    setErrors({});
-    setResult(null);
-    setShowResult(false);
-    setCalculationError(null);
-  }, [height, weight]);
+  };
 
-  const formFields = useMemo(
-    () => [
-      {
-        name: 'age',
-        label: copy.form.ageLabel,
-        type: 'number' as const,
-        value: age,
-        onChange: setAge,
-        error: errors.age,
-        placeholder: copy.form.agePlaceholder,
-      },
-      {
-        name: 'gender',
-        label: copy.form.genderLabel,
-        type: 'radio' as const,
-        value: gender,
-        onChange: (value: string) => setGender(value as Gender),
-        options: [
-          { value: 'male', label: copy.form.genderMale },
-          { value: 'female', label: copy.form.genderFemale },
-        ],
-      },
-      createHeightField(height, errors.height),
-      createWeightField(weight, errors.weight),
-    ],
-    [age, copy.form, errors, gender, height, weight]
-  );
+  const formFields = [
+    {
+      name: 'age',
+      label: copy.form.ageLabel,
+      type: 'number' as const,
+      value: age,
+      onChange: setAge,
+      error: errors.age,
+      placeholder: copy.form.agePlaceholder,
+    },
+    {
+      name: 'gender',
+      label: copy.form.genderLabel,
+      type: 'radio' as const,
+      value: gender,
+      onChange: (value: string) => setGender(value as Gender),
+      options: [
+        { value: 'male', label: copy.form.genderMale },
+        { value: 'female', label: copy.form.genderFemale },
+      ],
+    },
+    createHeightField(height, errors.height),
+    createWeightField(weight, errors.weight),
+  ];
 
   return (
     <CalculatorPageLayout

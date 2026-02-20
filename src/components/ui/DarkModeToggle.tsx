@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { usePreferences } from '@/context/PreferencesContext';
 
 interface DarkModeToggleProps {
@@ -14,33 +14,6 @@ interface DarkModeToggleProps {
 export default function DarkModeToggle({ className = '' }: DarkModeToggleProps): React.JSX.Element {
   const { preferences, toggleDarkMode } = usePreferences();
   const { darkMode } = preferences;
-  const [mounted, setMounted] = useState(false);
-
-  // Only render after hydration to avoid mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Show a placeholder during SSR/hydration to avoid mismatch
-  if (!mounted) {
-    return (
-      <button
-        className={`elevated-pill rounded-full p-2 text-slate-700 transition-colors dark:text-slate-200 ${className}`}
-        aria-label="Toggle dark mode"
-        disabled
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-        </svg>
-      </button>
-    );
-  }
 
   return (
     <button

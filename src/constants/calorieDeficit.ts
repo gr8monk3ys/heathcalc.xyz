@@ -39,7 +39,7 @@ export const MIN_CALORIES = {
 };
 
 // Maximum safe weekly weight loss (kg)
-export const MAX_WEEKLY_LOSS = {
+const _MAX_WEEKLY_LOSS = {
   safe: 1.0, // 1 kg per week
   aggressive: 1.5, // 1.5 kg per week (requires medical supervision)
 };

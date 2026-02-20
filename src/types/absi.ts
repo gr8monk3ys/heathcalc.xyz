@@ -16,7 +16,7 @@ export interface ABSIResult {
 /**
  * Form data for ABSI calculation
  */
-export interface ABSIFormData {
+interface _ABSIFormData {
   gender: Gender;
   age: number;
   height: number;

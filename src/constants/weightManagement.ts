@@ -23,7 +23,7 @@ export const MAX_CALORIES = {
 export const SAFE_WEIGHT_LOSS_MAX = 1.0; // 1 kg/week
 export const SAFE_WEIGHT_LOSS_MIN = 0.25; // 0.25 kg/week
 export const SAFE_WEIGHT_GAIN_MAX = 0.5; // 0.5 kg/week
-export const SAFE_WEIGHT_GAIN_MIN = 0.1; // 0.1 kg/week
+const _SAFE_WEIGHT_GAIN_MIN = 0.1; // 0.1 kg/week
 
 // Minimum timeline (weeks)
 export const MIN_TIMELINE_WEEKS = 4;

@@ -81,14 +81,14 @@ export interface AffiliateProduct {
   badge?: string;
 }
 
-export interface AffiliateGuide {
+interface AffiliateGuide {
   slug: string;
   title: string;
   description: string;
   category: ProductCategory;
 }
 
-export interface AffiliateCategoryConfig {
+interface AffiliateCategoryConfig {
   title: string;
   description: string;
   icon: string;
@@ -130,7 +130,7 @@ export const AFFILIATE_CATEGORY_CONFIG: Record<ProductCategory, AffiliateCategor
 
 // All available affiliate products
 // Partner links finalized
-export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
+const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
   // Fitness Trackers
   {
     id: 'fitbit-charge-6',
@@ -362,7 +362,7 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
   },
 ];
 
-export const AFFILIATE_GUIDES: AffiliateGuide[] = [
+const AFFILIATE_GUIDES: AffiliateGuide[] = [
   {
     slug: 'best-smart-scales-body-composition',
     title: 'Best Smart Scales for Body Composition',
@@ -582,7 +582,7 @@ export const AFFILIATE_GUIDES: AffiliateGuide[] = [
 ];
 
 // Mapping of calculator types to relevant product categories
-export const CALCULATOR_PRODUCT_MAPPING: Record<CalculatorType, ProductCategory[]> = {
+const CALCULATOR_PRODUCT_MAPPING: Record<CalculatorType, ProductCategory[]> = {
   bmi: ['smart-scale', 'fitness-tracker', 'fitness-app'],
   tdee: ['fitness-tracker', 'meal-delivery', 'fitness-app'],
   calorie: ['fitness-app', 'meal-delivery', 'smart-scale'],
@@ -635,7 +635,7 @@ export const CALCULATOR_PRODUCT_MAPPING: Record<CalculatorType, ProductCategory[
   'caffeine-calculator': ['supplement', 'fitness-app'],
 };
 
-export const CALCULATOR_GUIDE_MAPPING: Record<CalculatorType, AffiliateGuide['slug'][]> = {
+const CALCULATOR_GUIDE_MAPPING: Record<CalculatorType, AffiliateGuide['slug'][]> = {
   bmi: ['best-smart-scales-body-composition', 'best-fitness-apps-macro-tracking'],
   tdee: ['best-fitness-apps-macro-tracking', 'meal-delivery-services-weight-loss'],
   calorie: ['best-fitness-apps-macro-tracking', 'meal-delivery-services-weight-loss'],
@@ -795,7 +795,7 @@ export function getGuidesForCalculator(
 }
 
 // Helper function to get products by category
-export function getProductsByCategory(category: ProductCategory): AffiliateProduct[] {
+function _getProductsByCategory(category: ProductCategory): AffiliateProduct[] {
   return AFFILIATE_PRODUCTS.filter(product => product.category === category);
 }
 

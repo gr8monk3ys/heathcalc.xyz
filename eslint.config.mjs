@@ -17,7 +17,7 @@ export default [
           caughtErrors: 'none',
         },
       ],
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       // Disable overly strict rules for common React patterns
@@ -38,6 +38,7 @@ export default [
     files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
     rules: {
       'no-console': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
 ];

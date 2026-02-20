@@ -161,7 +161,7 @@ export const PROTEIN_SOURCES: ProteinSource[] = [
 /**
  * Default form values for protein calculator
  */
-export const DEFAULT_PROTEIN_VALUES = {
+const _DEFAULT_PROTEIN_VALUES = {
   male: {
     age: 30,
     heightCm: 175,

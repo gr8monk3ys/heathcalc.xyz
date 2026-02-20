@@ -1,17 +1,10 @@
 'use client';
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  ReactNode,
-} from 'react';
+import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import { useLocalStorage, LocalStorageError } from '@/hooks/useLocalStorage';
 
 // Unit system preferences stored in localStorage
-export interface UnitSystemPreferences {
+interface UnitSystemPreferences {
   unitSystem: 'metric' | 'imperial';
   heightUnit: 'cm' | 'ft';
   weightUnit: 'kg' | 'lb';
@@ -19,7 +12,7 @@ export interface UnitSystemPreferences {
 }
 
 // Context type for unit system
-export interface UnitSystemContextType {
+interface UnitSystemContextType {
   unitSystem: 'metric' | 'imperial';
   heightUnit: 'cm' | 'ft';
   weightUnit: 'kg' | 'lb';
@@ -63,55 +56,59 @@ export function UnitSystemProvider({ children }: { children: ReactNode }) {
       }
     );
 
-  // Initialize unit preferences from localStorage
-  const [preferences, setPreferences] = useState<UnitSystemPreferences>(storedPreferences);
-
   // Dismiss storage error notification
   const dismissStorageError = useCallback(() => {
     setDisplayedError(null);
   }, []);
 
-  // Update localStorage when preferences change
-  useEffect(() => {
-    setStoredPreferences(preferences);
-  }, [preferences, setStoredPreferences]);
-
   // Unit system setters
-  const setUnitSystem = useCallback((system: 'metric' | 'imperial') => {
-    setPreferences(prev => {
-      // Update all units based on system
-      const newPrefs = { ...prev, unitSystem: system };
+  const setUnitSystem = useCallback(
+    (system: 'metric' | 'imperial') => {
+      setStoredPreferences(prev => {
+        // Update all units based on system
+        const newPrefs = { ...prev, unitSystem: system };
 
-      if (system === 'metric') {
-        newPrefs.heightUnit = 'cm';
-        newPrefs.weightUnit = 'kg';
-      } else {
-        newPrefs.heightUnit = 'ft';
-        newPrefs.weightUnit = 'lb';
-      }
+        if (system === 'metric') {
+          newPrefs.heightUnit = 'cm';
+          newPrefs.weightUnit = 'kg';
+        } else {
+          newPrefs.heightUnit = 'ft';
+          newPrefs.weightUnit = 'lb';
+        }
 
-      return newPrefs;
-    });
-  }, []);
+        return newPrefs;
+      });
+    },
+    [setStoredPreferences]
+  );
 
-  const setHeightUnit = useCallback((unit: 'cm' | 'ft') => {
-    setPreferences(prev => ({ ...prev, heightUnit: unit }));
-  }, []);
+  const setHeightUnit = useCallback(
+    (unit: 'cm' | 'ft') => {
+      setStoredPreferences(prev => ({ ...prev, heightUnit: unit }));
+    },
+    [setStoredPreferences]
+  );
 
-  const setWeightUnit = useCallback((unit: 'kg' | 'lb') => {
-    setPreferences(prev => ({ ...prev, weightUnit: unit }));
-  }, []);
+  const setWeightUnit = useCallback(
+    (unit: 'kg' | 'lb') => {
+      setStoredPreferences(prev => ({ ...prev, weightUnit: unit }));
+    },
+    [setStoredPreferences]
+  );
 
-  const setEnergyUnit = useCallback((unit: 'kcal' | 'kj') => {
-    setPreferences(prev => ({ ...prev, energyUnit: unit }));
-  }, []);
+  const setEnergyUnit = useCallback(
+    (unit: 'kcal' | 'kj') => {
+      setStoredPreferences(prev => ({ ...prev, energyUnit: unit }));
+    },
+    [setStoredPreferences]
+  );
 
   // Context value
   const contextValue: UnitSystemContextType = {
-    unitSystem: preferences.unitSystem,
-    heightUnit: preferences.heightUnit,
-    weightUnit: preferences.weightUnit,
-    energyUnit: preferences.energyUnit,
+    unitSystem: storedPreferences.unitSystem,
+    heightUnit: storedPreferences.heightUnit,
+    weightUnit: storedPreferences.weightUnit,
+    energyUnit: storedPreferences.energyUnit,
     setUnitSystem,
     setHeightUnit,
     setWeightUnit,

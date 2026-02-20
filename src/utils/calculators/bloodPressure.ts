@@ -42,6 +42,6 @@ export function calculateBloodPressure(systolic: number, diastolic: number): Blo
   };
 }
 
-export function getBloodPressureCategoryPriority() {
+function _getBloodPressureCategoryPriority() {
   return BLOOD_PRESSURE_CATEGORY_PRIORITY.slice();
 }

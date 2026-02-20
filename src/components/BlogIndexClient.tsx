@@ -299,6 +299,63 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
     return { guidePosts: guides, reviewPosts: reviews };
   }, [mainPosts, featuredPosts, showFeatured]);
 
+  return renderBlogIndexClientView({
+    activeCategory,
+    categories,
+    debounceRef,
+    featuredPosts,
+    guidePosts,
+    handleSearchChange,
+    inputValue,
+    mainPosts,
+    posts,
+    reviewPosts,
+    setActiveCategory,
+    setInputValue,
+    setSearchQuery,
+    showFeatured,
+    showSectioned,
+    strings,
+  });
+}
+
+type BlogIndexClientViewProps = {
+  activeCategory: string;
+  categories: Array<[string, number]>;
+  debounceRef: React.MutableRefObject<ReturnType<typeof setTimeout> | null>;
+  featuredPosts: BlogPost[];
+  guidePosts: BlogPost[];
+  handleSearchChange: (value: string) => void;
+  inputValue: string;
+  mainPosts: BlogPost[];
+  posts: BlogPost[];
+  reviewPosts: BlogPost[];
+  setActiveCategory: React.Dispatch<React.SetStateAction<string>>;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  showFeatured: boolean;
+  showSectioned: boolean;
+  strings: BlogStrings;
+};
+
+function renderBlogIndexClientView({
+  activeCategory,
+  categories,
+  debounceRef,
+  featuredPosts,
+  guidePosts,
+  handleSearchChange,
+  inputValue,
+  mainPosts,
+  posts,
+  reviewPosts,
+  setActiveCategory,
+  setInputValue,
+  setSearchQuery,
+  showFeatured,
+  showSectioned,
+  strings,
+}: BlogIndexClientViewProps) {
   return (
     <>
       {/* Search */}
@@ -366,7 +423,7 @@ export default function BlogIndexClient({ posts }: BlogIndexClientProps): React.
           >
             {strings.allLabel} ({posts.length})
           </button>
-          {categories.map(([category, count]) => (
+          {categories.map(([category, count]: [string, number]) => (
             <button
               key={category}
               type="button"

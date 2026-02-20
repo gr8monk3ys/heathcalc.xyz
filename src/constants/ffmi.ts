@@ -59,7 +59,7 @@ export const FFMI_CATEGORIES: FFMICategory[] = [
 /**
  * Default FFMI form values
  */
-export const DEFAULT_FFMI_VALUES = {
+const _DEFAULT_FFMI_VALUES = {
   weight: 70,
   heightCm: 175,
   heightFt: 5,
@@ -70,7 +70,7 @@ export const DEFAULT_FFMI_VALUES = {
 /**
  * Validation ranges for FFMI inputs
  */
-export const FFMI_VALIDATION = {
+const _FFMI_VALIDATION = {
   bodyFatPercentage: { min: 1, max: 70 },
   weight: {
     kg: { min: 30, max: 300 },
@@ -91,7 +91,7 @@ export const NATURAL_FFMI_LIMIT = 25;
 /**
  * Typical FFMI values for reference
  */
-export const FFMI_REFERENCE_VALUES = {
+const _FFMI_REFERENCE_VALUES = {
   untrainedMale: 18.5,
   trainedMale: 22,
   eliteMale: 25,

@@ -2,7 +2,7 @@ import 'server-only';
 
 import type { SupportedLocale } from '@/i18n/config';
 
-export type TDEEMetaCopy = {
+type TDEEMetaCopy = {
   title: string;
   description: string;
   keywords: string;

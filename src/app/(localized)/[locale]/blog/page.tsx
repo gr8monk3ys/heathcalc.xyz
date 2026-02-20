@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import BlogIndexClient from '@/components/BlogIndexClient';
-import { BLOG_POSTS } from '@/app/blog/page';
+import { BLOG_POSTS } from '@/lib/blog/posts';
 import {
   defaultLocale,
   isSupportedLocale,
@@ -279,12 +279,15 @@ export default async function LocalizedBlogPage({ params }: LocalizedBlogPagePro
         <div>
           <h1 className="text-3xl md:text-4xl font-bold">{copy.pageTitle}</h1>
         </div>
-        <a href="/feed.xml" className="text-sm text-accent hover:underline flex items-center gap-2">
+        <Link
+          href="/feed.xml"
+          className="text-sm text-accent hover:underline flex items-center gap-2"
+        >
           <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
             <path d="M4.26 17.74a2.26 2.26 0 1 1 0 4.52 2.26 2.26 0 0 1 0-4.52zM2 22h2.26C4.26 14.56 9.44 9.38 16.88 9.38V7.12C8.18 7.12 2 13.3 2 22zM2 22h2.26c0-5.64 4.58-10.22 10.22-10.22v-2.26C6.9 9.52 2 15.42 2 22z" />
           </svg>
           {copy.rssLabel}
-        </a>
+        </Link>
       </div>
 
       <p className="text-gray-600 mb-4">{copy.pageDescription}</p>

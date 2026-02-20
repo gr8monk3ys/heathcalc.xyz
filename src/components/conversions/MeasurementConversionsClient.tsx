@@ -32,6 +32,29 @@ function formatTemplate(template: string, vars: Record<string, string>): string 
   return out;
 }
 
+function useMeasurementConversionsClientState(copy: ConversionsPageCopy) {
+  const [category, setCategory] = useState<ConversionCategory>('weight');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [fromUnit, setFromUnit] = useState<string>(copy.categories.weight.units[0] ?? 'kg');
+  const [toUnit, setToUnit] = useState<string>(copy.categories.weight.units[1] ?? 'lb');
+  const [result, setResult] = useState<number | null>(null);
+  const [error, setError] = useState<string>('');
+
+  return {
+    category,
+    setCategory,
+    inputValue,
+    setInputValue,
+    fromUnit,
+    setFromUnit,
+    toUnit,
+    setToUnit,
+    result,
+    setResult,
+    error,
+    setError,
+  };
+}
 export default function MeasurementConversionsClient({
   copy,
 }: {
@@ -39,12 +62,20 @@ export default function MeasurementConversionsClient({
 }): React.JSX.Element {
   const { localizePath } = useLocale();
 
-  const [category, setCategory] = useState<ConversionCategory>('weight');
-  const [inputValue, setInputValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>(copy.categories.weight.units[0] ?? 'kg');
-  const [toUnit, setToUnit] = useState<string>(copy.categories.weight.units[1] ?? 'lb');
-  const [result, setResult] = useState<number | null>(null);
-  const [error, setError] = useState<string>('');
+  const {
+    category,
+    setCategory,
+    inputValue,
+    setInputValue,
+    fromUnit,
+    setFromUnit,
+    toUnit,
+    setToUnit,
+    result,
+    setResult,
+    error,
+    setError,
+  } = useMeasurementConversionsClientState(copy);
 
   const handleCategoryChange = (newCategory: ConversionCategory) => {
     setCategory(newCategory);
@@ -170,6 +201,68 @@ export default function MeasurementConversionsClient({
   }, [copy.structuredDataDescription, copy.structuredDataName, pageUrl]);
 
   return (
+    <MeasurementConversionsView
+      copy={copy}
+      category={category}
+      categoryConfig={categoryConfig}
+      converterTitle={converterTitle}
+      educationalContent={educationalContent}
+      structuredData={structuredData}
+      result={result}
+      error={error}
+      inputValue={inputValue}
+      fromUnit={fromUnit}
+      toUnit={toUnit}
+      handleCategoryChange={handleCategoryChange}
+      setInputValue={setInputValue}
+      setFromUnit={setFromUnit}
+      setToUnit={setToUnit}
+      handleSwapUnits={handleSwapUnits}
+      handleConvert={handleConvert}
+    />
+  );
+}
+
+interface MeasurementConversionsViewProps {
+  copy: ConversionsPageCopy;
+  category: ConversionCategory;
+  categoryConfig: ConversionsPageCopy['categories'][ConversionCategory];
+  converterTitle: string;
+  educationalContent: React.JSX.Element;
+  structuredData: Record<string, unknown>;
+  result: number | null;
+  error: string;
+  inputValue: string;
+  fromUnit: string;
+  toUnit: string;
+  handleCategoryChange: (newCategory: ConversionCategory) => void;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  setFromUnit: React.Dispatch<React.SetStateAction<string>>;
+  setToUnit: React.Dispatch<React.SetStateAction<string>>;
+  handleSwapUnits: () => void;
+  handleConvert: () => void;
+}
+
+function MeasurementConversionsView({
+  copy,
+  category,
+  categoryConfig,
+  converterTitle,
+  educationalContent,
+  structuredData,
+  result,
+  error,
+  inputValue,
+  fromUnit,
+  toUnit,
+  handleCategoryChange,
+  setInputValue,
+  setFromUnit,
+  setToUnit,
+  handleSwapUnits,
+  handleConvert,
+}: MeasurementConversionsViewProps) {
+  return (
     <CalculatorPageLayout
       title={copy.title}
       description={copy.description}
@@ -234,7 +327,7 @@ export default function MeasurementConversionsClient({
                 onChange={e => setFromUnit(e.target.value)}
                 className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               >
-                {categoryConfig.units.map(unit => (
+                {categoryConfig.units.map((unit: string) => (
                   <option key={unit} value={unit}>
                     {categoryConfig.labels[unit]}
                   </option>
@@ -268,7 +361,7 @@ export default function MeasurementConversionsClient({
                 onChange={e => setToUnit(e.target.value)}
                 className="w-full p-3 neumorph-inset rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
               >
-                {categoryConfig.units.map(unit => (
+                {categoryConfig.units.map((unit: string) => (
                   <option key={unit} value={unit}>
                     {categoryConfig.labels[unit]}
                   </option>

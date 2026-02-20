@@ -5,7 +5,6 @@
 
 export {
   calculateWeightManagement,
-  getDietTypeConfig,
   formatDate,
   getGoalTypeMessage,
 } from '@/utils/calculators/weightManagement';

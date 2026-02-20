@@ -1,4 +1,4 @@
-export interface BlogCategory {
+interface BlogCategory {
   id: string;
   label: string;
   description: string;
@@ -6,7 +6,7 @@ export interface BlogCategory {
   type: 'educational' | 'review' | 'comparison';
 }
 
-export const BLOG_CATEGORIES: BlogCategory[] = [
+const BLOG_CATEGORIES: BlogCategory[] = [
   {
     id: 'health-science',
     label: 'Health & Science',

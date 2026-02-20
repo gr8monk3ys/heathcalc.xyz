@@ -32,6 +32,7 @@ import {
   PERCENTAGE_CHART_TEMPLATE,
   ONE_REP_MAX_FORMULAS,
 } from '@/constants/oneRepMax';
+import type { ValidationResult } from '@/utils/validation';
 
 /**
  * Calculates 1RM using the Epley formula
@@ -249,7 +250,7 @@ export function estimateRepsAtPercentage(percentage: number): number {
 export function validateOneRepMaxWeight(
   weight: number | string,
   unit: WeightUnit = 'kg'
-): { isValid: boolean; error?: string } {
+): ValidationResult {
   const numWeight = Number(weight);
 
   if (isNaN(numWeight)) {
@@ -274,7 +275,7 @@ export function validateOneRepMaxWeight(
  * @param reps - Number of repetitions to validate
  * @returns Validation result
  */
-export function validateReps(reps: number | string): { isValid: boolean; error?: string } {
+export function validateReps(reps: number | string): ValidationResult {
   const numReps = Number(reps);
 
   if (isNaN(numReps)) {

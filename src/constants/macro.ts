@@ -89,7 +89,7 @@ export const CALORIE_ADJUSTMENTS = {
 /**
  * Recommended protein intake ranges (grams per kg of body weight)
  */
-export const PROTEIN_RECOMMENDATIONS = {
+const _PROTEIN_RECOMMENDATIONS = {
   sedentary: { min: 0.8, max: 1.0 },
   lightly_active: { min: 1.0, max: 1.2 },
   moderately_active: { min: 1.2, max: 1.6 },
@@ -100,7 +100,7 @@ export const PROTEIN_RECOMMENDATIONS = {
 /**
  * Minimum macro percentages for health
  */
-export const MINIMUM_PERCENTAGES = {
+const MINIMUM_PERCENTAGES = {
   protein: 10, // Minimum protein for health
   carbs: 10, // Very low carb diets can go lower, but not recommended for most
   fat: 15, // Essential fatty acids requirement
@@ -109,7 +109,7 @@ export const MINIMUM_PERCENTAGES = {
 /**
  * Maximum macro percentages for health
  */
-export const MAXIMUM_PERCENTAGES = {
+const MAXIMUM_PERCENTAGES = {
   protein: 50, // Very high protein can strain kidneys
   carbs: 70, // Very high carb diets
   fat: 60, // High fat (keto-style) diets
@@ -118,7 +118,7 @@ export const MAXIMUM_PERCENTAGES = {
 /**
  * Default form values for the Macro Calculator
  */
-export const DEFAULT_MACRO_VALUES = {
+const _DEFAULT_MACRO_VALUES = {
   male: {
     age: 30,
     heightCm: 175,

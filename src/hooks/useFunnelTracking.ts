@@ -4,14 +4,14 @@ import { useCallback } from 'react';
 import { track as vercelTrack } from '@vercel/analytics';
 import { useCookieConsent } from '@/components/CookieConsent';
 
-export type FunnelEvent =
+type FunnelEvent =
   | 'calculator_complete'
   | 'results_share_copy_link'
   | 'results_share_download_image'
   | 'newsletter_subscribe'
   | 'affiliate_click';
 
-export type FunnelEventProps = Record<string, string | number | boolean | undefined>;
+type FunnelEventProps = Record<string, string | number | boolean | undefined>;
 
 function stripUndefined(props: FunnelEventProps): Record<string, string | number | boolean> {
   const cleaned: Record<string, string | number | boolean> = {};

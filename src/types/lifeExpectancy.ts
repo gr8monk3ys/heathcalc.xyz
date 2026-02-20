@@ -11,7 +11,7 @@ export type SmokingStatus = 'never' | 'former' | 'current-light' | 'current-heav
 export type AlcoholIntake = 'none' | 'light' | 'moderate' | 'heavy';
 export type ExerciseFrequency = 'sedentary' | 'light' | 'moderate' | 'active' | 'very-active';
 export type DietQuality = 'poor' | 'average' | 'good' | 'excellent';
-export type SleepQuality = 'poor' | 'fair' | 'good' | 'excellent';
+type _SleepQuality = 'poor' | 'fair' | 'good' | 'excellent';
 export type StressLevel = 'low' | 'moderate' | 'high' | 'very-high';
 export type SocialConnection = 'isolated' | 'some' | 'strong';
 

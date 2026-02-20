@@ -14,7 +14,7 @@ export interface WHRResult {
 /**
  * Form data for WHR calculation
  */
-export interface WHRFormData {
+interface _WHRFormData {
   gender: Gender;
   waist: number;
   hips: number;

@@ -36,7 +36,10 @@ export default function FAQSection({
 
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="border-b border-gray-200 pb-4 last:border-0 last:pb-0">
+          <div
+            key={`${faq.question}-${typeof faq.answer === 'string' ? faq.answer.slice(0, 24) : 'faq'}`}
+            className="border-b border-gray-200 pb-4 last:border-0 last:pb-0"
+          >
             <button
               onClick={() => toggleFAQ(index)}
               className="flex justify-between items-center w-full text-left font-medium py-2 focus:outline-none"

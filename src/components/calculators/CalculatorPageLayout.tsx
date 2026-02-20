@@ -1,9 +1,8 @@
 'use client';
 
-import React, { Suspense, useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import Breadcrumb from '@/components/Breadcrumb';
 import SocialShare from '@/components/SocialShare';
@@ -30,14 +29,25 @@ function formatTemplate(template: string, vars: Record<string, string>): string 
   return out;
 }
 
+const EMPTY_HASHTAGS: string[] = [];
+const FAQ_SKELETON_ROWS = ['faq-1', 'faq-2', 'faq-3'];
+const ARTICLE_SKELETON_ROWS = ['article-1', 'article-2', 'article-3'];
+
+function readIsEmbedFromLocation(): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  return new URLSearchParams(window.location.search).get('embed') === '1';
+}
+
 // Dynamic imports for below-the-fold components (performance optimization)
 const FAQSection = dynamic(() => import('@/components/FAQSection'), {
   loading: () => (
     <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
       <div className="h-8 bg-gray-200 rounded w-1/3 mb-6" />
       <div className="space-y-4">
-        {[1, 2, 3].map(i => (
-          <div key={i} className="h-12 bg-gray-200 rounded" />
+        {FAQ_SKELETON_ROWS.map(rowId => (
+          <div key={rowId} className="h-12 bg-gray-200 rounded" />
         ))}
       </div>
     </div>
@@ -60,8 +70,8 @@ const RelatedArticles = dynamic(() => import('@/components/RelatedArticles'), {
     <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
       <div className="h-8 bg-gray-200 rounded w-1/4 mb-6" />
       <div className="space-y-6">
-        {[1, 2, 3].map(i => (
-          <div key={i} className="p-4 rounded-lg neumorph">
+        {ARTICLE_SKELETON_ROWS.map(rowId => (
+          <div key={rowId} className="p-4 rounded-lg neumorph">
             <div className="h-4 bg-gray-200 rounded w-1/4 mb-2" />
             <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
             <div className="h-4 bg-gray-200 rounded w-full mb-2" />
@@ -96,7 +106,7 @@ interface RelatedArticle {
 /**
  * Props for the CalculatorPageLayout component
  */
-export interface CalculatorPageLayoutProps {
+interface CalculatorPageLayoutProps {
   /** Page title displayed as h1 heading */
   title: string;
   /** Page description displayed below the title */
@@ -149,13 +159,13 @@ export interface CalculatorPageLayoutProps {
  * - Dynamic imports for below-the-fold components (FAQSection, NewsletterSignup, RelatedArticles)
  * - Suspense boundaries with skeleton loading states
  */
-export function CalculatorPageLayout({
+function CalculatorPageLayoutContent({
   title,
   description,
   calculatorSlug,
   shareTitle,
   shareDescription,
-  shareHashtags = [],
+  shareHashtags = EMPTY_HASHTAGS,
   faqs,
   faqTitle,
   relatedArticles,
@@ -170,9 +180,20 @@ export function CalculatorPageLayout({
   const socialDescription = shareDescription || description;
   const { localizePath, t } = useLocale();
   const { trackEvent } = useFunnelTracking();
-  const searchParams = useSearchParams();
-  const isEmbed = searchParams.get('embed') === '1';
+  const [isEmbed, setIsEmbed] = useState(false);
   const hasTrackedResultRef = useRef(false);
+
+  useEffect(() => {
+    const syncEmbedFlag = () => {
+      setIsEmbed(readIsEmbedFromLocation());
+    };
+
+    syncEmbedFlag();
+    window.addEventListener('popstate', syncEmbedFlag);
+    return () => {
+      window.removeEventListener('popstate', syncEmbedFlag);
+    };
+  }, []);
 
   useEffect(() => {
     if (isEmbed) return;
@@ -281,8 +302,8 @@ export function CalculatorPageLayout({
               <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
                 <div className="h-8 bg-gray-200 rounded w-1/3 mb-6" />
                 <div className="space-y-4">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="h-12 bg-gray-200 rounded" />
+                  {FAQ_SKELETON_ROWS.map(rowId => (
+                    <div key={rowId} className="h-12 bg-gray-200 rounded" />
                   ))}
                 </div>
               </div>
@@ -307,8 +328,8 @@ export function CalculatorPageLayout({
               <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
                 <div className="h-8 bg-gray-200 rounded w-1/4 mb-6" />
                 <div className="space-y-6">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="p-4 rounded-lg neumorph">
+                  {ARTICLE_SKELETON_ROWS.map(rowId => (
+                    <div key={rowId} className="p-4 rounded-lg neumorph">
                       <div className="h-4 bg-gray-200 rounded w-1/4 mb-2" />
                       <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
                       <div className="h-4 bg-gray-200 rounded w-full mb-2" />
@@ -356,6 +377,14 @@ export function CalculatorPageLayout({
         </div>
       </ResultsShareProvider>
     </ErrorBoundary>
+  );
+}
+
+function CalculatorPageLayout(props: CalculatorPageLayoutProps): React.ReactElement {
+  return (
+    <Suspense fallback={null}>
+      <CalculatorPageLayoutContent {...props} />
+    </Suspense>
   );
 }
 

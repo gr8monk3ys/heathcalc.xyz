@@ -43,18 +43,7 @@ function CalculatorCard({ title, description, path, icon }: CalculatorCardProps)
  * Memoized version of the CalculatorCard component
  * This prevents unnecessary re-renders when parent components re-render
  */
-export const MemoizedCalculatorCard = React.memo(CalculatorCard, (prevProps, nextProps) => {
-  // Custom comparison function to determine if the component should re-render
-  // Return true if the props are equal (no re-render needed)
-  return (
-    prevProps.title === nextProps.title &&
-    prevProps.description === nextProps.description &&
-    prevProps.path === nextProps.path &&
-    // For the icon, we do a simple check if both exist or both don't exist
-    // A more complex comparison would be needed for deeply comparing React nodes
-    Boolean(prevProps.icon) === Boolean(nextProps.icon)
-  );
-});
+export const MemoizedCalculatorCard = React.memo(CalculatorCard);
 
 // For backward compatibility and to maintain existing import structure
 export default CalculatorCard;

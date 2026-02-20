@@ -40,4 +40,4 @@ export const RECOVERY_RECOMMENDATIONS = {
 // Projection parameters
 export const PROJECTION_WEEKS = 12; // Default projection timeline
 export const CALORIES_PER_KG_FAT = 7700; // kcal per kg of fat
-export const CALORIES_PER_LB_FAT = 3500; // kcal per lb of fat
+const _CALORIES_PER_LB_FAT = 3500; // kcal per lb of fat

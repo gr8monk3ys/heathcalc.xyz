@@ -131,8 +131,11 @@ const LifeExpectancyResultDisplay: React.FC<LifeExpectancyResultDisplayProps> = 
         <div className="mb-6">
           <h3 className="font-medium mb-3 text-green-700">Positive Factors</h3>
           <div className="neumorph-inset p-4 rounded-lg space-y-2">
-            {result.positiveFactors.map((factor, index) => (
-              <div key={index} className="flex justify-between items-center">
+            {result.positiveFactors.map(factor => (
+              <div
+                key={`${factor.factor}-${factor.yearsAdded}`}
+                className="flex justify-between items-center"
+              >
                 <div className="flex items-center gap-2">
                   <span className="text-green-500 text-lg" aria-hidden="true">
                     +
@@ -155,8 +158,11 @@ const LifeExpectancyResultDisplay: React.FC<LifeExpectancyResultDisplayProps> = 
         <div className="mb-6">
           <h3 className="font-medium mb-3 text-red-700">Negative Factors</h3>
           <div className="neumorph-inset p-4 rounded-lg space-y-2">
-            {result.negativeFactors.map((factor, index) => (
-              <div key={index} className="flex justify-between items-center">
+            {result.negativeFactors.map(factor => (
+              <div
+                key={`${factor.factor}-${factor.yearsLost}`}
+                className="flex justify-between items-center"
+              >
                 <div className="flex items-center gap-2">
                   <span className="text-red-500 text-lg" aria-hidden="true">
                     -
@@ -176,7 +182,7 @@ const LifeExpectancyResultDisplay: React.FC<LifeExpectancyResultDisplayProps> = 
           <h3 className="font-medium mb-3">Top Recommendations</h3>
           <div className="neumorph-inset p-4 rounded-lg space-y-3">
             {result.topRecommendations.map((rec, index) => (
-              <div key={index} className="flex gap-3">
+              <div key={rec} className="flex gap-3">
                 <span className="text-accent font-bold text-sm min-w-[1.5rem]" aria-hidden="true">
                   {index + 1}.
                 </span>

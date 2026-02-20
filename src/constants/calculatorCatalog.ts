@@ -1,10 +1,10 @@
-export interface CalculatorHub {
+interface CalculatorHub {
   slug: string;
   title: string;
   description: string;
 }
 
-export interface CalculatorCatalogItem {
+interface CalculatorCatalogItem {
   slug: string;
   title: string;
   description: string;

@@ -85,7 +85,7 @@ export const TDEE_FORMULAS: TDEEFormula[] = [
 ];
 
 // Default values for TDEE calculator
-export const DEFAULT_TDEE_VALUES = {
+const _DEFAULT_TDEE_VALUES = {
   male: {
     age: 30,
     heightCm: 175,

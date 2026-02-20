@@ -10,6 +10,8 @@ interface HealthChecks {
   newsletterProviderConfigured: boolean;
   contactProviderConfigured: boolean;
   embedProviderConfigured: boolean;
+  clerkKeysPaired: boolean;
+  clerkProductionKeysSafe: boolean;
   analyticsConfigured: boolean;
   sentryDsnConfigured: boolean;
   adsenseSlotsConfigured: boolean;
@@ -40,6 +42,15 @@ function createHealthChecks(): HealthChecks {
   const hasResend = has(process.env.RESEND_API_KEY);
   const hasPostgres = has(process.env.DATABASE_URL) || has(process.env.SUBMISSIONS_POSTGRES_URL);
   const dbDriver = (process.env.SUBMISSIONS_DB_DRIVER ?? '').trim().toLowerCase();
+  const clerkPublishable = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.trim();
+  const clerkSecret = process.env.CLERK_SECRET_KEY?.trim();
+  const hasClerkPublishable = has(clerkPublishable);
+  const hasClerkSecret = has(clerkSecret);
+  const isProductionRuntime =
+    (process.env.VERCEL_ENV ?? process.env.NODE_ENV ?? '').trim().toLowerCase() === 'production';
+  const clerkUsingTestKeys =
+    (clerkPublishable?.startsWith('pk_test_') ?? false) ||
+    (clerkSecret?.startsWith('sk_test_') ?? false);
 
   return {
     siteUrlConfigured: has(process.env.NEXT_PUBLIC_SITE_URL),
@@ -50,6 +61,8 @@ function createHealthChecks(): HealthChecks {
     newsletterProviderConfigured: hasMailchimp || hasConvertKit || hasResendAudience,
     contactProviderConfigured: hasResend,
     embedProviderConfigured: hasConvertKit,
+    clerkKeysPaired: hasClerkPublishable === hasClerkSecret,
+    clerkProductionKeysSafe: !isProductionRuntime || !clerkUsingTestKeys,
     analyticsConfigured: isGaMeasurementId(process.env.NEXT_PUBLIC_GA_ID),
     sentryDsnConfigured: has(process.env.NEXT_PUBLIC_SENTRY_DSN),
     adsenseSlotsConfigured: hasConfiguredAdSenseSlot(),
@@ -68,6 +81,12 @@ function createWarnings(checks: HealthChecks): string[] {
   if (!checks.adsenseSlotsConfigured) {
     warnings.push('AdSense slots are not configured.');
   }
+  if (!checks.clerkKeysPaired) {
+    warnings.push('Clerk keys are partially configured.');
+  }
+  if (!checks.clerkProductionKeysSafe) {
+    warnings.push('Clerk test keys are configured in production.');
+  }
 
   return warnings;
 }
@@ -79,7 +98,9 @@ function isHealthy(checks: HealthChecks): boolean {
     checks.persistenceDriverConfigured &&
     checks.persistenceDatabaseConfigured &&
     checks.newsletterProviderConfigured &&
-    checks.contactProviderConfigured
+    checks.contactProviderConfigured &&
+    checks.clerkKeysPaired &&
+    checks.clerkProductionKeysSafe
   );
 }
 
@@ -94,7 +115,13 @@ export async function GET(): Promise<NextResponse> {
   }
 
   return NextResponse.json(
-    { status: ok ? 'ok' : 'degraded', timestamp: new Date().toISOString() },
+    {
+      ok,
+      status: ok ? 'ok' : 'degraded',
+      checks,
+      warnings,
+      timestamp: new Date().toISOString(),
+    },
     { status: ok ? 200 : 503, headers: { 'Cache-Control': 'no-store' } }
   );
 }

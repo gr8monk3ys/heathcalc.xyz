@@ -5,7 +5,7 @@ import { ActivityLevel, Gender, HeightUnit, WeightUnit } from './common';
  * These are more granular than general activity levels to account
  * for different training intensities and goals
  */
-export type ProteinActivityLevel =
+type _ProteinActivityLevel =
   | 'sedentary'
   | 'lightly_active'
   | 'moderately_active'

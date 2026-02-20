@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
 
 interface AuthModalProps {
@@ -13,19 +13,17 @@ export default function AuthModal({ open, onClose }: AuthModalProps): React.JSX.
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  useEffect(() => {
-    if (open) {
-      inputRef.current?.focus();
-    } else {
-      // Reset state when modal closes.
-      setEmail('');
-      setStatus('idle');
-      setErrorMessage('');
-    }
-  }, [open]);
+  const resetFormState = useCallback(() => {
+    setEmail('');
+    setStatus('idle');
+    setErrorMessage('');
+  }, []);
+
+  const handleClose = useCallback(() => {
+    resetFormState();
+    onClose();
+  }, [onClose, resetFormState]);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -49,19 +47,19 @@ export default function AuthModal({ open, onClose }: AuthModalProps): React.JSX.
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {
       if (e.target === e.currentTarget) {
-        onClose();
+        handleClose();
       }
     },
-    [onClose]
+    [handleClose]
   );
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        handleClose();
       }
     },
-    [onClose]
+    [handleClose]
   );
 
   if (!open) return null;
@@ -74,7 +72,6 @@ export default function AuthModal({ open, onClose }: AuthModalProps): React.JSX.
       role="presentation"
     >
       <dialog
-        ref={dialogRef}
         open
         className="glass-panel relative m-0 w-full max-w-md rounded-2xl p-6 shadow-xl"
         aria-label="Sign in"
@@ -82,7 +79,7 @@ export default function AuthModal({ open, onClose }: AuthModalProps): React.JSX.
         {/* Close button */}
         <button
           type="button"
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute right-4 top-4 rounded-full p-1 text-[var(--foreground)] opacity-60 transition-opacity hover:opacity-100"
           aria-label="Close"
         >
@@ -140,7 +137,6 @@ export default function AuthModal({ open, onClose }: AuthModalProps): React.JSX.
                 Email address
               </label>
               <input
-                ref={inputRef}
                 id="auth-email"
                 type="email"
                 required

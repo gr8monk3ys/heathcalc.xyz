@@ -31,7 +31,7 @@ export interface FFMIResult {
 /**
  * Form data for FFMI calculation
  */
-export interface FFMIFormData {
+interface _FFMIFormData {
   weight: number;
   weightUnit: WeightUnit;
   heightCm: number;

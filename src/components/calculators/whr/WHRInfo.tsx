@@ -32,8 +32,8 @@ const WHRInfo: React.FC = () => {
         <div className="neumorph-inset p-4 rounded-lg">
           <h4 className="font-medium mb-2">Waist Measurement</h4>
           <ol className="list-decimal pl-5 space-y-1">
-            {MEASUREMENT_INSTRUCTIONS.waist.map((instruction, index) => (
-              <li key={index} className="text-sm">
+            {MEASUREMENT_INSTRUCTIONS.waist.map(instruction => (
+              <li key={instruction} className="text-sm">
                 {instruction}
               </li>
             ))}
@@ -43,8 +43,8 @@ const WHRInfo: React.FC = () => {
         <div className="neumorph-inset p-4 rounded-lg">
           <h4 className="font-medium mb-2">Hip Measurement</h4>
           <ol className="list-decimal pl-5 space-y-1">
-            {MEASUREMENT_INSTRUCTIONS.hips.map((instruction, index) => (
-              <li key={index} className="text-sm">
+            {MEASUREMENT_INSTRUCTIONS.hips.map(instruction => (
+              <li key={instruction} className="text-sm">
                 {instruction}
               </li>
             ))}

@@ -1,1 +1,0 @@
-export const TARGETHEARTRATE_PLACEHOLDER = true;

@@ -145,8 +145,8 @@ const GLP1ResultDisplay: React.FC<GLP1ResultDisplayProps> = ({ result, medicatio
           <h3 className="font-medium mb-2">Nutrient Priorities on GLP-1 Therapy</h3>
           <div className="neumorph-inset p-4 rounded-lg">
             <ul className="space-y-2">
-              {result.nutrientPriorities.map((priority, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm">
+              {result.nutrientPriorities.map(priority => (
+                <li key={priority} className="flex items-start gap-2 text-sm">
                   <span className="text-green-500 mt-0.5 flex-shrink-0">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
@@ -170,9 +170,9 @@ const GLP1ResultDisplay: React.FC<GLP1ResultDisplayProps> = ({ result, medicatio
         <div className="mb-6">
           <h3 className="font-medium mb-2">Important Notes</h3>
           <div className="space-y-2">
-            {result.warnings.map((warning, index) => (
+            {result.warnings.map(warning => (
               <div
-                key={index}
+                key={warning}
                 className="neumorph-inset p-3 rounded-lg border-l-4 border-amber-500"
               >
                 <p className="text-sm">{warning}</p>

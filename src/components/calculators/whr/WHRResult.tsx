@@ -88,8 +88,8 @@ const WHRResultDisplay: React.FC<WHRResultDisplayProps> = ({ result, gender }) =
           <div className="mt-4">
             <h4 className="font-medium">Health Risks Associated with Higher WHR</h4>
             <ul className="list-disc pl-5 mt-2 space-y-1">
-              {WHR_HEALTH_RISKS.map((risk, index) => (
-                <li key={index}>{risk}</li>
+              {WHR_HEALTH_RISKS.map(risk => (
+                <li key={risk}>{risk}</li>
               ))}
             </ul>
           </div>

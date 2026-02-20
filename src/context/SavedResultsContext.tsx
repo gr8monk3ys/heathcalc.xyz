@@ -153,6 +153,27 @@ async function clearResultsFromServer(): Promise<void> {
   }
 }
 
+async function fetchResultsFromServer(): Promise<SavedResult[]> {
+  try {
+    const res = await fetch('/api/saved-results', { method: 'GET' });
+    if (!res.ok) {
+      return [];
+    }
+
+    const payload = (await res.json()) as
+      | { success: true; results: SavedResult[] }
+      | { success: false; error: string };
+
+    if (!payload.success || !Array.isArray(payload.results)) {
+      return [];
+    }
+
+    return payload.results;
+  } catch {
+    return [];
+  }
+}
+
 export function SavedResultsProvider({ children }: SavedResultsProviderProps): React.JSX.Element {
   const { user, isAuthenticated, supabaseEnabled } = useAuth();
   const [savedResultsByUser, setSavedResultsByUser] = useLocalStorage<
@@ -222,15 +243,8 @@ export function SavedResultsProvider({ children }: SavedResultsProviderProps): R
 
     async function hydrateFromServer() {
       try {
-        const res = await fetch('/api/saved-results', { method: 'GET' });
-        if (!res.ok) return;
-        const payload = (await res.json()) as
-          | { success: true; results: SavedResult[] }
-          | { success: false; error: string };
-
-        if (!payload.success || !Array.isArray(payload.results)) return;
-
-        const remoteResults = payload.results;
+        const remoteResults = await fetchResultsFromServer();
+        if (remoteResults.length === 0) return;
         const localResults = savedResultsRef.current;
         const merged = mergeSavedResults(localResults, remoteResults);
 

@@ -5,7 +5,6 @@
 
 export {
   calculateCalorieDeficit,
-  getDeficitOption,
   formatTargetDate,
   getDeficitSafetyMessage,
 } from '@/utils/calculators/calorieDeficit';

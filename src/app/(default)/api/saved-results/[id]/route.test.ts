@@ -66,6 +66,9 @@ describe('DELETE /api/saved-results/[id]', () => {
     expect(res.status).toBe(200);
     expect(json.success).toBe(true);
     expect(json.deleted).toBe(true);
-    expect(mocks.deleteSavedResult).toHaveBeenCalledWith('anonymous', 'bmi-abc');
+    expect(mocks.deleteSavedResult).toHaveBeenCalledWith(
+      expect.stringMatching(/^anon_/),
+      'bmi-abc'
+    );
   });
 });

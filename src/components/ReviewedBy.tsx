@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Reviewer } from '@/constants/reviewers';
 
 interface ReviewedByProps {
@@ -48,9 +49,11 @@ const ReviewedBy: React.FC<ReviewedByProps> = ({ reviewer, lastReviewed, classNa
     >
       {/* Reviewer avatar or initials */}
       {reviewer.imageUrl ? (
-        <img
+        <Image
           src={reviewer.imageUrl}
           alt=""
+          width={36}
+          height={36}
           className="h-9 w-9 rounded-full object-cover"
           aria-hidden="true"
         />

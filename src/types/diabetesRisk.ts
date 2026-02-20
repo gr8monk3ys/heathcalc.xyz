@@ -7,7 +7,7 @@
  * - WHO Diabetes Diagnostic Criteria (2019)
  */
 
-export type DiabetesMode = 'risk-assessment' | 'a1c-converter';
+type _DiabetesMode = 'risk-assessment' | 'a1c-converter';
 export type RiskLevel = 'low' | 'moderate' | 'high' | 'very-high';
 
 export type EthnicityRisk =

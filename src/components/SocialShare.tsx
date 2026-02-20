@@ -4,6 +4,11 @@ import React from 'react';
 import { toAbsoluteUrl } from '@/lib/site';
 import { useLocale } from '@/context/LocaleContext';
 
+const EMPTY_HASHTAGS: string[] = [];
+const DEFAULT_SOCIAL_PLATFORMS: Array<
+  'twitter' | 'facebook' | 'linkedin' | 'pinterest' | 'reddit' | 'email'
+> = ['twitter', 'facebook', 'linkedin', 'pinterest', 'reddit', 'email'];
+
 interface SocialShareProps {
   url: string;
   title: string;
@@ -30,10 +35,10 @@ export default function SocialShare({
   url,
   title,
   description = '',
-  hashtags = [],
+  hashtags = EMPTY_HASHTAGS,
   className = '',
   showLabel = true,
-  platforms = ['twitter', 'facebook', 'linkedin', 'pinterest', 'reddit', 'email'],
+  platforms = DEFAULT_SOCIAL_PLATFORMS,
 }: SocialShareProps) {
   const { t } = useLocale();
   // Ensure URL is absolute

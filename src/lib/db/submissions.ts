@@ -7,7 +7,7 @@ type DatabaseSync = import('node:sqlite').DatabaseSync;
 
 type SubmissionProvider = 'mailchimp' | 'convertkit' | 'resend' | 'none';
 type SubmissionOperation = 'newsletter' | 'contact' | 'embed-request' | 'counts';
-export type SubmissionStorageDriver = 'sqlite' | 'postgres';
+type SubmissionStorageDriver = 'sqlite' | 'postgres';
 
 interface BaseSubmissionInput {
   provider: SubmissionProvider;
@@ -15,19 +15,19 @@ interface BaseSubmissionInput {
   error?: string;
 }
 
-export interface NewsletterSubmissionInput extends BaseSubmissionInput {
+interface NewsletterSubmissionInput extends BaseSubmissionInput {
   email: string;
   source?: string;
 }
 
-export interface ContactSubmissionInput extends BaseSubmissionInput {
+interface ContactSubmissionInput extends BaseSubmissionInput {
   name: string;
   email: string;
   subject: string;
   message: string;
 }
 
-export interface EmbedRequestSubmissionInput extends BaseSubmissionInput {
+interface EmbedRequestSubmissionInput extends BaseSubmissionInput {
   name: string;
   email: string;
   website: string;
@@ -36,13 +36,13 @@ export interface EmbedRequestSubmissionInput extends BaseSubmissionInput {
   notes: string;
 }
 
-export interface SubmissionCounts {
+interface SubmissionCounts {
   newsletter: number;
   contact: number;
   embedRequests: number;
 }
 
-export interface SubmissionWriteResult {
+interface SubmissionWriteResult {
   success: boolean;
   driver: SubmissionStorageDriver;
   error?: string;

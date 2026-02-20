@@ -45,7 +45,7 @@ export const RECOMP_GOAL_OPTIONS: Array<{
   },
 ];
 
-export const BODY_FAT_RANGES = {
+const _BODY_FAT_RANGES = {
   male: {
     essential: { min: 2, max: 5 },
     athletic: { min: 6, max: 13 },
@@ -62,7 +62,7 @@ export const BODY_FAT_RANGES = {
   },
 };
 
-export const CALORIE_CYCLING_INFO = {
+const _CALORIE_CYCLING_INFO = {
   trainingDay: {
     multiplier: 1.1,
     description: 'Higher calories to fuel performance and recovery',
@@ -73,7 +73,7 @@ export const CALORIE_CYCLING_INFO = {
   },
 };
 
-export const MACRO_TARGETS = {
+const _MACRO_TARGETS = {
   protein: {
     gramsPerLb: 1,
     gramsPerKg: 2.2,
@@ -88,7 +88,7 @@ export const MACRO_TARGETS = {
   },
 };
 
-export const MUSCLE_GAIN_RATES = {
+const _MUSCLE_GAIN_RATES = {
   male: {
     beginner: { min: 1, max: 2 },
     intermediate: { min: 0.5, max: 1 },
@@ -101,13 +101,13 @@ export const MUSCLE_GAIN_RATES = {
   },
 };
 
-export const RECOMMENDED_TRAINING_FREQUENCY = {
+const _RECOMMENDED_TRAINING_FREQUENCY = {
   beginner: { min: 3, max: 4 },
   intermediate: { min: 4, max: 5 },
   advanced: { min: 4, max: 6 },
 };
 
-export const FAT_LOSS_GUIDELINES = {
+const _FAT_LOSS_GUIDELINES = {
   safe: { min: 0.5, max: 1 }, // lbs per week
   aggressive: { min: 1, max: 2 },
   extreme: { min: 2, max: 3 },

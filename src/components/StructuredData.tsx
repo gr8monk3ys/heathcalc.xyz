@@ -1,5 +1,8 @@
 'use client';
 
+import { useId } from 'react';
+import Script from 'next/script';
+
 // Import schema utility functions for re-export
 import * as schemaUtils from '@/utils/schema';
 
@@ -9,7 +12,6 @@ export const {
   createWebsiteSchema,
   createBreadcrumbSchema,
   createFAQSchema,
-  createArticleSchema,
   createCalculatorSchema,
 } = schemaUtils;
 
@@ -23,12 +25,17 @@ interface StructuredDataProps {
  */
 export default function StructuredData({ data }: StructuredDataProps) {
   const schemaType = typeof data['@type'] === 'string' ? data['@type'] : 'unknown';
+  const scriptId = useId().replace(/:/g, '-');
+  const schemaJson = JSON.stringify(data).replace(/</g, '\\u003c');
 
   return (
-    <script
+    <Script
+      id={`structured-data-${schemaType}-${scriptId}`}
       type="application/ld+json"
       data-schema-type={schemaType}
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+      strategy="afterInteractive"
+    >
+      {schemaJson}
+    </Script>
   );
 }

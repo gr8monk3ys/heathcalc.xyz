@@ -100,8 +100,8 @@ const ProteinResult: React.FC<ProteinResultProps> = ({ result, weightUnit }) => 
       <div className="mb-6">
         <h3 className="font-medium mb-3">High-Protein Food Sources</h3>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {topProteinSources.map((source, index) => (
-            <div key={index} className="neumorph-inset p-3 rounded-lg">
+          {topProteinSources.map(source => (
+            <div key={source.name} className="neumorph-inset p-3 rounded-lg">
               <p className="font-medium text-sm">{source.name}</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 {source.proteinPer100g}g per 100g

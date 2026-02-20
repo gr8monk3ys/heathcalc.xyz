@@ -6,6 +6,7 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useRef,
   ReactNode,
 } from 'react';
 import { usePreferences } from '@/context/PreferencesContext';
@@ -135,7 +136,9 @@ function AdSenseLoader(): React.JSX.Element | null {
       return;
     }
 
-    const existing = document.querySelector<HTMLScriptElement>('script[data-hc-adsense="1"]');
+    const existing = document.querySelector<HTMLScriptElement>(
+      'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]'
+    );
     if (existing) {
       setLoaded(true);
       return;
@@ -145,7 +148,6 @@ function AdSenseLoader(): React.JSX.Element | null {
     script.src = getAdSenseScriptSrc();
     script.async = true;
     script.crossOrigin = 'anonymous';
-    script.dataset.hcAdsense = '1';
     document.head.appendChild(script);
     setLoaded(true);
   }, [advertising, hasConfiguredAdSlot, loaded, publisherId]);
@@ -274,8 +276,10 @@ function CookieConsentBanner({
 }): React.JSX.Element {
   const { t } = useLocale();
   const [expanded, setExpanded] = useState(false);
-  const [analyticsChecked, setAnalyticsChecked] = useState(initialAnalytics);
-  const [advertisingChecked, setAdvertisingChecked] = useState(initialAdvertising);
+  const initialAnalyticsRef = useRef(initialAnalytics);
+  const initialAdvertisingRef = useRef(initialAdvertising);
+  const [analyticsChecked, setAnalyticsChecked] = useState(initialAnalyticsRef.current);
+  const [advertisingChecked, setAdvertisingChecked] = useState(initialAdvertisingRef.current);
 
   return (
     <div
@@ -391,26 +395,34 @@ export function CookieConsentProvider({ children }: { children: ReactNode }): Re
   // the provider is mounted inside the preferences tree.
   usePreferences();
 
-  const [consent, setConsent] = useState<CookieConsentState>(DEFAULT_CONSENT);
-  const [bannerVisible, setBannerVisible] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
+  const [consentState, setConsentState] = useState<{
+    consent: CookieConsentState;
+    bannerVisible: boolean;
+    hydrated: boolean;
+  }>({
+    consent: DEFAULT_CONSENT,
+    bannerVisible: false,
+    hydrated: false,
+  });
+  const { consent, bannerVisible, hydrated } = consentState;
 
   // Hydrate from localStorage on mount
   useEffect(() => {
     const stored = readStoredConsent();
-    if (stored) {
-      setConsent(stored);
-      setBannerVisible(false);
-    } else {
-      setBannerVisible(true);
-    }
-    setHydrated(true);
+    setConsentState({
+      consent: stored ?? DEFAULT_CONSENT,
+      bannerVisible: !stored,
+      hydrated: true,
+    });
   }, []);
 
   const persist = useCallback((next: CookieConsentState) => {
-    setConsent(next);
+    setConsentState(prevState => ({
+      ...prevState,
+      consent: next,
+      bannerVisible: false,
+    }));
     writeConsent(next);
-    setBannerVisible(false);
   }, []);
 
   const handleAcceptAll = useCallback(() => {
@@ -447,7 +459,10 @@ export function CookieConsentProvider({ children }: { children: ReactNode }): Re
   );
 
   const openConsentBanner = useCallback(() => {
-    setBannerVisible(true);
+    setConsentState(prevState => ({
+      ...prevState,
+      bannerVisible: true,
+    }));
   }, []);
 
   const contextValue: CookieConsentContextValue = {
@@ -481,5 +496,3 @@ export function CookieConsentProvider({ children }: { children: ReactNode }): Re
     </CookieConsentContext.Provider>
   );
 }
-
-export default CookieConsentProvider;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useReducer, useCallback, useRef, useEffect } from 'react';
 import { getPublicSiteUrl } from '@/lib/site';
 
 interface EmbedCodeGeneratorProps {
@@ -16,52 +16,106 @@ const MAX_HEIGHT = 1000;
 const DEFAULT_WIDTH = 400;
 const DEFAULT_HEIGHT = 600;
 
+type EmbedTheme = 'light' | 'dark';
+
+interface EmbedUiState {
+  width: number;
+  height: number;
+  theme: EmbedTheme;
+  copied: boolean;
+  showPreview: boolean;
+}
+
+type EmbedUiAction =
+  | { type: 'setWidth'; value: number }
+  | { type: 'setHeight'; value: number }
+  | { type: 'setTheme'; value: EmbedTheme }
+  | { type: 'setCopied'; value: boolean }
+  | { type: 'togglePreview' };
+
+const initialEmbedUiState: EmbedUiState = {
+  width: DEFAULT_WIDTH,
+  height: DEFAULT_HEIGHT,
+  theme: 'light',
+  copied: false,
+  showPreview: false,
+};
+
+function embedUiReducer(state: EmbedUiState, action: EmbedUiAction): EmbedUiState {
+  switch (action.type) {
+    case 'setWidth':
+      return { ...state, width: action.value };
+    case 'setHeight':
+      return { ...state, height: action.value };
+    case 'setTheme':
+      return { ...state, theme: action.value };
+    case 'setCopied':
+      return { ...state, copied: action.value };
+    case 'togglePreview':
+      return { ...state, showPreview: !state.showPreview };
+    default:
+      return state;
+  }
+}
+
 export const EmbedCodeGenerator: React.FC<EmbedCodeGeneratorProps> = ({
   calculatorSlug,
   calculatorTitle,
 }) => {
-  const [width, setWidth] = useState<number>(DEFAULT_WIDTH);
-  const [height, setHeight] = useState<number>(DEFAULT_HEIGHT);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [copied, setCopied] = useState<boolean>(false);
-  const [showPreview, setShowPreview] = useState<boolean>(false);
+  const [uiState, dispatchUiState] = useReducer(embedUiReducer, initialEmbedUiState);
+  const { width, height, theme, copied, showPreview } = uiState;
   const codeRef = useRef<HTMLTextAreaElement>(null);
+  const copiedResetTimeoutRef = useRef<number | null>(null);
 
   const embedUrl = `${SITE_URL}/api/embed/${calculatorSlug}${theme === 'dark' ? '?theme=dark' : ''}`;
 
   const embedCode = `<iframe src="${embedUrl}" width="${width}" height="${height}" frameborder="0" title="${calculatorTitle} - HealthCheck" style="border:none;border-radius:12px;max-width:100%;" loading="lazy"></iframe>`;
 
+  const scheduleCopiedReset = useCallback(() => {
+    if (copiedResetTimeoutRef.current !== null) {
+      window.clearTimeout(copiedResetTimeoutRef.current);
+    }
+    copiedResetTimeoutRef.current = window.setTimeout(
+      () => dispatchUiState({ type: 'setCopied', value: false }),
+      2500
+    );
+  }, []);
+
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(embedCode);
-      setCopied(true);
+      dispatchUiState({ type: 'setCopied', value: true });
+      scheduleCopiedReset();
     } catch {
       if (codeRef.current) {
         codeRef.current.select();
         document.execCommand('copy');
-        setCopied(true);
+        dispatchUiState({ type: 'setCopied', value: true });
+        scheduleCopiedReset();
       }
     }
-  }, [embedCode]);
+  }, [embedCode, scheduleCopiedReset]);
 
   useEffect(() => {
-    if (copied) {
-      const timer = setTimeout(() => setCopied(false), 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [copied]);
+    return () => {
+      if (copiedResetTimeoutRef.current !== null) {
+        window.clearTimeout(copiedResetTimeoutRef.current);
+      }
+      copiedResetTimeoutRef.current = null;
+    };
+  }, []);
 
   const handleWidthChange = useCallback((value: string) => {
     const num = parseInt(value, 10);
     if (!isNaN(num) && num >= MIN_WIDTH && num <= MAX_WIDTH) {
-      setWidth(num);
+      dispatchUiState({ type: 'setWidth', value: num });
     }
   }, []);
 
   const handleHeightChange = useCallback((value: string) => {
     const num = parseInt(value, 10);
     if (!isNaN(num) && num >= MIN_HEIGHT && num <= MAX_HEIGHT) {
-      setHeight(num);
+      dispatchUiState({ type: 'setHeight', value: num });
     }
   }, []);
 
@@ -112,7 +166,9 @@ export const EmbedCodeGenerator: React.FC<EmbedCodeGeneratorProps> = ({
           <select
             id="embed-theme"
             value={theme}
-            onChange={e => setTheme(e.target.value as 'light' | 'dark')}
+            onChange={e =>
+              dispatchUiState({ type: 'setTheme', value: e.target.value as EmbedTheme })
+            }
             className="w-full p-2 neumorph-inset rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-accent"
           >
             <option value="light">Light</option>
@@ -147,7 +203,7 @@ export const EmbedCodeGenerator: React.FC<EmbedCodeGeneratorProps> = ({
           {copied ? 'Copied!' : 'Copy to Clipboard'}
         </button>
         <button
-          onClick={() => setShowPreview(!showPreview)}
+          onClick={() => dispatchUiState({ type: 'togglePreview' })}
           className="px-4 py-2 neumorph text-gray-600 dark:text-gray-400 font-medium rounded-lg hover:shadow-neumorph-inset transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 text-sm"
           aria-expanded={showPreview}
           aria-controls="embed-preview"

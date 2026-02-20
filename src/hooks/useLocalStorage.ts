@@ -11,7 +11,7 @@ export interface LocalStorageError {
   key: string;
 }
 
-export interface UseLocalStorageOptions {
+interface UseLocalStorageOptions {
   /** Called when a storage error occurs */
   onError?: (error: LocalStorageError) => void;
 }
