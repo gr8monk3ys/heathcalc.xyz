@@ -17,6 +17,7 @@
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",
     "create:calculator": "bun run scripts/create-calculator.ts",
+    "smoke": "playwright test e2e/calculators-all.spec.ts e2e/navigation.spec.ts",
     "validate": "bun run format:check && bun run lint && bun run type-check && bun run test",
     "clean": "rm -rf .next out node_modules/.cache",
     "audit:fix": "npm audit fix",
