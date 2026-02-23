@@ -248,7 +248,7 @@ function ToggleSwitch({
         <span
           className={`
             pointer-events-none inline-block h-4 w-4 rounded-full
-            bg-white shadow-md transition-transform duration-200
+            bg-white dark:bg-gray-200 shadow-md transition-transform duration-200
             ${checked ? 'translate-x-6' : 'translate-x-1'}
           `}
         />

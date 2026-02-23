@@ -44,10 +44,10 @@ function readIsEmbedFromLocation(): boolean {
 const FAQSection = dynamic(() => import('@/components/FAQSection'), {
   loading: () => (
     <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
-      <div className="h-8 bg-gray-200 rounded w-1/3 mb-6" />
+      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-6" />
       <div className="space-y-4">
         {FAQ_SKELETON_ROWS.map(rowId => (
-          <div key={rowId} className="h-12 bg-gray-200 rounded" />
+          <div key={rowId} className="h-12 bg-gray-200 dark:bg-gray-700 rounded" />
         ))}
       </div>
     </div>
@@ -57,10 +57,10 @@ const FAQSection = dynamic(() => import('@/components/FAQSection'), {
 const NewsletterSignup = dynamic(() => import('@/components/NewsletterSignup'), {
   loading: () => (
     <div className="neumorph p-6 rounded-lg animate-pulse">
-      <div className="h-6 bg-gray-200 rounded w-1/2 mb-2" />
-      <div className="h-4 bg-gray-200 rounded w-3/4 mb-4" />
-      <div className="h-10 bg-gray-200 rounded mb-4" />
-      <div className="h-10 bg-gray-200 rounded" />
+      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-2" />
+      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4" />
+      <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded mb-4" />
+      <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded" />
     </div>
   ),
 });
@@ -68,14 +68,14 @@ const NewsletterSignup = dynamic(() => import('@/components/NewsletterSignup'), 
 const RelatedArticles = dynamic(() => import('@/components/RelatedArticles'), {
   loading: () => (
     <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
-      <div className="h-8 bg-gray-200 rounded w-1/4 mb-6" />
+      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6" />
       <div className="space-y-6">
         {ARTICLE_SKELETON_ROWS.map(rowId => (
           <div key={rowId} className="p-4 rounded-lg neumorph">
-            <div className="h-4 bg-gray-200 rounded w-1/4 mb-2" />
-            <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
-            <div className="h-4 bg-gray-200 rounded w-full mb-2" />
-            <div className="h-3 bg-gray-200 rounded w-1/3" />
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2" />
+            <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
+            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/3" />
           </div>
         ))}
       </div>
@@ -242,9 +242,9 @@ function CalculatorPageLayoutContent({
         <ResultsShareProvider>
           <div className="max-w-4xl mx-auto px-4 py-6">
             <h1 className="text-2xl font-bold mb-2">{title}</h1>
-            <p className="text-sm text-gray-600 mb-6">{description}</p>
+            <p className="text-sm text-gray-600 mb-6 dark:text-gray-400">{description}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">{children}</div>
-            <div className="mt-4 text-xs text-gray-500">{poweredByContent}</div>
+            <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">{poweredByContent}</div>
           </div>
         </ResultsShareProvider>
       </ErrorBoundary>
@@ -258,7 +258,7 @@ function CalculatorPageLayoutContent({
           <Breadcrumb />
 
           <h1 className="text-3xl font-bold mb-2">{title}</h1>
-          <p className="text-gray-600 mb-6">{description}</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">{description}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
 
@@ -300,10 +300,10 @@ function CalculatorPageLayoutContent({
           <Suspense
             fallback={
               <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
-                <div className="h-8 bg-gray-200 rounded w-1/3 mb-6" />
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-6" />
                 <div className="space-y-4">
                   {FAQ_SKELETON_ROWS.map(rowId => (
-                    <div key={rowId} className="h-12 bg-gray-200 rounded" />
+                    <div key={rowId} className="h-12 bg-gray-200 dark:bg-gray-700 rounded" />
                   ))}
                 </div>
               </div>
@@ -326,14 +326,14 @@ function CalculatorPageLayoutContent({
           <Suspense
             fallback={
               <div className="neumorph p-6 rounded-lg my-8 animate-pulse">
-                <div className="h-8 bg-gray-200 rounded w-1/4 mb-6" />
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-6" />
                 <div className="space-y-6">
                   {ARTICLE_SKELETON_ROWS.map(rowId => (
                     <div key={rowId} className="p-4 rounded-lg neumorph">
-                      <div className="h-4 bg-gray-200 rounded w-1/4 mb-2" />
-                      <div className="h-5 bg-gray-200 rounded w-3/4 mb-2" />
-                      <div className="h-4 bg-gray-200 rounded w-full mb-2" />
-                      <div className="h-3 bg-gray-200 rounded w-1/3" />
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2" />
+                      <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2" />
+                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/3" />
                     </div>
                   ))}
                 </div>
@@ -351,10 +351,10 @@ function CalculatorPageLayoutContent({
           <Suspense
             fallback={
               <div className="neumorph p-6 rounded-lg animate-pulse">
-                <div className="h-6 bg-gray-200 rounded w-1/2 mb-2" />
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4" />
-                <div className="h-10 bg-gray-200 rounded mb-4" />
-                <div className="h-10 bg-gray-200 rounded" />
+                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-2" />
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4" />
+                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded mb-4" />
+                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded" />
               </div>
             }
           >

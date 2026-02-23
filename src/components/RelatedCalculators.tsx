@@ -27,10 +27,12 @@ export default function RelatedCalculators({ currentSlug, title }: RelatedCalcul
           <Link
             key={calculator.slug}
             href={localizePath(`/${calculator.slug}`)}
-            className="block p-4 rounded-lg bg-white hover:shadow-md transition-shadow"
+            className="block p-4 rounded-lg bg-white hover:shadow-md transition-shadow dark:bg-gray-800"
           >
-            <h3 className="font-semibold text-gray-900 mb-1">{calculator.title}</h3>
-            <p className="text-sm text-gray-600">{calculator.description}</p>
+            <h3 className="font-semibold text-gray-900 mb-1 dark:text-gray-100">
+              {calculator.title}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{calculator.description}</p>
           </Link>
         ))}
       </div>

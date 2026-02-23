@@ -42,9 +42,9 @@ const CompleteGuideGLP1WeightLossPageContent = (
       </div>
 
       <p>
-        I want to be upfront about something. GLP-1 medications are the most significant development
-        in obesity treatment in decades. They are also wildly overhyped, poorly understood by most
-        people taking them, and surrounded by misinformation from every direction. Pharma companies
+        I want to be upfront about something. GLP-1 medications produce weight loss that no pill or
+        injection could before. They are also wildly overhyped, poorly understood by most people
+        taking them, and surrounded by misinformation from every direction. Pharma companies
         oversell the benefits. Social media undersells the risks. And most coverage glosses over the
         single biggest question: what happens when you stop?
       </p>
@@ -152,8 +152,8 @@ const CompleteGuideGLP1WeightLossPageContent = (
 
       <p>
         STEP 5 extended the treatment to 104 weeks (2 years). Average weight loss was 15.2%, and it
-        was largely sustained for the duration of treatment. This matters because it shows the
-        medication keeps working as long as you keep taking it.
+        held for the duration of treatment. The medication keeps working as long as you keep taking
+        it.
       </p>
 
       <h3 className="text-xl font-semibold mt-8 mb-3">Tirzepatide: The SURMOUNT Trial Program</h3>
@@ -165,9 +165,9 @@ const CompleteGuideGLP1WeightLossPageContent = (
       </p>
 
       <p>
-        The results were genuinely striking. At the highest dose (15 mg), participants lost an
-        average of 22.5% of their body weight over 72 weeks. At the middle dose (10 mg), it was
-        21.4%. At the lowest dose (5 mg), 15%.
+        The results stood out. At the highest dose (15 mg), participants lost an average of 22.5% of
+        their body weight over 72 weeks. At the middle dose (10 mg), it was 21.4%. At the lowest
+        dose (5 mg), 15%.
       </p>
 
       <p>
@@ -307,14 +307,13 @@ const CompleteGuideGLP1WeightLossPageContent = (
       <p>
         This is not a failure of the medication. It is biology. Obesity, for most people, is a
         chronic condition driven by hormonal and neurological factors that the medication corrects.
-        When you remove the medication, those factors reassert themselves. The same way blood
-        pressure rises again when you stop taking blood pressure medication.
+        Remove the medication and those factors come back. Blood pressure rises again when you stop
+        taking blood pressure medication. Same idea.
       </p>
 
       <p>
-        The implication is clear: for most people, GLP-1 medications work best as a long-term
-        treatment, not a short course. That has enormous implications for cost, access, and how we
-        think about these drugs.
+        For most people, GLP-1 medications work best as a long-term treatment, not a short course.
+        That changes the math on cost and access entirely.
       </p>
 
       <p>
@@ -384,16 +383,16 @@ const CompleteGuideGLP1WeightLossPageContent = (
       </p>
 
       <p>
-        In my view, the people who benefit most are those who have genuinely tried lifestyle changes
-        and hit a biological wall. Someone who has been eating well and exercising consistently for
-        years but cannot get their weight below a certain threshold due to hormonal factors. Someone
-        whose hunger signals are genuinely dysregulated, not someone who skips breakfast and eats
-        fast food and has never seriously tried.
+        In my view, the people who benefit most have already tried lifestyle changes and hit a
+        biological wall. Someone who has been eating well and exercising consistently for years but
+        cannot get their weight below a certain threshold. Someone whose hunger signals are
+        dysregulated at a hormonal level, not someone who skips breakfast and eats fast food and has
+        never seriously tried.
       </p>
 
       <p>
-        I know that last sentence will be controversial. But these drugs have real side effects,
-        cost a fortune, and may need to be taken indefinitely. Starting them before exhausting
+        I know that last sentence will be controversial. But these drugs have real side effects and
+        cost a fortune. You may need to take them indefinitely. Starting them before exhausting
         simpler approaches does not make sense to me.
       </p>
 
@@ -513,23 +512,22 @@ const CompleteGuideGLP1WeightLossPageContent = (
       </p>
 
       <p>
-        That is a massive finding. For context, statins, which are considered one of the most
-        important medications in cardiovascular prevention, typically reduce cardiovascular events
-        by about 25-30%. Semaglutide is approaching similar territory.
+        That is a big number. For comparison, statins typically reduce cardiovascular events by
+        about 25-30%. Semaglutide is in the same neighborhood.
       </p>
 
       <p>
-        Other documented benefits from the clinical trial data include: reduction in hemoglobin A1c
-        (even in non-diabetic patients), improvements in blood pressure (average reduction of 4-6
-        mmHg systolic), improvements in triglycerides and HDL cholesterol, reduced markers of
-        systemic inflammation (C-reactive protein dropped significantly), and improvements in liver
-        fat content (relevant for people with fatty liver disease).
+        The trials also documented: lower hemoglobin A1c (even in non-diabetic patients), blood
+        pressure reductions averaging 4-6 mmHg systolic, better triglycerides and HDL cholesterol,
+        lower C-reactive protein (a marker of systemic inflammation), and reduced liver fat content
+        (relevant for people with fatty liver disease).
       </p>
 
       <p>
         Research on kidney outcomes, sleep apnea, and heart failure is ongoing. Early results from
-        the FLOW trial showed a 24% reduction in kidney disease progression with semaglutide, and
-        the trial was actually stopped early because the benefit was so clear.
+        the FLOW trial showed a 24% reduction in kidney disease progression with semaglutide. The
+        trial was stopped early because the benefit was large enough that continuing the placebo arm
+        was considered unethical.
       </p>
 
       <h2 className="text-2xl font-bold mt-10 mb-4">Making It Work: Practical Recommendations</h2>
@@ -557,9 +555,9 @@ const CompleteGuideGLP1WeightLossPageContent = (
       </p>
 
       <p>
-        <strong>Hydrate aggressively.</strong> Many GLP-1 side effects (nausea, constipation,
-        headaches) are worsened by dehydration. Aim for at least 2 liters of water daily. More if
-        you are exercising.
+        <strong>Drink more water than you think you need.</strong> Nausea, constipation, and
+        headaches all get worse when you are dehydrated. At least 2 liters daily. More if you are
+        exercising.
       </p>
 
       <p>
@@ -569,30 +567,28 @@ const CompleteGuideGLP1WeightLossPageContent = (
       </p>
 
       <p>
-        <strong>Track your progress beyond the scale.</strong> Body measurements, progress photos,
-        how your clothes fit, energy levels, blood work. The scale number alone tells you almost
-        nothing about whether you are losing fat versus muscle.
+        <strong>Track more than the scale number.</strong> Body measurements, progress photos, how
+        your clothes fit, energy levels, blood work. The scale alone tells you almost nothing about
+        whether you are losing fat or muscle.
       </p>
 
       <h2 className="text-2xl font-bold mt-10 mb-4">The Bottom Line</h2>
 
       <p>
-        GLP-1 medications are a genuine breakthrough. They produce weight loss that was previously
-        only achievable through surgery. They improve cardiovascular outcomes, metabolic markers,
-        and quality of life.
+        GLP-1 medications work. They produce weight loss that was previously only achievable through
+        surgery, and they improve cardiovascular outcomes and metabolic markers along the way.
       </p>
 
       <p>
-        They are also expensive, require long-term use, cause significant side effects in many
-        people, and do not replace the need for good nutrition and exercise. They are a tool, not a
-        solution. The best outcomes come from treating them as the foundation of a plan that
-        includes adequate protein, resistance training, and realistic expectations about what
-        happens when (or if) you stop.
+        They are also expensive, require long-term use, and cause real side effects in many people.
+        They do not replace good nutrition and exercise. The best outcomes come from treating them
+        as one piece of a plan that includes adequate protein, resistance training, and realistic
+        expectations about what happens when you stop.
       </p>
 
       <p>
-        If you are considering a GLP-1 medication, have an honest conversation with your doctor
-        about your specific situation. Use our{' '}
+        If you are considering a GLP-1 medication, talk to your doctor about your specific
+        situation. Use our{' '}
         <Link href="/glp1-calculator" className="text-blue-600 dark:text-blue-400 hover:underline">
           GLP-1 calculator
         </Link>{' '}
@@ -601,8 +597,7 @@ const CompleteGuideGLP1WeightLossPageContent = (
       </p>
 
       <p>
-        The research is clear on one thing: these medications work. How well they work for you
-        depends on everything you do around them.
+        These medications work. How well they work for you depends on everything you do around them.
       </p>
 
       <div className="neumorph p-6 rounded-lg mt-8">

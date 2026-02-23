@@ -73,11 +73,10 @@ const BlogPostPageContent = (
 
       <div className="prose prose-lg max-w-none">
         <p>
-          When it comes to assessing your health and fitness, the number on the scale doesn't tell
-          the whole story. Your body weight includes muscle, bone, organs, water, and fat—but not
-          all of these components affect your health in the same way. Body fat percentage, which
-          measures the proportion of your body that's composed of fat, provides a much more
-          meaningful metric for understanding your body composition and overall health.
+          The number on the scale doesn't tell you much. Your body weight includes muscle, bone,
+          organs, water, and fat, and these components affect your health differently. Body fat
+          percentage, the proportion of your body that's composed of fat, is a more useful measure
+          of body composition than total weight alone.
         </p>
 
         <AdBlock format="horizontal" />
@@ -88,7 +87,7 @@ const BlogPostPageContent = (
           weight that is fat. If you weigh 150 pounds and have 30 pounds of fat, your body fat
           percentage is 20%.
         </p>
-        <p>Body fat serves several important functions:</p>
+        <p>Body fat does real work in your body:</p>
         <ul>
           <li>Energy storage</li>
           <li>Hormone regulation</li>
@@ -97,15 +96,14 @@ const BlogPostPageContent = (
           <li>Vitamin storage (for fat-soluble vitamins A, D, E, and K)</li>
         </ul>
         <p>
-          However, excess body fat—especially visceral fat that surrounds your organs—is associated
-          with increased risk of various health conditions, including heart disease, type 2
-          diabetes, and certain cancers.
+          That said, excess body fat (especially visceral fat surrounding your organs) is associated
+          with increased risk of heart disease, type 2 diabetes, and certain cancers.
         </p>
 
         <h2>Healthy Body Fat Percentage Ranges</h2>
         <p>
-          What constitutes a "healthy" body fat percentage varies based on age, sex, and fitness
-          goals. Here are general guidelines from the American Council on Exercise (ACE):
+          What counts as "healthy" body fat varies by age, sex, and fitness goals. The American
+          Council on Exercise (ACE) breaks it down like this:
         </p>
 
         <h3>For Men:</h3>
@@ -153,10 +151,7 @@ const BlogPostPageContent = (
         </p>
 
         <h2>How Body Fat Percentage Is Measured</h2>
-        <p>
-          There are several methods to measure body fat percentage, each with varying degrees of
-          accuracy, accessibility, and cost:
-        </p>
+        <p>Several methods exist, and they trade off accuracy against convenience and cost:</p>
 
         <h3>DEXA (Dual-Energy X-ray Absorptiometry)</h3>
         <p>
@@ -169,8 +164,7 @@ const BlogPostPageContent = (
         </p>
         <p>
           DEXA scans use low-dose X-rays to measure bone mineral density, lean mass, and fat mass
-          throughout the body. This method is considered the gold standard for body composition
-          assessment.
+          throughout the body. It is the gold standard for body composition measurement.
         </p>
 
         <h3>Hydrostatic Weighing</h3>
@@ -182,9 +176,8 @@ const BlogPostPageContent = (
           <strong>Cost:</strong> Moderate ($40-60 per test)
         </p>
         <p>
-          This method involves being completely submerged in water to measure body density, which is
-          then used to calculate body fat percentage based on the principle that fat is less dense
-          than muscle and bone.
+          You're fully submerged in water to measure body density. Fat is less dense than muscle and
+          bone, so the density measurement can be converted to a body fat estimate.
         </p>
 
         <h3>Skinfold Measurements</h3>
@@ -196,9 +189,9 @@ const BlogPostPageContent = (
           <strong>Cost:</strong> Low to moderate ($15-30)
         </p>
         <p>
-          This method uses calipers to measure the thickness of skinfolds at specific sites on the
-          body. The measurements are then input into equations to estimate body fat percentage. The
-          accuracy depends heavily on the skill of the person taking the measurements.
+          Calipers measure the thickness of skinfolds at specific sites on the body. Those
+          measurements feed into equations that estimate body fat percentage. Accuracy depends
+          heavily on the skill of the person doing the measurement.
         </p>
 
         <h3>Bioelectrical Impedance Analysis (BIA)</h3>
@@ -210,10 +203,10 @@ const BlogPostPageContent = (
           <strong>Cost:</strong> Low ($20-100 for a device)
         </p>
         <p>
-          BIA devices send a small, safe electrical current through the body and measure the
-          resistance. Since fat conducts electricity differently than muscle, the device can
-          estimate body fat percentage. However, hydration levels, recent exercise, and meal timing
-          can affect results.
+          BIA devices send a small electrical current through the body and measure resistance. Fat
+          conducts electricity differently than muscle, so the device can estimate body fat
+          percentage. The catch: hydration levels, recent exercise, and meal timing can all skew
+          results.
         </p>
 
         <h3>Navy Method</h3>
@@ -225,32 +218,27 @@ const BlogPostPageContent = (
           <strong>Cost:</strong> Free
         </p>
         <p>
-          This method uses measurements of waist, neck, and hip (for women) circumferences along
-          with height to estimate body fat percentage. It's a simple method that can be done at home
-          with reasonable accuracy.
+          Uses waist, neck, and hip (for women) circumferences along with height to estimate body
+          fat percentage. Simple enough to do at home with a tape measure, and reasonably accurate.
         </p>
 
         <h2>Why Body Fat Percentage Matters More Than Weight</h2>
-        <p>
-          Focusing solely on weight can be misleading. Consider two people who both weigh 170 pounds
-          and are 5'10" tall:
-        </p>
+        <p>Weight alone can be misleading. Take two people who both weigh 170 pounds at 5'10":</p>
         <ul>
           <li>Person A has 15% body fat (25.5 pounds of fat, 144.5 pounds of lean mass)</li>
           <li>Person B has 30% body fat (51 pounds of fat, 119 pounds of lean mass)</li>
         </ul>
         <p>
-          Despite having identical weights and BMIs, these individuals have dramatically different
-          body compositions and likely different health profiles. Person A has more muscle mass and
-          less fat, which generally indicates better metabolic health.
+          Same weight, same BMI, very different bodies. Person A has more muscle mass and less fat,
+          which generally indicates better metabolic health.
         </p>
-        <p>Body fat percentage provides insights that weight alone cannot:</p>
+        <p>Body fat percentage tells you things that weight alone cannot:</p>
         <ul>
           <li>
             It distinguishes between fat loss and weight loss (which could include muscle loss)
           </li>
           <li>It helps set more meaningful fitness goals beyond just "losing weight"</li>
-          <li>It provides a better indicator of health risks associated with body composition</li>
+          <li>It is a better indicator of health risks tied to body composition</li>
           <li>
             It can help track progress when weight plateaus (you might be losing fat but gaining
             muscle)
@@ -258,10 +246,7 @@ const BlogPostPageContent = (
         </ul>
 
         <h2>How to Lower Your Body Fat Percentage</h2>
-        <p>
-          If you're looking to reduce your body fat percentage, consider these evidence-based
-          strategies:
-        </p>
+        <p>Reducing body fat percentage comes down to a few well-supported strategies:</p>
         <ol>
           <li>
             <strong>Create a moderate calorie deficit</strong> - Aim to consume 300-500 fewer
@@ -280,34 +265,32 @@ const BlogPostPageContent = (
             (HIIT) and steady-state cardio can aid fat loss.
           </li>
           <li>
-            <strong>Ensure adequate sleep</strong> - Poor sleep is associated with higher body fat
-            percentage and can hinder fat loss efforts.
+            <strong>Sleep enough</strong> - Poor sleep is linked to higher body fat percentage and
+            makes fat loss harder.
           </li>
           <li>
-            <strong>Manage stress</strong> - Chronic stress can elevate cortisol levels, which may
-            promote fat storage, particularly around the abdomen.
+            <strong>Manage stress</strong> - Chronic stress elevates cortisol, which can promote fat
+            storage around the abdomen.
           </li>
         </ol>
 
         <h2>Conclusion</h2>
         <p>
-          Understanding your body fat percentage provides valuable insights into your health and
-          fitness that go beyond what a scale can tell you. While the ideal percentage varies based
-          on age, sex, and individual goals, maintaining a healthy body fat percentage is associated
-          with better overall health outcomes and reduced disease risk.
+          Body fat percentage gives you a clearer picture of your body composition than weight
+          alone. The ideal range depends on your age, sex, and goals, but staying within a healthy
+          range is linked to better health outcomes and lower disease risk.
         </p>
         <p>
-          Remember that extremely low body fat percentages aren't necessarily healthier—there's a
-          reason we have essential fat. The goal should be to achieve a body composition that
-          supports your health, performance, and quality of life.
+          Extremely low body fat is not necessarily better. Essential fat exists for a reason. Aim
+          for a body composition that supports your health, performance, and quality of life.
         </p>
         <p>
-          If you're interested in measuring your body fat percentage, try our
+          To estimate your body fat percentage, try our
           <Link href="/body-fat" className="text-accent hover:underline">
             {' '}
             Body Fat Calculator
           </Link>
-          , which offers multiple estimation methods including the Navy method and BMI correlation.
+          . It supports multiple estimation methods including the Navy method and BMI correlation.
         </p>
       </div>
     </article>

@@ -44,9 +44,8 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
 
       <p>
         The question I get most often about GLP-1 medications is some version of "which one is
-        best?" The honest answer is that it depends on your specific situation. But that does not
-        mean all three options are equally good for all people. The differences are real and
-        measurable, and they matter.
+        best?" It depends on your situation. But that does not mean all three options are
+        interchangeable. The differences are real, measurable, and worth understanding.
       </p>
 
       <p>
@@ -110,9 +109,9 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </p>
 
       <p>
-        Whether that dual mechanism explains the superior weight loss results or whether tirzepatide
-        just happens to be a more potent molecule is still debated. The practical result, however,
-        is clear: tirzepatide produces more weight loss in clinical trials.
+        Whether that dual mechanism explains the better weight loss or whether tirzepatide just
+        happens to be a more potent molecule is still debated. Either way, tirzepatide produces more
+        weight loss in clinical trials.
       </p>
 
       <div className="overflow-x-auto my-8">
@@ -250,18 +249,18 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </div>
 
       <p>
-        The difference is meaningful. At the highest tirzepatide dose, more than half of
-        participants lost over 20% of their body weight. With semaglutide, about a third did. For a
-        250-pound person, that is the difference between losing 37 pounds and losing 52 pounds.
+        At the highest tirzepatide dose, more than half of participants lost over 20% of their body
+        weight. With semaglutide, about a third did. For a 250-pound person, that is roughly 37
+        pounds versus 52 pounds.
       </p>
 
       <p>
-        A caveat worth repeating: these are different trials with different patient populations,
-        different sites, and slightly different timeframes. The gold-standard comparison
-        (randomized, double-blind, same patients) is being done in the ongoing SURMOUNT-5 trial,
-        which directly compares tirzepatide 15 mg against semaglutide 2.4 mg. Initial results
-        announced in late 2024 confirmed tirzepatide&apos;s superiority, with a roughly 5 percentage
-        point greater weight loss.
+        A caveat: these are different trials with different patient populations, different sites,
+        and slightly different timeframes. The gold-standard comparison (randomized, double-blind,
+        same patients) is being done in the ongoing SURMOUNT-5 trial, which directly compares
+        tirzepatide 15 mg against semaglutide 2.4 mg. Initial results announced in late 2024
+        confirmed tirzepatide&apos;s superiority, with a roughly 5 percentage point greater weight
+        loss.
       </p>
 
       <AdBlock format="horizontal" />
@@ -347,9 +346,9 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       <h2 className="text-2xl font-bold mt-10 mb-4">Cost Comparison: The Real Numbers</h2>
 
       <p>
-        Drug pricing in the US is Byzantine. List prices, negotiated insurance rates, manufacturer
-        coupons, and compounding pharmacy prices create a confusing landscape. Here is my best
-        attempt at an honest picture of what you will actually pay, as of early 2026.
+        Drug pricing in the US is a mess. List prices, negotiated insurance rates, manufacturer
+        coupons, and compounding pharmacy prices all overlap. Here is my best attempt at what you
+        will actually pay, as of early 2026.
       </p>
 
       <div className="overflow-x-auto my-8">
@@ -412,22 +411,20 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
 
       <p>
         A few things that complicate this picture. Eli Lilly launched LillyDirect in early 2024,
-        allowing patients to buy single-dose vials of tirzepatide at $549/month directly from the
-        company (bypassing pharmacies and insurance entirely). This changed the pricing conversation
-        significantly for tirzepatide.
+        letting patients buy single-dose vials of tirzepatide at $549/month directly from the
+        company, bypassing pharmacies and insurance entirely. That undercut the brand-name price by
+        nearly half.
       </p>
 
       <p>
-        Novo Nordisk has not offered a comparable direct-to-consumer program for semaglutide at
-        equivalent savings, though manufacturer savings cards can significantly reduce costs for
-        commercially insured patients.
+        Novo Nordisk has not offered a similar direct-to-consumer program for semaglutide, though
+        manufacturer savings cards can reduce costs for commercially insured patients.
       </p>
 
       <p>
-        Medicare explicitly does not cover weight loss medications. This affects a large population
-        of older adults with obesity who would benefit from these drugs. Legislation (the Treat and
-        Reduce Obesity Act) has been introduced to change this, but as of early 2026, it has not
-        passed.
+        Medicare does not cover weight loss medications. That shuts out a large population of older
+        adults with obesity. The Treat and Reduce Obesity Act has been introduced to change this,
+        but as of early 2026, it has not passed.
       </p>
 
       <h2 className="text-2xl font-bold mt-10 mb-4">Insurance Coverage: The Obstacle Course</h2>
@@ -460,10 +457,9 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </p>
 
       <p>
-        The reality is that a significant number of people who would benefit from these medications
-        cannot access them because of cost and coverage barriers. If your insurance denies coverage,
-        ask your doctor about the appeals process. First-level denials are often overturned on
-        appeal.
+        Many people who would benefit from these medications cannot access them because of cost and
+        coverage barriers. If your insurance denies coverage, ask your doctor about the appeals
+        process. First-level denials are often overturned.
       </p>
 
       <AdBlock format="horizontal" />
@@ -473,8 +469,8 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </h2>
 
       <p>
-        Compounding pharmacies have become a major part of the GLP-1 story, and this deserves a
-        frank discussion.
+        Compounding pharmacies have become a big part of the GLP-1 market. This deserves a direct
+        discussion.
       </p>
 
       <p>
@@ -485,11 +481,10 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </p>
 
       <p>
-        Here is where it gets complicated. As Novo Nordisk ramped up production and the FDA shortage
-        designation was resolved, the legal basis for compounding semaglutide began to erode. Novo
-        Nordisk filed lawsuits and the FDA issued guidance restricting compounding of semaglutide.
-        Some compounding pharmacies have continued to operate in legal gray areas, arguing various
-        exemptions.
+        As Novo Nordisk ramped up production and the FDA resolved the shortage designation, the
+        legal basis for compounding semaglutide started to disappear. Novo Nordisk filed lawsuits.
+        The FDA issued guidance restricting compounding. Some pharmacies have continued to operate
+        in legal gray areas, arguing various exemptions.
       </p>
 
       <p>
@@ -522,9 +517,9 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </p>
 
       <p>
-        I am not going to tell you whether compounded GLP-1s are right for you. I do think the
-        financial reality of brand-name pricing makes compounded versions the only option for many
-        people. Just go in with your eyes open about the trade-offs.
+        I am not going to tell you whether compounded GLP-1s are right for you. Brand-name pricing
+        makes compounded versions the only option for many people. Just understand the trade-offs
+        before you start.
       </p>
 
       <h2 className="text-2xl font-bold mt-10 mb-4">Side Effect Comparison</h2>
@@ -574,15 +569,14 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </div>
 
       <p>
-        The pattern is consistent: tirzepatide has lower GI side effect rates across the board,
-        despite producing more weight loss. The vomiting difference is particularly notable (25% vs
-        12%). If GI tolerance is a primary concern for you, tirzepatide may be better tolerated.
+        Tirzepatide has lower GI side effect rates across the board, despite producing more weight
+        loss. The vomiting gap stands out: 25% versus 12%. If GI tolerance is a concern for you,
+        tirzepatide may be the easier drug to stay on.
       </p>
 
       <p>
-        Discontinuation rates due to adverse events are similar between the two drugs (roughly
-        6-7%), suggesting that while semaglutide causes more GI symptoms, the severity is manageable
-        for most people.
+        Discontinuation rates are similar between the two drugs (roughly 6-7%). Semaglutide causes
+        more GI symptoms, but most people can tolerate them well enough to stay on the drug.
       </p>
 
       <p>
@@ -599,8 +593,8 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       <h2 className="text-2xl font-bold mt-10 mb-4">The Decision Framework</h2>
 
       <p>
-        No single medication is "best" for everyone. But the data does allow us to make some
-        reasonably clear recommendations based on individual circumstances.
+        No single medication is "best" for everyone. But the data points toward some reasonably
+        clear recommendations depending on your situation.
       </p>
 
       <div className="neumorph-card rounded-xl p-6 my-8 bg-blue-50 dark:bg-blue-900/20">
@@ -689,10 +683,7 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
 
       <h2 className="text-2xl font-bold mt-10 mb-4">The Next Generation: What Is Coming</h2>
 
-      <p>
-        The GLP-1 medication landscape is evolving fast. Several next-generation drugs are in
-        late-stage development.
-      </p>
+      <p>Several next-generation GLP-1 drugs are in late-stage development.</p>
 
       <p>
         <strong>Retatrutide</strong> (Eli Lilly) is a triple agonist hitting GLP-1, GIP, and
@@ -714,22 +705,22 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
       </p>
 
       <p>
-        The trajectory is clear: more effective drugs, more delivery options (oral, higher doses),
-        and eventually lower costs as competition increases. But for now, semaglutide and
-        tirzepatide are the options on the table.
+        Expect more effective drugs, more delivery options (oral, higher doses), and eventually
+        lower costs as competition increases. But for now, semaglutide and tirzepatide are the
+        options on the table.
       </p>
 
       <h2 className="text-2xl font-bold mt-10 mb-4">Making Your Decision</h2>
 
       <p>
-        There is no substitute for a conversation with your doctor who knows your medical history,
-        your insurance situation, and your goals. What I can tell you from the data is this:
-        tirzepatide produces more weight loss with fewer GI side effects. Semaglutide has stronger
-        cardiovascular outcomes data. Both work. Neither is cheap.
+        Talk to your doctor. They know your medical history, your insurance situation, and your
+        goals. What I can tell you from the data: tirzepatide produces more weight loss with fewer
+        GI side effects. Semaglutide has stronger cardiovascular outcomes data. Both work. Neither
+        is cheap.
       </p>
 
       <p>
-        Whatever medication you choose, the fundamentals do not change. Eat enough protein (our{' '}
+        Whichever medication you choose, the basics still apply. Eat enough protein (our{' '}
         <Link href="/glp1-calculator" className="text-blue-600 dark:text-blue-400 hover:underline">
           GLP-1 calculator
         </Link>{' '}
@@ -737,7 +728,7 @@ const OzempicVsWegovyVsMounjaroComparisonPageContent = (
         slowly. Track your progress beyond just the scale.
       </p>
 
-      <p>The medication is a tool. A powerful one. What you build with it is up to you.</p>
+      <p>The medication is a tool. What you do with it is up to you.</p>
 
       <div className="neumorph p-6 rounded-lg mt-8">
         <h2 className="text-xl font-semibold mb-4">Sources</h2>

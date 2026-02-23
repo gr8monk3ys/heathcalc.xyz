@@ -27,7 +27,7 @@ const PregnancyNutritionGuidePageContent = (
             lbs for overweight, and 11-20 lbs for obese (IOM 2009).
           </li>
           <li>
-            Folate, iron, DHA, choline, and vitamin D are the most critical nutrients. Many prenatal
+            Folate, iron, DHA, choline, and vitamin D need the most attention. Many prenatal
             vitamins lack adequate DHA and choline.
           </li>
           <li>
@@ -157,19 +157,19 @@ const PregnancyNutritionGuidePageContent = (
 
       <AdBlock format="horizontal" />
 
-      <h2 className="text-2xl font-bold mt-8 mb-4">Critical Nutrients: What Actually Matters</h2>
+      <h2 className="text-2xl font-bold mt-8 mb-4">The Nutrients That Matter Most</h2>
 
       <p>
         Prenatal vitamins are important, but they are not a complete solution. Many commonly
-        available prenatals are missing key nutrients or provide inadequate amounts. Here are the
-        nutrients with the strongest evidence for pregnancy outcomes.
+        available prenatals are missing key nutrients or provide inadequate amounts. Here is what
+        the evidence actually says about each one.
       </p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">Folate (Folic Acid)</h3>
       <p>
-        This is the most well-established nutrient in prenatal care. Folate is essential for neural
-        tube development, and supplementation dramatically reduces the risk of spina bifida and
-        anencephaly. The CDC recommends 400 mcg of folic acid daily starting at least one month
+        Folate has the longest track record of any nutrient in prenatal care. It is essential for
+        neural tube development, and supplementation dramatically reduces the risk of spina bifida
+        and anencephaly. The CDC recommends 400 mcg of folic acid daily starting at least one month
         before conception and continuing through the first 12 weeks.
       </p>
       <p>
@@ -198,10 +198,10 @@ const PregnancyNutritionGuidePageContent = (
 
       <h3 className="text-xl font-semibold mt-6 mb-3">DHA (Docosahexaenoic Acid)</h3>
       <p>
-        DHA is an omega-3 fatty acid critical for fetal brain and eye development. The brain is
-        approximately 60% fat by dry weight, and DHA is the predominant structural fatty acid. The
-        International Society for the Study of Fatty Acids and Lipids recommends 200-300 mg of DHA
-        daily during pregnancy.
+        DHA is an omega-3 fatty acid that the fetal brain and eyes need in large quantities. The
+        brain is approximately 60% fat by dry weight, and DHA is the predominant structural fatty
+        acid. The International Society for the Study of Fatty Acids and Lipids recommends 200-300
+        mg of DHA daily during pregnancy.
       </p>
       <p>
         Many prenatal vitamins either skip DHA entirely or include a trivially small amount. Check
@@ -213,7 +213,7 @@ const PregnancyNutritionGuidePageContent = (
 
       <h3 className="text-xl font-semibold mt-6 mb-3">Choline</h3>
       <p>
-        Choline may be the most underappreciated nutrient in prenatal care. It is essential for
+        Choline gets almost no attention in prenatal care, which is a problem. It is essential for
         brain development, particularly the hippocampus (memory center), and for preventing neural
         tube defects in conjunction with folate. The AI (Adequate Intake) for pregnant women is 450
         mg/day.
@@ -247,12 +247,12 @@ const PregnancyNutritionGuidePageContent = (
 
       <h3 className="text-xl font-semibold mt-6 mb-3">Iodine</h3>
       <p>
-        Often overlooked, iodine is critical for fetal thyroid development and brain growth. The
-        recommended intake during pregnancy is 220 mcg/day (up from 150 mcg for non-pregnant
-        adults). WHO considers iodine deficiency the most common preventable cause of intellectual
-        disability worldwide. Many prenatal vitamins now include iodine, but check your label. If it
-        is not there, iodized salt (about 95 mcg per half teaspoon) and dairy products are good
-        dietary sources.
+        Iodine tends to fly under the radar, but the fetus needs it for thyroid development and
+        brain growth. The recommended intake during pregnancy is 220 mcg/day (up from 150 mcg for
+        non-pregnant adults). WHO considers iodine deficiency the most common preventable cause of
+        intellectual disability worldwide. Many prenatal vitamins now include iodine, but check your
+        label. If it is not there, iodized salt (about 95 mcg per half teaspoon) and dairy products
+        are good dietary sources.
       </p>
 
       <AdBlock format="horizontal" />
@@ -449,7 +449,7 @@ const PregnancyNutritionGuidePageContent = (
         pregnancies get at least 150 minutes of moderate-intensity aerobic activity per week.
       </p>
 
-      <p>The benefits are substantial and well-documented:</p>
+      <p>The research on this is clear:</p>
 
       <ul className="list-disc list-inside space-y-2 my-4">
         <li>Reduced risk of gestational diabetes (by about 30% per a 2017 meta-analysis)</li>
@@ -523,9 +523,7 @@ const PregnancyNutritionGuidePageContent = (
       </div>
 
       <div className="neumorph p-6 rounded-lg mt-8">
-        <h3 className="text-xl font-semibold mb-4">
-          Pregnancy Calculators to Support Your Journey
-        </h3>
+        <h3 className="text-xl font-semibold mb-4">Pregnancy Calculators</h3>
         <p className="mb-4">
           Our calculators can help you track key metrics throughout your pregnancy:
         </p>

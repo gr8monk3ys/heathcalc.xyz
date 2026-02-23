@@ -59,7 +59,7 @@ const blogArticles = [
   {
     title: 'TDEE Explained: How Many Calories Do You Really Need?',
     description:
-      "Understand the components of Total Daily Energy Expenditure (TDEE), how it's calculated, and why knowing your TDEE is crucial for effective weight management.",
+      "Understand the components of Total Daily Energy Expenditure (TDEE), how it's calculated, and how to use it for weight management.",
     slug: 'tdee-explained',
     date: 'February 20, 2025',
     readTime: '10 min read',
@@ -146,25 +146,21 @@ const MeasuringBodyFatPageContent = (
       </div>
 
       <p>
-        Body fat percentage is one of the most useful metrics for assessing body composition and
-        health risk. Unlike weight or BMI, body fat percentage distinguishes between fat mass and
-        lean mass, providing a clearer picture of your health status. But measuring body fat
-        accurately can be challenging, with various methods offering different levels of precision,
-        convenience, and cost.
+        Body fat percentage tells you something that weight alone cannot: how much of you is fat
+        versus muscle, bone, and water. Two people at the same weight can carry very different
+        amounts of fat, and that difference matters for health risk. The catch is that measuring
+        body fat is harder than stepping on a scale, and every method involves trade-offs between
+        accuracy, cost, and convenience.
       </p>
 
       <p>
-        In this article, we'll explore the most common body fat measurement methods, examining their
-        accuracy, accessibility, and practical considerations to help you choose the approach that
-        best fits your needs.
+        Below is a straightforward comparison of the most common methods, what each one actually
+        measures, and where each falls short.
       </p>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">Why Measure Body Fat?</h2>
 
-      <p>
-        Before diving into measurement methods, it's worth understanding why body fat percentage
-        matters:
-      </p>
+      <p>A few reasons body fat percentage is worth tracking:</p>
 
       <ul className="list-disc list-inside space-y-3 my-4">
         <li>
@@ -187,8 +183,8 @@ const MeasuringBodyFatPageContent = (
       </ul>
 
       <p>
-        With that context, let's examine the various methods for measuring body fat, from laboratory
-        techniques to at-home approaches.
+        The methods below are ordered from most accurate (and least accessible) to most accessible
+        (and least accurate).
       </p>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">Laboratory Methods</h2>
@@ -204,9 +200,9 @@ const MeasuringBodyFatPageContent = (
 
       <div className="neumorph p-6 rounded-lg my-4">
         <p>
-          DEXA scanning was originally developed to measure bone density but has become the gold
-          standard for body composition analysis. It uses low-dose X-rays at two different energy
-          levels to distinguish between bone, fat tissue, and lean soft tissue.
+          DEXA was originally developed to measure bone density, but it turns out the same
+          technology works well for body composition. It uses low-dose X-rays at two energy levels
+          to distinguish between bone, fat tissue, and lean soft tissue.
         </p>
 
         <h4 className="font-semibold mt-4 mb-2">Pros:</h4>
@@ -314,8 +310,8 @@ const MeasuringBodyFatPageContent = (
       <h2 className="text-2xl font-bold mt-8 mb-4">Clinical Methods</h2>
 
       <p>
-        These methods are commonly available in clinical settings, fitness centers, and sometimes at
-        home.
+        These show up in gyms, clinics, and sometimes your bathroom. They are more accessible than
+        lab methods, with moderate accuracy.
       </p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">4. Bioelectrical Impedance Analysis (BIA)</h3>
@@ -419,8 +415,7 @@ const MeasuringBodyFatPageContent = (
       <h2 className="text-2xl font-bold mt-8 mb-4">At-Home Methods</h2>
 
       <p>
-        These methods can be performed at home with minimal equipment and are generally more
-        accessible, though typically less accurate.
+        These methods need little or no special equipment. They trade some accuracy for convenience.
       </p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">
@@ -453,8 +448,8 @@ const MeasuringBodyFatPageContent = (
 
         <h4 className="font-semibold mt-4 mb-2">Accuracy:</h4>
         <p>
-          Studies have shown the Navy Method to be accurate within ±3-4% of DEXA measurements for
-          most people, making it surprisingly reliable for a simple method. Our{' '}
+          Studies show the Navy Method falls within ±3-4% of DEXA measurements for most people,
+          which is respectable given that all you need is a tape measure. Our{' '}
           <Link href="/body-fat" className="text-accent hover:underline">
             Body Fat Calculator
           </Link>{' '}
@@ -644,7 +639,7 @@ const MeasuringBodyFatPageContent = (
 
       <h2 className="text-2xl font-bold mt-8 mb-4">Choosing the Right Method for You</h2>
 
-      <p>When selecting a body fat measurement method, consider these factors:</p>
+      <p>The decision comes down to a few practical questions:</p>
 
       <div className="neumorph p-6 rounded-lg my-6">
         <h3 className="text-xl font-semibold mb-3">Factors to Consider</h3>
@@ -737,8 +732,8 @@ const MeasuringBodyFatPageContent = (
       <h2 className="text-2xl font-bold mt-8 mb-4">Best Practices for Accurate Measurements</h2>
 
       <p>
-        Regardless of which method you choose, follow these guidelines to maximize accuracy and
-        consistency:
+        Whichever method you use, controlling measurement conditions matters as much as choosing the
+        method itself:
       </p>
 
       <div className="neumorph p-6 rounded-lg my-6">
@@ -847,21 +842,19 @@ const MeasuringBodyFatPageContent = (
       </div>
 
       <p>
-        Remember that these ranges are general guidelines. Optimal body fat percentage varies based
-        on individual factors, including age, genetics, and specific health or performance goals.
+        These ranges are population-level guidelines. Where you should aim depends on your age,
+        genetics, sport (if applicable), and personal health priorities.
       </p>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">Conclusion: Finding Your Best Approach</h2>
 
-      <p>
-        No single body fat measurement method is perfect for everyone. The "best" method depends on
-        your specific needs, resources, and goals:
-      </p>
+      <p>No method is perfect. The right choice depends on what you need from the measurement:</p>
 
       <ul className="list-disc list-inside space-y-3 my-4">
         <li>
-          <strong>For most people</strong>, the Navy Method offers an excellent balance of
-          accessibility, cost, and reasonable accuracy. Our{' '}
+          <strong>For most people</strong>, the Navy Method is the most practical option: it is
+          free, requires no special equipment, and its accuracy is within a few percent of lab
+          methods. Our{' '}
           <Link href="/body-fat" className="text-accent hover:underline">
             Body Fat Calculator
           </Link>{' '}
@@ -883,23 +876,14 @@ const MeasuringBodyFatPageContent = (
       </ul>
 
       <p>
-        Regardless of which method you choose, remember that consistency is key. Using the same
-        method under similar conditions will provide the most valuable information about changes in
-        your body composition over time.
-      </p>
-
-      <p>
-        By understanding the strengths and limitations of each measurement approach, you can make
-        informed decisions about which method best suits your needs and how to interpret the results
-        effectively.
+        Whatever you pick, stick with it. A BIA scale that reads 3% high will still show you whether
+        you are gaining or losing fat, as long as you measure under the same conditions each time.
+        Consistency in method beats accuracy in any single reading.
       </p>
 
       <div className="neumorph p-6 rounded-lg mt-8">
         <h3 className="text-xl font-semibold mb-4">Tools to Help You Measure and Track Body Fat</h3>
-        <p className="mb-4">
-          At HealthCheck, we've developed several calculators to help you assess and manage your
-          body composition:
-        </p>
+        <p className="mb-4">These calculators can help you estimate and track body composition:</p>
         <ul className="list-disc list-inside space-y-2">
           <li>
             <Link href="/body-fat" className="text-accent hover:underline">

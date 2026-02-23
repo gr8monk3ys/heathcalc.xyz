@@ -206,11 +206,11 @@ const BMIResultDisplay: React.FC<BMIResultDisplayProps> = ({
 
         <div className="relative h-6 neumorph-inset rounded-full overflow-hidden">
           <div className="absolute inset-0 flex">
-            <div className="h-full bg-blue-200" style={{ width: '20%' }}></div>
-            <div className="h-full bg-green-200" style={{ width: '15%' }}></div>
-            <div className="h-full bg-yellow-200" style={{ width: '15%' }}></div>
-            <div className="h-full bg-orange-200" style={{ width: '15%' }}></div>
-            <div className="h-full bg-red-200" style={{ width: '35%' }}></div>
+            <div className="h-full bg-blue-200 dark:bg-blue-800" style={{ width: '20%' }}></div>
+            <div className="h-full bg-green-200 dark:bg-green-800" style={{ width: '15%' }}></div>
+            <div className="h-full bg-yellow-200 dark:bg-yellow-800" style={{ width: '15%' }}></div>
+            <div className="h-full bg-orange-200 dark:bg-orange-800" style={{ width: '15%' }}></div>
+            <div className="h-full bg-red-200 dark:bg-red-800" style={{ width: '35%' }}></div>
           </div>
 
           <div
@@ -281,7 +281,7 @@ const BMIResultDisplay: React.FC<BMIResultDisplayProps> = ({
             </>
           )}
         </p>
-        <p className="text-sm text-gray-600">{content.note}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">{content.note}</p>
       </div>
 
       <NextSteps insight={nextStepsData.insight} steps={nextStepsData.steps} />

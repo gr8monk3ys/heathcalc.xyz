@@ -17,6 +17,7 @@ type SearchStrings = {
   dropdownNoResults: string;
   dropdownViewAllResults: string;
   pageTitle: string;
+  initialStateMessage: string;
   summaryFound: (count: number, query: string) => string;
   summaryNone: (query: string) => string;
   noResultsPanelTitle: string;
@@ -35,6 +36,7 @@ function getSearchStrings(locale: SupportedLocale): SearchStrings {
         dropdownNoResults: 'No se encontraron resultados',
         dropdownViewAllResults: 'Ver todos los resultados',
         pageTitle: 'Resultados de búsqueda',
+        initialStateMessage: 'Empieza a escribir para buscar',
         summaryFound: (count, query) =>
           `Se encontraron ${count} resultado${count === 1 ? '' : 's'} para "${query}"`,
         summaryNone: query => `No se encontraron resultados para "${query}"`,
@@ -60,6 +62,7 @@ function getSearchStrings(locale: SupportedLocale): SearchStrings {
         dropdownNoResults: 'Aucun résultat',
         dropdownViewAllResults: 'Voir tous les résultats',
         pageTitle: 'Résultats de recherche',
+        initialStateMessage: 'Commencez à taper pour rechercher',
         summaryFound: (count, query) =>
           `Nous avons trouvé ${count} résultat${count === 1 ? '' : 's'} pour « ${query} »`,
         summaryNone: query => `Aucun résultat pour « ${query} »`,
@@ -85,6 +88,7 @@ function getSearchStrings(locale: SupportedLocale): SearchStrings {
         dropdownNoResults: 'Keine Ergebnisse gefunden',
         dropdownViewAllResults: 'Alle Ergebnisse ansehen',
         pageTitle: 'Suchergebnisse',
+        initialStateMessage: 'Eingeben, um zu suchen',
         summaryFound: (count, query) =>
           `${count} Ergebnis${count === 1 ? '' : 'se'} für „${query}“ gefunden`,
         summaryNone: query => `Keine Ergebnisse für „${query}“`,
@@ -110,6 +114,7 @@ function getSearchStrings(locale: SupportedLocale): SearchStrings {
         dropdownNoResults: 'Nenhum resultado encontrado',
         dropdownViewAllResults: 'Ver todos os resultados',
         pageTitle: 'Resultados da busca',
+        initialStateMessage: 'Comece a digitar para buscar',
         summaryFound: (count, query) =>
           `Encontramos ${count} resultado${count === 1 ? '' : 's'} para "${query}"`,
         summaryNone: query => `Nenhum resultado para "${query}"`,
@@ -135,6 +140,7 @@ function getSearchStrings(locale: SupportedLocale): SearchStrings {
         dropdownNoResults: '未找到结果',
         dropdownViewAllResults: '查看全部结果',
         pageTitle: '搜索结果',
+        initialStateMessage: '输入关键词开始搜索',
         summaryFound: (count, query) => `为“${query}”找到 ${count} 条结果`,
         summaryNone: query => `未找到与“${query}”相关的结果`,
         noResultsPanelTitle: '未找到结果',
@@ -159,6 +165,7 @@ function getSearchStrings(locale: SupportedLocale): SearchStrings {
         dropdownNoResults: 'No results found',
         dropdownViewAllResults: 'View all results',
         pageTitle: 'Search Results',
+        initialStateMessage: 'Start typing to search',
         summaryFound: (count, query) =>
           `Found ${count} result${count === 1 ? '' : 's'} for "${query}"`,
         summaryNone: query => `No results found for "${query}"`,
@@ -612,7 +619,7 @@ function SearchAutocompleteView({
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-gray-400"
+                className="h-5 w-5 text-gray-400 dark:text-gray-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -630,7 +637,7 @@ function SearchAutocompleteView({
           <input
             ref={inputRef}
             type="search"
-            className={`block w-full rounded-lg border border-gray-300 bg-white py-2 ${showIcon ? 'pl-10' : 'pl-4'} pr-4 text-gray-900 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent`}
+            className={`block w-full rounded-lg border border-gray-300 bg-white py-2 ${showIcon ? 'pl-10' : 'pl-4'} pr-4 text-gray-900 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100`}
             placeholder={resolvedPlaceholder}
             value={query}
             onChange={handleInputChange}
@@ -667,24 +674,28 @@ function SearchAutocompleteView({
       </form>
 
       {showResults && (
-        <div className="absolute z-10 mt-2 w-full rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+        <div className="absolute z-10 mt-2 w-full rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden dark:bg-gray-800 dark:ring-gray-700">
           <div className="max-h-60 overflow-y-auto py-2">
             {results.length > 0 ? (
-              <ul className="divide-y divide-gray-100">
+              <ul className="divide-y divide-gray-100 dark:divide-gray-700">
                 {results.map(result => (
                   <li key={`${result.type}-${result.url}`}>
                     <button
-                      className="flex w-full items-start px-4 py-2 text-left hover:bg-gray-50"
+                      className="flex w-full items-start px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700"
                       onClick={() => handleResultClick(result.url)}
                     >
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500 mr-3">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500 mr-3 dark:bg-gray-700 dark:text-gray-400">
                         {getSearchResultTypeIcon(result.type)}
                       </span>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">{result.title}</p>
-                        <p className="text-xs text-gray-500 truncate">{result.description}</p>
+                        <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-100">
+                          {result.title}
+                        </p>
+                        <p className="text-xs text-gray-500 truncate dark:text-gray-400">
+                          {result.description}
+                        </p>
                         {result.category && (
-                          <span className="inline-flex items-center mt-1 px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                          <span className="inline-flex items-center mt-1 px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                             {result.category}
                           </span>
                         )}
@@ -694,12 +705,14 @@ function SearchAutocompleteView({
                 ))}
               </ul>
             ) : (
-              <p className="px-4 py-2 text-sm text-gray-500">{strings.dropdownNoResults}</p>
+              <p className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
+                {strings.dropdownNoResults}
+              </p>
             )}
           </div>
 
           {results.length > 0 && (
-            <div className="bg-gray-50 px-4 py-3 text-right">
+            <div className="bg-gray-50 px-4 py-3 text-right dark:bg-gray-800">
               <Link
                 href={`${localizePath('/search')}?q=${encodeURIComponent(query)}`}
                 className="text-xs font-medium text-accent hover:text-accent-dark"
@@ -788,9 +801,41 @@ export function SearchPage() {
             ></path>
           </svg>
         </div>
+      ) : query.trim().length === 0 ? (
+        <div className="neumorph p-6 rounded-lg text-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-12 w-12 mx-auto text-gray-400 mb-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          <h2 className="text-xl font-semibold mb-2">{strings.initialStateMessage}</h2>
+          <div className="mt-6">
+            <h3 className="font-medium mb-3">{strings.popularTitle}</h3>
+            <div className="flex flex-wrap justify-center gap-2">
+              {strings.popularCalculators.map(calc => (
+                <Link
+                  key={calc.href}
+                  href={localizePath(calc.href)}
+                  className="inline-block px-4 py-2 bg-white rounded-lg hover:shadow-md transition-shadow dark:bg-gray-800"
+                >
+                  {calc.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
       ) : (
         <>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
             {formatResultsSummary(locale, results.length, query)}
           </p>
 
@@ -852,13 +897,15 @@ export function SearchPage() {
                         )}
                       </span>
                       <div>
-                        <h2 className="text-lg font-semibold text-gray-900 hover:text-accent">
+                        <h2 className="text-lg font-semibold text-gray-900 hover:text-accent dark:text-gray-100">
                           {result.title}
                         </h2>
-                        <p className="mt-1 text-gray-600">{result.description}</p>
+                        <p className="mt-1 text-gray-600 dark:text-gray-400">
+                          {result.description}
+                        </p>
                         <div className="mt-2 flex flex-wrap gap-2">
                           {result.category && (
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                               {result.category}
                             </span>
                           )}
@@ -871,7 +918,7 @@ export function SearchPage() {
                                 {tag}
                               </span>
                             ))}
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
                             {strings.typeLabels[result.type]}
                           </span>
                         </div>
@@ -898,7 +945,9 @@ export function SearchPage() {
                 />
               </svg>
               <h2 className="text-xl font-semibold mb-2">{strings.noResultsPanelTitle}</h2>
-              <p className="text-gray-600 mb-4">{strings.noResultsPanelBody(query)}</p>
+              <p className="text-gray-600 mb-4 dark:text-gray-400">
+                {strings.noResultsPanelBody(query)}
+              </p>
               <div className="mt-6">
                 <h3 className="font-medium mb-3">{strings.popularTitle}</h3>
                 <div className="flex flex-wrap justify-center gap-2">
@@ -906,7 +955,7 @@ export function SearchPage() {
                     <Link
                       key={calc.href}
                       href={localizePath(calc.href)}
-                      className="inline-block px-4 py-2 bg-white rounded-lg hover:shadow-md transition-shadow"
+                      className="inline-block px-4 py-2 bg-white rounded-lg hover:shadow-md transition-shadow dark:bg-gray-800"
                     >
                       {calc.label}
                     </Link>

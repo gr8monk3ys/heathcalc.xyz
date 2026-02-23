@@ -69,8 +69,8 @@ const UnderstandingABSIPageContent = (
           Understanding ABSI: Beyond BMI for Health Risk Assessment
         </h1>
         <p className="text-xl text-gray-600">
-          Why waist circumference matters and how A Body Shape Index provides a more complete
-          picture of health risks.
+          Why waist circumference matters and what A Body Shape Index actually tells you about
+          health risk.
         </p>
       </header>
 
@@ -111,8 +111,8 @@ const UnderstandingABSIPageContent = (
               alone doesn't capture.
             </li>
             <li>
-              Using multiple metrics like BMI, ABSI, and body fat percentage provides the most
-              comprehensive health assessment.
+              Using multiple metrics (BMI, ABSI, body fat percentage) together gives a fuller
+              picture than any single number.
             </li>
           </ul>
         </div>
@@ -121,10 +121,9 @@ const UnderstandingABSIPageContent = (
 
         <h2>What is ABSI?</h2>
         <p>
-          A Body Shape Index (ABSI) is a relatively new metric developed in 2012 by researchers Nir
-          Y. Krakauer and Jesse C. Krakauer. It was designed to address some of the limitations of
-          Body Mass Index (BMI) by incorporating waist circumference as a measure of central
-          obesity.
+          A Body Shape Index (ABSI) is a metric developed in 2012 by researchers Nir Y. Krakauer and
+          Jesse C. Krakauer. It incorporates waist circumference as a measure of central obesity,
+          addressing a gap that BMI leaves open.
         </p>
         <p>The formula for ABSI is:</p>
         <div className="neumorph-inset p-4 rounded-lg my-6 text-center">
@@ -136,16 +135,15 @@ const UnderstandingABSIPageContent = (
           </p>
         </div>
         <p>
-          While this formula might look complex, it essentially measures how much your waist
-          circumference deviates from what would be expected based on your height and weight. A
-          higher ABSI indicates that you carry more weight around your waist than would be expected
-          for someone with your BMI.
+          The formula measures how much your waist circumference deviates from what would be
+          expected given your height and weight. A higher ABSI means you carry more weight around
+          your waist than expected for someone with your BMI.
         </p>
 
         <h2>Why ABSI Matters: The Limitations of BMI</h2>
         <p>
-          BMI has been the standard metric for assessing weight-related health risks for decades,
-          but it has several well-known limitations:
+          BMI has been the standard weight-health metric for decades, but its limitations are well
+          documented:
         </p>
         <ul>
           <li>It doesn't distinguish between fat and muscle mass</li>
@@ -153,14 +151,13 @@ const UnderstandingABSIPageContent = (
           <li>It doesn't consider age, sex, or ethnicity</li>
         </ul>
         <p>
-          The second limitation is particularly important. Research has consistently shown that
-          where you carry your fat matters as much as, if not more than, how much fat you have.
-          Specifically, abdominal fat (especially visceral fat that surrounds your organs) is more
-          strongly linked to health risks than fat in other areas of the body.
+          The second limitation matters most here. Where you carry your fat may matter as much as
+          how much fat you have. Abdominal fat, especially the visceral fat surrounding your organs,
+          is more strongly linked to health risks than fat stored elsewhere.
         </p>
         <p>
-          This is where ABSI comes in. By incorporating waist circumference relative to BMI and
-          height, ABSI specifically targets the health risks associated with central obesity.
+          ABSI addresses this by incorporating waist circumference relative to BMI and height,
+          targeting the health risks tied to central obesity specifically.
         </p>
 
         <div className="neumorph p-6 rounded-lg my-8">
@@ -181,10 +178,7 @@ const UnderstandingABSIPageContent = (
             risk. However, Person B would have a higher ABSI, reflecting their increased abdominal
             fat and potentially higher health risk despite having a "normal" BMI.
           </p>
-          <p className="mb-0">
-            This example illustrates why ABSI can provide valuable information that BMI alone
-            misses.
-          </p>
+          <p className="mb-0">BMI would flag both as equal risk. ABSI would not.</p>
         </div>
 
         <h2>The Science Behind ABSI</h2>
@@ -204,8 +198,8 @@ const UnderstandingABSIPageContent = (
           </li>
         </ul>
         <p>
-          Subsequent studies have confirmed these findings and shown that ABSI is particularly
-          useful for identifying health risks in people with normal or overweight BMI.
+          Follow-up studies have confirmed these findings. ABSI appears most useful for identifying
+          health risks in people whose BMI falls in the normal or overweight range.
         </p>
         <p>
           A 2020 meta-analysis published in the journal Obesity Reviews found that ABSI was a better
@@ -276,39 +270,38 @@ const UnderstandingABSIPageContent = (
 
         <h2>Improving Your ABSI</h2>
         <p>
-          If your ABSI is high, you may want to focus on reducing your waist circumference. Here are
-          some strategies that can help:
+          If your ABSI is high, the main lever is reducing waist circumference. A few approaches
+          that work:
         </p>
         <ul>
           <li>
-            <strong>Target abdominal fat:</strong> While spot reduction isn't possible, exercises
-            that engage your core, like planks and Russian twists, can help strengthen abdominal
-            muscles.
+            <strong>Core training:</strong> Spot reduction is not possible, but exercises like
+            planks and Russian twists strengthen abdominal muscles and improve posture.
           </li>
           <li>
-            <strong>Cardiovascular exercise:</strong> Activities like walking, running, swimming, or
-            cycling can help reduce overall body fat, including abdominal fat.
+            <strong>Cardiovascular exercise:</strong> Walking, running, swimming, or cycling all
+            reduce overall body fat, including abdominal fat.
           </li>
           <li>
-            <strong>Strength training:</strong> Building muscle mass can improve your body
-            composition and metabolic health.
+            <strong>Strength training:</strong> Building muscle mass improves body composition and
+            metabolic health.
           </li>
           <li>
             <strong>Healthy diet:</strong> Focus on whole foods, lean proteins, fruits, vegetables,
             and whole grains while limiting processed foods, added sugars, and excessive alcohol.
           </li>
           <li>
-            <strong>Stress management:</strong> Chronic stress can contribute to abdominal fat
-            accumulation, so practices like meditation, yoga, or deep breathing may help.
+            <strong>Stress management:</strong> Chronic stress contributes to abdominal fat
+            accumulation. Meditation, yoga, or even regular deep breathing can help.
           </li>
           <li>
-            <strong>Adequate sleep:</strong> Poor sleep is associated with increased abdominal fat,
-            so aim for 7-9 hours of quality sleep per night.
+            <strong>Adequate sleep:</strong> Poor sleep is linked to increased abdominal fat. Aim
+            for 7-9 hours per night.
           </li>
         </ul>
 
         <h2>ABSI vs. Other Body Composition Metrics</h2>
-        <p>ABSI is one of several metrics used to assess body composition and health risks:</p>
+        <p>ABSI is one of several body composition metrics. Here is how they compare:</p>
         <ul>
           <li>
             <strong>BMI (Body Mass Index):</strong> Measures overall weight relative to height, but
@@ -332,30 +325,27 @@ const UnderstandingABSIPageContent = (
           </li>
         </ul>
         <p>
-          Each metric has strengths and limitations. For the most comprehensive assessment, consider
-          using multiple metrics. For example, check your BMI, ABSI, and body fat percentage to get
-          a more complete picture of your body composition and health risks.
+          No single metric covers everything. If you want a fuller picture of your body composition
+          and health risks, check your BMI, ABSI, and body fat percentage together rather than
+          relying on any one number.
         </p>
 
         <h2>Conclusion</h2>
         <p>
-          ABSI represents an important advancement in our understanding of how body shape affects
-          health. By accounting for waist circumference relative to BMI and height, it provides
-          valuable information about health risks that BMI alone misses.
+          ABSI accounts for waist circumference relative to BMI and height, catching health risks
+          that BMI misses, particularly in people who carry excess fat around their midsection.
         </p>
         <p>
-          While ABSI is a useful tool, it's important to remember that no single metric can capture
-          all aspects of health. ABSI should be used alongside other metrics like BMI and body fat
-          percentage, and in consultation with healthcare professionals, to get a comprehensive
-          picture of your health status.
+          No single metric captures every aspect of health. ABSI works best alongside BMI and body
+          fat percentage, and in conversation with a doctor who can interpret your numbers in
+          context.
         </p>
         <p>
           Use our{' '}
           <Link href="/absi" className="text-accent hover:underline">
             ABSI Calculator
           </Link>{' '}
-          to determine your ABSI and z-score, and check out our other calculators for a more
-          comprehensive health assessment.
+          to find your ABSI and z-score.
         </p>
 
         <div className="neumorph p-6 rounded-lg my-8">
@@ -422,8 +412,8 @@ const UnderstandingABSIPageContent = (
     <div className="neumorph p-6 rounded-lg">
       <h3 className="text-xl font-semibold mb-4">Try Our ABSI Calculator</h3>
       <p className="mb-4">
-        Calculate your A Body Shape Index (ABSI) and see how it compares to the average for your age
-        and sex.
+        Find your A Body Shape Index (ABSI) and see how it compares to the average for your age and
+        sex.
       </p>
       <Link
         href="/absi"

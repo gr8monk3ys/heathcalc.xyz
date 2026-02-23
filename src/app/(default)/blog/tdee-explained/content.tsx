@@ -58,32 +58,29 @@ const TDEEExplainedPageContent = (
           <li>TDEE consists of four components: BMR, TEF, EAT, and NEAT</li>
           <li>Your BMR (Basal Metabolic Rate) typically accounts for 60-70% of your TDEE</li>
           <li>Activity level can significantly impact your daily calorie needs</li>
-          <li>Understanding your TDEE is essential for effective weight management</li>
+          <li>Knowing your TDEE makes calorie targets less of a guessing game</li>
         </ul>
       </div>
 
       <AdBlock format="horizontal" />
 
       <p>
-        Whether you're trying to lose weight, gain muscle, or simply maintain your current physique,
-        understanding your body's energy needs is crucial. At the center of this understanding is a
-        concept known as Total Daily Energy Expenditure (TDEE). In this article, we'll break down
-        what TDEE is, how it's calculated, and why it matters for your health and fitness goals.
+        Most calorie advice starts with a number: eat 2,000 calories, or 1,800, or 2,500. But where
+        does that number come from? For any individual, it should come from Total Daily Energy
+        Expenditure (TDEE). This article covers what TDEE actually is, how to calculate it, and how
+        to use it without overthinking things.
       </p>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">What Is TDEE?</h2>
 
       <p>
         Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns in a
-        24-hour period. It represents the sum of all the energy your body uses, from basic
-        life-sustaining functions to intense physical activity. Think of TDEE as your body's daily
-        caloric budget—the number of calories you need to consume to maintain your current weight.
+        24-hour period. It includes everything from breathing and digesting food to running a
+        marathon. If you eat that many calories, your weight stays roughly the same. Eat more, you
+        gain. Eat less, you lose.
       </p>
 
-      <p>
-        Understanding your TDEE is fundamental to any nutrition plan because it establishes your
-        energy balance equation:
-      </p>
+      <p>That relationship is the energy balance equation, and it works like this:</p>
 
       <div className="neumorph p-6 rounded-lg my-6">
         <ul className="list-disc list-inside space-y-3">
@@ -103,17 +100,14 @@ const TDEEExplainedPageContent = (
       </div>
 
       <p>
-        While this principle is straightforward, accurately determining your TDEE can be challenging
-        because it's influenced by numerous factors, including your age, gender, body composition,
-        activity level, and even genetics.
+        Simple concept, harder in practice. Your TDEE depends on your age, sex, body composition,
+        how much you move, and your genetics. Two people who weigh the same can have very different
+        TDEEs.
       </p>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">The Four Components of TDEE</h2>
 
-      <p>
-        Your TDEE is made up of four distinct components, each representing different aspects of
-        your body's energy expenditure:
-      </p>
+      <p>Your TDEE is the sum of four components:</p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">1. Basal Metabolic Rate (BMR)</h3>
 
@@ -153,8 +147,8 @@ const TDEEExplainedPageContent = (
 
       <div className="neumorph p-6 rounded-lg my-4">
         <p>
-          TEF refers to the energy your body uses to digest, absorb, and process the nutrients in
-          the food you eat. In essence, you burn calories by eating and digesting food.
+          TEF is the energy your body uses to digest, absorb, and process food. Yes, eating itself
+          burns calories.
         </p>
         <p className="mt-4">
           TEF typically accounts for about 10% of your total daily energy expenditure, though this
@@ -175,8 +169,8 @@ const TDEEExplainedPageContent = (
           </li>
         </ul>
         <p className="mt-4">
-          This is one reason why high-protein diets can be beneficial for weight management—they
-          naturally increase your calorie burn through TEF.
+          This is one reason high-protein diets have a slight edge for fat loss: more of the
+          calories you eat get spent on digestion itself.
         </p>
       </div>
 
@@ -184,9 +178,8 @@ const TDEEExplainedPageContent = (
 
       <div className="neumorph p-6 rounded-lg my-4">
         <p>
-          EAT represents the calories burned during intentional exercise, such as running,
-          weightlifting, swimming, or any structured physical activity. This component varies
-          dramatically from person to person based on:
+          EAT is the calories burned during intentional exercise: running, weightlifting, swimming,
+          cycling, and so on. It varies widely between people based on:
         </p>
         <ul className="list-disc list-inside mt-4 space-y-1">
           <li>
@@ -214,8 +207,8 @@ const TDEEExplainedPageContent = (
 
       <div className="neumorph p-6 rounded-lg my-4">
         <p>
-          NEAT encompasses all the calories burned through non-exercise physical activities in your
-          daily life. This includes:
+          NEAT covers every calorie you burn through movement that is not structured exercise. This
+          includes:
         </p>
         <ul className="list-disc list-inside mt-4 space-y-1">
           <li>Walking around your home or office</li>
@@ -228,25 +221,21 @@ const TDEEExplainedPageContent = (
           <li>Any other physical activity that isn't structured exercise</li>
         </ul>
         <p className="mt-4">
-          NEAT can vary enormously between individuals and is often the most significant factor in
-          differences in TDEE between people of similar size and composition. For some people, NEAT
-          might account for just 15% of TDEE, while for others (especially those with active jobs),
-          it could represent 50% or more.
+          NEAT varies enormously between people. A desk worker might get 15% of their TDEE from
+          NEAT, while a postal carrier or warehouse worker could get 50% or more. This is often the
+          biggest reason two people of the same size burn very different amounts of calories.
         </p>
       </div>
 
       <p className="mt-6">
-        Understanding these four components helps explain why two people of the same weight, height,
-        age, and gender can have very different calorie needs. Differences in muscle mass affect
-        BMR, dietary choices influence TEF, exercise habits determine EAT, and lifestyle factors
-        impact NEAT.
+        Together, these four components explain why calorie needs are so individual. Your coworker
+        who eats more than you and stays lean? They might have more muscle mass (higher BMR), a more
+        active commute (higher NEAT), or both.
       </p>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">How TDEE Is Calculated</h2>
 
-      <p>
-        There are several methods to estimate TDEE, each with its own advantages and limitations:
-      </p>
+      <p>There are three main approaches, ranging from quick estimates to lab-grade precision:</p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">Method 1: BMR × Activity Multiplier</h3>
 
@@ -329,16 +318,13 @@ const TDEEExplainedPageContent = (
       </ul>
 
       <p>
-        These direct measurement methods are more accurate but less accessible than formula-based
-        calculations.
+        These methods are more accurate but rarely practical for everyday use. Most people will
+        never need them.
       </p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">Method 3: The Tracking Method</h3>
 
-      <p>
-        Perhaps the most practical approach for many individuals is what we call the "tracking
-        method":
-      </p>
+      <p>This is the most practical approach for most people. It skips the formulas entirely:</p>
 
       <ol className="list-decimal list-inside space-y-2 my-4">
         <li>Track your calorie intake accurately for 2-3 weeks</li>
@@ -351,13 +337,13 @@ const TDEEExplainedPageContent = (
       </ol>
 
       <p>
-        This method requires patience and consistent tracking but can provide a highly personalized
-        TDEE estimate based on real-world data.
+        It takes patience and consistent logging, but the result is your actual TDEE, not an
+        estimate derived from population averages.
       </p>
 
       <h2 className="text-2xl font-bold mt-8 mb-4">Factors That Influence Your TDEE</h2>
 
-      <p>Your TDEE isn't static—it can change based on numerous factors:</p>
+      <p>Your TDEE is not a fixed number. It shifts with changes in your body and behavior:</p>
 
       <div className="neumorph p-6 rounded-lg my-6">
         <h3 className="text-xl font-semibold mb-3">Physical Factors</h3>
@@ -430,19 +416,19 @@ const TDEEExplainedPageContent = (
       </div>
 
       <p>
-        Understanding these factors helps explain why TDEE can change over time and why regular
-        reassessment is important for long-term weight management.
+        The practical takeaway: a TDEE estimate from six months ago may no longer be accurate,
+        especially if your weight, activity, or routine has changed.
       </p>
 
-      <h2 className="text-2xl font-bold mt-8 mb-4">Why Understanding TDEE Matters</h2>
+      <h2 className="text-2xl font-bold mt-8 mb-4">What You Can Actually Do With TDEE</h2>
 
-      <p>Knowing your TDEE provides several important benefits:</p>
+      <p>A TDEE number on its own is not useful. Here is how it applies to specific goals:</p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">For Weight Loss</h3>
 
       <p>
-        To lose weight effectively and sustainably, you need to create a moderate calorie deficit
-        below your TDEE. Without knowing your TDEE, you might:
+        Losing weight requires eating fewer calories than your TDEE. Without a reasonable estimate
+        of that number, you risk:
       </p>
 
       <ul className="list-disc list-inside space-y-2 my-4">
@@ -463,8 +449,8 @@ const TDEEExplainedPageContent = (
       <h3 className="text-xl font-semibold mt-6 mb-3">For Muscle Gain</h3>
 
       <p>
-        Building muscle requires a calorie surplus—consuming more than your TDEE to provide energy
-        and resources for muscle growth. Knowing your TDEE helps you:
+        Building muscle requires a calorie surplus, meaning you eat more than your TDEE. A
+        reasonable TDEE estimate helps you:
       </p>
 
       <ul className="list-disc list-inside space-y-2 my-4">
@@ -476,9 +462,8 @@ const TDEEExplainedPageContent = (
       <h3 className="text-xl font-semibold mt-6 mb-3">For Weight Maintenance</h3>
 
       <p>
-        Perhaps the most valuable application of understanding TDEE is for long-term weight
-        maintenance. After reaching a weight loss or muscle gain goal, knowing your new TDEE allows
-        you to:
+        Maintenance gets less attention than fat loss or muscle gain, but it is where most people
+        struggle. After reaching a goal, knowing your updated TDEE lets you:
       </p>
 
       <ul className="list-disc list-inside space-y-2 my-4">
@@ -536,7 +521,7 @@ const TDEEExplainedPageContent = (
         Practical Applications: Using TDEE for Your Goals
       </h2>
 
-      <p>Here's how to apply TDEE knowledge to various fitness goals:</p>
+      <p>Here is a step-by-step breakdown for four common goals:</p>
 
       <h3 className="text-xl font-semibold mt-6 mb-3">For Weight Loss</h3>
 
@@ -602,36 +587,31 @@ const TDEEExplainedPageContent = (
       <h2 className="text-2xl font-bold mt-8 mb-4">Conclusion: TDEE as a Tool, Not a Rule</h2>
 
       <p>
-        Understanding your Total Daily Energy Expenditure provides valuable insight into your body's
-        calorie needs and creates a framework for effective nutrition planning. However, it's
-        important to remember that TDEE is a tool to guide your decisions, not an absolute rule to
-        follow rigidly.
+        TDEE gives you a starting point for calorie planning. That is all it is: a starting point.
+        The formula does not know about your stress levels, your sleep, or the fact that you walked
+        an extra three miles today. Treat it as a useful estimate, not a decree.
       </p>
 
-      <p>The most successful approach to using TDEE involves:</p>
+      <p>In practice, the process looks like this:</p>
 
-      <ul className="list-disc list-inside space-y-2 my-4">
-        <li>Starting with a reasonable estimate</li>
-        <li>Monitoring your results</li>
-        <li>Making data-based adjustments</li>
-        <li>Focusing on consistency rather than perfection</li>
-        <li>Adapting your approach as your body, goals, and circumstances change</li>
-      </ul>
+      <ol className="list-decimal list-inside space-y-2 my-4">
+        <li>Get an estimate (calculator, tracking method, or both)</li>
+        <li>Set your calories based on your goal</li>
+        <li>Follow it for 2-3 weeks</li>
+        <li>Check the scale and the mirror, then adjust</li>
+        <li>Repeat as your body and circumstances change</li>
+      </ol>
 
       <p>
-        By combining TDEE knowledge with mindful eating, regular physical activity, and patience,
-        you can develop a sustainable approach to nutrition that supports your health and fitness
-        goals for the long term.
+        That feedback loop matters more than the initial number. Consistency and willingness to
+        adjust will get you further than a perfect formula.
       </p>
 
       <div className="neumorph p-6 rounded-lg mt-8">
         <h3 className="text-xl font-semibold mb-4">
           Tools to Help You Calculate and Use Your TDEE
         </h3>
-        <p className="mb-4">
-          At HealthCheck, we've developed several calculators to help you apply TDEE concepts to
-          your specific goals:
-        </p>
+        <p className="mb-4">These calculators can help you put the concepts above into practice:</p>
         <ul className="list-disc list-inside space-y-2">
           <li>
             <Link href="/tdee" className="text-accent hover:underline">

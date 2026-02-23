@@ -40,7 +40,7 @@ const OneRepMaxResultDisplay: React.FC<OneRepMaxResultDisplayProps> = ({ result 
             style={{ width: '100%' }}
           />
         </div>
-        <div className="flex justify-between text-xs mt-1 text-gray-500">
+        <div className="flex justify-between text-xs mt-1 text-gray-500 dark:text-gray-400">
           <span>Light</span>
           <span>Moderate</span>
           <span>Heavy</span>
@@ -59,7 +59,7 @@ const OneRepMaxResultDisplay: React.FC<OneRepMaxResultDisplayProps> = ({ result 
                 formulaResult.formula === result.selectedFormula ? 'ring-2 ring-accent' : ''
               }`}
             >
-              <p className="text-sm text-gray-600">{formulaResult.name}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{formulaResult.name}</p>
               <p className="text-lg font-bold">
                 {formulaResult.oneRepMax.toFixed(1)} {result.weightUnit}
               </p>
@@ -79,18 +79,18 @@ const OneRepMaxResultDisplay: React.FC<OneRepMaxResultDisplayProps> = ({ result 
                   <h4 className="font-semibold" style={{ color: getZoneColor(zone.zone) }}>
                     {zone.name}
                   </h4>
-                  <p className="text-sm text-gray-600">{zone.repRange}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{zone.repRange}</p>
                 </div>
                 <div className="text-right">
                   <p className="font-bold">
                     {zone.minWeight.toFixed(1)} - {zone.maxWeight.toFixed(1)} {result.weightUnit}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     {zone.minPercentage}% - {zone.maxPercentage}% 1RM
                   </p>
                 </div>
               </div>
-              <p className="text-sm text-gray-600 mt-2">{zone.description}</p>
+              <p className="text-sm text-gray-600 mt-2 dark:text-gray-400">{zone.description}</p>
             </div>
           ))}
         </div>
@@ -101,7 +101,7 @@ const OneRepMaxResultDisplay: React.FC<OneRepMaxResultDisplayProps> = ({ result 
         <h3 className="font-medium mb-3">Percentage Chart</h3>
         <div className="neumorph-inset rounded-lg overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-gray-100">
+            <thead className="bg-gray-100 dark:bg-gray-700">
               <tr>
                 <th className="px-4 py-2 text-left">% of 1RM</th>
                 <th className="px-4 py-2 text-right">Weight</th>
@@ -110,7 +110,12 @@ const OneRepMaxResultDisplay: React.FC<OneRepMaxResultDisplayProps> = ({ result 
             </thead>
             <tbody>
               {result.percentageChart.map((entry, index) => (
-                <tr key={entry.percentage} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <tr
+                  key={entry.percentage}
+                  className={
+                    index % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-800/50'
+                  }
+                >
                   <td className="px-4 py-2">
                     <span
                       className="inline-block w-3 h-3 rounded-full mr-2"
@@ -121,7 +126,9 @@ const OneRepMaxResultDisplay: React.FC<OneRepMaxResultDisplayProps> = ({ result 
                   <td className="px-4 py-2 text-right font-medium">
                     {entry.weight.toFixed(1)} {result.weightUnit}
                   </td>
-                  <td className="px-4 py-2 text-right text-gray-600">{entry.estimatedReps}</td>
+                  <td className="px-4 py-2 text-right text-gray-600 dark:text-gray-400">
+                    {entry.estimatedReps}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -130,9 +137,9 @@ const OneRepMaxResultDisplay: React.FC<OneRepMaxResultDisplayProps> = ({ result 
       </div>
 
       {/* Important Note */}
-      <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <h4 className="font-medium text-yellow-800 mb-2">Important Note</h4>
-        <p className="text-sm text-yellow-700">
+      <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg dark:bg-yellow-900/20 dark:border-yellow-700">
+        <h4 className="font-medium text-yellow-800 mb-2 dark:text-yellow-200">Important Note</h4>
+        <p className="text-sm text-yellow-700 dark:text-yellow-300">
           1RM calculations are estimates based on submaximal performance. Actual 1RM may vary based
           on factors like fatigue, technique, and training experience. Always use a spotter when
           attempting maximal lifts and never sacrifice form for weight.

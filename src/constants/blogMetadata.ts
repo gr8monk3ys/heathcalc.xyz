@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getPublicSiteUrl } from '@/lib/site';
 
 function blogMeta(
   slug: string,
@@ -17,6 +18,7 @@ function blogMeta(
   const resolvedTwitterTitle = twitterTitle ?? title;
   const resolvedTwitterDescription = twitterDescription ?? description;
   const resolvedImageAlt = imageAlt ?? title.replace(/ \| HealthCheck.*$/, '');
+  const siteUrl = getPublicSiteUrl();
 
   return {
     title,
@@ -26,7 +28,7 @@ function blogMeta(
       title: resolvedOgTitle,
       description: resolvedOgDescription,
       type: 'article',
-      url: './',
+      url: `${siteUrl}/blog/${slug}`,
       images: [
         {
           url: image,
@@ -43,7 +45,7 @@ function blogMeta(
       images: [image],
     },
     alternates: {
-      canonical: './',
+      canonical: `${siteUrl}/blog/${slug}`,
     },
   };
 }

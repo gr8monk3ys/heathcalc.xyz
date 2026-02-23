@@ -45,9 +45,9 @@ const CompleteGuideToMacronutrientsPageContent = (
 
       <p>
         The reality is simpler and less dramatic. Each macronutrient has a role. None of them is
-        inherently harmful. The amounts and ratios that work best for you depend on your goals, your
-        activity level, and your personal preferences. Let me walk through what the research
-        actually says.
+        inherently harmful. The amounts and ratios that work best for you depend on what you are
+        trying to do, how much you move, and what you actually enjoy eating. Let me walk through
+        what the research says.
       </p>
 
       <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
@@ -277,7 +277,7 @@ const CompleteGuideToMacronutrientsPageContent = (
       <AdBlock format="horizontal" />
 
       <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900 dark:text-white">
-        Fiber: The Most Underrated Nutrient
+        Fiber: The Nutrient Nobody Eats Enough Of
       </h2>
 
       <p>
@@ -288,7 +288,7 @@ const CompleteGuideToMacronutrientsPageContent = (
       <p>
         A 2019 meta-analysis commissioned by the World Health Organization and published in The
         Lancet (Reynolds et al.) analyzed 185 prospective studies and 58 clinical trials with a
-        combined 4,635 adult participants. The findings were striking.
+        combined 4,635 adult participants.
       </p>
 
       <p>
@@ -300,9 +300,8 @@ const CompleteGuideToMacronutrientsPageContent = (
       </p>
 
       <p>
-        Most Americans eat about 15 grams per day. Most Europeans are in a similar range. This is
-        roughly half the minimum recommended intake. It is a massive gap between what people eat and
-        what the evidence suggests they should eat.
+        Most Americans eat about 15 grams per day. Most Europeans are in a similar range. That is
+        roughly half the minimum recommended intake.
       </p>
 
       <p>
@@ -469,22 +468,23 @@ const CompleteGuideToMacronutrientsPageContent = (
       </h2>
 
       <p>
-        Macronutrients are tools. Protein builds and repairs. Carbohydrates fuel high-intensity
-        work. Fat supports hormones and absorbs vitamins. Fiber feeds your gut and protects your
-        health. None of them is the enemy.
+        Macronutrients are tools. Protein builds and repairs tissue. Carbohydrates are your fuel for
+        anything intense. Fat keeps your hormones working and helps you absorb key vitamins. Fiber
+        feeds your gut bacteria and has the best evidence base of any nutrient for disease
+        prevention. None of them is the enemy.
       </p>
 
       <p>
-        The most productive thing you can do is stop thinking about macros in terms of good and evil
-        and start thinking about them in terms of amounts that serve your goals. Hit your protein
-        target. Eat enough fat for hormonal health. Adjust carbs based on activity and preference.
-        Get your fiber up.
+        The most useful thing you can do is stop sorting macros into good and evil and start
+        thinking about how much of each one actually serves what you are trying to do. Get your
+        protein up first. Make sure fat does not drop too low. Adjust carbs based on how much you
+        train and what you prefer. And eat more fiber than you currently do, because you almost
+        certainly are not eating enough.
       </p>
 
       <p>
-        That is not as exciting as a manifesto declaring war on a specific nutrient. But it is what
-        the research consistently supports, and it is an approach you can maintain for the rest of
-        your life.
+        That is less exciting than a manifesto declaring war on a specific nutrient. But it is what
+        the research consistently supports, and you can actually sustain it.
       </p>
 
       <div className="neumorph-card rounded-xl p-6 my-8">

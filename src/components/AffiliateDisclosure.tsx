@@ -15,8 +15,8 @@ export default function AffiliateDisclosure({
   const text = variant === 'short' ? AFFILIATE_DISCLOSURE.short : AFFILIATE_DISCLOSURE.full;
 
   return (
-    <div className={`neumorph p-6 rounded-lg my-8 bg-gray-50 ${className}`}>
-      <p className="text-sm text-gray-600">
+    <div className={`neumorph p-6 rounded-lg my-8 bg-gray-50 dark:bg-gray-800 ${className}`}>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
         <strong>Disclosure:</strong> {text}
       </p>
     </div>

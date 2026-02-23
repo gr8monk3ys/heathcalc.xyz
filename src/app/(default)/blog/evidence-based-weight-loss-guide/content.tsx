@@ -39,9 +39,9 @@ const EvidenceBasedWeightLossGuidePageContent = (
       <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
         Most weight loss advice falls into two camps. The first says it&apos;s simple: eat less,
         move more. The second says it&apos;s complicated and sells you a proprietary system. Neither
-        is entirely honest. The truth is that the basic physics of weight loss is straightforward,
-        but the biology and psychology that sit on top of it make the whole process much harder than
-        a simple equation suggests.
+        is entirely honest. The physics of weight loss is straightforward. The biology and
+        psychology that sit on top of it make the whole thing much harder than a simple equation
+        suggests.
       </p>
 
       <p>
@@ -332,10 +332,9 @@ const EvidenceBasedWeightLossGuidePageContent = (
       </h2>
 
       <p>
-        No discussion of sustainable weight loss is complete without addressing the psychological
-        dimension. I think this is where most diet programs fail their users. They provide a
-        nutrition plan without acknowledging that human eating behavior is driven as much by
-        emotion, habit, and psychology as by hunger and metabolic need.
+        I think this is where most diet programs fail their users. They hand you a nutrition plan
+        and ignore the fact that human eating behavior is driven as much by emotion and habit as by
+        hunger.
       </p>
 
       <p>
@@ -482,22 +481,21 @@ const EvidenceBasedWeightLossGuidePageContent = (
       </h2>
 
       <p>
-        Weight loss is not mysterious. It requires eating fewer calories than you burn, sustained
-        over time. But it is harder than that simple statement implies, because your body adapts,
-        your psychology fights you, and the environment you live in is designed to make you eat
-        more.
+        Weight loss is not mysterious. Eat fewer calories than you burn, sustained over time. But it
+        is harder than that sentence makes it sound, because your body adapts to the deficit and
+        your psychology fights back. The modern food environment does not help either.
       </p>
 
       <p>
         The research points to a clear set of practices that work: a moderate calorie deficit, high
         protein intake, resistance training, consistent self-monitoring, and a flexible
-        psychological approach that can survive real life. None of that is sexy. None of it sells
-        supplements. But it is what the evidence consistently supports.
+        psychological approach that can survive real life. Nobody builds a brand around that. But it
+        is what the evidence consistently supports.
       </p>
 
       <p>
-        If you are going to lose weight, do it in a way that you can maintain. Crash diets produce
-        crash results. Slow, boring, consistent effort produces permanent change.
+        If you are going to lose weight, do it in a way that you can maintain. The approaches that
+        work long-term are not exciting. They are just consistent.
       </p>
 
       <div className="neumorph-card rounded-xl p-6 my-8">
