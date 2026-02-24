@@ -29,7 +29,7 @@ test.describe('Calculators Index', () => {
     await expect(page).not.toHaveURL('/calculators');
 
     if (href) {
-      await expect(page).toHaveURL(new RegExp(href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+      await expect.poll(() => new URL(page.url()).pathname).toBe(href);
     }
   });
 
