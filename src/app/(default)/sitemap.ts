@@ -88,6 +88,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/chains`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
     // Learn pages
     {
       url: `${BASE_URL}/learn`,
