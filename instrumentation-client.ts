@@ -96,7 +96,7 @@ if (SENTRY_DSN) {
       return event;
     },
   });
-} else {
+} else if (process.env.NODE_ENV !== 'production') {
   console.warn('Sentry DSN not configured. Error tracking is disabled.');
 }
 

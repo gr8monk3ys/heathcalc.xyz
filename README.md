@@ -144,6 +144,13 @@ In addition to the standard Next.js scripts, this project includes several helpf
   - `RESEND_FROM_EMAIL` to override the default sender for contact emails.
   - `CONTACT_EMAIL` to set recipient inbox for contact messages.
 
+### Observability
+
+- Vercel Analytics is built in and only loads after analytics consent.
+- Add `NEXT_PUBLIC_GA_ID` if you also want Google Analytics.
+- Add `NEXT_PUBLIC_SENTRY_DSN` for browser-side Sentry and optional `SENTRY_DSN` for server-only Sentry.
+- If no browser Sentry DSN is configured, client errors fall back to the internal `/api/client-errors` endpoint and are written to server logs.
+
 ### Authentication (Clerk)
 
 - Clerk is enabled only when both `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` are set.
