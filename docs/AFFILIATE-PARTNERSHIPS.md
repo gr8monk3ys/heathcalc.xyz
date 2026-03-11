@@ -4,26 +4,26 @@ This doc captures the highest-ROI **direct partnership** targets for meal delive
 
 ## Priority Programs (Apply First)
 
-1. **HelloFresh Influencer/Ambassador Program**  
-   Official influencer program with application flow and discount code onboarding.  
+1. **HelloFresh Influencer/Ambassador Program**
+   Official influencer program with application flow and discount code onboarding.
    https://www.hellofresh.com/about/influencer-program
 
-2. **Noom Creators & Community**  
-   Official creator/community partnership intake.  
+2. **Noom Creators & Community**
+   Official creator/community partnership intake.
    https://www.noom.com/creators-community/
 
-3. **Cronometer Partner With Us**  
-   Direct partner inquiry form for collaborations.  
+3. **Cronometer Partner With Us**
+   Direct partner inquiry form for collaborations.
    https://cronometer.com/blog/partner-with-us/
 
 ## Likely Affiliate Options (Network-Based)
 
-- **MyFitnessPal**: Listed on Acceleration Partners (affiliate network listing).  
+- **MyFitnessPal**: Listed on Acceleration Partners (affiliate network listing).
   https://www.accelerationpartners.com/affiliate-programs/myfitnesspal/
 
 ## Programs Without Clear Public Affiliate Pages
 
-- **MyFitnessPal**: Official help center only shows “invite a friend” flows, not an affiliate program.  
+- **MyFitnessPal**: Official help center only shows “invite a friend” flows, not an affiliate program.
   https://support.myfitnesspal.com/hc/en-us/articles/360032625251-How-do-I-invite-a-friend-to-join-MyFitnessPal
 
 ## Recommended Next Actions

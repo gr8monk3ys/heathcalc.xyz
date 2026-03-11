@@ -6,6 +6,17 @@ import { getAdSensePublisherId } from '@/lib/adsense';
 import { useCookieConsent } from '@/components/CookieConsent';
 
 const logger = createLogger({ component: 'AdUnit' });
+type AdSenseCommand = Record<string, never>;
+type AdSenseWindow = Window & { adsbygoogle?: AdSenseCommand[] };
+
+function getAdSenseQueue(target: Window): AdSenseCommand[] {
+  const adWindow = target as AdSenseWindow;
+  if (!adWindow.adsbygoogle) {
+    adWindow.adsbygoogle = [];
+  }
+
+  return adWindow.adsbygoogle;
+}
 
 interface AdUnitProps {
   /**
@@ -70,9 +81,9 @@ export default function AdUnit({
     if (isAdLoaded.current) return;
 
     try {
-      // Check if adsbygoogle is available
-      const adsbygoogle = (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle;
-      if (adsbygoogle && adRef.current) {
+      // AdSense supports queueing commands before the script is fully ready.
+      if (adRef.current) {
+        const adsbygoogle = getAdSenseQueue(window);
         adsbygoogle.push({});
         isAdLoaded.current = true;
       }
