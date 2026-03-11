@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isSubmissionPersistenceStrictModeEnabled } from '@/lib/db/submissions';
+import { hasConfiguredAnalyticsProvider, hasConfiguredAnySentryDsn } from '@/lib/monitoring';
 
 interface HealthChecks {
   siteUrlConfigured: boolean;
@@ -19,11 +20,6 @@ interface HealthChecks {
 
 function has(value: string | undefined): boolean {
   return Boolean(value?.trim());
-}
-
-function isGaMeasurementId(value: string | undefined): boolean {
-  if (!value) return false;
-  return /^G-[A-Z0-9]+$/i.test(value.trim());
 }
 
 function hasConfiguredAdSenseSlot(): boolean {
@@ -63,8 +59,8 @@ function createHealthChecks(): HealthChecks {
     embedProviderConfigured: hasConvertKit,
     clerkKeysPaired: hasClerkPublishable === hasClerkSecret,
     clerkProductionKeysSafe: !isProductionRuntime || !clerkUsingTestKeys,
-    analyticsConfigured: isGaMeasurementId(process.env.NEXT_PUBLIC_GA_ID),
-    sentryDsnConfigured: has(process.env.NEXT_PUBLIC_SENTRY_DSN),
+    analyticsConfigured: hasConfiguredAnalyticsProvider(),
+    sentryDsnConfigured: hasConfiguredAnySentryDsn(),
     adsenseSlotsConfigured: hasConfiguredAdSenseSlot(),
   };
 }
@@ -73,10 +69,10 @@ function createWarnings(checks: HealthChecks): string[] {
   const warnings: string[] = [];
 
   if (!checks.analyticsConfigured) {
-    warnings.push('Google Analytics is not configured.');
+    warnings.push('No analytics provider is configured.');
   }
   if (!checks.sentryDsnConfigured) {
-    warnings.push('Sentry browser DSN is not configured.');
+    warnings.push('Sentry DSN is not configured. Browser errors fall back to server logs.');
   }
   if (!checks.adsenseSlotsConfigured) {
     warnings.push('AdSense slots are not configured.');

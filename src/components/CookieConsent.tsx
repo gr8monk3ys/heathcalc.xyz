@@ -10,7 +10,7 @@ import React, {
   ReactNode,
 } from 'react';
 import { usePreferences } from '@/context/PreferencesContext';
-import { getAdSensePublisherId, getAdSenseScriptSrc } from '@/lib/adsense';
+import { getAdSensePublisherId, getAdSenseScriptSrc, shouldLoadAdSense } from '@/lib/adsense';
 import { useLocale } from '@/context/LocaleContext';
 
 /* -------------------------------------------------------------------------- */
@@ -131,6 +131,7 @@ function AdSenseLoader(): React.JSX.Element | null {
       (!hasConfiguredAdSlot && !publisherId) ||
       loaded ||
       typeof window === 'undefined' ||
+      !shouldLoadAdSense(window) ||
       process.env.NODE_ENV !== 'production'
     ) {
       return;

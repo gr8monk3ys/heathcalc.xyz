@@ -34,6 +34,7 @@ Add the following to your `.env.local` file (create it if it doesn't exist):
 ```bash
 # Sentry Error Monitoring
 NEXT_PUBLIC_SENTRY_DSN=https://your-key@your-org.ingest.sentry.io/your-project-id
+SENTRY_DSN=https://your-key@your-org.ingest.sentry.io/your-project-id
 
 # Optional: For source map uploads (get from Sentry settings)
 SENTRY_ORG=your-organization-slug
@@ -42,6 +43,8 @@ SENTRY_AUTH_TOKEN=your-auth-token
 ```
 
 Replace the placeholder values with your actual Sentry credentials.
+
+`NEXT_PUBLIC_SENTRY_DSN` enables browser reporting. `SENTRY_DSN` is an optional server-only fallback if you want server and edge telemetry without exposing the DSN to the client bundle.
 
 ### 4. Test the Setup
 
@@ -80,6 +83,7 @@ Add these environment variables to your production deployment:
 
 ```bash
 NEXT_PUBLIC_SENTRY_DSN=https://your-key@your-org.ingest.sentry.io/your-project-id
+SENTRY_DSN=https://your-key@your-org.ingest.sentry.io/your-project-id
 SENTRY_ORG=your-organization-slug
 SENTRY_PROJECT=your-project-name
 SENTRY_AUTH_TOKEN=your-production-auth-token
@@ -103,6 +107,7 @@ Source maps will be automatically uploaded to Sentry during the build process.
 - React component errors
 - Network request failures
 - Session replay on errors (privacy-safe)
+- If `NEXT_PUBLIC_SENTRY_DSN` is absent, browser error reports fall back to the internal `/api/client-errors` endpoint so production errors still reach server logs.
 
 ### ✅ Server-Side Error Tracking
 
@@ -185,7 +190,7 @@ Then visit `/api/test-error` in your browser.
 ### Errors Not Appearing in Sentry
 
 1. **Check DSN**: Verify your `NEXT_PUBLIC_SENTRY_DSN` is correct
-2. **Check Console**: Look for Sentry initialization warnings
+2. **Check Console**: In development, look for Sentry initialization warnings
 3. **Check Environment**: Sentry is disabled by default in development
 4. **Check Filters**: Make sure your error isn't being filtered by `ignoreErrors`
 

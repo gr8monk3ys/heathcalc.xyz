@@ -168,7 +168,10 @@ Manual owner tasks before launch:
 2. Replace remaining placeholder direct partner links in `src/constants/affiliates.ts` with tracked affiliate URLs.
 3. Set AdSense slot envs (`NEXT_PUBLIC_ADSENSE_SLOT_*`) to activate ad inventory.
 4. Set Clerk live keys or intentionally remove Clerk env vars to keep auth disabled.
-5. Configure observability (`NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_SENTRY_DSN`).
+5. Configure observability:
+   `NEXT_PUBLIC_SENTRY_DSN` for browser-side Sentry,
+   optional `SENTRY_DSN` for server-only Sentry,
+   and optional `NEXT_PUBLIC_GA_ID` if you want GA in addition to the consent-gated Vercel Analytics integration that already ships with the app.
 
 ## Rollback Plan
 

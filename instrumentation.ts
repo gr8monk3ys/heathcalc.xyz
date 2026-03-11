@@ -39,7 +39,7 @@ export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     // Server-side instrumentation
     const { init } = await import('@sentry/nextjs');
-    const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
+    const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
 
     if (SENTRY_DSN) {
       init({
@@ -75,7 +75,7 @@ export async function register() {
           return event;
         },
       });
-    } else {
+    } else if (process.env.NODE_ENV !== 'production') {
       console.warn('Sentry DSN not configured. Server-side error tracking is disabled.');
     }
   }
@@ -83,7 +83,7 @@ export async function register() {
   if (process.env.NEXT_RUNTIME === 'edge') {
     // Edge runtime instrumentation
     const { init } = await import('@sentry/nextjs');
-    const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
+    const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
 
     if (SENTRY_DSN) {
       init({

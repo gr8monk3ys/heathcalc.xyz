@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { createLogger } from '@/utils/logger';
-import { getAdSensePublisherId } from '@/lib/adsense';
+import { getAdSensePublisherId, shouldLoadAdSense } from '@/lib/adsense';
 import { useCookieConsent } from '@/components/CookieConsent';
 
 const logger = createLogger({ component: 'AdUnit' });
@@ -78,6 +78,7 @@ export default function AdUnit({
     if (typeof window === 'undefined') return;
     if (testMode) return;
     if (!advertising) return;
+    if (!shouldLoadAdSense(window)) return;
     if (isAdLoaded.current) return;
 
     try {
@@ -135,6 +136,10 @@ export default function AdUnit({
   }
 
   if (!advertising) {
+    return null;
+  }
+
+  if (typeof window !== 'undefined' && !shouldLoadAdSense(window)) {
     return null;
   }
 

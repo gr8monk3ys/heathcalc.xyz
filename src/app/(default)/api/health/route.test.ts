@@ -72,4 +72,26 @@ describe('GET /api/health', () => {
     expect(response.status).toBe(200);
     expect(body.status).toBe('ok');
   });
+
+  it('treats Vercel Analytics as a valid analytics provider', async () => {
+    vi.stubEnv('VERCEL_ENV', 'production');
+
+    const response = await runHealthCheck();
+    const body = await response.json();
+
+    expect(body.checks.analyticsConfigured).toBe(true);
+    expect(body.warnings).not.toContain('No analytics provider is configured.');
+  });
+
+  it('accepts a server-only Sentry DSN for observability checks', async () => {
+    vi.stubEnv('SENTRY_DSN', 'https://secret@example.ingest.sentry.io/123');
+
+    const response = await runHealthCheck();
+    const body = await response.json();
+
+    expect(body.checks.sentryDsnConfigured).toBe(true);
+    expect(body.warnings).not.toContain(
+      'Sentry DSN is not configured. Browser errors fall back to server logs.'
+    );
+  });
 });

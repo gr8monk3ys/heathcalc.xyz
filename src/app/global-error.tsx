@@ -1,9 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import * as Sentry from '@sentry/nextjs';
 import { createLogger } from '@/utils/logger';
+import { buildClientErrorReport, sendClientErrorReport } from '@/lib/clientErrorReporting';
+import { hasConfiguredBrowserSentryDsn } from '@/lib/monitoring';
 
 const logger = createLogger({ component: 'GlobalError', level: 'critical' });
 
@@ -20,11 +22,22 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const hasReportedRef = useRef(false);
+
   useEffect(() => {
+    if (hasReportedRef.current) return;
+    hasReportedRef.current = true;
+
     logger.logError('Critical global error occurred', error, {
       digest: error.digest,
     });
-    Sentry.captureException(error);
+
+    if (hasConfiguredBrowserSentryDsn()) {
+      Sentry.captureException(error);
+      return;
+    }
+
+    sendClientErrorReport(buildClientErrorReport(error, 'global-error'));
   }, [error]);
 
   return (
