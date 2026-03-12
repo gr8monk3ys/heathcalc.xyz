@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
 import UnitToggle from '@/components/ui/UnitToggle';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { usePreferences } from '@/context/PreferencesContext';
 import { useLocale } from '@/context/LocaleContext';
 import { stripLocaleFromPathname } from '@/i18n/config';
@@ -30,7 +29,6 @@ export default function Header(): React.JSX.Element {
   const { darkMode } = preferences;
   const [openMenuPathname, setOpenMenuPathname] = useState<string | null>(null);
   const mobileMenuOpen = openMenuPathname === pathname;
-  const ENABLE_LANGUAGE_SWITCHER = false;
   const normalizedPathname = stripLocaleFromPathname(pathname);
 
   const quickLinks = [
@@ -75,11 +73,6 @@ export default function Header(): React.JSX.Element {
           </nav>
 
           <div className="flex items-center space-x-3">
-            {ENABLE_LANGUAGE_SWITCHER && (
-              <div className="hidden md:block">
-                <LanguageSwitcher />
-              </div>
-            )}
             <DarkModeToggle />
             <UnitToggle className="hidden sm:flex" />
             <div className="hidden lg:block">
@@ -135,11 +128,6 @@ export default function Header(): React.JSX.Element {
       {mobileMenuOpen && (
         <nav aria-label={t('header.mobileNavAria')} className="lg:hidden px-3 pb-3 md:px-4 md:pb-4">
           <div className="glass-panel mx-auto mt-2 max-w-6xl space-y-2 rounded-2xl p-4">
-            {ENABLE_LANGUAGE_SWITCHER && (
-              <div className="py-1">
-                <LanguageSwitcher />
-              </div>
-            )}
             <div className="py-1 sm:hidden">
               <UnitToggle />
             </div>

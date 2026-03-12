@@ -3,6 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import AuthProviderBoundary from '@/components/providers/AuthProviderBoundary';
 import { useLocale } from '@/context/LocaleContext';
 import { useAuth } from '@/context/AuthContext';
 
@@ -15,7 +16,7 @@ const UserMenu = dynamic(() => import('@/components/auth/UserMenu'), {
   ),
 });
 
-export default function AuthControls(): React.JSX.Element {
+function AuthControlsContent(): React.JSX.Element {
   const { t } = useLocale();
   const { supabaseEnabled } = useAuth();
 
@@ -37,5 +38,13 @@ export default function AuthControls(): React.JSX.Element {
         {t('auth.login')}
       </Link>
     </div>
+  );
+}
+
+export default function AuthControls(): React.JSX.Element {
+  return (
+    <AuthProviderBoundary>
+      <AuthControlsContent />
+    </AuthProviderBoundary>
   );
 }

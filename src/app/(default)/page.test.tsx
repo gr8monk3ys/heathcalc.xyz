@@ -35,7 +35,7 @@ describe('Home Page', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: /54\+ free health calculators/i,
+        name: /BMI, body fat, TDEE, and 50\+ more health calculators/i,
       })
     ).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Browse calculators' })).toHaveAttribute(

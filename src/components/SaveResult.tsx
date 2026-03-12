@@ -3,6 +3,7 @@
 import React from 'react';
 import { useSavedResultsManager } from '@/hooks/useSavedResultsManager';
 import Link from 'next/link';
+import AuthSavedResultsProviders from '@/components/providers/AuthSavedResultsProviders';
 import { useLocale } from '@/context/LocaleContext';
 
 interface SaveResultProps {
@@ -16,7 +17,7 @@ interface SaveResultProps {
  * SaveResult component for saving calculator results
  * Improves user experience and encourages return visits
  */
-export default function SaveResult({
+function SaveResultContent({
   calculatorType,
   calculatorName,
   data,
@@ -94,6 +95,14 @@ export default function SaveResult({
         </div>
       )}
     </div>
+  );
+}
+
+export default function SaveResult(props: SaveResultProps): React.JSX.Element {
+  return (
+    <AuthSavedResultsProviders>
+      <SaveResultContent {...props} />
+    </AuthSavedResultsProviders>
   );
 }
 

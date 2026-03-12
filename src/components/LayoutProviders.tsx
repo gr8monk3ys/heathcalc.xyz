@@ -2,8 +2,6 @@ import React, { ReactNode } from 'react';
 import { DarkModeProvider } from '@/context/DarkModeContext';
 import { UnitSystemProvider } from '@/context/UnitSystemContext';
 import { PreferencesProvider } from '@/context/PreferencesContext';
-import { SavedResultsProvider } from '@/context/SavedResultsContext';
-import { AuthProvider } from '@/context/AuthContext';
 import { CookieConsentProvider } from '@/components/CookieConsent';
 import { LocaleProvider } from '@/context/LocaleContext';
 import { defaultLocale, type SupportedLocale } from '@/i18n/config';
@@ -20,11 +18,7 @@ export default function LayoutProviders({
       <DarkModeProvider>
         <UnitSystemProvider>
           <PreferencesProvider>
-            <AuthProvider>
-              <SavedResultsProvider>
-                <CookieConsentProvider>{children}</CookieConsentProvider>
-              </SavedResultsProvider>
-            </AuthProvider>
+            <CookieConsentProvider>{children}</CookieConsentProvider>
           </PreferencesProvider>
         </UnitSystemProvider>
       </DarkModeProvider>

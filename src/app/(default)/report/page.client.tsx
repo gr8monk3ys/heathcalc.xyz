@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import type { jsPDF } from 'jspdf';
+import AuthSavedResultsProviders from '@/components/providers/AuthSavedResultsProviders';
 import Breadcrumb from '@/components/Breadcrumb';
 import { useSavedResults } from '@/context/SavedResultsContext';
 import { useLocale } from '@/context/LocaleContext';
@@ -242,7 +243,7 @@ async function exportReportPdf(
   doc.save(`healthcheck-report-${dateStamp}.pdf`);
 }
 
-export default function ReportPageClient(): React.JSX.Element {
+function ReportPageClientContent(): React.JSX.Element {
   const { savedResults } = useSavedResults();
   const { localizePath } = useLocale();
   const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
@@ -439,5 +440,13 @@ export default function ReportPageClient(): React.JSX.Element {
         treatment, nutrition, or training plans.
       </p>
     </div>
+  );
+}
+
+export default function ReportPageClient(): React.JSX.Element {
+  return (
+    <AuthSavedResultsProviders>
+      <ReportPageClientContent />
+    </AuthSavedResultsProviders>
   );
 }

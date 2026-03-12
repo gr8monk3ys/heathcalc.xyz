@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback } from 'react';
-import { track as vercelTrack } from '@vercel/analytics';
 import { useCookieConsent } from '@/components/CookieConsent';
 
 type FunnelEvent =
@@ -36,11 +35,13 @@ export function useFunnelTracking(): {
       if (!canTrack) return;
       const payload = stripUndefined(props);
 
-      try {
-        vercelTrack(name, payload);
-      } catch {
-        // Ignore tracking errors.
-      }
+      void import('@vercel/analytics')
+        .then(({ track }) => {
+          track(name, payload);
+        })
+        .catch(() => {
+          // Ignore tracking errors.
+        });
 
       // Optional GA4 bridge (loaded after consent via CookieConsentProvider).
       try {

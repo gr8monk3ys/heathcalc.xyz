@@ -1,15 +1,10 @@
 'use client';
 
-import React, { createContext, useCallback, useContext, useEffect, useMemo } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import React, { createContext, useCallback, useContext, useMemo } from 'react';
 import {
   defaultLocale,
-  getLocaleFromPathname,
-  localeCookieName,
-  localeToHtmlLang,
   normalizeLocale,
   prefixPathWithLocale,
-  stripLocaleFromPathname,
   type SupportedLocale,
 } from '@/i18n/config';
 import { getMessage, type MessageKey } from '@/i18n/messages';
@@ -32,20 +27,7 @@ export function LocaleProvider({
   children,
   initialLocale = defaultLocale,
 }: LocaleProviderProps): React.JSX.Element {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const locale = useMemo(() => {
-    const localeFromPath = getLocaleFromPathname(pathname ?? '');
-    if (localeFromPath) return localeFromPath;
-
-    return normalizeLocale(initialLocale) ?? defaultLocale;
-  }, [initialLocale, pathname]);
-
-  useEffect(() => {
-    document.documentElement.lang = localeToHtmlLang[locale];
-    document.cookie = `${localeCookieName}=${locale}; path=/; max-age=31536000; samesite=lax`;
-  }, [locale]);
+  const locale = useMemo(() => normalizeLocale(initialLocale) ?? defaultLocale, [initialLocale]);
 
   const localizePath = useCallback(
     (path: string): string => {
@@ -55,16 +37,13 @@ export function LocaleProvider({
     [locale]
   );
 
-  const setLocale = useCallback(
-    (nextLocale: SupportedLocale): void => {
-      if (!pathname) return;
-      const basePath = stripLocaleFromPathname(pathname);
-      const localizedPath = prefixPathWithLocale(basePath, nextLocale);
-      const query = typeof window !== 'undefined' ? window.location.search : '';
-      router.push(`${localizedPath}${query}`);
-    },
-    [pathname, router]
-  );
+  const setLocale = useCallback((nextLocale: SupportedLocale): void => {
+    if (typeof window === 'undefined') return;
+    const localizedPath = prefixPathWithLocale(window.location.pathname, nextLocale);
+    const search = window.location.search ?? '';
+    const hash = window.location.hash ?? '';
+    window.location.assign(`${localizedPath}${search}${hash}`);
+  }, []);
 
   const t = useCallback(
     (key: MessageKey): string => {
