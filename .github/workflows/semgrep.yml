@@ -19,4 +19,4 @@ jobs:
           python3 -m pip install --upgrade pip
           python3 -m pip install semgrep
       - name: Run Semgrep
-        run: semgrep scan --config auto --error --metrics=off
+        run: semgrep scan --config auto --error
