@@ -17,7 +17,10 @@ import {
 } from '@/hooks/useCalculatorUnits';
 import { useCalculatorForm } from '@/hooks/useCalculatorForm';
 import { useChainPrefill } from '@/hooks/useChainPrefill';
-import { requestCalculatorFormSubmit } from '@/hooks/useSharedResultPrefill';
+import {
+  requestCalculatorFormSubmit,
+  useSharedResultPrefill,
+} from '@/hooks/useSharedResultPrefill';
 import type { SharedResultInputMap } from '@/utils/resultSharing';
 
 // Dynamic imports for below-the-fold components
@@ -310,7 +313,8 @@ export default function TDEECalculator({
   const height = useHeight();
   const weight = useWeight();
   const chainPrefill = useChainPrefill('tdee');
-  const sharedPrefill = initialSharedPrefill;
+  const querySharedPrefill = useSharedResultPrefill('tdee');
+  const sharedPrefill = initialSharedPrefill ?? querySharedPrefill;
   const hasAppliedSharedPrefill = useRef(false);
 
   useEffect(() => {

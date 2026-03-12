@@ -25,6 +25,7 @@ import {
   requestCalculatorFormSubmit,
   useSharedResultPrefill,
 } from '@/hooks/useSharedResultPrefill';
+import type { SharedResultInputMap } from '@/utils/resultSharing';
 
 // FAQ data for Macro calculator
 const faqs = [
@@ -372,13 +373,18 @@ function MacroCalculatorContent({
     </>
   );
 }
-export default function MacroCalculator() {
+export default function MacroCalculator({
+  initialSharedPrefill = null,
+}: {
+  initialSharedPrefill?: SharedResultInputMap['macro'] | null;
+}) {
   const [state, dispatchState] = useReducer(macroCalculatorReducer, initialMacroCalculatorState);
   const { activityLevel, age, customCarbs, customFat, customProtein, gender, goal } = state;
   const height = useHeight();
   const weight = useWeight();
   const chainPrefill = useChainPrefill('macro');
-  const sharedPrefill = useSharedResultPrefill('macro');
+  const querySharedPrefill = useSharedResultPrefill('macro');
+  const sharedPrefill = initialSharedPrefill ?? querySharedPrefill;
   const hasAppliedSharedPrefill = useRef(false);
 
   useEffect(() => {

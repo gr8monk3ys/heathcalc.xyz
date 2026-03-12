@@ -39,6 +39,7 @@ import {
   requestCalculatorFormSubmit,
   useSharedResultPrefill,
 } from '@/hooks/useSharedResultPrefill';
+import type { SharedResultInputMap } from '@/utils/resultSharing';
 
 // Dynamic imports for below-the-fold components
 const BodyFatUnderstanding = dynamic(
@@ -306,7 +307,11 @@ function createBodyFatShareResultContext({
     },
   };
 }
-export default function BodyFatCalculator() {
+export default function BodyFatCalculator({
+  initialSharedPrefill = null,
+}: {
+  initialSharedPrefill?: SharedResultInputMap['body-fat'] | null;
+}) {
   const [state, dispatchState] = useReducer(
     bodyFatCalculatorReducer,
     initialBodyFatCalculatorState
@@ -315,7 +320,8 @@ export default function BodyFatCalculator() {
   const height = useHeight();
   const weight = useWeight();
   const chainPrefill = useChainPrefill('body-fat');
-  const sharedPrefill = useSharedResultPrefill('body-fat');
+  const querySharedPrefill = useSharedResultPrefill('body-fat');
+  const sharedPrefill = initialSharedPrefill ?? querySharedPrefill;
   const hasAppliedSharedPrefill = useRef(false);
 
   useEffect(() => {

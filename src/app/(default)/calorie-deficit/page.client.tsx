@@ -26,6 +26,7 @@ import {
   requestCalculatorFormSubmit,
   useSharedResultPrefill,
 } from '@/hooks/useSharedResultPrefill';
+import type { SharedResultInputMap } from '@/utils/resultSharing';
 
 // FAQ data for the calculator
 const faqs = [
@@ -353,13 +354,18 @@ function CalorieDeficitContent({
     </>
   );
 }
-export default function CalorieDeficitCalculator() {
+export default function CalorieDeficitCalculator({
+  initialSharedPrefill = null,
+}: {
+  initialSharedPrefill?: SharedResultInputMap['calorie-deficit'] | null;
+}) {
   const [state, dispatchState] = useReducer(calorieDeficitReducer, initialCalorieDeficitState);
   const { activityLevel, age, deficitLevel, gender, goalWeight } = state;
   const height = useHeight();
   const weight = useWeight();
   const chainPrefill = useChainPrefill('calorie-deficit');
-  const sharedPrefill = useSharedResultPrefill('calorie-deficit');
+  const querySharedPrefill = useSharedResultPrefill('calorie-deficit');
+  const sharedPrefill = initialSharedPrefill ?? querySharedPrefill;
   const hasAppliedSharedPrefill = useRef(false);
 
   useEffect(() => {

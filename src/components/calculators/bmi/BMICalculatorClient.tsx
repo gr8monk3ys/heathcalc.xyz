@@ -26,7 +26,10 @@ import {
 import { useLocale } from '@/context/LocaleContext';
 import { toAbsoluteUrl } from '@/lib/site';
 import { useChainPrefill } from '@/hooks/useChainPrefill';
-import { requestCalculatorFormSubmit } from '@/hooks/useSharedResultPrefill';
+import {
+  requestCalculatorFormSubmit,
+  useSharedResultPrefill,
+} from '@/hooks/useSharedResultPrefill';
 import type { BMIPageCopy } from '@/i18n/pages/bmi';
 import type { SharedResultInputMap } from '@/utils/resultSharing';
 
@@ -394,7 +397,8 @@ export default function BMICalculatorClient({
   const height = useHeight();
   const weight = useWeight();
   const chainPrefill = useChainPrefill('bmi');
-  const sharedPrefill = initialSharedPrefill;
+  const querySharedPrefill = useSharedResultPrefill('bmi');
+  const sharedPrefill = initialSharedPrefill ?? querySharedPrefill;
   const hasAppliedSharedPrefill = useRef(false);
 
   useEffect(() => {

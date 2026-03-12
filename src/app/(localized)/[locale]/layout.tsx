@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GlobalStructuredData from '@/components/GlobalStructuredData';
-import Preconnect from '@/components/Preconnect';
 import React, { ReactNode } from 'react';
 import SkipToMainLink from '@/components/SkipToMainLink';
 import { getPublicSiteUrl } from '@/lib/site';
@@ -187,15 +186,6 @@ export default async function RootLayout({ children, params }: LocalizedLayoutPr
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="HealthCheck" />
-
-        {/* Preconnect to external domains for better performance */}
-        <Preconnect
-          domains={[
-            'https://www.googletagmanager.com',
-            'https://www.google.com',
-            'https://stats.g.doubleclick.net',
-          ]}
-        />
       </head>
       <body>
         <LayoutProviders initialLocale={locale}>

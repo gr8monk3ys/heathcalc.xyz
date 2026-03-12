@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Preconnect from '@/components/Preconnect';
 import { createOrganizationSchema, createWebsiteSchema } from '@/utils/schema';
 import React, { ReactNode } from 'react';
 import SkipToMainLink from '@/components/SkipToMainLink';
@@ -92,15 +91,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="HealthCheck" />
-
-        {/* Preconnect to external domains for better performance */}
-        <Preconnect
-          domains={[
-            'https://www.googletagmanager.com',
-            'https://www.google.com',
-            'https://stats.g.doubleclick.net',
-          ]}
-        />
 
         {/* Blocking script to apply dark mode before first paint (prevents FOUC) */}
         <Script id="dark-mode-bootstrap" strategy="beforeInteractive">

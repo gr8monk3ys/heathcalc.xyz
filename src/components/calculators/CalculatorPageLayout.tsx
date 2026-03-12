@@ -268,7 +268,6 @@ function CalculatorPageLayoutContent({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
 
           {showResultsCapture && <div id="results" className="sr-only" aria-hidden="true" />}
-
           {showResultsCapture && (
             <ResultsShareBar
               calculatorSlug={calculatorSlug}
@@ -289,9 +288,11 @@ function CalculatorPageLayoutContent({
             />
           )}
 
-          <AdBlock slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_RESULT} format="rectangle" />
+          <div className="perf-defer-section">
+            <AdBlock slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_RESULT} format="rectangle" />
+          </div>
 
-          <div className="mb-6">
+          <div className="perf-defer-section mb-6">
             <SocialShare
               url={localizePath(`/${calculatorSlug}`)}
               title={socialTitle}
@@ -300,11 +301,13 @@ function CalculatorPageLayoutContent({
             />
           </div>
 
-          <Accordion title={t('calculator.embed.title')} defaultOpen={false}>
-            <EmbedCalculator calculatorSlug={calculatorSlug} title={title} />
-          </Accordion>
+          <div className="perf-defer-section">
+            <Accordion title={t('calculator.embed.title')} defaultOpen={false}>
+              <EmbedCalculator calculatorSlug={calculatorSlug} title={title} />
+            </Accordion>
+          </div>
 
-          <div>
+          <div className="perf-defer-section">
             <RelatedCalculators
               currentSlug={calculatorSlug}
               title={t('calculator.relatedCalculators.title')}
@@ -312,7 +315,7 @@ function CalculatorPageLayoutContent({
           </div>
 
           {availableChains.length > 0 && (
-            <div className="my-8">
+            <div className="perf-defer-section my-8">
               <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide opacity-60">
                 Guided Workflows
               </h3>
@@ -334,7 +337,7 @@ function CalculatorPageLayoutContent({
             </div>
           )}
 
-          <div>
+          <div className="perf-defer-section">
             <RelatedGuides title={t('calculator.relatedGuides.title')} />
           </div>
 
@@ -346,19 +349,22 @@ function CalculatorPageLayoutContent({
                 topic: title.replace(' Calculator', ''),
               })
             }
-            className="mb-8"
+            className="perf-defer-section mb-8"
           />
 
           {understandingSection ? (
             <SupplementalDisclosure
               summary={`Learn more about ${title.replace(' Calculator', '')}`}
-              className="my-8"
+              className="perf-defer-section my-8"
             >
               {understandingSection}
             </SupplementalDisclosure>
           ) : null}
 
-          <SupplementalDisclosure summary={t('calculator.relatedArticles.title')} className="my-8">
+          <SupplementalDisclosure
+            summary={t('calculator.relatedArticles.title')}
+            className="perf-defer-section my-8"
+          >
             <RelatedArticles
               currentSlug=""
               articles={relatedArticles}
@@ -367,7 +373,10 @@ function CalculatorPageLayoutContent({
             />
           </SupplementalDisclosure>
 
-          <SupplementalDisclosure summary={newsletterTitle ?? 'Newsletter'} className="my-8">
+          <SupplementalDisclosure
+            summary={newsletterTitle ?? 'Newsletter'}
+            className="perf-defer-section my-8"
+          >
             <NewsletterSignup
               title={newsletterTitle}
               description={newsletterDescription}
