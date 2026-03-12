@@ -1,12 +1,22 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import AuthProviderBoundary from '@/components/providers/AuthProviderBoundary';
 import { useLocale } from '@/context/LocaleContext';
 import { useAuth } from '@/context/AuthContext';
-import UserMenu from '@/components/auth/UserMenu';
 
-export default function AuthControls(): React.JSX.Element {
+const UserMenu = dynamic(() => import('@/components/auth/UserMenu'), {
+  ssr: false,
+  loading: () => (
+    <div className="elevated-pill flex h-9 items-center rounded-full px-4 py-2 text-sm font-semibold text-accent">
+      Account
+    </div>
+  ),
+});
+
+function AuthControlsContent(): React.JSX.Element {
   const { t } = useLocale();
   const { supabaseEnabled } = useAuth();
 
@@ -28,5 +38,13 @@ export default function AuthControls(): React.JSX.Element {
         {t('auth.login')}
       </Link>
     </div>
+  );
+}
+
+export default function AuthControls(): React.JSX.Element {
+  return (
+    <AuthProviderBoundary>
+      <AuthControlsContent />
+    </AuthProviderBoundary>
   );
 }

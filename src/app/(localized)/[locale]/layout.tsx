@@ -3,12 +3,10 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GlobalStructuredData from '@/components/GlobalStructuredData';
-import Preconnect from '@/components/Preconnect';
 import React, { ReactNode } from 'react';
 import SkipToMainLink from '@/components/SkipToMainLink';
 import { getPublicSiteUrl } from '@/lib/site';
 import VercelAnalyticsGate from '@/components/VercelAnalyticsGate';
-import { Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import LayoutProviders from '@/components/LayoutProviders';
 import {
   defaultLocale,
@@ -21,16 +19,6 @@ import { isLocaleIndexable } from '@/i18n/indexing';
 import { notFound, redirect } from 'next/navigation';
 
 const siteUrl = getPublicSiteUrl();
-const bodyFont = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-body',
-});
-const headingFont = Sora({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-heading',
-});
 
 interface LocalizedLayoutProps {
   children: ReactNode;
@@ -188,9 +176,6 @@ export default async function RootLayout({ children, params }: LocalizedLayoutPr
     <html lang={localeToHtmlLang[locale]} suppressHydrationWarning>
       <head>
         {/* Core Web Vitals optimizations */}
-        <link rel="preconnect" href={siteUrl} />
-        <link rel="dns-prefetch" href={siteUrl} />
-
         {/* PWA and app settings */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#4f46e5" />
@@ -201,17 +186,8 @@ export default async function RootLayout({ children, params }: LocalizedLayoutPr
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="HealthCheck" />
-
-        {/* Preconnect to external domains for better performance */}
-        <Preconnect
-          domains={[
-            'https://www.googletagmanager.com',
-            'https://www.google.com',
-            'https://stats.g.doubleclick.net',
-          ]}
-        />
       </head>
-      <body className={`${bodyFont.variable} ${headingFont.variable}`}>
+      <body>
         <LayoutProviders initialLocale={locale}>
           <SkipToMainLink />
           <div className="min-h-screen flex flex-col">

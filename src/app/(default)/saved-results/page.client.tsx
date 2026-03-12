@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import AuthSavedResultsProviders from '@/components/providers/AuthSavedResultsProviders';
 import { SavedResultsList } from '@/components/SaveResult';
 import { useAuth } from '@/context/AuthContext';
 import { useSavedResults } from '@/context/SavedResultsContext';
@@ -11,7 +12,7 @@ import HealthDashboard from '@/components/dashboard/HealthDashboard';
 
 type Tab = 'dashboard' | 'all-results';
 
-export default function SavedResultsPage() {
+function SavedResultsPageContent(): React.JSX.Element {
   const { isAuthenticated, supabaseEnabled } = useAuth();
   const { savedResults, syncPromptPending, confirmSync, dismissSync } = useSavedResults();
   const { localizePath, t } = useLocale();
@@ -127,5 +128,13 @@ export default function SavedResultsPage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function SavedResultsPage(): React.JSX.Element {
+  return (
+    <AuthSavedResultsProviders>
+      <SavedResultsPageContent />
+    </AuthSavedResultsProviders>
   );
 }

@@ -1,26 +1,41 @@
 'use client';
 
-import { useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import {
   decodeSharedResultFromSearchParams,
   type ShareCalculatorSlug,
   type SharedResultInputMap,
 } from '@/utils/resultSharing';
 
+function readSharedResultPrefill<C extends ShareCalculatorSlug>(
+  calculator: C
+): SharedResultInputMap[C] | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  const payload = decodeSharedResultFromSearchParams(
+    new URLSearchParams(window.location.search),
+    calculator
+  );
+
+  if (!payload) {
+    return null;
+  }
+
+  return payload.i as SharedResultInputMap[C];
+}
+
 export function useSharedResultPrefill<C extends ShareCalculatorSlug>(
   calculator: C
 ): SharedResultInputMap[C] | null {
-  const searchParams = useSearchParams();
+  const [sharedPrefill, setSharedPrefill] = useState<SharedResultInputMap[C] | null>(null);
 
-  return useMemo(() => {
-    const payload = decodeSharedResultFromSearchParams(searchParams, calculator);
-    if (!payload) {
-      return null;
-    }
+  useEffect(() => {
+    setSharedPrefill(readSharedResultPrefill(calculator));
+  }, [calculator]);
 
-    return payload.i as SharedResultInputMap[C];
-  }, [calculator, searchParams]);
+  return sharedPrefill;
 }
 
 export function requestCalculatorFormSubmit(delayMs = 120): void {
