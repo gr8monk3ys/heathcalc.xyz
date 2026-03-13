@@ -308,8 +308,10 @@ function createBodyFatShareResultContext({
   };
 }
 export default function BodyFatCalculator({
+  serverHeader,
   initialSharedPrefill = null,
 }: {
+  serverHeader?: React.ReactNode;
   initialSharedPrefill?: SharedResultInputMap['body-fat'] | null;
 }) {
   const [state, dispatchState] = useReducer(
@@ -586,6 +588,7 @@ export default function BodyFatCalculator({
   const methodLabel = BODY_FAT_METHODS.find(m => m.value === method)?.label || method;
 
   return renderBodyFatCalculatorView({
+    serverHeader,
     age: typeof age === 'number' ? age : undefined,
     calculationError,
     chainResultData,
@@ -602,6 +605,7 @@ export default function BodyFatCalculator({
 }
 
 type BodyFatCalculatorViewProps = {
+  serverHeader?: React.ReactNode;
   age?: number;
   calculationError: string | null;
   chainResultData: Record<string, string | number>;
@@ -617,6 +621,7 @@ type BodyFatCalculatorViewProps = {
 };
 
 function renderBodyFatCalculatorView({
+  serverHeader,
   age,
   calculationError,
   chainResultData,
@@ -632,6 +637,7 @@ function renderBodyFatCalculatorView({
 }: BodyFatCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Body Fat Calculator"
       description="Calculate your body fat percentage using various methods including Navy, skinfold, and BMI"
       calculatorSlug="body-fat"

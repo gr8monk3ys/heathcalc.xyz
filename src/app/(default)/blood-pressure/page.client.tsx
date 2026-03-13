@@ -50,7 +50,7 @@ const relatedArticles = [
   },
 ];
 
-export default function BloodPressureCalculator() {
+export default function BloodPressureCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [systolic, setSystolic] = useState<number | ''>('');
   const [diastolic, setDiastolic] = useState<number | ''>('');
 
@@ -98,6 +98,7 @@ export default function BloodPressureCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Blood Pressure Calculator"
       description="Check your blood pressure category using systolic and diastolic readings."
       calculatorSlug="blood-pressure"

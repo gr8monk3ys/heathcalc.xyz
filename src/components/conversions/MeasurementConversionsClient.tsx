@@ -57,8 +57,10 @@ function useMeasurementConversionsClientState(copy: ConversionsPageCopy) {
 }
 export default function MeasurementConversionsClient({
   copy,
+  serverHeader,
 }: {
   copy: ConversionsPageCopy;
+  serverHeader?: React.ReactNode;
 }): React.JSX.Element {
   const { localizePath } = useLocale();
 
@@ -203,6 +205,7 @@ export default function MeasurementConversionsClient({
   return (
     <MeasurementConversionsView
       copy={copy}
+      serverHeader={serverHeader}
       category={category}
       categoryConfig={categoryConfig}
       converterTitle={converterTitle}
@@ -225,6 +228,7 @@ export default function MeasurementConversionsClient({
 
 interface MeasurementConversionsViewProps {
   copy: ConversionsPageCopy;
+  serverHeader?: React.ReactNode;
   category: ConversionCategory;
   categoryConfig: ConversionsPageCopy['categories'][ConversionCategory];
   converterTitle: string;
@@ -245,6 +249,7 @@ interface MeasurementConversionsViewProps {
 
 function MeasurementConversionsView({
   copy,
+  serverHeader,
   category,
   categoryConfig,
   converterTitle,
@@ -264,6 +269,7 @@ function MeasurementConversionsView({
 }: MeasurementConversionsViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title={copy.title}
       description={copy.description}
       calculatorSlug="conversions"

@@ -43,7 +43,7 @@ const relatedArticles = [
   },
 ];
 
-export default function StepsToCaloriesCalculator() {
+export default function StepsToCaloriesCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const weight = useWeight();
   const [steps, setSteps] = useState<number | ''>('');
   const [strideLength, setStrideLength] = useState<number | ''>(30);
@@ -127,6 +127,7 @@ export default function StepsToCaloriesCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Steps to Calories Calculator"
       description="Estimate calories burned from steps using stride length and duration."
       calculatorSlug="steps-to-calories"

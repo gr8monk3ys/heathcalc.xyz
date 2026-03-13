@@ -41,7 +41,7 @@ const relatedArticles = [
   },
 ];
 
-export default function SleepCalculator() {
+export default function SleepCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [mode, setMode] = useState<SleepMode>('wake');
   const [time, setTime] = useState('');
 
@@ -75,6 +75,7 @@ export default function SleepCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Sleep Calculator"
       description="Find ideal bedtimes or wake times based on 90-minute sleep cycles."
       calculatorSlug="sleep"

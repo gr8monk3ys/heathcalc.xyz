@@ -109,7 +109,7 @@ function useBodyRecompositionCalculatorState() {
     setGoal,
   };
 }
-export default function BodyRecompositionCalculator() {
+export default function BodyRecompositionCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const [age, setAge] = useState<number | ''>('');
   const [gender, setGender] = useState<Gender>('male');
@@ -285,6 +285,7 @@ export default function BodyRecompositionCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Body Recomposition Calculator"
       description="Calculate your calorie cycling and macro targets to lose fat and build muscle simultaneously. Get personalized nutrition recommendations based on your training experience and goals."
       calculatorSlug="body-recomposition"

@@ -53,7 +53,7 @@ function useArmyBodyFatCalculatorState() {
 
   return { gender, setGender, waist, setWaist, neck, setNeck, hip, setHip, unit, setUnit };
 }
-export default function ArmyBodyFatCalculator() {
+export default function ArmyBodyFatCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const height = useHeight();
   const { gender, setGender, waist, setWaist, neck, setNeck, hip, setHip, unit, setUnit } =
     useArmyBodyFatCalculatorState();
@@ -154,6 +154,7 @@ export default function ArmyBodyFatCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Army Body Fat Calculator"
       description="Estimate body fat percentage using U.S. Army circumference method."
       calculatorSlug="army-body-fat"

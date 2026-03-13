@@ -40,7 +40,7 @@ const relatedArticles = [
   },
 ];
 
-export default function CaloriesBurnedCyclingCalculator() {
+export default function CaloriesBurnedCyclingCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [speed, setSpeed] = useState<number | ''>(12);
@@ -118,6 +118,7 @@ export default function CaloriesBurnedCyclingCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Calories Burned Cycling Calculator"
       description="Estimate calories burned while cycling based on speed and time."
       calculatorSlug="calories-burned-cycling"

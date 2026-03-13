@@ -41,7 +41,7 @@ const relatedArticles = [
   },
 ];
 
-export default function TargetHeartRateCalculator() {
+export default function TargetHeartRateCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [age, setAge] = useState<number | ''>('');
   const [restingHeartRate, setRestingHeartRate] = useState<number | ''>('');
   const [intensityMin, setIntensityMin] = useState<number | ''>(50);
@@ -112,6 +112,7 @@ export default function TargetHeartRateCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Target Heart Rate Calculator"
       description="Calculate target heart rate zones for cardio training."
       calculatorSlug="target-heart-rate"

@@ -91,6 +91,7 @@ function useIntermittentFastingCalculatorState() {
 }
 
 type IntermittentFastingCalculatorViewProps = {
+  serverHeader?: React.ReactNode;
   calculationError: string | null;
   formFields: React.ComponentProps<typeof CalculatorForm>['fields'];
   handleSubmit: React.FormEventHandler<Element>;
@@ -100,7 +101,7 @@ type IntermittentFastingCalculatorViewProps = {
   weight: ReturnType<typeof useWeight>;
 };
 
-export default function IntermittentFastingCalculator() {
+export default function IntermittentFastingCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
   const height = useHeight();
@@ -265,6 +266,7 @@ export default function IntermittentFastingCalculator() {
   ];
 
   return renderIntermittentFastingCalculatorView({
+    serverHeader,
     calculationError,
     formFields,
     handleSubmit,
@@ -275,6 +277,7 @@ export default function IntermittentFastingCalculator() {
   });
 }
 function renderIntermittentFastingCalculatorView({
+  serverHeader,
   calculationError,
   formFields,
   handleSubmit,
@@ -285,6 +288,7 @@ function renderIntermittentFastingCalculatorView({
 }: IntermittentFastingCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Intermittent Fasting Calculator"
       description="Calculate your personalized intermittent fasting schedule with optimal eating windows, meal timing, and nutrition targets. Get a complete IF plan based on your goals, lifestyle, and preferred fasting protocol."
       calculatorSlug="intermittent-fasting"

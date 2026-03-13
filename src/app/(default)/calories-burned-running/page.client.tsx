@@ -40,7 +40,7 @@ const relatedArticles = [
   },
 ];
 
-export default function CaloriesBurnedRunningCalculator() {
+export default function CaloriesBurnedRunningCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [speed, setSpeed] = useState<number | ''>(6);
@@ -118,6 +118,7 @@ export default function CaloriesBurnedRunningCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Calories Burned Running Calculator"
       description="Estimate calories burned while running based on speed and time."
       calculatorSlug="calories-burned-running"

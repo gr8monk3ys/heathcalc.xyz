@@ -48,7 +48,7 @@ const relatedArticles = [
   },
 ];
 
-export default function FatIntakeCalculator() {
+export default function FatIntakeCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [calories, setCalories] = useState<number | ''>('');
   const [fatPercent, setFatPercent] = useState<number | ''>(30);
 
@@ -90,6 +90,7 @@ export default function FatIntakeCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Fat Intake Calculator"
       description="Calculate daily fat intake from calories or targets."
       calculatorSlug="fat-intake"

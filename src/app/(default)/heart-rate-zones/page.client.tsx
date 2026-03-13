@@ -46,7 +46,7 @@ const relatedArticles = [
   },
 ];
 
-export default function HeartRateZonesCalculator() {
+export default function HeartRateZonesCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [age, setAge] = useState<number | ''>('');
   const [restingHeartRate, setRestingHeartRate] = useState<number | ''>('');
   const [method, setMethod] = useState<HeartRateZoneMethod>('percent-max');
@@ -119,6 +119,7 @@ export default function HeartRateZonesCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Heart Rate Zones Calculator"
       description="Calculate personalized training zones using percent max or Karvonen method."
       calculatorSlug="heart-rate-zones"

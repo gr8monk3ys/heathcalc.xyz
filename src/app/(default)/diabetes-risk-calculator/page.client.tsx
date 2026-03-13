@@ -137,6 +137,7 @@ type DiabetesRiskCalculatorViewProps = Pick<
   | 'setWaistCircumference'
   | 'waistCircumference'
 > & {
+  serverHeader?: React.ReactNode;
   a1cErrors: Record<string, string>;
   a1cResult: A1CResult | null;
   calculationError: string | null;
@@ -148,7 +149,7 @@ type DiabetesRiskCalculatorViewProps = Pick<
   riskResult: DiabetesRiskResult | null;
 };
 
-export default function DiabetesRiskCalculator() {
+export default function DiabetesRiskCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // Tab state
   const {
     activeMode,
@@ -297,6 +298,7 @@ export default function DiabetesRiskCalculator() {
   const hasResult = activeMode === 'risk' ? !!riskResult : !!a1cResult;
 
   return renderDiabetesRiskCalculatorView({
+    serverHeader,
     a1cErrors,
     a1cPercentage,
     a1cResult,
@@ -333,6 +335,7 @@ export default function DiabetesRiskCalculator() {
   });
 }
 function renderDiabetesRiskCalculatorView({
+  serverHeader,
   a1cErrors,
   a1cPercentage,
   a1cResult,
@@ -369,6 +372,7 @@ function renderDiabetesRiskCalculatorView({
 }: DiabetesRiskCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Diabetes Risk Calculator"
       description="Assess your Type 2 diabetes risk using an ADA-based scoring system, or convert your A1C percentage to estimated average glucose."
       calculatorSlug="diabetes-risk-calculator"

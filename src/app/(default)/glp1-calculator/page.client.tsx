@@ -104,6 +104,7 @@ type GLP1CalculatorViewProps = Pick<
   | 'setGoal'
   | 'setMedication'
 > & {
+  serverHeader?: React.ReactNode;
   calculationError: string | null;
   errors: Record<string, string>;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -114,7 +115,7 @@ type GLP1CalculatorViewProps = Pick<
   weight: ReturnType<typeof useWeight>;
 };
 
-export default function GLP1Calculator() {
+export default function GLP1Calculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const weight = useWeight();
   const height = useHeight();
@@ -211,6 +212,7 @@ export default function GLP1Calculator() {
   };
 
   return renderGLP1CalculatorView({
+    serverHeader,
     activityLevel,
     age,
     calculationError,
@@ -232,6 +234,7 @@ export default function GLP1Calculator() {
   });
 }
 function renderGLP1CalculatorView({
+  serverHeader,
   activityLevel,
   age,
   calculationError,
@@ -253,6 +256,7 @@ function renderGLP1CalculatorView({
 }: GLP1CalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="GLP-1 Weight Loss Calculator"
       description="Calculate personalized calorie, protein, and hydration targets while on GLP-1 medications like Ozempic, Wegovy, Mounjaro, or Zepbound. Get evidence-based nutrition recommendations to maximize fat loss and preserve muscle."
       calculatorSlug="glp1-calculator"

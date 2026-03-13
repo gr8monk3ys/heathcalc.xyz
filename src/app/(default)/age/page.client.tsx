@@ -40,7 +40,7 @@ const relatedArticles = [
   },
 ];
 
-export default function AgeCalculator() {
+export default function AgeCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [birthDate, setBirthDate] = useState<string>('');
   const [referenceDate, setReferenceDate] = useState<string>('');
 
@@ -78,6 +78,7 @@ export default function AgeCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Age Calculator"
       description="Calculate your exact age in years, months, and days."
       calculatorSlug="age"

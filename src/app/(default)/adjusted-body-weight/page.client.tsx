@@ -47,7 +47,7 @@ const relatedArticles = [
   },
 ];
 
-export default function AdjustedBodyWeightCalculator() {
+export default function AdjustedBodyWeightCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const height = useHeight();
   const weight = useWeight();
   const [gender, setGender] = useState<Gender>('male');
@@ -105,6 +105,7 @@ export default function AdjustedBodyWeightCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Adjusted Body Weight Calculator"
       description="Estimate adjusted body weight using height and current weight."
       calculatorSlug="adjusted-body-weight"

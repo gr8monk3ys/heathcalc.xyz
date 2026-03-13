@@ -62,7 +62,7 @@ function useRunningPaceCalculatorState() {
     setSeconds,
   };
 }
-export default function RunningPaceCalculator() {
+export default function RunningPaceCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const {
     distance,
     setDistance,
@@ -126,6 +126,7 @@ export default function RunningPaceCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Running Pace Calculator"
       description="Calculate your pace per mile or kilometer along with average speed."
       calculatorSlug="running-pace"

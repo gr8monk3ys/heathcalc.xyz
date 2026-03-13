@@ -58,7 +58,7 @@ const relatedArticles = [
   },
 ];
 
-export default function CalorieCalculator() {
+export default function CalorieCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [age, setAge] = useState<number | ''>('');
   const [gender, setGender] = useState<Gender>('male');
   const height = useHeight();
@@ -132,6 +132,7 @@ export default function CalorieCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Calorie Calculator"
       description="Calculate your daily calorie needs for maintenance, weight loss, or muscle gain."
       calculatorSlug="calorie"

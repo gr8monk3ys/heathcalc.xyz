@@ -40,7 +40,7 @@ const relatedArticles = [
   },
 ];
 
-export default function CaloriesBurnedWalkingCalculator() {
+export default function CaloriesBurnedWalkingCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [speed, setSpeed] = useState<number | ''>(3.5);
@@ -118,6 +118,7 @@ export default function CaloriesBurnedWalkingCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Calories Burned Walking Calculator"
       description="Estimate calories burned while walking based on speed and time."
       calculatorSlug="calories-burned-walking"

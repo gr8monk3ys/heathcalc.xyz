@@ -53,7 +53,7 @@ const relatedArticles = [
   },
 ];
 
-export default function IdealWeightCalculator() {
+export default function IdealWeightCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [gender, setGender] = useState<Gender>('male');
   const height = useHeight();
 
@@ -111,6 +111,7 @@ export default function IdealWeightCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Ideal Weight Calculator"
       description="Estimate your ideal weight range using common formulas."
       calculatorSlug="ideal-weight"

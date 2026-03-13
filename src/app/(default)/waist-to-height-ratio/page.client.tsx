@@ -54,7 +54,7 @@ const relatedArticles = [
   },
 ];
 
-export default function WaistToHeightRatioCalculator() {
+export default function WaistToHeightRatioCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const height = useHeight();
   const [waist, setWaist] = useState<number | ''>('');
   const [waistUnit, setWaistUnit] = useState<WaistUnit>('cm');
@@ -127,6 +127,7 @@ export default function WaistToHeightRatioCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Waist-to-Height Ratio Calculator"
       description="Calculate your waist-to-height ratio to assess body shape and health risk."
       calculatorSlug="waist-to-height-ratio"

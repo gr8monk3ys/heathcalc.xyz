@@ -89,7 +89,7 @@ const blogArticles = [
   },
 ];
 
-export default function ABSICalculator() {
+export default function ABSICalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
@@ -221,6 +221,7 @@ export default function ABSICalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="A Body Shape Index (ABSI) Calculator"
       description="Calculate your ABSI to assess health risks related to body shape and fat distribution"
       calculatorSlug="absi"

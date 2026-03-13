@@ -141,6 +141,7 @@ type SubstanceImpactCalculatorViewProps = Pick<
   | 'yearsOfDrinking'
   | 'yearsOfSmoking'
 > & {
+  serverHeader?: React.ReactNode;
   calculationError: string | null;
   errors: Record<string, string>;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -151,7 +152,7 @@ type SubstanceImpactCalculatorViewProps = Pick<
   showSmoking: boolean;
 };
 
-export default function SubstanceImpactCalculator() {
+export default function SubstanceImpactCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // Mode state
   const {
     mode,
@@ -290,6 +291,7 @@ export default function SubstanceImpactCalculator() {
   };
 
   return renderSubstanceImpactCalculatorView({
+    serverHeader,
     age,
     alcoholType,
     avgDrinkCost,
@@ -323,6 +325,7 @@ export default function SubstanceImpactCalculator() {
   });
 }
 function renderSubstanceImpactCalculatorView({
+  serverHeader,
   age,
   alcoholType,
   avgDrinkCost,
@@ -356,6 +359,7 @@ function renderSubstanceImpactCalculatorView({
 }: SubstanceImpactCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Alcohol & Smoking Impact Calculator"
       description="Calculate the health, financial, and lifespan impact of alcohol and tobacco use. See how much quitting could save you in years and dollars."
       calculatorSlug="substance-impact-calculator"

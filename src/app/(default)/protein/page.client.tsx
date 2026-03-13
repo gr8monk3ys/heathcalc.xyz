@@ -94,7 +94,7 @@ const blogArticles = [
   },
 ];
 
-export default function ProteinCalculator() {
+export default function ProteinCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const [age, setAge] = useState<number | ''>('');
   const [gender, setGender] = useState<Gender>('male');
@@ -243,6 +243,7 @@ export default function ProteinCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Protein Intake Calculator"
       description="Calculate your optimal daily protein intake based on your weight, activity level, and fitness goals. Get personalized recommendations backed by scientific research."
       calculatorSlug="protein"

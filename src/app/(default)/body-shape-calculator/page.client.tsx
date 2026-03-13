@@ -90,7 +90,7 @@ function useBodyShapeCalculatorState() {
     setWristCircumference,
   };
 }
-export default function BodyShapeCalculator() {
+export default function BodyShapeCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [gender, setGender] = useState<Gender>('female');
   const height = useHeight();
   const weight = useWeight();
@@ -269,6 +269,7 @@ export default function BodyShapeCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Body Shape Calculator"
       description="Classify your body shape and somatotype based on bust, waist, and hip measurements"
       calculatorSlug="body-shape-calculator"

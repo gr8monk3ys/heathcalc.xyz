@@ -101,6 +101,8 @@ interface CalculatorPageLayoutProps {
   chainResultData?: Record<string, string | number>;
   /** Optional result payload used to generate shareable prefilled URLs */
   shareResultContext?: ShareResultContext;
+  /** Server-rendered header (h1 + description). When provided, replaces the client-rendered title/description in normal mode. */
+  serverHeader?: React.ReactNode;
   /** The main content (calculator form and result display) */
   children: React.ReactNode;
 }
@@ -161,6 +163,7 @@ function CalculatorPageLayoutContent({
   newsletterDescription,
   chainResultData,
   shareResultContext,
+  serverHeader,
   children,
 }: CalculatorPageLayoutProps): React.ReactElement {
   const socialTitle = shareTitle || title;
@@ -262,8 +265,12 @@ function CalculatorPageLayoutContent({
           )}
           <Breadcrumb />
 
-          <h1 className="text-3xl font-bold mb-2">{title}</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">{description}</p>
+          {serverHeader ?? (
+            <>
+              <h1 className="text-3xl font-bold mb-2">{title}</h1>
+              <p className="text-gray-600 mb-6 dark:text-gray-400">{description}</p>
+            </>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">{children}</div>
 

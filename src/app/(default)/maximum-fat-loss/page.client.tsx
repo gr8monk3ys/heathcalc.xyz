@@ -80,7 +80,7 @@ const blogArticles = [
   },
 ];
 
-export default function MaximumFatLossCalculator() {
+export default function MaximumFatLossCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
@@ -242,6 +242,7 @@ export default function MaximumFatLossCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Maximum Fat Loss Calculator"
       description="Find the optimal calorie intake for maximum fat loss while preserving muscle mass"
       calculatorSlug="maximum-fat-loss"
