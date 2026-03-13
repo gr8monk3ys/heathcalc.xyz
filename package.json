@@ -87,7 +87,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@playwright/test": "^1.50.0",
-    "@vitejs/plugin-react": "^5.1.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "^4.0.8",
     "autoprefixer": "^10.4.14",
@@ -101,7 +101,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.1.18",
-    "vite": "^7.2.2",
+    "vite": "^8.0.0",
     "typescript": "^5.8.2",
     "@types/node": "^25.1.0",
     "vitest": "^4.0.8"
