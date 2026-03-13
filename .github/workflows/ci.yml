@@ -2,6 +2,10 @@ permissions: read-all
 
 name: CI/CD Pipeline
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
