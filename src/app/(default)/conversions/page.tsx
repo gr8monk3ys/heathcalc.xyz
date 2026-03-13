@@ -12,7 +12,9 @@ export default function MeasurementConversionsPage() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Measurement Conversions</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Convert between different units of measurement for weight, height, volume, and more</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Convert between different units of measurement for weight, height, volume, and more
+          </p>
         </>
       }
     />

@@ -53,7 +53,11 @@ function useArmyBodyFatCalculatorState() {
 
   return { gender, setGender, waist, setWaist, neck, setNeck, hip, setHip, unit, setUnit };
 }
-export default function ArmyBodyFatCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function ArmyBodyFatCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const { gender, setGender, waist, setWaist, neck, setNeck, hip, setHip, unit, setUnit } =
     useArmyBodyFatCalculatorState();

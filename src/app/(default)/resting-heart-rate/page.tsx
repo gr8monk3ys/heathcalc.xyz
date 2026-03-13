@@ -9,7 +9,9 @@ export default function Page() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Resting Heart Rate Calculator</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Evaluate your resting heart rate and fitness category.</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Evaluate your resting heart rate and fitness category.
+          </p>
         </>
       }
     />

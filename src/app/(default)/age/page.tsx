@@ -9,7 +9,9 @@ export default function Page() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Age Calculator</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Calculate your exact age in years, months, and days.</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Calculate your exact age in years, months, and days.
+          </p>
         </>
       }
     />

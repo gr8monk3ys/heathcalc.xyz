@@ -149,7 +149,11 @@ type DiabetesRiskCalculatorViewProps = Pick<
   riskResult: DiabetesRiskResult | null;
 };
 
-export default function DiabetesRiskCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function DiabetesRiskCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // Tab state
   const {
     activeMode,

@@ -30,7 +30,7 @@ export default async function BlogPostLayout({
   params: Promise<{ slug: string }>;
 }): Promise<React.JSX.Element> {
   const { slug } = await params;
-  const post = BLOG_REGISTRY.find((p) => p.slug === slug);
+  const post = BLOG_REGISTRY.find(p => p.slug === slug);
 
   const title = post?.seoTitle ?? post?.title ?? 'Blog Post | HealthCheck';
   const description = post?.description ?? 'Health and fitness articles from HealthCheck.';

@@ -53,7 +53,11 @@ const relatedArticles = [
   },
 ];
 
-export default function IdealWeightCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function IdealWeightCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [gender, setGender] = useState<Gender>('male');
   const height = useHeight();
 

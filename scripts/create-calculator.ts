@@ -163,13 +163,7 @@ function layoutTemplate({
   return `import type { Metadata } from 'next';\nimport { ReactNode } from 'react';\n\nexport const metadata: Metadata = {\n  title: '${title} | HealthCheck',\n  description: '${description}',\n  alternates: {\n    canonical: 'https://www.healthcalc.xyz/${slug}',\n  },\n  openGraph: {\n    title: '${title} | HealthCheck',\n    description: '${description}',\n    type: 'website',\n    url: 'https://www.healthcalc.xyz/${slug}',\n    images: [\n      {\n        url: '/images/calculators/${slug}-calculator.jpg',\n        width: 1200,\n        height: 630,\n        alt: '${title}',\n      },\n    ],\n  },\n  twitter: {\n    card: 'summary_large_image',\n    title: '${title} | HealthCheck',\n    description: '${description}',\n    images: ['/images/calculators/${slug}-calculator.jpg'],\n  },\n};\n\nexport default function ${toPascal(slug)}Layout({ children }: { children: ReactNode }) {\n  return <>{children}</>;\n}\n`;
 }
 
-function pageServerTemplate({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+function pageServerTemplate({ title, description }: { title: string; description: string }) {
   return `import PageClient from './page.client';\n\nimport { metadata as routeMetadata } from './layout';\nexport const metadata = routeMetadata;\n\nexport default function Page() {\n  return (\n    <PageClient\n      serverHeader={\n        <>\n          <h1 className="text-3xl font-bold mb-2">${title}</h1>\n          <p className="text-gray-600 mb-6 dark:text-gray-400">${description}</p>\n        </>\n      }\n    />\n  );\n}\n`;
 }
 

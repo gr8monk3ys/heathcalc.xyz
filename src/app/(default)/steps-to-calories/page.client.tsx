@@ -43,7 +43,11 @@ const relatedArticles = [
   },
 ];
 
-export default function StepsToCaloriesCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function StepsToCaloriesCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [steps, setSteps] = useState<number | ''>('');
   const [strideLength, setStrideLength] = useState<number | ''>(30);

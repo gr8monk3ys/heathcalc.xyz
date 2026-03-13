@@ -164,7 +164,11 @@ type LifeExpectancyCalculatorViewProps = Pick<
   showResult: boolean;
 };
 
-export default function LifeExpectancyCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function LifeExpectancyCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // State for form inputs
   const {
     age,

@@ -43,7 +43,11 @@ const relatedArticles = [
   },
 ];
 
-export default function StepsToMilesCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function StepsToMilesCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [steps, setSteps] = useState<number | ''>('');
   const [strideLength, setStrideLength] = useState<number | ''>(30);
   const [strideUnit, setStrideUnit] = useState<StrideUnit>('in');

@@ -40,7 +40,11 @@ const relatedArticles = [
   },
 ];
 
-export default function RestingHeartRateCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function RestingHeartRateCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [restingHeartRate, setRestingHeartRate] = useState<number | ''>('');
 
   const { result, showResult, calculationError, errors, handleSubmit, handleReset } =

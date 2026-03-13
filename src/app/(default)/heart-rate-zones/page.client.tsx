@@ -46,7 +46,11 @@ const relatedArticles = [
   },
 ];
 
-export default function HeartRateZonesCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function HeartRateZonesCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [age, setAge] = useState<number | ''>('');
   const [restingHeartRate, setRestingHeartRate] = useState<number | ''>('');
   const [method, setMethod] = useState<HeartRateZoneMethod>('percent-max');

@@ -45,7 +45,11 @@ const relatedArticles = [
   },
 ];
 
-export default function PregnancyDueDateCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function PregnancyDueDateCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [method, setMethod] = useState<PregnancyDueDateMethod>('lmp');
   const [date, setDate] = useState('');
 

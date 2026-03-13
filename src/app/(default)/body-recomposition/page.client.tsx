@@ -109,7 +109,11 @@ function useBodyRecompositionCalculatorState() {
     setGoal,
   };
 }
-export default function BodyRecompositionCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function BodyRecompositionCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // State for form inputs
   const [age, setAge] = useState<number | ''>('');
   const [gender, setGender] = useState<Gender>('male');

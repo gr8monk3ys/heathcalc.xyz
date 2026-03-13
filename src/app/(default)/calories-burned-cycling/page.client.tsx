@@ -40,7 +40,11 @@ const relatedArticles = [
   },
 ];
 
-export default function CaloriesBurnedCyclingCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function CaloriesBurnedCyclingCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [speed, setSpeed] = useState<number | ''>(12);

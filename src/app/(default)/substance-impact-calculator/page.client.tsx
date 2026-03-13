@@ -152,7 +152,11 @@ type SubstanceImpactCalculatorViewProps = Pick<
   showSmoking: boolean;
 };
 
-export default function SubstanceImpactCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function SubstanceImpactCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // Mode state
   const {
     mode,

@@ -9,7 +9,10 @@ export default function Page() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Calorie Deficit Calculator</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Calculate how long it will take to reach your goal weight with different calorie deficit levels</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Calculate how long it will take to reach your goal weight with different calorie deficit
+            levels
+          </p>
         </>
       }
     />

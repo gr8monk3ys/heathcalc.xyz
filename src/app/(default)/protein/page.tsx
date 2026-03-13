@@ -9,7 +9,10 @@ export default function Page() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Protein Intake Calculator</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Calculate your optimal daily protein intake based on your weight, activity level, and fitness goals. Get personalized recommendations backed by scientific research.</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Calculate your optimal daily protein intake based on your weight, activity level, and
+            fitness goals. Get personalized recommendations backed by scientific research.
+          </p>
         </>
       }
     />

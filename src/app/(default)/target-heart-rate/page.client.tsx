@@ -41,7 +41,11 @@ const relatedArticles = [
   },
 ];
 
-export default function TargetHeartRateCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function TargetHeartRateCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [age, setAge] = useState<number | ''>('');
   const [restingHeartRate, setRestingHeartRate] = useState<number | ''>('');
   const [intensityMin, setIntensityMin] = useState<number | ''>(50);

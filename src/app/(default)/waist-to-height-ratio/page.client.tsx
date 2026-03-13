@@ -54,7 +54,11 @@ const relatedArticles = [
   },
 ];
 
-export default function WaistToHeightRatioCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function WaistToHeightRatioCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const [waist, setWaist] = useState<number | ''>('');
   const [waistUnit, setWaistUnit] = useState<WaistUnit>('cm');

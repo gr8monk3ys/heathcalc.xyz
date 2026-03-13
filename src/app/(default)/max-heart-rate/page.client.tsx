@@ -42,7 +42,11 @@ const relatedArticles = [
   },
 ];
 
-export default function MaxHeartRateCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function MaxHeartRateCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [age, setAge] = useState<number | ''>('');
 
   const chainPrefill = useChainPrefill('max-heart-rate');

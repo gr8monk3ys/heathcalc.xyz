@@ -55,7 +55,11 @@ const relatedArticles = [
   },
 ];
 
-export default function PregnancyWeightGainCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function PregnancyWeightGainCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const weight = useWeight();
 

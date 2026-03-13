@@ -9,7 +9,10 @@ export default function Page() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Body Fat Burn Calculator</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals.</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Calculate calories burned during physical activities and estimate how long it will take
+            to reach your weight loss goals.
+          </p>
         </>
       }
     />

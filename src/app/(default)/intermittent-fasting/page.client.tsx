@@ -101,7 +101,11 @@ type IntermittentFastingCalculatorViewProps = {
   weight: ReturnType<typeof useWeight>;
 };
 
-export default function IntermittentFastingCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function IntermittentFastingCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
   const height = useHeight();

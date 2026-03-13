@@ -45,7 +45,11 @@ const relatedArticles = [
   },
 ];
 
-export default function WaterIntakeCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function WaterIntakeCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [activityLevel, setActivityLevel] = useState<WaterIntakeActivity>('low');
 

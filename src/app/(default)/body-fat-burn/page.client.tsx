@@ -111,7 +111,11 @@ function useBodyFatBurnCalculatorState() {
     setBurnGoal,
   };
 }
-export default function BodyFatBurnCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function BodyFatBurnCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');

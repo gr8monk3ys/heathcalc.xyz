@@ -9,7 +9,9 @@ export default function Page() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Body Shape Calculator</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Classify your body shape and somatotype based on bust, waist, and hip measurements</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Classify your body shape and somatotype based on bust, waist, and hip measurements
+          </p>
         </>
       }
     />

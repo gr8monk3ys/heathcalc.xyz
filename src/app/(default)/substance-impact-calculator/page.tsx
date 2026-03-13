@@ -9,7 +9,10 @@ export default function Page() {
       serverHeader={
         <>
           <h1 className="text-3xl font-bold mb-2">Alcohol &amp; Smoking Impact Calculator</h1>
-          <p className="text-gray-600 mb-6 dark:text-gray-400">Calculate the health, financial, and lifespan impact of alcohol and tobacco use. See how much quitting could save you in years and dollars.</p>
+          <p className="text-gray-600 mb-6 dark:text-gray-400">
+            Calculate the health, financial, and lifespan impact of alcohol and tobacco use. See how
+            much quitting could save you in years and dollars.
+          </p>
         </>
       }
     />

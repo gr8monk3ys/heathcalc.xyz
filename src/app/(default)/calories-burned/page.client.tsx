@@ -52,7 +52,11 @@ const relatedArticles = [
   },
 ];
 
-export default function CaloriesBurnedCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function CaloriesBurnedCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [activity, setActivity] = useState(CALORIES_BURNED_ACTIVITIES[0]);

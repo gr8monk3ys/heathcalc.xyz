@@ -62,7 +62,11 @@ function useRunningPaceCalculatorState() {
     setSeconds,
   };
 }
-export default function RunningPaceCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function RunningPaceCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const {
     distance,
     setDistance,

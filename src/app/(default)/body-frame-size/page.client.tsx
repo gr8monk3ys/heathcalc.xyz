@@ -42,7 +42,11 @@ const relatedArticles = [
   },
 ];
 
-export default function BodyFrameSizeCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function BodyFrameSizeCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const [gender, setGender] = useState<Gender>('female');
   const [wrist, setWrist] = useState<number | ''>('');

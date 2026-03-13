@@ -38,7 +38,11 @@ const relatedArticles = [
   },
 ];
 
-export default function DueDateByConceptionCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function DueDateByConceptionCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [conceptionDate, setConceptionDate] = useState('');
 
   const { result, showResult, calculationError, errors, handleSubmit, handleReset } =

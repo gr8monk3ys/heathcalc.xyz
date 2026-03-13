@@ -49,7 +49,11 @@ const relatedArticles = [
   },
 ];
 
-export default function LeanBodyMassCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function LeanBodyMassCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const weight = useWeight();
   const [gender, setGender] = useState<Gender>('male');

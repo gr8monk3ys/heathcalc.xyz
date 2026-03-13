@@ -100,7 +100,11 @@ function useWeightManagementCalculatorState() {
     setDietType,
   };
 }
-export default function WeightManagementCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function WeightManagementCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');

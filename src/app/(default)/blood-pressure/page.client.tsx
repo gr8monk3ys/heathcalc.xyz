@@ -50,7 +50,11 @@ const relatedArticles = [
   },
 ];
 
-export default function BloodPressureCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function BloodPressureCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [systolic, setSystolic] = useState<number | ''>('');
   const [diastolic, setDiastolic] = useState<number | ''>('');
 

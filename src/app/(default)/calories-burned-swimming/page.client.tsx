@@ -57,7 +57,11 @@ const intensityOptions = [
   { value: 'vigorous', label: 'Vigorous / Fast', description: 'Hard effort, challenging pace.' },
 ];
 
-export default function CaloriesBurnedSwimmingCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function CaloriesBurnedSwimmingCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [intensity, setIntensity] = useState<SwimmingIntensity>('moderate');

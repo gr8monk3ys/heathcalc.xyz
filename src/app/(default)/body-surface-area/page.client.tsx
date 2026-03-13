@@ -48,7 +48,11 @@ const relatedArticles = [
   },
 ];
 
-export default function BodySurfaceAreaCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
+export default function BodySurfaceAreaCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const weight = useWeight();
 
