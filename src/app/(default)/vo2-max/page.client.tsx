@@ -45,7 +45,7 @@ const relatedArticles = [
   },
 ];
 
-export default function Vo2MaxCalculator() {
+export default function Vo2MaxCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
   const weight = useWeight();
@@ -141,6 +141,7 @@ export default function Vo2MaxCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="VO2 Max Calculator"
       description="Estimate VO2 max using the Rockport 1-mile walk test formula."
       calculatorSlug="vo2-max"

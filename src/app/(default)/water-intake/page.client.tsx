@@ -45,7 +45,11 @@ const relatedArticles = [
   },
 ];
 
-export default function WaterIntakeCalculator() {
+export default function WaterIntakeCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [activityLevel, setActivityLevel] = useState<WaterIntakeActivity>('low');
 
@@ -101,6 +105,7 @@ export default function WaterIntakeCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Water Intake Calculator"
       description="Calculate your daily water intake based on weight and activity level."
       calculatorSlug="water-intake"

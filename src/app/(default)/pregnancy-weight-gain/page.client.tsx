@@ -55,7 +55,11 @@ const relatedArticles = [
   },
 ];
 
-export default function PregnancyWeightGainCalculator() {
+export default function PregnancyWeightGainCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const weight = useWeight();
 
@@ -110,6 +114,7 @@ export default function PregnancyWeightGainCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Pregnancy Weight Gain Calculator"
       description="Estimate recommended pregnancy weight gain by BMI."
       calculatorSlug="pregnancy-weight-gain"

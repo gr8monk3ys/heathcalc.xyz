@@ -374,8 +374,10 @@ function MacroCalculatorContent({
   );
 }
 export default function MacroCalculator({
+  serverHeader,
   initialSharedPrefill = null,
 }: {
+  serverHeader?: React.ReactNode;
   initialSharedPrefill?: SharedResultInputMap['macro'] | null;
 }) {
   const [state, dispatchState] = useReducer(macroCalculatorReducer, initialMacroCalculatorState);
@@ -596,6 +598,7 @@ export default function MacroCalculator({
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Macro Calculator"
       description="Calculate your daily macronutrient targets (protein, carbs, fat) based on your goals and activity level."
       calculatorSlug="macro"

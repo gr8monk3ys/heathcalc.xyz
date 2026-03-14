@@ -2,6 +2,10 @@ permissions: read-all
 
 name: CI/CD Pipeline
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
@@ -156,5 +160,4 @@ jobs:
 
       - name: Check for vulnerabilities
         # audit-ci doesn't support bun.lock; use bun's native audit instead
-        continue-on-error: true
         run: bun audit --level high

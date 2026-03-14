@@ -40,7 +40,11 @@ const relatedArticles = [
   },
 ];
 
-export default function RestingHeartRateCalculator() {
+export default function RestingHeartRateCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [restingHeartRate, setRestingHeartRate] = useState<number | ''>('');
 
   const { result, showResult, calculationError, errors, handleSubmit, handleReset } =
@@ -75,6 +79,7 @@ export default function RestingHeartRateCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Resting Heart Rate Calculator"
       description="Evaluate your resting heart rate and fitness category."
       calculatorSlug="resting-heart-rate"

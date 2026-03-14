@@ -111,7 +111,11 @@ function useBodyFatBurnCalculatorState() {
     setBurnGoal,
   };
 }
-export default function BodyFatBurnCalculator() {
+export default function BodyFatBurnCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
@@ -296,6 +300,7 @@ export default function BodyFatBurnCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Body Fat Burn Calculator"
       description="Calculate calories burned during physical activities and estimate how long it will take to reach your weight loss goals."
       calculatorSlug="body-fat-burn"

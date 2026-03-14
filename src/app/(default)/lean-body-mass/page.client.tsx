@@ -49,7 +49,11 @@ const relatedArticles = [
   },
 ];
 
-export default function LeanBodyMassCalculator() {
+export default function LeanBodyMassCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const weight = useWeight();
   const [gender, setGender] = useState<Gender>('male');
@@ -117,6 +121,7 @@ export default function LeanBodyMassCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Lean Body Mass Calculator"
       description="Estimate lean body mass using weight, height, and sex."
       calculatorSlug="lean-body-mass"

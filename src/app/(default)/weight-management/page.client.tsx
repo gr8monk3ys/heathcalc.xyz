@@ -100,7 +100,11 @@ function useWeightManagementCalculatorState() {
     setDietType,
   };
 }
-export default function WeightManagementCalculator() {
+export default function WeightManagementCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
@@ -334,6 +338,7 @@ export default function WeightManagementCalculator() {
   ];
 
   return renderWeightManagementCalculatorView({
+    serverHeader,
     formFields,
     goalWeight,
     handleSubmit,
@@ -346,6 +351,7 @@ export default function WeightManagementCalculator() {
 }
 
 type WeightManagementCalculatorViewProps = {
+  serverHeader?: React.ReactNode;
   formFields: React.ComponentProps<typeof CalculatorForm>['fields'];
   goalWeight: number | '';
   handleSubmit: React.FormEventHandler<Element>;
@@ -357,6 +363,7 @@ type WeightManagementCalculatorViewProps = {
 };
 
 function renderWeightManagementCalculatorView({
+  serverHeader,
   formFields,
   goalWeight,
   handleSubmit,
@@ -368,6 +375,7 @@ function renderWeightManagementCalculatorView({
 }: WeightManagementCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Weight Management Calculator"
       description="Plan your weight management journey with a target date and get personalized calorie and macro recommendations"
       calculatorSlug="weight-management"

@@ -47,7 +47,7 @@ const relatedArticles = [
   },
 ];
 
-export default function CarbIntakeCalculator() {
+export default function CarbIntakeCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [calories, setCalories] = useState<number | ''>('');
   const [carbPercent, setCarbPercent] = useState<number | ''>(45);
 
@@ -89,6 +89,7 @@ export default function CarbIntakeCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Carb Intake Calculator"
       description="Calculate daily carbohydrate intake from calories or targets."
       calculatorSlug="carb-intake"

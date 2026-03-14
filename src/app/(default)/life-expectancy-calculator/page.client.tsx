@@ -154,6 +154,7 @@ type LifeExpectancyCalculatorViewProps = Pick<
   | 'socialConnections'
   | 'stressLevel'
 > & {
+  serverHeader?: React.ReactNode;
   calculationError: string | null;
   errors: Record<string, string>;
   handleConditionToggle: (condition: string) => void;
@@ -163,7 +164,11 @@ type LifeExpectancyCalculatorViewProps = Pick<
   showResult: boolean;
 };
 
-export default function LifeExpectancyCalculator() {
+export default function LifeExpectancyCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   // State for form inputs
   const {
     age,
@@ -284,6 +289,7 @@ export default function LifeExpectancyCalculator() {
   };
 
   return renderLifeExpectancyCalculatorView({
+    serverHeader,
     age,
     alcoholIntake,
     bmi,
@@ -317,6 +323,7 @@ export default function LifeExpectancyCalculator() {
   });
 }
 function renderLifeExpectancyCalculatorView({
+  serverHeader,
   age,
   alcoholIntake,
   bmi,
@@ -350,6 +357,7 @@ function renderLifeExpectancyCalculatorView({
 }: LifeExpectancyCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Life Expectancy Calculator"
       description="Estimate your life expectancy based on lifestyle factors including diet, exercise, smoking, sleep, stress, social connections, and chronic conditions. Get personalized recommendations to improve your longevity."
       calculatorSlug="life-expectancy-calculator"

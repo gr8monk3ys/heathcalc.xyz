@@ -42,7 +42,11 @@ const relatedArticles = [
   },
 ];
 
-export default function BodyFrameSizeCalculator() {
+export default function BodyFrameSizeCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const [gender, setGender] = useState<Gender>('female');
   const [wrist, setWrist] = useState<number | ''>('');
@@ -111,6 +115,7 @@ export default function BodyFrameSizeCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Body Frame Size Calculator"
       description="Determine body frame size using height and wrist circumference."
       calculatorSlug="body-frame-size"

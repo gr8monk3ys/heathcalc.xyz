@@ -304,8 +304,10 @@ function TDEECalculatorContent({
 }
 
 export default function TDEECalculator({
+  serverHeader,
   initialSharedPrefill = null,
 }: {
+  serverHeader?: React.ReactNode;
   initialSharedPrefill?: SharedResultInputMap['tdee'] | null;
 }) {
   const [state, dispatchState] = useReducer(tdeePageReducer, initialTDEEPageState);
@@ -481,6 +483,7 @@ export default function TDEECalculator({
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="TDEE Calculator"
       description="Estimate your maintenance calories in seconds."
       calculatorSlug="tdee"

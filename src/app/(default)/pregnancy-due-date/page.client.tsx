@@ -45,7 +45,11 @@ const relatedArticles = [
   },
 ];
 
-export default function PregnancyDueDateCalculator() {
+export default function PregnancyDueDateCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [method, setMethod] = useState<PregnancyDueDateMethod>('lmp');
   const [date, setDate] = useState('');
 
@@ -77,6 +81,7 @@ export default function PregnancyDueDateCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Pregnancy Due Date Calculator"
       description="Estimate your due date based on last menstrual period or conception date."
       calculatorSlug="pregnancy-due-date"

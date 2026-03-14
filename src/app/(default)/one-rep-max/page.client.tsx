@@ -74,7 +74,7 @@ const blogArticles = [
   },
 ];
 
-export default function OneRepMaxCalculator() {
+export default function OneRepMaxCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const [weight, setWeight] = useState<number | ''>('');
   const [weightUnit, setWeightUnit] = useState<WeightUnit>('kg');
@@ -198,6 +198,7 @@ export default function OneRepMaxCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="One Rep Max (1RM) Calculator"
       description="Estimate your one rep max from submaximal lifts. Get training zone recommendations and a percentage chart for programming your workouts."
       calculatorSlug="one-rep-max"

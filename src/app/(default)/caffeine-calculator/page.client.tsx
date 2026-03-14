@@ -74,6 +74,7 @@ const blogArticles = [
 type SourceEntry = { id: number; source: CaffeineSource; servings: number };
 
 type CaffeineCalculatorViewProps = {
+  serverHeader?: React.ReactNode;
   calculationError: string | null;
   errors: Record<string, string>;
   handleAddSource: () => void;
@@ -95,7 +96,7 @@ type CaffeineCalculatorViewProps = {
   weight: ReturnType<typeof useWeight>;
 };
 
-export default function CaffeineCalculator() {
+export default function CaffeineCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const weight = useWeight();
   const [sources, setSources] = useState<SourceEntry[]>([{ id: 1, source: 'coffee', servings: 2 }]);
@@ -198,6 +199,7 @@ export default function CaffeineCalculator() {
   );
 
   return renderCaffeineCalculatorView({
+    serverHeader,
     calculationError,
     errors,
     handleAddSource,
@@ -216,6 +218,7 @@ export default function CaffeineCalculator() {
   });
 }
 function renderCaffeineCalculatorView({
+  serverHeader,
   calculationError,
   errors,
   handleAddSource,
@@ -234,6 +237,7 @@ function renderCaffeineCalculatorView({
 }: CaffeineCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Caffeine Intake Calculator"
       description="Calculate your daily caffeine intake from coffee, tea, energy drinks, and more. Get personalized recommendations for safe limits and optimal pre-workout dosing based on your body weight and metabolism."
       calculatorSlug="caffeine-calculator"

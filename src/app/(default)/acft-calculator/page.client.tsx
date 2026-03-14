@@ -130,6 +130,7 @@ type ACFTCalculatorViewProps = Pick<
   | 'tmrMinutes'
   | 'tmrSeconds'
 > & {
+  serverHeader?: React.ReactNode;
   calculationError: string | null;
   errors: Record<string, string>;
   handleSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -138,7 +139,7 @@ type ACFTCalculatorViewProps = Pick<
   showResult: boolean;
 };
 
-export default function ACFTCalculator() {
+export default function ACFTCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // Form state
   const {
     gender,
@@ -275,6 +276,7 @@ export default function ACFTCalculator() {
   };
 
   return renderACFTCalculatorView({
+    serverHeader,
     ageGroup,
     calculationError,
     deadliftWeight,
@@ -306,6 +308,7 @@ export default function ACFTCalculator() {
   });
 }
 function renderACFTCalculatorView({
+  serverHeader,
   ageGroup,
   calculationError,
   deadliftWeight,
@@ -337,6 +340,7 @@ function renderACFTCalculatorView({
 }: ACFTCalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="ACFT Score Calculator"
       description="Calculate your Army Combat Fitness Test score across all 6 events. Enter your raw performance values to get your total score, pass/fail status, category tier, and personalized training recommendations."
       calculatorSlug="acft-calculator"

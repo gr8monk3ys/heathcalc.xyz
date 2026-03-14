@@ -57,7 +57,11 @@ const intensityOptions = [
   { value: 'vigorous', label: 'Vigorous / Fast', description: 'Hard effort, challenging pace.' },
 ];
 
-export default function CaloriesBurnedSwimmingCalculator() {
+export default function CaloriesBurnedSwimmingCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [intensity, setIntensity] = useState<SwimmingIntensity>('moderate');
@@ -113,6 +117,7 @@ export default function CaloriesBurnedSwimmingCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Calories Burned Swimming Calculator"
       description="Estimate calories burned while swimming based on intensity and time."
       calculatorSlug="calories-burned-swimming"

@@ -48,7 +48,11 @@ const relatedArticles = [
   },
 ];
 
-export default function BodySurfaceAreaCalculator() {
+export default function BodySurfaceAreaCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const height = useHeight();
   const weight = useWeight();
 
@@ -100,6 +104,7 @@ export default function BodySurfaceAreaCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Body Surface Area Calculator"
       description="Calculate body surface area using height and weight."
       calculatorSlug="body-surface-area"

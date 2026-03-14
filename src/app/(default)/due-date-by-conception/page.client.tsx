@@ -38,7 +38,11 @@ const relatedArticles = [
   },
 ];
 
-export default function DueDateByConceptionCalculator() {
+export default function DueDateByConceptionCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const [conceptionDate, setConceptionDate] = useState('');
 
   const { result, showResult, calculationError, errors, handleSubmit, handleReset } =
@@ -68,6 +72,7 @@ export default function DueDateByConceptionCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Due Date by Conception Calculator"
       description="Estimate pregnancy due date from conception date."
       calculatorSlug="due-date-by-conception"

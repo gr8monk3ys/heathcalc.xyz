@@ -52,7 +52,11 @@ const relatedArticles = [
   },
 ];
 
-export default function CaloriesBurnedCalculator() {
+export default function CaloriesBurnedCalculator({
+  serverHeader,
+}: {
+  serverHeader?: React.ReactNode;
+}) {
   const weight = useWeight();
   const [duration, setDuration] = useState<number | ''>('');
   const [activity, setActivity] = useState(CALORIES_BURNED_ACTIVITIES[0]);
@@ -109,6 +113,7 @@ export default function CaloriesBurnedCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Calories Burned Calculator"
       description="Estimate calories burned from workouts using weight, duration, and activity."
       calculatorSlug="calories-burned"

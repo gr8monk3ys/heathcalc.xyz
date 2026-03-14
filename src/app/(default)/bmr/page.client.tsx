@@ -49,7 +49,7 @@ const relatedArticles = [
   },
 ];
 
-export default function BMRCalculator() {
+export default function BMRCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
   const height = useHeight();
@@ -132,6 +132,7 @@ export default function BMRCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="BMR Calculator"
       description="Calculate your basal metabolic rate using popular formulas."
       calculatorSlug="bmr"

@@ -42,7 +42,7 @@ const relatedArticles = [
   },
 ];
 
-export default function OvulationCalculator() {
+export default function OvulationCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const [lastPeriodDate, setLastPeriodDate] = useState('');
   const [cycleLength, setCycleLength] = useState<number | ''>('');
 
@@ -85,6 +85,7 @@ export default function OvulationCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Ovulation Calculator"
       description="Estimate your ovulation date and fertile window based on cycle length."
       calculatorSlug="ovulation"

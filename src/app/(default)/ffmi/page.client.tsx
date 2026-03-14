@@ -21,6 +21,7 @@ import { useCalculatorForm } from '@/hooks/useCalculatorForm';
 import { useChainPrefill } from '@/hooks/useChainPrefill';
 
 type FFMICalculatorViewProps = {
+  serverHeader?: React.ReactNode;
   bodyFatPercentage: number | '';
   calculationError: string | null;
   chainResultData: Record<string, string | number>;
@@ -34,7 +35,7 @@ type FFMICalculatorViewProps = {
   weight: ReturnType<typeof useWeight>;
 };
 
-export default function FFMICalculator() {
+export default function FFMICalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   const { localizePath } = useLocale();
 
   // State for form inputs
@@ -131,6 +132,7 @@ export default function FFMICalculator() {
     });
 
   return renderFFMICalculatorView({
+    serverHeader,
     bodyFatPercentage,
     calculationError,
     chainResultData,
@@ -145,6 +147,7 @@ export default function FFMICalculator() {
   });
 }
 function renderFFMICalculatorView({
+  serverHeader,
   bodyFatPercentage,
   calculationError,
   chainResultData,
@@ -159,6 +162,7 @@ function renderFFMICalculatorView({
 }: FFMICalculatorViewProps) {
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="FFMI Calculator"
       description="Calculate your Fat-Free Mass Index (FFMI) to assess muscle mass development and compare to natural muscular potential"
       calculatorSlug="ffmi"

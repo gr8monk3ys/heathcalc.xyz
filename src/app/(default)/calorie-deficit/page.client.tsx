@@ -355,8 +355,10 @@ function CalorieDeficitContent({
   );
 }
 export default function CalorieDeficitCalculator({
+  serverHeader,
   initialSharedPrefill = null,
 }: {
+  serverHeader?: React.ReactNode;
   initialSharedPrefill?: SharedResultInputMap['calorie-deficit'] | null;
 }) {
   const [state, dispatchState] = useReducer(calorieDeficitReducer, initialCalorieDeficitState);
@@ -586,6 +588,7 @@ export default function CalorieDeficitCalculator({
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Calorie Deficit Calculator"
       description="Calculate how long it will take to reach your goal weight with different calorie deficit levels"
       calculatorSlug="calorie-deficit"

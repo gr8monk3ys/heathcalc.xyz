@@ -106,7 +106,7 @@ function useKetoCalculatorState() {
     setGoal,
   };
 }
-export default function KetoCalculator() {
+export default function KetoCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [age, setAge] = useState<number | ''>('');
@@ -292,6 +292,7 @@ export default function KetoCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Keto Macro Calculator"
       description="Calculate your personalized ketogenic diet macros for optimal fat loss and ketosis"
       calculatorSlug="keto-calculator"

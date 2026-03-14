@@ -77,7 +77,7 @@ const blogArticles = [
   },
 ];
 
-export default function WHRCalculator() {
+export default function WHRCalculator({ serverHeader }: { serverHeader?: React.ReactNode }) {
   // State for form inputs
   const [gender, setGender] = useState<Gender>('male');
   const [waist, setWaist] = useState<number | ''>('');
@@ -181,6 +181,7 @@ export default function WHRCalculator() {
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title="Waist-to-Hip Ratio (WHR) Calculator"
       description="Calculate your waist-to-hip ratio to assess your body fat distribution and health risks"
       calculatorSlug="whr"

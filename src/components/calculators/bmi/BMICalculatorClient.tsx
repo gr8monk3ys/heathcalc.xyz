@@ -386,9 +386,11 @@ function submitBMIForm({
 
 export default function BMICalculatorClient({
   copy,
+  serverHeader,
   initialSharedPrefill = null,
 }: {
   copy: BMIPageCopy;
+  serverHeader?: React.ReactNode;
   initialSharedPrefill?: SharedResultInputMap['bmi'] | null;
 }) {
   const { localizePath } = useLocale();
@@ -551,6 +553,7 @@ export default function BMICalculatorClient({
 
   return (
     <CalculatorPageLayout
+      serverHeader={serverHeader}
       title={copy.page.title}
       description={copy.page.description}
       calculatorSlug="bmi"
